@@ -9,11 +9,12 @@ abstract class Grid2(T, V) {
   bool exists(Vector2!V);
 }
 
+/// A Grid2 type which uses a hash based dictionary to store values
 class Dict_grid2(T, V) : Grid2!(T, V) {
   T[Vector2!V] dictionary;
   
   override T* get(Vector2!V vector){
-    /// This returns null if it doesn't exist
+    // This returns null if it doesn't exist
     return (vector in dictionary);
   }
   
