@@ -3,17 +3,20 @@ module agent;
 
 import vector;
 import physical;
-import dynamic;
+import dynamical;
+import sllist;
 
 float Vector2f = Vector2!float;
 
 /++
-A physical object that can move freely from position to position and have velocities, mass, etc to do so
+Proxy class from LList!Agent
+++/
+class Agent_list : LList!Agent {}
+
+/++
+A dynamical physical
 ++/
 class Agent : Physical, Dynamical {
-  
-  Vector2f velocity;
-  float mass;
   
   this(Vector2f _position, float _size){ super(_position, _size); }
   

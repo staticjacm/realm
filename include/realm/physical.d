@@ -1,5 +1,9 @@
 
+module physical;
+
 import vector;
+import collidable;
+import material;
 
 alias Vector2f = Vector2!float;
 
@@ -8,8 +12,11 @@ Represents a physical object that can inhabit a realm.
 A conceptual abstract of floating (can move freely between grid locations) and fixed (affixed to the grid) objects
 Each physical has a size for collision detection purposes
 ++/
-class Physical {
+class Physical : Collidable {
+  Material material;
+  Animation 
   Vector2f position;
+  float height = 0;
   float size;
   
   this(Vector2f _position, float _size){
@@ -29,5 +36,11 @@ class Physical {
   abstract int physical_subtype_id(){ return 0; }
   
   /// void overlap(Physical) is called when a collision is detected (this's and other's collision squares intersect)
-  void overlap(Physical other){}
+  override void overlap(Collidable other){
+    if(material !is null) material.overlap(this, other);
+  }
+  
+  void update(long time, float dt){
+    if(material !is null) material.update(time, dt);
+  }
 }
