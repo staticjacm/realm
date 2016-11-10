@@ -1,2 +1,2 @@
 @del realm.exe
-@dmd -g realm -Iinclude lib/glfw3.lib lib/sgogl.lib
+@dmd -g -odobj realm -Iinclude lib/glfw3.lib lib/sgogl.lib
