@@ -21,4 +21,6 @@ class Agent : Physical, Dynamical {
   this(Vector2f _position, float _size){ super(_position, _size); }
   
   override int physical_subtype_id(){ return 1; }
+  
+  int agent_subtype_id(){ return 0; }
 }

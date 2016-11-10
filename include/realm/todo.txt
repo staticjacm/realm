@@ -1,0 +1,22 @@
+
+Need to do:
+behavior
+agent
+item
+entity
+kind
+drop
+armor
+accessory
+weapon
+realm
+structured entity
+
+Functional:
+vector
+collidable
+animation
+sllist
+material
+physical
+dynamical
