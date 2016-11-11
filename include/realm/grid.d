@@ -4,6 +4,7 @@ import vector;
 
 abstract class Grid2(T, V) {  
   T* get(Vector2!V);
+  int opApply(scope int delegate(ref T));
   void set(T, Vector2!V);
   void remove(Vector2!V);
   bool exists(Vector2!V);
@@ -16,6 +17,16 @@ class Dict_grid2(T, V) : Grid2!(T, V) {
   override T* get(Vector2!V vector){
     // This returns null if it doesn't exist
     return (vector in dictionary);
+  }
+  
+  override int opApply(scope int delegate(ref T) dg){
+    int result = 0;
+    foreach(T value; dictionary){
+      result = dg(value);
+      if(result)
+        break;
+    }
+    return result;
   }
   
   override void set(T value, Vector2!V vector){

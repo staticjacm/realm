@@ -19,6 +19,10 @@ struct Vector2(T) {
       }
     }
     
+    Vector2!T opOpAssign(string op)(T scalar){
+      return this = this.opBinary!op(scalar);
+    }
+    
     Vector2!T opBinary(string op)(Vector2!T other){
       static if(op == "+"){
         return Vector2!T(x + other.x, y + other.y);
@@ -26,6 +30,10 @@ struct Vector2(T) {
       else static if(op == "-"){
         return Vector2!T(x - other.x, y - other.y);
       }
+    }
+    
+    Vector2!T opOpAssign(string op)(Vector2!T other){
+      return this = this.opBinary!op(other);
     }
     
     Vector2!T opUnary(string op : "-")(){
@@ -40,7 +48,7 @@ struct Vector2(T) {
   }
 }
 
-// opBinary("*")(T) Scalar multiplication unittest
+// opBinary!"*"(T) Scalar multiplication unittest
 unittest {
   alias Vector2f = Vector2!float;
   Vector2f a = Vector2f(5.0f, 7.0f);
@@ -50,9 +58,12 @@ unittest {
   b = b/6;
   assert( b.x == 10.0f );
   assert( b.y == 14.0f );
+  a *= 12.0f;
+  assert( a.x == 60.0f );
+  assert( a.y == 84.0f );
 }
 
-// opBinary(op)(Vector2!T) Vector Addition/Subtraction unittest
+// opBinary!op(Vector2!T) Vector Addition/Subtraction unittest
 unittest {
   alias Vector2f = Vector2!float;
   Vector2f a = Vector2f(5.0f, 7.0f);
@@ -63,9 +74,12 @@ unittest {
   c = a - b;
   assert( c.x == 3.0f );
   assert( c.y == 4.0f );
+  a += b;
+  assert( a.x == 7.0f );
+  assert( a.y == 10.0f );
 }
 
-// opUnary("-")(Vector2!T) Vector inversion unittest
+// opUnary!"-"(Vector2!T) Vector inversion unittest
 unittest {
   alias Vector2f = Vector2!float;
   Vector2f a = Vector2f(5.0f, 7.0f);
@@ -106,6 +120,10 @@ struct Vector3(T) {
       }
     }
     
+    Vector3!T opOpAssign(string op)(T scalar){
+      return this = this.opBinary!op(scalar);
+    }
+    
     Vector3!T opBinary(string op)(Vector3!T other){
       static if(op == "+"){
         return Vector3!T(x + other.x, y + other.y, z + other.z);
@@ -113,6 +131,10 @@ struct Vector3(T) {
       else static if(op == "-"){
         return Vector3!T(x - other.x, y - other.y, z - other.z);
       }
+    }
+    
+    Vector3!T opOpAssign(string op)(Vector3!T other){
+      return this = this.opBinary!op(other);
     }
     
     Vector3!T opUnary(string op : "-")(){
@@ -127,7 +149,7 @@ struct Vector3(T) {
   }
 }
 
-// opBinary("*")(T) Scalar multiplication unittest
+// opBinary!"*"(T) Scalar multiplication unittest
 unittest {
   alias Vector3f = Vector3!float;
   Vector3f a = Vector3f(5.0f, 7.0f, 11.0f);
@@ -139,9 +161,13 @@ unittest {
   assert( b.x == 10.0f );
   assert( b.y == 14.0f );
   assert( b.z == 22.0f );
+  a *= 12.0f;
+  assert( a.x == 60.0f );
+  assert( a.y == 84.0f );
+  assert( a.z == 132.0f );
 }
 
-// opBinary(op)(Vector3!T) Vector Addition/Subtraction unittest
+// opBinary!op(Vector3!T), opOpAssign!op Vector Addition/Subtraction unittest
 unittest {
   alias Vector3f = Vector3!float;
   Vector3f a = Vector3f(5.0f, 7.0f, 1.0f);
@@ -154,9 +180,13 @@ unittest {
   assert( c.x == 3.0f );
   assert( c.y == 4.0f );
   assert( c.z == -8.0f );
+  a += b;
+  assert( a.x == 7.0f );
+  assert( a.y == 10.0f );
+  assert( a.z == 10.0f );
 }
 
-// opUnary("-")(Vector3!T) Vector inversion unittest
+// opUnary!"-"(Vector3!T) Vector inversion unittest
 unittest {
   alias Vector3f = Vector3!float;
   Vector3f a = Vector3f(5.0f, 7.0f, 11.0f);

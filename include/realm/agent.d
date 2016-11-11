@@ -6,7 +6,7 @@ import physical;
 import dynamics;
 import sllist;
 
-float Vector2f = Vector2!float;
+alias Vector2f = Vector2!float;
 
 /++
 Proxy class from LList!Agent
@@ -14,7 +14,7 @@ Proxy class from LList!Agent
 class Agent_list : LList!Agent {}
 
 /++
-A dynamical physical
+A physical with dynamics
 ++/
 class Agent : Physical {
   Dynamics dynamics;

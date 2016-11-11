@@ -11,12 +11,12 @@ Iterates through a list of uints when playing
 uints correspond to sgogl images
 also contains anchor (anx, any) information and scale (sx, sy) information
 ++/
-struct Animation {
+class Animation {
   uint[] frames;
   float frame_rate = 1;
   int current_frame_index = 0;
-  int current_frame_time = 0;  // in ms
-  int next_frame_time = 0;     // in ms
+  long current_frame_time = 0;  // in ms
+  long next_frame_time = 0;     // in ms
   bool playing = false;
   Vector2f anchor;
   Vector2f scale;
@@ -49,19 +49,22 @@ struct Animation {
   }
   
   void next_frame(long time){
-    current_frame_index = (frame + 1) % frames.length;
+    // if(frames.length == 1) ...
+    current_frame_index = (current_frame_index + 1) % frames.length;
     current_frame_time = time;
     next_frame_time = current_frame_time + cast(int)(1000.0f/frame_rate);
   }
   
-  void update(long time){
+  Animation update(long time){
+    // if(frames.length == 1) ...
     if(time < current_frame_time)
-      return next_frame(time);
+      next_frame(time);
     else
-      return get_frame(current_frame_index);
+      get_frame(current_frame_index);
+    return this;
   }
 }
 
 void gr_draw(Animation animation, Vector2f position, float depth, float angle){
-  gr_draw(animation.current_frame, position.x, position.y, depth, animation.anchor.x, animation.anchor.y, angle, animation.scale.x, animation.scale.y);
+  sgogl.gr_draw(animation.current_frame, position.x, position.y, depth, animation.anchor.x, animation.anchor.y, angle, animation.scale.x, animation.scale.y);
 }

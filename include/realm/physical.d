@@ -15,7 +15,7 @@ Each physical has a size for collision detection purposes
 ++/
 class Physical : Collidable {
   Material material;
-  Animation* animation;
+  Animation animation;
   Vector2f position;
   float height = 0;
   float size = 1;
@@ -46,10 +46,14 @@ class Physical : Collidable {
     if(material !is null) material.update(time, dt);
   }
   
-  void render(){
-    if(height > 0)
-      gr_draw(*animation, position + Vector2f(0, height), height, angle);
-    else
-      gr_draw(*animation, position, 0, angle);
+  bool check_for_collisions(){ return true; }
+  
+  void render(long time){
+    if(animation !is null){
+      if(height > 0)
+        gr_draw(animation, position + Vector2f(0, height), height, angle);
+      else
+        gr_draw(animation, position, 0, angle);
+    }
   }
 }

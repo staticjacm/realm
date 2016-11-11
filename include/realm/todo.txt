@@ -1,7 +1,6 @@
 
 Need to do:
 behavior
-agent
 item
 entity
 kind
@@ -9,7 +8,6 @@ drop
 armor
 accessory
 weapon
-world
 structured entity
 
 Functional:
@@ -20,3 +18,5 @@ sllist
 material
 physical
 dynamical
+agent
+world

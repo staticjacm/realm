@@ -1,15 +1,21 @@
 @del realm.exe
 @dmd -g -odobj realm ^
+include/sgogl ^
 include/realm/agent ^
 include/realm/animation ^
 include/realm/area ^
 include/realm/collidable ^
-include/realm/dynamical ^
+include/realm/dynamics ^
 include/realm/grid ^
 include/realm/material ^
 include/realm/physical ^
 include/realm/world ^
 include/realm/sllist ^
 include/realm/vector ^
-include/sgogl ^
+include/realm/entity ^
+include/realm/behavior ^
+include/realm/player ^
+assets/entities/commoner/commoner ^
+assets/grounds/rocky/rocky_ground ^
+assets/worlds/testing_world/testing_world ^
 -Iinclude lib/glfw3.lib lib/sgogl.lib
