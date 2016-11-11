@@ -1,7 +1,7 @@
 
 module material;
 
-import Collidable;
+import collidable;
 
 /++
 Extendible class which allows for modifiable responses to collisions and events

@@ -4,6 +4,7 @@ module physical;
 import vector;
 import collidable;
 import material;
+import animation;
 
 alias Vector2f = Vector2!float;
 

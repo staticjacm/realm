@@ -3,7 +3,7 @@ module agent;
 
 import vector;
 import physical;
-import dynamical;
+import dynamics;
 import sllist;
 
 float Vector2f = Vector2!float;
@@ -16,7 +16,8 @@ class Agent_list : LList!Agent {}
 /++
 A dynamical physical
 ++/
-class Agent : Physical, Dynamical {
+class Agent : Physical {
+  Dynamics dynamics;
   
   this(Vector2f _position, float _size){ super(_position, _size); }
   
