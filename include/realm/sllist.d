@@ -49,12 +49,22 @@ class LList(T) {
     foreach(T t; tlist) add(t);
   }
   
+  void destroy(){
+    Element cel = first, nel;
+    while(cel !is null){
+      nel = cel.next;
+      remove(cel);
+      cel = nel;
+    }
+  }
+  
   int opApply(scope int delegate(ref T) dg){
     int result = 0;
     Element cel = first;
     while(cel !is null){
       result = dg(cel.value);
       if(result) break;
+      cel = cel.next;
     }
     return result;
   }

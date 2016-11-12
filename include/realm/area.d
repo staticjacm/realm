@@ -7,26 +7,56 @@ import vector;
 alias Vector2f = Vector2!float;
 
 class Area {
-  Physical stationary; /// The stationary physical currently sitting at this location
-  Agent_list agents;
+  static const(float) area_width = 1.0f, area_height = 1.0f;
+  
+  Physical_list stationaries; /// Static objects
+  Physical_list agents; /// Mobile objects
   Vector2f position;
   
   this(Vector2f _position){
     position = _position;
+    stationaries = new Physical_list;
+    agents = new Physical_list;
+  }
+  
+  void destroy(){
+    foreach(Physical stationary; stationaries){
+      stationary.destroy;
+    }
+    foreach(Physical agent; agents){
+      agent.destroy;
+    }
+    stationaries.destroy;
+    agents.destroy;
+    object.destroy(this);
   }
   
   void update(long time, float dt){
-    stationary.update(time, dt);
-    foreach(Agent agent; agents){
+    foreach(Physical stationary; stationaries){
+      stationary.update(time, dt);
+    }
+    foreach(Physical agent; agents){
       agent.update(time, dt);
     }
   }
   
   void render(long time){
-    stationary.render(time);
-    foreach(Agent agent; agents){
+    foreach(Physical stationary; stationaries){
+      stationary.render(time);
+    }
+    foreach(Physical agent; agents){
       agent.render(time);
     }
+  }
+  
+  void add_agent(Agent agent){
+    agent.index.remove;
+    agent.index = agents.add(agent);
+  }
+  
+  void add_stationaries(Physical stationary){
+    stationary.index.remove;
+    stationary.index = stationaries.add(stationary);
   }
 }
 

@@ -5,8 +5,14 @@ import vector;
 import collidable;
 import material;
 import animation;
+import sllist;
 
 alias Vector2f = Vector2!float;
+
+/++
+Proxy class from LList!Physical
+++/
+class Physical_list : LList!Physical {}
 
 /++
 Represents a physical object that can inhabit a realm.
@@ -14,6 +20,7 @@ A conceptual abstract of floating (can move freely between grid locations) and f
 Each physical has a size for collision detection purposes
 ++/
 class Physical : Collidable {
+  Physical_list.Index index;
   Material material;
   Animation animation;
   Vector2f position;
@@ -24,6 +31,13 @@ class Physical : Collidable {
   this(Vector2f _position, float _size){
     position = _position;
     size = _size;
+  }
+  
+  void destroy(){
+    index.remove;
+    material.destroy;
+    animation.destroy;
+    object.destroy(this);
   }
   
   void move_by(Vector2f delta){

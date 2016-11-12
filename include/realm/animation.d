@@ -28,6 +28,10 @@ class Animation {
     scale = _scale;
   }
   
+  void destroy(){
+    object.destroy(this);
+  }
+  
   void play(){
     playing = true;
   }

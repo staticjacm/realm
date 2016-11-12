@@ -1,7 +1,10 @@
 
 module vector;
+import std.stdio;
 import std.math;
 import std.traits;
+
+alias Vector2f = Vector2!float;
 
 /++
 An arbitrary 2-Tuple of values of type T
@@ -46,6 +49,10 @@ struct Vector2(T) {
       Vector2!T normalize(){ return this/this.norm; }
     }
   }
+}
+
+Vector2!T floor(T)(Vector2!T vector){
+  return Vector2!T(std.math.floor(vector.x), std.math.floor(vector.y));
 }
 
 // opBinary!"*"(T) Scalar multiplication unittest
@@ -102,6 +109,15 @@ unittest {
   assert( d.y == 0.8f );
 }
 
+// floor unittest
+unittest {
+  alias Vector2f = Vector2!float;
+  Vector2f a = Vector2f(3.567f, 4.183f);
+  a = floor(a);
+  assert( a.x == 3.0f );
+  assert( a.y == 4.0f );
+}
+
 
 /++
 An arbitrary 3-Tuple of values of type T
@@ -147,6 +163,10 @@ struct Vector3(T) {
       Vector3!T normalize(){ return this/this.norm; }
     }
   }
+}
+
+Vector3!T floor(T)(Vector3!T vector){
+  return Vector3!T(std.math.floor(vector.x), std.math.floor(vector.y), std.math.floor(vector.z));
 }
 
 // opBinary!"*"(T) Scalar multiplication unittest
@@ -209,4 +229,14 @@ unittest {
   assert( d.x == 1.0f/3.0f );
   assert( d.y == 2.0f/3.0f );
   assert( d.z == 2.0f/3.0f );
+}
+
+// floor unittest
+unittest {
+  alias Vector3f = Vector3!float;
+  Vector3f a = Vector3f(3.567f, 4.183f, 8.278f);
+  a = floor(a);
+  assert( a.x == 3.0f );
+  assert( a.y == 4.0f );
+  assert( a.z == 8.0f );
 }
