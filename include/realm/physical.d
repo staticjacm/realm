@@ -41,7 +41,7 @@ class Physical : Collidable {
     size = _size;
   }
   
-  string toString(){ return "Physical "~id.to!string; }
+  override string toString(){ return "Physical "~id.to!string; }
   
   void destroy(){
     index.remove;

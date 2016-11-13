@@ -1,6 +1,7 @@
 @del realm.exe
 @dmd -g -odobj realm ^
 include/sgogl ^
+include/realm/timer ^
 include/realm/sgogl_interface ^
 include/realm/agent ^
 include/realm/animation ^

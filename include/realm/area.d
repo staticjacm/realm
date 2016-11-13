@@ -54,9 +54,7 @@ class Area {
   void add_agent(Agent agent){
     if(agent.index.list !is agents){
       agent.index.remove;
-      // writeln("agent.index.element: ", agent.index.element);
       agent.index = agents.add(agent);
-      // writeln("agent.index.element: ", agent.index.element);
     }
   }
   

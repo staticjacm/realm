@@ -3,6 +3,8 @@ import std.stdio;
 import sgogl;
 import sgogl_interface;
 
+import core.thread;
+import timer;
 import testing_world;
 import world;
 import commoner;
@@ -17,14 +19,19 @@ Entity test_entity;
 World test_world;
 
 bool running = true;
+
+Timer frame_timer;
 long current_time = 0;
+float frame_delta = 0.001;
+long frame = 0;
 
 void key_function(){
-  player_key_function(current_time, 0.1);
+  player_key_function();
 }
 
 void initialize(){
   gr_open;
+  gr_activate_depth_testing(1);
   gr_activate_linear_filtering(0);
   
   gr_view_centered(Vector2f(0, 0), 10);
@@ -43,7 +50,8 @@ void render(){
 }
 
 void update(){
-  current_time++; // should be set to the current time in ms
+  frame++;
+  frame_timer.start;
   gr_register_events();
   while(gr_has_event()){
     switch(gr_read()){
@@ -52,8 +60,14 @@ void update(){
       default: break;
     }
   }
-  test_world.update(current_time, 0.01);
+  player_update(current_time, frame_delta);
+  test_world.update(current_time, frame_delta);
   render;
+  current_time = frame_timer.msecs;
+  frame_delta = frame_timer.hnsecsf;
+  if(frame % 100 == 0)
+    writeln("frame_delta: ", frame_delta);
+  Thread.sleep(2.dur!"msecs");
 }
 
 void main(){
