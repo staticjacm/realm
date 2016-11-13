@@ -1,0 +1,68 @@
+
+agent
+  void accelerate(Vector2f acceleration, float dt)
+  void apply_impulse(Vector2f force, float dt)
+
+animation
+  void play()
+  void pause()
+  void reset()
+  uint get_frame(int frame)
+  uint current_frame()
+  void next_frame(long time)
+  Animation update(long time)
+
+area
+  void render(long time)
+  void add_agent(Agent agent)
+  void add_stationaries(Physical stationary)
+
+behavior
+  void detected(Agent agent)
+  void regular_attack()
+
+collidable
+  void overlap(Collidable other)
+
+dynamics
+  void accelerate(Vector2f acceleration, float dt)
+  void apply_impulse(Vector2f force, float dt)
+  void update_position(ref Vector2f position, float dt)
+
+entity
+  void detected(Agent agent)
+  void regular_attack()
+
+grid
+  void set(T value, Vector2!V vector)
+  void remove(Vector2!V vector)
+  bool exists(Vector2!V vector)
+
+material
+  void overlap(Collidable owner, Collidable other)
+  void update(long time, float dt)
+
+physical
+  float render_depth()
+  void move_by(Vector2f delta)
+  void move_to(Vector2f new_position)
+  void overlap(Collidable other)
+  void update(long time, float dt)
+  bool check_for_collisions()
+  void render(long time)
+
+player
+  void player_update(long time, float dt)
+  void player_key_function(int key, int action, int mods)
+  void player_mouse_move_function(double x, double y)
+  void player_mouse_button_function(int button, int action, int mods)
+
+world
+  void update_area(long time, float dt, Area area)
+  void update(long time, float dt)
+  void initialize()
+  void generate(Area area)
+  void render(long time)
+  Area new_area(Vector2f position)
+  void add_stationary(Physical stationary)
+  void place_agent(Agent agent)

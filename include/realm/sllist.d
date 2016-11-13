@@ -6,6 +6,7 @@ A very simple linked list library
 ++/
 
 import std.stdio;
+import physical;
 
 class LList(T) {
   
@@ -31,10 +32,12 @@ class LList(T) {
       valid = true;
       list = list_;
       element = element_;
+      // writeln("+element ", element.value, " in list ", list.id);
     }
     
     void remove(){
       if(valid) {
+        // writeln("-element ", element.value);
         list.remove(element);
         valid = false;
       }
@@ -42,10 +45,12 @@ class LList(T) {
   }
   
   Element first, last;
+  static int gid = 0; int id = 0;
   int length = 0;
   
-  this(){}
+  this(){ id = gid++; }
   this(T[] tlist){
+    this();
     foreach(T t; tlist) add(t);
   }
   
@@ -82,10 +87,14 @@ class LList(T) {
   
   Index add(T t){
     // Empty
-    if(first is null)
+    if(first is null){
+      // writeln("first is null");
       return add_first(t);
+    }
     // Nonempty
     else {
+      // writeln("first isnt null");
+      // writeln("first: ", first);
       Element old_last = last;
       last = new Element(t);
       connect(old_last, last);
@@ -109,21 +118,33 @@ class LList(T) {
   }
   
   void connect(Element a, Element b){
-    a.next = b;
-    b.prev = a;
+    if(a !is null)
+      a.next = b;
+    if(b !is null)
+      b.prev = a;
   }
   
   void remove(Element element){
+    /*
     if(element is last){
+      // writeln("remove last");
       last = element.prev;
-      if(element.prev !is null)
+      if(element.prev !is null){
+        // writeln(" element.prev !is null");
         element.prev.next = element.next;
+      }
     }
     else if(element is first){
+      // writeln("remove first");
       first = element.next;
-      if(element.next !is null)
+      if(element.next !is null){
+        // writeln(" element.next !is null");
         element.next.prev = element.prev;
+      }
     }
+    */
+    writeln("remove ", element);
+    connect(element.prev, element.next);
     length--;
     object.destroy(element);
   }

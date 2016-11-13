@@ -1,5 +1,6 @@
 
 module vector;
+import std.conv;
 import std.stdio;
 import std.math;
 import std.traits;
@@ -11,6 +12,8 @@ An arbitrary 2-Tuple of values of type T
 ++/
 struct Vector2(T) {
   T x; T y;
+  
+  string toString(){ return "("~x.to!string~", "~y.to!string~")"; }
   
   static if(isNumeric!T){
     Vector2!T opBinary(string op)(T scalar){
@@ -118,6 +121,13 @@ unittest {
   assert( a.y == 4.0f );
 }
 
+// toString
+unittest {
+  alias Vector2f = Vector2!int;
+  Vector2f a = Vector2f(0, 1);
+  assert( a.toString == "(0, 1)");
+}
+
 
 /++
 An arbitrary 3-Tuple of values of type T
@@ -125,6 +135,7 @@ An arbitrary 3-Tuple of values of type T
 struct Vector3(T) {
   T x; T y; T z;
   
+  string toString(){ return "("~x.to!string~", "~y.to!string~", "~z.to!string~")"; }
   
   static if(isNumeric!T){
     Vector3!T opBinary(string op)(T scalar){
@@ -239,4 +250,11 @@ unittest {
   assert( a.x == 3.0f );
   assert( a.y == 4.0f );
   assert( a.z == 8.0f );
+}
+
+// toString
+unittest {
+  alias Vector3f = Vector3!int;
+  Vector3f a = Vector3f(0, 1, 2);
+  assert( a.toString == "(0, 1, 2)");
 }

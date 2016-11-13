@@ -11,16 +11,18 @@ import sgogl;
 alias Vector2f = Vector2!float;
 
 class Commoner : Entity {
-  static string directory = "/assets/characters/commoner/";
   static uint image_standing, image_walking_1, image_walking_2, image_hurt;
   static  Vector2f image_dimensions;
+  static bool type_initialized = false;
   
-  static this(){
-    image_dimensions = Vector2f(1, 1);
-    image_standing  = gr_load_image((directory ~ "standing.png").toStringz, 0);
-    image_walking_1 = gr_load_image((directory ~ "walking_1.png").toStringz, 0);
-    image_walking_2 = gr_load_image((directory ~ "walking_2.png").toStringz, 0);
-    image_hurt      = gr_load_image((directory ~ "hurt.png").toStringz, 0);
+  static initialize_type(){
+    if(!type_initialized){
+      image_dimensions = Vector2f(1, 1);
+      image_standing  = gr_load_image("assets/entities/commoner/standing.png".toStringz, 0);
+      image_walking_1 = gr_load_image("assets/entities/commoner/walking_1.png".toStringz, 0);
+      image_walking_2 = gr_load_image("assets/entities/commoner/walking_2.png".toStringz, 0);
+      image_hurt      = gr_load_image("assets/entities/commoner/hurt.png".toStringz, 0);
+    }
   }
   
   Animation animation_standing, animation_walking, animation_hurt;

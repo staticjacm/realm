@@ -24,6 +24,7 @@ class Testing_world : World {
         add_stationary(ground);
       }
     }
+    place_agent(player_entity);
   }
   
 }

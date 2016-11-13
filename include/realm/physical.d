@@ -1,6 +1,7 @@
 
 module physical;
 
+import std.conv;
 import vector;
 import collidable;
 import material;
@@ -8,6 +9,10 @@ import animation;
 import sllist;
 
 alias Vector2f = Vector2!float;
+
+float under_render_depth = 1000;
+float level_render_depth = 100;
+float over_render_depth  = 1;
 
 /++
 Proxy class from LList!Physical
@@ -20,6 +25,7 @@ A conceptual abstract of floating (can move freely between grid locations) and f
 Each physical has a size for collision detection purposes
 ++/
 class Physical : Collidable {
+  static int gid = 0; int id = 0;
   Physical_list.Index index;
   Material material;
   Animation animation;
@@ -27,11 +33,15 @@ class Physical : Collidable {
   float height = 0;
   float size = 1;
   float angle = 0;
+  bool moved = false;
   
   this(Vector2f _position, float _size){
+    id = gid++;
     position = _position;
     size = _size;
   }
+  
+  string toString(){ return "Physical "~id.to!string; }
   
   void destroy(){
     index.remove;
@@ -42,14 +52,18 @@ class Physical : Collidable {
   
   void move_by(Vector2f delta){
     position += delta;
+    moved = true;
   }
   
   void move_to(Vector2f new_position){
     position = new_position;
+    moved = true;
   }
   
   /// int type_id() is used for type identification
   abstract int physical_subtype_id(){ return 0; }
+  
+  float render_depth(){ return under_render_depth; }
   
   /// void overlap(Physical) is called when a collision is detected (this's and other's collision squares intersect)
   override void overlap(Collidable other){
@@ -65,7 +79,7 @@ class Physical : Collidable {
   void render(long time){
     if(animation !is null){
       if(height > 0)
-        gr_draw(animation, position + Vector2f(0, height), height, angle);
+        gr_draw(animation, position + Vector2f(0, height), render_depth + position.y, angle);
       else
         gr_draw(animation, position, 0, angle);
     }

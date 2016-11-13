@@ -1,5 +1,6 @@
 module area;
 
+import std.stdio;
 import physical;
 import agent;
 import vector;
@@ -45,13 +46,18 @@ class Area {
       stationary.render(time);
     }
     foreach(Physical agent; agents){
-      agent.render(time);
+      if(agent !is null)
+        agent.render(time);
     }
   }
   
   void add_agent(Agent agent){
-    agent.index.remove;
-    agent.index = agents.add(agent);
+    if(agent.index.list !is agents){
+      agent.index.remove;
+      // writeln("agent.index.element: ", agent.index.element);
+      agent.index = agents.add(agent);
+      // writeln("agent.index.element: ", agent.index.element);
+    }
   }
   
   void add_stationaries(Physical stationary){
