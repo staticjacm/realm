@@ -23,29 +23,9 @@ int move_right_button = GR_D;
 bool running = true;
 long current_time = 0;
 
-extern(C) void close_function(){
-  running = false;
-}
-
-extern(C) void key_function(int key, int actions, int mods){
-  
-}
-
-extern(C) void mouse_move_function(double x, double y){
-  
-}
-
-extern(C) void mouse_button_function(int button, int actions, int mods){
-  
-}
-
 void initialize(){
   gr_open;
-  gr_activate_linear_filtering(1);
-  gr_window_close_function(&close_function);
-  gr_key_function(&key_function);
-  gr_mouse_move_function(&mouse_move_function);
-  gr_mouse_button_function(&mouse_button_function);
+  gr_activate_linear_filtering(0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
@@ -62,7 +42,13 @@ void render(){
 
 void update(){
   current_time++; // should be set to the current time in ms
-  gr_poll_events;
+  gr_register_events();
+  while(gr_has_event()){
+    switch(gr_read()){
+      case GR_CLOSE: running = false; break;
+      default: break;
+    }
+  }
   render;
 }
 

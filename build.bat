@@ -19,4 +19,4 @@ include/realm/player ^
 assets/entities/commoner/commoner ^
 assets/grounds/rocky/rocky_ground ^
 assets/worlds/testing_world/testing_world ^
--Iinclude lib/glfw3.lib lib/sgogl.lib
+-Iinclude lib/sgogl.lib
