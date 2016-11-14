@@ -6,7 +6,6 @@ A very simple linked list library
 ++/
 
 import std.stdio;
-import physical;
 
 class LList(T) {
   
@@ -42,6 +41,10 @@ class LList(T) {
         valid = false;
       }
     }
+    
+    T value(){
+      return element.value;
+    }
   }
   
   Element first, last;
@@ -72,6 +75,24 @@ class LList(T) {
       cel = cel.next;
     }
     return result;
+  }
+  
+  enum {
+    ITER_CONTINUE,
+    ITER_DELETE,
+    ITER_BREAK
+  }
+  void iterate(scope int delegate(ref T) dg){
+    Element nel, cel = first;
+    while(cel !is null){
+      switch(dg(cel.value)){
+        default:
+        case ITER_CONTINUE: nel = cel.next;              break;
+        case ITER_DELETE:   nel = cel.next; remove(cel); break;
+        case ITER_BREAK:    return;
+      }
+      cel = nel;
+    }
   }
   
   T opIndex(Index i){

@@ -1,6 +1,13 @@
 
 module refable;
 
+/++
+  A class which can be used for guaranteed accurate validity checks on objects
+  
+  Refable has a reference count which Ref!T increases and decreases
+  Refable.destroy can only use object.destroy if its count is 0
+  Ref!T automatically destroys object if it is no longer valid
+++/
 class Refable {
   uint ref_count = 0;
   bool valid = true;
@@ -17,6 +24,9 @@ struct Ref(T) {
   
   this(T _object){
     this = _object;
+  }
+  ~this(){
+    unassign;
   }
   
   void unassign(){
@@ -44,4 +54,16 @@ struct Ref(T) {
       object.ref_count++;
     }
   }
+}
+
+unittest {
+  class A : Refable {
+    int plus1(int x){ return x+1; }
+  }
+  A aobj   = new A;
+  Ref!A ar = aobj;
+  assert(ar.valid);
+  aobj.destroy; aobj = null;
+  assert(!ar.valid);
+  assert(ar.get.ref_count == 1);
 }

@@ -201,6 +201,8 @@ extern(C){
 /** Setting Variables / Parameters **/
 
 extern(C){
+  void gr_set_max_depth(float);
+  
   void gr_activate_transparency(int);
   void gr_activate_linear_filtering(int);
   void gr_activate_dithering(int);

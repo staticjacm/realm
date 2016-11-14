@@ -2,42 +2,143 @@
 module agent;
 
 import std.stdio;
+import world;
+import area;
+import wall;
+import ground;
+import material;
 import vector;
-import physical;
+import renderable;
+import refable;
 import sllist;
-import dynamics;
 
 alias Vector2f = Vector2!float;
 
 /++
-A physical with dynamics
+Proxy class from LList!AgentR
 ++/
-class Agent : Physical {
-  Dynamics dynamics;
+class Agent_list : LList!Agent {}
+
+/++
+Represents a physical object that can inhabit a world.
+A conceptual abstract of floating (can move freely between grid locations) objects
+Each agent has a size for collision detection purposes
+++/
+class Agent : Renderable {
+  /++
+    Static Variables
+  ++/
+  enum {
+    subtype_agent,
+    subtype_shot,
+    subtype_drop,
+    subtype_entity
+  };
   
-  this(Vector2f _position, float _size){
-    super(_position, _size);
-    dynamics = new Dynamics;
+  static int gid = 0;
+  static Agent_list master_list;
+  
+  static this(){
+    master_list = new Agent_list;
   }
   
-  override void destroy(){
-    dynamics.destroy;
-    super.destroy;
-  }
-  
-  override void update(long time, float dt){
-    if(dynamics.moving){
-      dynamics.update_position(position, dt);
-      moved = true;
+  static render_all(long time){
+    foreach(Agent agent; master_list){
+      agent.render(time);
     }
   }
   
-  override int physical_subtype_id(){ return 1; }
+  /++
+    Object Variables
+  ++/
+  int id = 0;
+  World world;
+  Area area;
+  Agent_list.Index master_index;
+  Agent_list.Index area_index;
+  Material material;
+  Vector2f velocity = Vector2f(0, 0);
+  float mass = 1;
+  bool moving = false;
+  bool moved = false;
+  float height = 0;
+  float size = 1;
   
-  override float render_depth(){ return physical.level_render_depth; }
+  /++
+    Constructors & Destructors
+  ++/
+  this(Vector2f _position, float _size){
+    id = gid++;
+    super(_position);
+    size = _size;
+    master_index = master_list.add(this);
+  }
   
   int agent_subtype_id(){ return 0; }
   
-  void accelerate(Vector2f acceleration, float dt){ dynamics.accelerate(acceleration, dt); }
-  void apply_impulse(Vector2f force, float dt){ dynamics.apply_impulse(force, dt); }
+  override void destroy(){
+    master_index.remove;
+    area_index.remove;
+    material.destroy;
+    material = null;
+    animation.destroy;
+    animation = null;
+    super.destroy;
+  }
+  
+  /++
+    Updating & Collision detection
+  ++/
+  void update(long time, float dt){
+    if(material !is null)
+      material.update(time, dt);
+    if(moving){
+      position += velocity*dt;
+      if(world !is null)
+        world.place_agent(this);
+    }
+  }
+  
+  bool interacts(T : Agent)(){  return true; }
+  bool interacts(T : Wall)(){   return true; }
+  bool interacts(T : Ground)(){ return true; }
+  /// void overlap(Agent) is called when a collision is detected (this's and agent's collision squares intersect)
+  void overlap(Agent agent){
+    if(material !is null)
+      material.overlap(this, agent);
+  }
+  void collide(Wall wall){
+    if(material !is null)
+      material.collide(this, wall);
+  }
+  void over(Ground ground){
+    if(material !is null)
+      material.over(this, ground);
+  }
+  
+  /++
+    Movement Dynamics
+  ++/
+  void accelerate(Vector2f acceleration, float dt){
+    velocity += acceleration*dt;
+    if(velocity.x != 0 || velocity.y != 0)
+      moving = true;
+  }
+  void apply_impulse(Vector2f force, float dt){
+    accelerate(force/mass, dt);
+  }
+  
+  void move_by(Vector2f delta){
+    position += delta;
+    moved = true;
+  }
+  void move_to(Vector2f new_position){
+    position = new_position;
+    moved = true;
+  }
+  
+  /++
+    Rendering
+  ++/
+  override float render_depth(){ return 200; }
 }

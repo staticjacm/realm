@@ -5,10 +5,10 @@ import std.stdio;
 import std.string;
 import sgogl;
 import animation;
-import physical;
 import vector;
+import ground;
 
-class Rocky_ground : Physical {
+class Rocky_ground : Ground {
   static bool type_initialized = false;
   static uint image_1, image_2, image_3;
   static Animation animation_1, animation_2, animation_3;
@@ -25,8 +25,8 @@ class Rocky_ground : Physical {
     }
   }
   
-  this(Vector2f _position, float _size){
-    super(_position, _size);
+  this(Vector2f _position){
+    super(_position);
     int selection = uniform(0,3);
     switch(uniform(0, 3)){
       case 0: animation = animation_1;  break;
@@ -35,7 +35,4 @@ class Rocky_ground : Physical {
       default: animation = animation_1; break;
     }
   }
-  
-  override bool check_for_collisions(){ return false; }
-  override int physical_subtype_id(){ return -1; }
 }

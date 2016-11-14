@@ -10,6 +10,8 @@ import world;
 import commoner;
 import entity;
 import agent;
+import ground;
+import rocky_ground;
 import vector;
 import player;
 
@@ -33,6 +35,7 @@ void initialize(){
   gr_open;
   gr_activate_depth_testing(1);
   gr_activate_linear_filtering(0);
+  gr_set_max_depth(1000.0f);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
@@ -44,8 +47,11 @@ void initialize(){
 }
 
 void render(){
-  gr_clear;
+  gr_clear;  
   test_world.render(current_time);
+  foreach(Agent agent; Agent.master_list){
+    agent.render(current_time);
+  }
   gr_refresh;
 }
 
