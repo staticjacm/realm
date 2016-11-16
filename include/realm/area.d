@@ -1,18 +1,24 @@
 module area;
 
 import std.stdio;
+import std.string;
 import refable;
 import world;
 import ground;
 import wall;
 import agent;
 import vector;
+import sgogl_interface;
 
 alias Vector2f = Vector2!float;
 
+bool draw_boundaries = false;
+
 class Area {
+  static int gid = 0;
   static const(float) area_width = 1.0f, area_height = 1.0f;
   
+  int id = 0;
   int object_count = 0;
   World world;
   Wall wall;
@@ -21,6 +27,7 @@ class Area {
   Vector2f position;
   
   this(Vector2f _position){
+    id = gid++;
     position = _position;
     agents = new Agent_list;
   }
@@ -34,6 +41,8 @@ class Area {
     agents.destroy;
     object.destroy(this);
   }
+  
+  override string toString(){ return format("area %d", id); }
   
   void update(long time, float dt){
     bool emptyq = true;
@@ -52,6 +61,9 @@ class Area {
   }
   
   void render(long time){
+    if(draw_boundaries){
+      gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
+    }
     if(ground !is null)
       ground.render(time);
     // foreach(Agent agent; agents){

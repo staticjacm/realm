@@ -1,2 +1,2 @@
 
-* Entity not updating correctly
+* Entity might not be switching areas correctly again

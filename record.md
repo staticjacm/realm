@@ -11,3 +11,7 @@
 
 * Rendered testing_world with player_entity moving around (and correctly switching areas)
 * Added Timer module
+
+### 16
+
+* Camera now follows player_entity

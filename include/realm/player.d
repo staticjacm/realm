@@ -2,6 +2,7 @@
 module player;
 
 import std.stdio;
+import sgogl_interface;
 import entity;
 import sgogl;
 
@@ -24,6 +25,8 @@ void player_update(long time, float dt){
   if(move_left_pressed) acceleration += Vector2f(-1.0, 0.0f);
   else if(move_right_pressed) acceleration += Vector2f(1.0, 0.0f);
   player_entity.accelerate(acceleration*boost, dt);
+  
+  gr_view_centered(player_entity.position, 10.0);
 }
 
 void player_key_function(){

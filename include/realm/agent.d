@@ -2,6 +2,7 @@
 module agent;
 
 import std.stdio;
+import std.string;
 import world;
 import area;
 import wall;
@@ -48,6 +49,12 @@ class Agent : Renderable {
     }
   }
   
+  static update_all(long time, float dt){
+    foreach(Agent agent; master_list){
+      agent.update(time, dt);
+    }
+  }
+  
   /++
     Object Variables
   ++/
@@ -85,6 +92,8 @@ class Agent : Renderable {
     animation = null;
     super.destroy;
   }
+  
+  override string toString(){ return format("agent %d", id); }
   
   /++
     Updating & Collision detection

@@ -17,8 +17,8 @@ class Testing_world : World {
   }
   
   this(){
-    for(int x = 0; x < 10; x++){
-      for(int y = 0; y < 10; y++){
+    for(int x = 0; x < 30; x++){
+      for(int y = 0; y < 30; y++){
         add_ground(new Rocky_ground(Vector2f(x, y)));
       }
     }

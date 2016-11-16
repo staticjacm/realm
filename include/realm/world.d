@@ -67,7 +67,8 @@ class World : world_grid_type!(Area, float) {
   
   void place_agent(Agent agent){
     Area area = get_area(agent.position);
-    if(area !is null){
+    if(area !is null && area !is agent.area){
+      writefln("%s switched from %s to %s", agent, agent.area, area);
       area.add_agent(agent);
     }
   }

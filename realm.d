@@ -49,9 +49,17 @@ void initialize(){
 void render(){
   gr_clear;  
   test_world.render(current_time);
+  // Agent.render_all(current_time);
   foreach(Agent agent; Agent.master_list){
     agent.render(current_time);
   }
+  
+  gr_color(1.0, 0.0, 0.0, 1.0);
+  gr_draw_line(player_entity.position, Vector2f(0, 0), 1.0);
+  gr_color(0.0, 1.0, 0.0, 1.0);
+  gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
+  gr_color_alpha(1.0);
+  
   gr_refresh;
 }
 
@@ -67,6 +75,9 @@ void update(){
     }
   }
   player_update(current_time, frame_delta);
+  foreach(Agent agent; Agent.master_list){
+    agent.update(current_time, frame_delta);
+  }
   test_world.update(current_time, frame_delta);
   render;
   current_time = frame_timer.msecs;
