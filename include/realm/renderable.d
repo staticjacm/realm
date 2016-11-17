@@ -16,7 +16,6 @@ class Renderable : Refable {
   }
   
   override void destroy(){
-    animation.destroy;
     animation = null;
     super.destroy;
   }

@@ -39,7 +39,7 @@ class World : world_grid_type!(Area, float) {
   }
   
   Area new_area(Vector2f position){
-    Area area = new Area(position);
+    Area area = new Area(Vector2f(position.x.floor, position.y.floor));
     area.world = this;
     set(area, position);
     return area;
@@ -53,23 +53,36 @@ class World : world_grid_type!(Area, float) {
       return null;
   }
   
+  Area get_or_new_area(Vector2f position){
+    Area area = get_area(position);
+    if(area is null)
+      return new_area(position);
+    else
+      return area;
+  }
+  
   void add_wall(Wall wall){
     wall.position.x = floor(wall.position.x);
     wall.position.y = floor(wall.position.y);
-    new_area(wall.position).set_wall(wall);
+    get_or_new_area(wall.position).set_wall(wall);
   }
   
   void add_ground(Ground ground){
     ground.position.x = floor(ground.position.x);
     ground.position.y = floor(ground.position.y);
-    new_area(ground.position).set_ground(ground);
+    get_or_new_area(ground.position).set_ground(ground);
   }
   
   void place_agent(Agent agent){
     Area area = get_area(agent.position);
-    if(area !is null && area !is agent.area){
-      writefln("%s switched from %s to %s", agent, agent.area, area);
-      area.add_agent(agent);
+    if(area !is null){
+      if(area !is agent.area){
+        agent.area_index.remove;
+        area.add_agent(agent);
+      }
+    }
+    else{
+      agent.area_index.remove;
     }
   }
   

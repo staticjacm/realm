@@ -6,6 +6,7 @@ A very simple linked list library
 ++/
 
 import std.stdio;
+import std.conv;
 
 class LList(T) {
   
@@ -17,6 +18,14 @@ class LList(T) {
     T value;
     
     this(T t){ value = t; }
+    
+    override string toString(){
+      return "llist_element("~value.to!string~")";
+    }
+    
+    void destroy(){
+      object.destroy(this);
+    }
   }
   
   /++
@@ -55,6 +64,18 @@ class LList(T) {
   this(T[] tlist){
     this();
     foreach(T t; tlist) add(t);
+  }
+  
+  override string toString(){
+    string ret = "";
+    Element cel = first;
+    while(cel !is null){
+      ret ~= cel.toString;
+      if(cel !is last)
+        ret ~= "<->";
+      cel = cel.next;
+    }
+    return ret;
   }
   
   void destroy(){
@@ -146,28 +167,13 @@ class LList(T) {
   }
   
   void remove(Element element){
-    /*
-    if(element is last){
-      // writeln("remove last");
-      last = element.prev;
-      if(element.prev !is null){
-        // writeln(" element.prev !is null");
-        element.prev.next = element.next;
-      }
-    }
-    else if(element is first){
-      // writeln("remove first");
+    if(element is first)
       first = element.next;
-      if(element.next !is null){
-        // writeln(" element.next !is null");
-        element.next.prev = element.prev;
-      }
-    }
-    */
-    writeln("remove ", element);
+    else if(element is last)
+      last = element.prev;
     connect(element.prev, element.next);
     length--;
-    object.destroy(element);
+    element.destroy;
   }
   void remove(Index index){
     index.remove;
@@ -190,5 +196,5 @@ unittest {
   foreach(int i; a){
     sum += i;
   }
-  assert( sum == 18 );
+  assert( sum == 19 );
 }

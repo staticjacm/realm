@@ -7,6 +7,7 @@ import sgogl;
 import animation;
 import vector;
 import ground;
+import agent;
 
 class Rocky_ground : Ground {
   static bool type_initialized = false;
@@ -25,6 +26,11 @@ class Rocky_ground : Ground {
     }
   }
   
+  long internal_time = 0;
+  long under_timer = 0;
+  long under_delay = 1000;
+  bool waiting = false;
+  
   this(Vector2f _position){
     super(_position);
     int selection = uniform(0,3);
@@ -33,6 +39,31 @@ class Rocky_ground : Ground {
       case 1: animation = animation_2;  break;
       case 2: animation = animation_3;  break;
       default: animation = animation_1; break;
+    }
+  }
+  
+  override void render(long time){
+    if(waiting)
+      gr_color(1, 0, 0, 1);
+    super.render(time);
+    gr_color_alpha(1);
+  }
+  
+  override void update(long time, float dt){
+    internal_time = time;
+    // if(waiting) writefln("waiting %b, under_time %d, internal_time %d", waiting, under_timer, internal_time);
+    if(waiting && under_timer < internal_time){
+      waiting = false;
+    }
+  }
+  
+  override bool interacts(){ return true; }
+  
+  override void under(Agent agent){
+    if(!waiting){
+      // writeln("under agent");
+      under_timer = internal_time + under_delay;
+      waiting = true;
     }
   }
 }

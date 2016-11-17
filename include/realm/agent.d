@@ -102,6 +102,7 @@ class Agent : Renderable {
     if(material !is null)
       material.update(time, dt);
     if(moving){
+      // accelerate(-velocity, dt);
       position += velocity*dt;
       if(world !is null)
         world.place_agent(this);

@@ -53,6 +53,44 @@ class Area {
     if(ground !is null){
       emptyq = false;
       ground.update(time, dt);
+      if(ground.interacts){
+        foreach(Agent agent; agents){
+          ground.under(agent);
+          agent.over(ground);
+        }
+      }
+    }
+    foreach(Agent agent; agents){
+      /// Checking collisions between agent and surrounding walls
+      /// Theres probably a faster way to do this
+      if(agent.position.x - agent.size/2 < position.x){
+        Area collider_area = world.get_area(position + Vector2f(-1, 0));
+        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+          agent.collide(collider_area.wall);
+          collider_area.wall.collide(agent);
+        }
+      }
+      else if(position.x + 1 < agent.position.x + agent.size/2){
+        Area collider_area = world.get_area(position + Vector2f(1, 0));
+        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+          agent.collide(collider_area.wall);
+          collider_area.wall.collide(agent);
+        }
+      }
+      if(agent.position.y - agent.size/2 < position.y){
+        Area collider_area = world.get_area(position + Vector2f(0, -1));
+        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+          agent.collide(collider_area.wall);
+          collider_area.wall.collide(agent);
+        }
+      }
+      else if(position.y + 1 < agent.position.y + agent.size/2){
+        Area collider_area = world.get_area(position + Vector2f(0, 1));
+        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+          agent.collide(collider_area.wall);
+          collider_area.wall.collide(agent);
+        }
+      }
     }
     if(agents.length > 0)
       emptyq = false;
@@ -66,10 +104,6 @@ class Area {
     }
     if(ground !is null)
       ground.render(time);
-    // foreach(Agent agent; agents){
-      // if(agent !is null)
-        // agent.render(time);
-    // }
     if(wall !is null)
       wall.render(time);
   }
@@ -84,6 +118,8 @@ class Area {
       agent.area = this;
       agent.area_index = agents.add(agent);
     }
+    else
+      agent.area_index.remove;
   }
   
   void set_wall(Wall _wall){

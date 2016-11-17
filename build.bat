@@ -20,5 +20,6 @@ include/realm/entity ^
 include/realm/player ^
 assets/entities/commoner/commoner ^
 assets/grounds/rocky/rocky_ground ^
+assets/walls/cactus1/cactus1 ^
 assets/worlds/testing_world/testing_world ^
 -Iinclude lib/sgogl.lib
