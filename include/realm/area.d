@@ -74,18 +74,16 @@ class Area {
       int range = cast(int)((agent.size/2 + 1.0).floor);
       for(int xd = -range; xd <= range; xd++){
         for(int yd = -range; yd <= range; yd++){
-          if(xd != 0 && yd != 0){
           Area check_area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
             if(check_area !is null){
               foreach(Agent check_agent; check_area.agents){
-                if(agent.check_for_overlap(check_agent)){
+                if(agent !is check_agent && agent.check_for_overlap(check_agent)){
                   writeln(agent, " overlapped ", check_agent);
                   agent.overlap(check_agent);
                   check_agent.overlap(agent);
                 }
               }
             }
-          }
         }
       }
       /// Checking collisions between agent and surrounding walls

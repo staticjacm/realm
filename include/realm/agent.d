@@ -13,6 +13,8 @@ import vector;
 import renderable;
 import refable;
 import sllist;
+import sgogl;
+import sgogl_interface;
 
 alias Vector2f = Vector2!float;
 
@@ -20,6 +22,8 @@ alias Vector2f = Vector2!float;
 Proxy class from LList!AgentR
 ++/
 class Agent_list : LList!Agent {}
+
+bool render_overlap_boundary = true;
 
 /++
 Represents a physical object that can inhabit a world.
@@ -103,7 +107,7 @@ class Agent : Renderable {
     if(material !is null)
       material.update(time, dt);
     if(moving){
-      // accelerate(-velocity, dt);
+      accelerate(-velocity*10.0f, dt);
       position += velocity*dt;
       if(world !is null)
         world.place_agent(this);
@@ -112,8 +116,8 @@ class Agent : Renderable {
   
   
   bool check_for_overlap(Agent agent){
-    return abs(agent.position.x - this.position.x) <= (agent.size/2 + this.size/2) && 
-           abs(agent.position.y - this.position.y) <= (agent.size/2 + this.size/2);
+    return (abs(agent.position.x - this.position.x) <= (agent.size/2 + this.size/2)) && 
+           (abs(agent.position.y - this.position.y) <= (agent.size/2 + this.size/2));
   }
   bool interacts(T : Agent)(){  return true; }
   bool interacts(T : Wall)(){   return true; }
@@ -157,4 +161,14 @@ class Agent : Renderable {
     Rendering
   ++/
   override float render_depth(){ return 200; }
+  override void render(long time){
+    if(render_overlap_boundary){
+      gr_color_alpha(1);
+      gr_draw_line(position + Vector2f(size/2, size/2), position + Vector2f(-size/2, size/2), 1);
+      gr_draw_line(position + Vector2f(-size/2, size/2), position + Vector2f(-size/2, -size/2), 1);
+      gr_draw_line(position + Vector2f(-size/2, -size/2), position + Vector2f(size/2, -size/2), 1);
+      gr_draw_line(position + Vector2f(size/2, -size/2), position + Vector2f(size/2, size/2), 1);
+    }
+    super.render(time);
+  }
 }
