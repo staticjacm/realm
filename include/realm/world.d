@@ -38,9 +38,22 @@ class World : world_grid_type!(Area, float) {
     }
   }
   
+  void connect_area_to_surroundings(Area area){
+    Vector2f position = area.position;
+    area.adjacent_ul  = get_area(position + Vector2f(-1, 1));
+    area.adjacent_u   = get_area(position + Vector2f(0, 1));
+    area.adjacent_ur  = get_area(position + Vector2f(1, 1));
+    area.adjacent_l   = get_area(position + Vector2f(-1, 0));
+    area.adjacent_r   = get_area(position + Vector2f(1, 0));
+    area.adjacent_bl  = get_area(position + Vector2f(-1, -1));
+    area.adjacent_b   = get_area(position + Vector2f(0, -1));
+    area.adjacent_br  = get_area(position + Vector2f(1, -1));
+  }
+  
   Area new_area(Vector2f position){
     Area area = new Area(Vector2f(position.x.floor, position.y.floor));
     area.world = this;
+    connect_area_to_surroundings(area);
     set(area, position);
     return area;
   }

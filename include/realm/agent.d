@@ -3,6 +3,7 @@ module agent;
 
 import std.stdio;
 import std.string;
+import std.math;
 import world;
 import area;
 import wall;
@@ -109,6 +110,11 @@ class Agent : Renderable {
     }
   }
   
+  
+  bool check_for_overlap(Agent agent){
+    return abs(agent.position.x - this.position.x) <= (agent.size/2 + this.size/2) && 
+           abs(agent.position.y - this.position.y) <= (agent.size/2 + this.size/2);
+  }
   bool interacts(T : Agent)(){  return true; }
   bool interacts(T : Wall)(){   return true; }
   bool interacts(T : Ground)(){ return true; }

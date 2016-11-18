@@ -1,7 +1,14 @@
 module area;
+/++
+Responsibilities:
+  Collision detection between agents and rooted objects
+  Updating rooted objects
+
++/
 
 import std.stdio;
 import std.string;
+import std.math;
 import refable;
 import world;
 import ground;
@@ -25,6 +32,8 @@ class Area {
   Ground ground;
   Agent_list agents; /// Mobile objects
   Vector2f position;
+  /// Holding adjacencies might not be necessary
+  Area adjacent_ul, adjacent_u, adjacent_ur, adjacent_l, adjacent_r, adjacent_bl, adjacent_b, adjacent_br;
   
   this(Vector2f _position){
     id = gid++;
@@ -61,6 +70,24 @@ class Area {
       }
     }
     foreach(Agent agent; agents){
+      /// Checking collision between agents and agents
+      int range = cast(int)((agent.size/2 + 1.0).floor);
+      for(int xd = -range; xd <= range; xd++){
+        for(int yd = -range; yd <= range; yd++){
+          if(xd != 0 && yd != 0){
+          Area check_area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
+            if(check_area !is null){
+              foreach(Agent check_agent; check_area.agents){
+                if(agent.check_for_overlap(check_agent)){
+                  writeln(agent, " overlapped ", check_agent);
+                  agent.overlap(check_agent);
+                  check_agent.overlap(agent);
+                }
+              }
+            }
+          }
+        }
+      }
       /// Checking collisions between agent and surrounding walls
       /// Theres probably a faster way to do this
       if(agent.position.x - agent.size/2 < position.x){
@@ -99,13 +126,15 @@ class Area {
   }
   
   void render(long time){
-    if(draw_boundaries){
-      gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
+    if(point_in_view(position)){
+      if(draw_boundaries){
+        gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
+      }
+      if(ground !is null)
+        ground.render(time);
+      if(wall !is null)
+        wall.render(time);
     }
-    if(ground !is null)
-      ground.render(time);
-    if(wall !is null)
-      wall.render(time);
   }
   
   bool inside(Vector2f point){

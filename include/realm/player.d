@@ -5,6 +5,9 @@ import std.stdio;
 import sgogl_interface;
 import entity;
 import sgogl;
+import vector;
+
+float view_size = 10;
 
 Entity player_entity;
 int move_up_button    = GR_W;
@@ -26,7 +29,7 @@ void player_update(long time, float dt){
   else if(move_right_pressed) acceleration += Vector2f(1.0, 0.0f);
   player_entity.accelerate(acceleration*boost, dt);
   
-  gr_view_centered(player_entity.position, 10.0);
+  gr_view_centered(player_entity.position, view_size);
 }
 
 void player_key_function(){

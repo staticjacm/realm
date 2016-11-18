@@ -1,5 +1,6 @@
 
 module refable;
+import std.stdio;
 
 /++
   A class which can be used for guaranteed accurate validity checks on objects
@@ -21,6 +22,7 @@ class Refable {
 
 struct Ref(T) {
   T object;
+  alias object this;
   
   this(T _object){
     this = _object;
@@ -29,12 +31,18 @@ struct Ref(T) {
     unassign;
   }
   
+  void opAssign(T _object){
+    unassign;
+    if(_object !is null && _object.valid){
+      object = _object;
+      object.ref_count++;
+    }
+  }
+  
   void unassign(){
     if(object !is null){
-      if(object.valid)
-        object.ref_count--;
-      else
-        object.destroy;
+      object.ref_count--;
+      object.destroy;
     }
     object = null;
   }
@@ -45,14 +53,6 @@ struct Ref(T) {
   
   T get(){
     return object;
-  }
-  
-  void opAssign(T _object){
-    unassign;
-    if(_object !is null && _object.valid){
-      object = _object;
-      object.ref_count++;
-    }
   }
 }
 
@@ -66,4 +66,19 @@ unittest {
   aobj.destroy; aobj = null;
   assert(!ar.valid);
   assert(ar.get.ref_count == 1);
+}
+
+unittest {
+  class A : Refable {
+    int x;
+    void xp1(){ writeln("xp1 ", x+1); }
+  }
+  Ref!A ar;
+  A a1 = new A;
+  A a2 = new A;
+  a2.x=10;
+  ar=a1;
+  ar.xp1;
+  ar=a2;
+  ar.xp1;
 }

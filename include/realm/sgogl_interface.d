@@ -20,3 +20,9 @@ void gr_view_centered(Vector2f position, float scale, float angle){
 void gr_view_centered(Vector2f position, float scale){
   sgogl.gr_view_centered(position.x, position.y, scale, 0);
 }
+
+/// Is point visible in the current view?
+bool point_in_view(Vector2f point, float margin = 1){
+  return (gr_view_left - margin <= point.x) && (gr_view_bottom - margin <= point.y) && 
+         (point.x <= gr_view_right + margin) && (point.y <= gr_view_top + margin);
+}

@@ -5,6 +5,7 @@ import world;
 import player;
 import commoner;
 import rocky_ground;
+import agent;
 import cactus1;
 
 class Testing_world : World {
@@ -41,6 +42,10 @@ class Testing_world : World {
       add_wall(new Cactus1(Vector2f(x, y)));
     }
     place_agent(player_entity);
+    
+    Agent collider_entity = new Commoner(Vector2f(13, 13), 1);
+    collider_entity.world = this;
+    place_agent(collider_entity);
   }
   
 }
