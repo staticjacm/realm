@@ -6,6 +6,8 @@ import std.string;
 import animation;
 import vector;
 import entity;
+import agent;
+import fireball1;
 import sgogl;
 
 alias Vector2f = Vector2!float;
@@ -17,6 +19,7 @@ class Commoner : Entity {
   
   static initialize_type(){
     if(!type_initialized){
+      Fireball1.initialize_type;
       image_dimensions = Vector2f(1, 1);
       image_standing  = gr_load_image("assets/entities/commoner/standing.png".toStringz, 0);
       image_walking_1 = gr_load_image("assets/entities/commoner/walking_1.png".toStringz, 0);
@@ -37,4 +40,9 @@ class Commoner : Entity {
   
   override int entity_subtype_id(){ return 1; }
   
+  override void regular_attack(){
+    Fireball1 fireball = new Fireball1(position, 1);
+    fireball.initialize(this);
+    fireball.world = world;
+  }
 }

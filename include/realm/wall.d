@@ -23,7 +23,7 @@ class Wall : Rooted {
   
   void collide(Agent agent){
     Vector2f pdif = agent.position.floor - position.floor;
-    writeln("collided ", agent.position.floor, " - ", position, " = ", pdif);
+    // writeln("collided ", agent.position.floor, " - ", position, " = ", pdif);
     if(pdif.x == 1 && agent.velocity.x < 0){
       agent.velocity.x *= -1;
     }

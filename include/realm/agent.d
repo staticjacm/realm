@@ -75,6 +75,7 @@ class Agent : Renderable {
   bool moved = false;
   float height = 0;
   float size = 1;
+  float friction = 1.0;
   
   /++
     Constructors & Destructors
@@ -107,7 +108,8 @@ class Agent : Renderable {
     if(material !is null)
       material.update(time, dt);
     if(moving){
-      accelerate(-velocity*10.0f, dt);
+      if(friction != 0)
+        accelerate(-velocity*friction*10.0f, dt);
       position += velocity*dt;
       if(world !is null)
         world.place_agent(this);

@@ -3,6 +3,18 @@
 
 * Find a sound library
 
+* Move all global game related stuff into its own module
+
+* Incorporate time, frame delta etc into game module
+
+* Write Item module
+* Write Weapon module
+* Write Accessory module
+* Write Armor module
+* Write Drop module
+* Write Structured Entity module
+
+
 
 
 # Already done:
@@ -19,10 +31,6 @@
 
 * Agent.size could be an overridable function instead of a variable
 
-* Rooted objects should probably be updated independent of Area - ie: Area's only responsibility should be collision detection
-
-* Collision objects should all be unified
-
-* Collision functions should all have similar names
+* Integrate global frame delta variable, global time variable - so that these don't need to be passed down every time
 
 * There should be some way to get all agents, rooted etc in a region - a way to check overlaps within an arbitrary area of space

@@ -3,6 +3,8 @@ module entity;
 
 import vector;
 import agent;
+import sgogl;
+import sgogl_interface;
 
 alias Vector2f = Vector2!float;
 
@@ -27,4 +29,11 @@ class Entity : Agent {
   void detected(Agent agent){}
   
   void regular_attack(){}
+  
+  override void render(long time){
+    gr_color(0.0, 0.0, 1.0, 1.0);
+    gr_draw_line(position, position + direction, 1);
+    gr_color_alpha(1.0);
+    super.render(time);
+  }
 }

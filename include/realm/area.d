@@ -78,7 +78,7 @@ class Area {
             if(check_area !is null){
               foreach(Agent check_agent; check_area.agents){
                 if(agent !is check_agent && agent.check_for_overlap(check_agent)){
-                  writeln(agent, " overlapped ", check_agent);
+                  // writeln(agent, " overlapped ", check_agent);
                   agent.overlap(check_agent);
                   check_agent.overlap(agent);
                 }

@@ -17,8 +17,10 @@ include/realm/world ^
 include/realm/sllist ^
 include/realm/vector ^
 include/realm/entity ^
+include/realm/shot ^
 include/realm/player ^
 assets/entities/commoner/commoner ^
+assets/shots/fireball1/fireball1 ^
 assets/grounds/rocky/rocky_ground ^
 assets/walls/cactus1/cactus1 ^
 assets/worlds/testing_world/testing_world ^

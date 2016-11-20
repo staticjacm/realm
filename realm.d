@@ -1,4 +1,5 @@
 import std.stdio;
+import std.string;
 
 import sgogl;
 import sgogl_interface;
@@ -29,8 +30,21 @@ long current_game_time = 0;
 float frame_delta = 0.001;
 long frame = 0;
 
+uint test_img;
+float test_x = 0.0, test_y = 0.0;
+
 void key_function(){
   player_key_function();
+}
+
+void mouse_click_function(){
+  player_mouse_click_function;
+}
+
+void mouse_move_function(){
+  gr_read_mouse;
+  test_x = gr_mouse_x.gr_screen_to_world_x;
+  test_y = gr_mouse_y.gr_screen_to_world_y;
 }
 
 void initialize(){
@@ -38,6 +52,8 @@ void initialize(){
   gr_activate_depth_testing(1);
   gr_activate_linear_filtering(0);
   gr_set_max_depth(1000.0f);
+  
+  test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
@@ -60,6 +76,8 @@ void render(){
     agent.render(current_game_time);
   }
   
+  gr_draw_centered(test_img, test_x, test_y, 1.0, 0.0, 0.5, 0.5);
+  
   gr_color(1.0, 0.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, Vector2f(0, 0), 1.0);
   gr_color(0.0, 1.0, 0.0, 1.0);
@@ -78,6 +96,8 @@ void update(){
     switch(gr_read()){
       case GR_CLOSE: running = false; break;
       case GR_KEY_EVENT: key_function; break;
+      case GR_MOUSE_BUTTON_EVENT: mouse_click_function; break;
+      case GR_MOUSE_MOVE_EVENT: mouse_move_function; break;
       default: break;
     }
   }
@@ -89,8 +109,10 @@ void update(){
   render;
   current_frame_time = frame_timer.msecs;
   frame_delta = frame_timer.hnsecsf;
-  if(frame % 100 == 0)
+  if(frame % 100 == 0){
     writeln("frame_delta: ", frame_delta);
+    writeln("  number of agents: ", Agent.master_list.length);
+  }
   Thread.sleep(2.dur!"msecs");
 }
 

@@ -62,6 +62,16 @@ void player_key_function(){
   }
 }
 
+void player_mouse_click_function(){
+  gr_read_mouse;
+  player_entity.direction = Vector2f(gr_mouse_x.gr_screen_to_world_x - player_entity.position.x, 
+                                     gr_mouse_y.gr_screen_to_world_y - player_entity.position.y ).normalize;
+  if(gr_mouse_left){
+    if(player_entity !is null)
+      player_entity.regular_attack;
+  }
+}
+
 void player_mouse_button_function(){
   
 }
