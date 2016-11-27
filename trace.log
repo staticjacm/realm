@@ -1,0 +1,1010 @@
+------------------
+	  348	_D5agent5Agent6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC5agent5Agent
+	10800	_D6rooted6Rooted6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6rooted6Rooted
+_D10renderable10Renderable6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC10renderable10Renderable	11148	638	638
+------------------
+	432044	_D12rocky_ground12Rocky_ground6renderMFlZv
+	23900	_D5agent5Agent6renderMFlZv
+	25513	_D7cactus17Cactus16renderMFlZv
+_D10renderable10Renderable6renderMFlZv	481457	28471646	246258
+	481457	_D10renderable10Renderable7y_shiftMFZb
+	432044	_D6ground6Ground12render_depthMFZf
+	481457	_D9animation7gr_drawFC9animation9AnimationS6vector14__T7Vector2TfZ7Vector2ffZv
+	23900	_D5agent5Agent12render_depthMFZf
+	25513	_D4wall4Wall12render_depthMFZf
+------------------
+	   16	_D6rooted6Rooted7destroyMFZv
+	  340	_D5agent5Agent7destroyMFZv
+_D10renderable10Renderable7destroyMFZv	356	621	112
+	  356	_D7refable7Refable7destroyMFZv
+------------------
+	481457	_D10renderable10Renderable6renderMFlZv
+_D10renderable10Renderable7y_shiftMFZb	481457	39461	39461
+------------------
+	    4	_D13testing_world13Testing_world15initialize_typeFZv
+_D12rocky_ground12Rocky_ground15initialize_typeFZv	4	6442	6440
+	   12	_D9animation9Animation6__ctorMFAkfS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2ZC9animation9Animation
+------------------
+	23841	_D4area4Area6updateMFlfZ14__foreachbody3MFKC5agent5AgentZi
+_D12rocky_ground12Rocky_ground5underMFC5agent5AgentZv	23841	1993	1993
+------------------
+	10000	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+_D12rocky_ground12Rocky_ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC12rocky_ground12Rocky_ground	10000	19229	2922
+	10000	_D6ground6Ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6ground6Ground
+	20000	_D3std6random27__T7uniformVAyaa2_5b29TiTiZ7uniformFNfiiZi
+------------------
+	432044	_D4area4Area6renderMFlZv
+_D12rocky_ground12Rocky_ground6renderMFlZv	432044	26012206	340880
+	432044	_D10renderable10Renderable6renderMFlZv
+------------------
+	7467500	_D4area4Area6updateMFlfZv
+_D12rocky_ground12Rocky_ground6updateMFlfZv	7467500	548650	548650
+------------------
+	7467500	_D4area4Area6updateMFlfZv
+_D12rocky_ground12Rocky_ground9interactsMFZb	7467500	470081	470081
+------------------
+	    4	_D5realm10initializeFZv
+_D13testing_world13Testing_world15initialize_typeFZv	4	12741	6
+	    4	_D12rocky_ground12Rocky_ground15initialize_typeFZv
+	    4	_D7cactus17Cactus115initialize_typeFZv
+------------------
+	    4	_D5realm10initializeFZv
+_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world	4	238078	8478
+	10000	_D12rocky_ground12Rocky_ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC12rocky_ground12Rocky_ground
+	10000	_D5world5World10add_groundMFC6ground6GroundZv
+	  800	_D7cactus17Cactus16__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC7cactus17Cactus1
+	  800	_D5world5World8add_wallMFC4wall4WallZv
+	    8	_D5world5World11place_agentMFC5agent5AgentZv
+	    4	_D8commoner8Commoner6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC8commoner8Commoner
+------------------
+	 5974	_D6entity6Entity6renderMFlZv
+	95600	_D5agent5Agent6renderMFlZv
+	 5974	_D5realm6renderFZv
+_D15sgogl_interface12gr_draw_lineFS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2fZv	107548	4855412	4855412
+------------------
+	7467500	_D4area4Area6renderMFlZv
+_D15sgogl_interface13point_in_viewFS6vector14__T7Vector2TfZ7Vector2fZb	7467500	619647	619647
+------------------
+	    4	_D5realm10initializeFZv
+	 2987	_D6player13player_updateFlfZv
+_D15sgogl_interface16gr_view_centeredFS6vector14__T7Vector2TfZ7Vector2fZv	2991	15428	15428
+------------------
+	   56	_D3std9algorithm10comparison13__T3minTyiTkZ3minFNaNbNiNfyikZyi
+_D3std10functional20__T6safeOpVAyaa1_3cZ16__T6safeOpTyiTkZ6safeOpFNaNbNiNfKyiKkZb	56	11	9
+	   56	_D3std10functional20__T6safeOpVAyaa1_3cZ18__T8unsafeOpTyiTkZ8unsafeOpFNaNbNiNfyikZb
+------------------
+	   56	_D3std10functional20__T6safeOpVAyaa1_3cZ16__T6safeOpTyiTkZ6safeOpFNaNbNiNfKyiKkZb
+_D3std10functional20__T6safeOpVAyaa1_3cZ18__T8unsafeOpTyiTkZ8unsafeOpFNaNbNiNfyikZb	56	2	2
+------------------
+	   56	_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya
+_D3std3utf28__T20canSearchInCodeUnitsTaZ20canSearchInCodeUnitsFNaNbNiNfwZb	56	4	4
+------------------
+	20800	_D3std6random175__T7uniformVAyaa2_5b29TiTiTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNfiiKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZi
+_D3std4conv15__T8unsignedTiZ8unsignedFNaNbNiNfiZk	20800	1198	1198
+------------------
+	   28	_D3std5stdio4File18__T5writeTAyaTiTaZ5writeMFNfAyaiaZv
+_D3std4conv55__T11toTextRangeTiTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfiS3std5stdio4File17LockingTextWriterZv	28	46	19
+	   28	_D3std5range10primitives47__T3putTS3std5stdio4File17LockingTextWriterTAaZ3putFNfKS3std5stdio4File17LockingTextWriterAaZv
+------------------
+	    4	_D3std5stdio4File18__T5writeTAyaTkTaZ5writeMFNfAyakaZv
+_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv	4	75	60
+	    4	_D3std5range10primitives47__T3putTS3std5stdio4File17LockingTextWriterTAaZ3putFNfKS3std5stdio4File17LockingTextWriterAaZv
+------------------
+	199368	_D5agent5Agent17check_for_overlapMFC5agent5AgentZb
+_D3std4math10__T3absTfZ3absFNaNbNiNffZf	199368	10559	10559
+------------------
+	    4	_D3std5stdio4File18__T5writeTAyaTkTaZ5writeMFNfAyakaZv
+	   28	_D3std5stdio4File28__T5writeTAyaTfTAyaTfTAyaTaZ5writeMFNfAyafAyafAyaaZv
+	   28	_D3std5stdio4File18__T5writeTAyaTiTaZ5writeMFNfAyaiaZv
+_D3std5range10primitives46__T3putTS3std5stdio4File17LockingTextWriterTaZ3putFNbNiNfKS3std5stdio4File17LockingTextWriteraZv	60	24193	13
+	   60	_D3std5range10primitives48__T5doPutTS3std5stdio4File17LockingTextWriterTaZ5doPutFNbNiNfKS3std5stdio4File17LockingTextWriterKaZv
+------------------
+	    4	_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv
+	   56	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+	   28	_D3std4conv55__T11toTextRangeTiTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfiS3std5stdio4File17LockingTextWriterZv
+_D3std5range10primitives47__T3putTS3std5stdio4File17LockingTextWriterTAaZ3putFNfKS3std5stdio4File17LockingTextWriterAaZv	88	107	10
+	   88	_D3std5range10primitives49__T5doPutTS3std5stdio4File17LockingTextWriterTAaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAaZv
+------------------
+	   56	_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb
+_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAxaZ3putFNfKS3std5stdio4File17LockingTextWriterAxaZv	56	168	8
+	   56	_D3std5range10primitives50__T5doPutTS3std5stdio4File17LockingTextWriterTAxaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAxaZv
+------------------
+	    4	_D3std5stdio4File18__T5writeTAyaTkTaZ5writeMFNfAyakaZv
+	   84	_D3std5stdio4File28__T5writeTAyaTfTAyaTfTAyaTaZ5writeMFNfAyafAyafAyaaZv
+	   28	_D3std5stdio4File18__T5writeTAyaTiTaZ5writeMFNfAyaiaZv
+_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAyaZ3putFNfKS3std5stdio4File17LockingTextWriterAyaZv	116	250	23
+	  116	_D3std5range10primitives50__T5doPutTS3std5stdio4File17LockingTextWriterTAyaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAyaZv
+------------------
+	   60	_D3std5range10primitives46__T3putTS3std5stdio4File17LockingTextWriterTaZ3putFNbNiNfKS3std5stdio4File17LockingTextWriteraZv
+_D3std5range10primitives48__T5doPutTS3std5stdio4File17LockingTextWriterTaZ5doPutFNbNiNfKS3std5stdio4File17LockingTextWriterKaZv	60	24180	13
+	   60	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv
+------------------
+	   88	_D3std5range10primitives47__T3putTS3std5stdio4File17LockingTextWriterTAaZ3putFNfKS3std5stdio4File17LockingTextWriterAaZv
+_D3std5range10primitives49__T5doPutTS3std5stdio4File17LockingTextWriterTAaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAaZv	88	97	28
+	   88	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv
+------------------
+	   56	_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAxaZ3putFNfKS3std5stdio4File17LockingTextWriterAxaZv
+_D3std5range10primitives50__T5doPutTS3std5stdio4File17LockingTextWriterTAxaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAxaZv	56	160	15
+	   56	_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFNfAxaZv
+------------------
+	  116	_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAyaZ3putFNfKS3std5stdio4File17LockingTextWriterAyaZv
+_D3std5range10primitives50__T5doPutTS3std5stdio4File17LockingTextWriterTAyaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAyaZv	116	227	28
+	  116	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv
+------------------
+	    4	_Dmain
+_D3std5stdio16__T7writelnTAyaZ7writelnFNfAyaZv	4	2510	92
+	    4	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
+	    4	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv
+	    4	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv
+------------------
+	   28	_D5realm6updateFZv
+_D3std5stdio18__T7writelnTAyaTiZ7writelnFNfAyaiZv	28	6009	23
+	   28	_D3std5stdio4File18__T5writeTAyaTiTaZ5writeMFNfAyaiaZv
+------------------
+	    4	_D7cactus17Cactus115initialize_typeFZv
+_D3std5stdio18__T7writelnTAyaTkZ7writelnFNfAyakZv	4	4179	8
+	    4	_D3std5stdio4File18__T5writeTAyaTkTaZ5writeMFNfAyakaZv
+------------------
+	   28	_D5realm6updateFZv
+_D3std5stdio28__T7writelnTAyaTfTAyaTfTAyaZ7writelnFNfAyafAyafAyaZv	28	16632	57
+	   28	_D3std5stdio4File28__T5writeTAyaTfTAyaTfTAyaTaZ5writeMFNfAyafAyafAyaaZv
+------------------
+	    4	_D3std5stdio16__T7writelnTAyaZ7writelnFNfAyaZv
+	   60	_D3std5range10primitives48__T5doPutTS3std5stdio4File17LockingTextWriterTaZ5doPutFNbNiNfKS3std5stdio4File17LockingTextWriterKaZv
+_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv	64	26464	14
+	   64	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNfaZ12trustedFPUTCFNbNiNeiPS4core4stdc5stdio6_iobufZi
+------------------
+	   64	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNbNiNfaZv
+_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNfaZ12trustedFPUTCFNbNiNeiPS4core4stdc5stdio6_iobufZi	64	26450	26450
+------------------
+	   88	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv
+_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFAaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk	88	43	43
+------------------
+	   88	_D3std5range10primitives49__T5doPutTS3std5stdio4File17LockingTextWriterTAaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAaZv
+_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFNfAaZv	88	69	26
+	   88	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFAaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+------------------
+	   56	_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFNfAxaZv
+_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFAxaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk	56	24	24
+------------------
+	   56	_D3std5range10primitives50__T5doPutTS3std5stdio4File17LockingTextWriterTAxaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAxaZv
+_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFNfAxaZv	56	145	121
+	   56	_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFAxaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+------------------
+	  120	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv
+_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFAyaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk	120	294	294
+------------------
+	    4	_D3std5stdio16__T7writelnTAyaZ7writelnFNfAyaZv
+	  116	_D3std5range10primitives50__T5doPutTS3std5stdio4File17LockingTextWriterTAyaZ5doPutFNfKS3std5stdio4File17LockingTextWriterKAyaZv
+_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFNfAyaZv	120	320	26
+	  120	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFAyaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+------------------
+	   28	_D3std5stdio18__T7writelnTAyaTiZ7writelnFNfAyaiZv
+_D3std5stdio4File18__T5writeTAyaTiTaZ5writeMFNfAyaiaZv	28	5986	138
+	   28	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
+	   28	_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAyaZ3putFNfKS3std5stdio4File17LockingTextWriterAyaZv
+	   28	_D3std4conv55__T11toTextRangeTiTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfiS3std5stdio4File17LockingTextWriterZv
+	   28	_D3std5range10primitives46__T3putTS3std5stdio4File17LockingTextWriterTaZ3putFNbNiNfKS3std5stdio4File17LockingTextWriteraZv
+------------------
+	    4	_D3std5stdio18__T7writelnTAyaTkZ7writelnFNfAyakZv
+_D3std5stdio4File18__T5writeTAyaTkTaZ5writeMFNfAyakaZv	4	4171	164
+	    4	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
+	    4	_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAyaZ3putFNfKS3std5stdio4File17LockingTextWriterAyaZv
+	    4	_D3std4conv55__T11toTextRangeTkTS3std5stdio4File17LockingTextWriterZ11toTextRangeFNfkS3std5stdio4File17LockingTextWriterZv
+	    4	_D3std5range10primitives46__T3putTS3std5stdio4File17LockingTextWriterTaZ3putFNbNiNfKS3std5stdio4File17LockingTextWriteraZv
+------------------
+	   28	_D3std5stdio28__T7writelnTAyaTfTAyaTfTAyaZ7writelnFNfAyafAyafAyaZv
+_D3std5stdio4File28__T5writeTAyaTfTAyaTfTAyaTaZ5writeMFNfAyafAyafAyaaZv	28	16575	517
+	   28	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
+	   84	_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAyaZ3putFNfKS3std5stdio4File17LockingTextWriterAyaZv
+	   56	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAafZk
+	   28	_D3std5range10primitives46__T3putTS3std5stdio4File17LockingTextWriterTaZ3putFNbNiNfKS3std5stdio4File17LockingTextWriteraZv
+------------------
+	  112	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAafZk
+_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb	112	306	138
+	   56	_D3std5range10primitives48__T3putTS3std5stdio4File17LockingTextWriterTAxaZ3putFNfKS3std5stdio4File17LockingTextWriterAxaZv
+------------------
+	   56	_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTfTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	56	840	210
+	   56	_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya
+	   56	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi
+	   56	_D3std9algorithm10comparison13__T3minTyiTkZ3minFNaNbNiNfyikZyi
+	   56	_D3std5range10primitives47__T3putTS3std5stdio4File17LockingTextWriterTAaZ3putFNfKS3std5stdio4File17LockingTextWriterAaZv
+------------------
+	   56	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZ9__lambda6MFNbNiNeZi	56	465	465
+------------------
+	   56	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAafZk
+_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTfTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	56	876	36
+	   56	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+------------------
+	   56	_D3std5stdio4File28__T5writeTAyaTfTAyaTfTAyaTaZ5writeMFNfAyafAyafAyaaZv
+_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAafZk	56	1342	146
+	   56	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAafZ9__lambda5FNaNbNiNeZPFNaNbNfS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+	   56	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAafZ16__T9__lambda6TfZ9__lambda6FNaNbNiNeKfZxPv
+	  112	_D3std6format18__T10FormatSpecTaZ10FormatSpec59__T17writeUpToNextSpecTS3std5stdio4File17LockingTextWriterZ17writeUpToNextSpecMFNfS3std5stdio4File17LockingTextWriterZb
+	   56	_D3std6format59__T13formatGenericTS3std5stdio4File17LockingTextWriterTfTaZ13formatGenericFS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+------------------
+	   56	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAafZk
+_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAafZ16__T9__lambda6TfZ9__lambda6FNaNbNiNeKfZxPv	56	5	5
+------------------
+	   56	_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFNfS3std5stdio4File17LockingTextWriterxAafZk
+_D3std6format60__T14formattedWriteTS3std5stdio4File17LockingTextWriterTaTfZ14formattedWriteFS3std5stdio4File17LockingTextWriterxAafZ9__lambda5FNaNbNiNeZPFNaNbNfS3std5stdio4File17LockingTextWriterPxvKS3std6format18__T10FormatSpecTaZ10FormatSpecZv	56	9	9
+------------------
+	20800	_D3std6random175__T7uniformVAyaa2_5b29TiTiTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNfiiKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZi
+_D3std6random162__T7uniformTkTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNbNfKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZk	20800	2240	2240
+------------------
+	20800	_D3std6random27__T7uniformVAyaa2_5b29TiTiZ7uniformFNfiiZi
+_D3std6random175__T7uniformVAyaa2_5b29TiTiTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNfiiKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZi	20800	10379	5791
+	20800	_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb
+	20800	_D3std4conv15__T8unsignedTiZ8unsignedFNaNbNiNfiZk
+	20800	_D3std6random162__T7uniformTkTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNbNfKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZk
+------------------
+	20000	_D12rocky_ground12Rocky_ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC12rocky_ground12Rocky_ground
+	  800	_D7cactus17Cactus16__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC7cactus17Cactus1
+_D3std6random27__T7uniformVAyaa2_5b29TiTiZ7uniformFNfiiZi	20800	13464	3085
+	20800	_D3std6random175__T7uniformVAyaa2_5b29TiTiTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNfiiKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZi
+------------------
+	   56	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+_D3std9algorithm10comparison13__T3minTyiTkZ3minFNaNbNiNfyikZyi	56	23	12
+	   56	_D3std10functional20__T6safeOpVAyaa1_3cZ16__T6safeOpTyiTkZ6safeOpFNaNbNiNfKyiKkZb
+------------------
+	   56	_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya
+_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFAyaaZ13trustedMemchrFNaNbNiNeKAyaKaZAya	56	34	34
+------------------
+	   56	_D3std6format57__T11formatValueTS3std5stdio4File17LockingTextWriterTfTaZ11formatValueFNfS3std5stdio4File17LockingTextWriterfKS3std6format18__T10FormatSpecTaZ10FormatSpecZv
+_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFNaNfAyaaZAya	56	77	39
+	   56	_D3std3utf28__T20canSearchInCodeUnitsTaZ20canSearchInCodeUnitsFNaNbNiNfwZb
+	   56	_D3std9algorithm9searching34__T4findVAyaa6_61203d3d2062TAyaTaZ4findFAyaaZ13trustedMemchrFNaNbNiNeKAyaKaZAya
+------------------
+	    4	_D3std5stdio16__T7writelnTAyaZ7writelnFNfAyaZv
+	    4	_D3std5stdio4File18__T5writeTAyaTkTaZ5writeMFNfAyakaZv
+	20800	_D3std6random175__T7uniformVAyaa2_5b29TiTiTS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZ7uniformFNaNfiiKS3std6random109__T21MersenneTwisterEngineTkVki32Vki624Vki397Vki31Vki2567483615Vki11Vki7Vki2636928640Vki15Vki4022730752Vki18Z21MersenneTwisterEngineZi
+	   28	_D3std5stdio4File28__T5writeTAyaTfTAyaTfTAyaTaZ5writeMFNfAyafAyafAyaaZv
+	   28	_D3std5stdio4File18__T5writeTAyaTiTaZ5writeMFNfAyaiaZv
+_D3std9exception27__T7enforceHTC9ExceptionTbZ7enforceFNaNfbLAxaAyakZb	20864	1157	1157
+------------------
+	10000	_D5world5World10add_groundMFC6ground6GroundZv
+_D4area4Area10set_groundMFC6ground6GroundZv	10000	2793	1829
+	10000	_D4area4Area12unset_groundMFZv
+------------------
+	  800	_D4area4Area8set_wallMFC4wall4WallZv
+_D4area4Area10unset_wallMFZv	800	219	61
+	   16	_D4wall4Wall7destroyMFZv
+------------------
+	10000	_D4area4Area10set_groundMFC6ground6GroundZv
+_D4area4Area12unset_groundMFZv	10000	964	964
+------------------
+	10000	_D5world5World8new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+_D4area4Area6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area	10000	6173	4207
+	10000	_D5agent10Agent_list6__ctorMFZC5agent10Agent_list
+------------------
+	 3854	_D4area4Area9add_agentMFC5agent5AgentZv
+_D4area4Area6insideMFS6vector14__T7Vector2TfZ7Vector2Zb	3854	735	735
+------------------
+	7467500	_D5world5World6renderMFlZ14__foreachbody2MFKC4area4AreaZi
+_D4area4Area6renderMFlZv	7467500	29278951	1262160
+	7467500	_D15sgogl_interface13point_in_viewFS6vector14__T7Vector2TfZ7Vector2fZb
+	432044	_D12rocky_ground12Rocky_ground6renderMFlZv
+	25513	_D7cactus17Cactus16renderMFlZv
+------------------
+	23841	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+_D4area4Area6updateMFlfZ14__foreachbody3MFKC5agent5AgentZi	23841	14026	8193
+	23841	_D12rocky_ground12Rocky_ground5underMFC5agent5AgentZv
+	23841	_D5agent5Agent4overMFC6ground6GroundZv
+------------------
+	127797	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi	127797	69869	22731
+	103956	_D5agent5Agent17check_for_overlapMFC5agent5AgentZb
+	168120	_D5agent5Agent7overlapMFC5agent5AgentZv
+------------------
+	23841	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi	23841	647384	61993
+	261696	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	261696	_D5world5World8get_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	214479	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+	  415	_D4wall4Wall9interactsMFZb
+	  415	_D5agent5Agent7collideMFC4wall4WallZv
+	  415	_D7cactus17Cactus17collideMFC5agent5AgentZv
+------------------
+	7467500	_D5world5World6updateMFlfZ14__foreachbody3MFKC4area4AreaZi
+_D4area4Area6updateMFlfZv	7467500	6419410	3854864
+	585452	_D7cactus17Cactus16updateMFlfZv
+	7467500	_D12rocky_ground12Rocky_ground6updateMFlfZv
+	7467500	_D12rocky_ground12Rocky_ground9interactsMFZb
+	14935000	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+------------------
+	  800	_D5world5World8add_wallMFC4wall4WallZv
+_D4area4Area8set_wallMFC4wall4WallZv	800	341	122
+	  800	_D4area4Area10unset_wallMFZv
+------------------
+	 3854	_D5world5World11place_agentMFC5agent5AgentZv
+_D4area4Area9add_agentMFC5agent5AgentZv	3854	13893	2012
+	 3854	_D4area4Area6insideMFS6vector14__T7Vector2TfZ7Vector2Zb
+	 3854	_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+------------------
+	 5974	_D4core4time8Duration27__T5totalVAyaa5_6d73656373Z5totalMxFNaNbNdNiNfZl
+_D4core4time41__T18getUnitsFromHNSecsVAyaa5_6d73656373Z18getUnitsFromHNSecsFNaNbNiNflZl	5974	2621	1611
+	 5974	_D4core4time48__T7convertVAyaa6_686e73656373VAyaa5_6d73656373Z7convertFNaNbNiNflZl
+------------------
+	 5974	_D5timer5Timer5msecsMFZl
+	 2987	_D5timer5Timer6hnsecsMFZl
+_D4core4time42__T12MonoTimeImplVE4core4time9ClockTypei0Z12MonoTimeImpl22__T8opBinaryVAyaa1_2dZ8opBinaryMxFNaNbNiNfS4core4time42__T12MonoTimeImplVE4core4time9ClockTypei0Z12MonoTimeImplZS4core4time8Duration	8961	6034	6034
+------------------
+	 2987	_D4core4time8Duration29__T5totalVAyaa6_686e73656373Z5totalMxFNaNbNdNiNfZl
+_D4core4time43__T18getUnitsFromHNSecsVAyaa6_686e73656373Z18getUnitsFromHNSecsFNaNbNiNflZl	2987	1205	938
+	 2987	_D4core4time50__T7convertVAyaa6_686e73656373VAyaa6_686e73656373Z7convertFNaNbNiNflZl
+------------------
+	 5974	_D4core4time41__T18getUnitsFromHNSecsVAyaa5_6d73656373Z18getUnitsFromHNSecsFNaNbNiNflZl
+_D4core4time48__T7convertVAyaa6_686e73656373VAyaa5_6d73656373Z7convertFNaNbNiNflZl	5974	1010	1010
+------------------
+	 2987	_D4core4time43__T18getUnitsFromHNSecsVAyaa6_686e73656373Z18getUnitsFromHNSecsFNaNbNiNflZl
+_D4core4time50__T7convertVAyaa6_686e73656373VAyaa6_686e73656373Z7convertFNaNbNiNflZl	2987	267	267
+------------------
+	 5974	_D5timer5Timer5msecsMFZl
+_D4core4time8Duration27__T5totalVAyaa5_6d73656373Z5totalMxFNaNbNdNiNfZl	5974	4497	1876
+	 5974	_D4core4time41__T18getUnitsFromHNSecsVAyaa5_6d73656373Z18getUnitsFromHNSecsFNaNbNiNflZl
+------------------
+	 2987	_D5timer5Timer6hnsecsMFZl
+_D4core4time8Duration29__T5totalVAyaa6_686e73656373Z5totalMxFNaNbNdNiNfZl	2987	2295	1090
+	 2987	_D4core4time43__T18getUnitsFromHNSecsVAyaa6_686e73656373Z18getUnitsFromHNSecsFNaNbNiNflZl
+------------------
+	370268	_D5world5World8get_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23getMFS6vector14__T7Vector2TfZ7Vector2ZPC4area4Area	370268	596967	367728
+	370232	_D6vector14__T7Vector2TfZ7Vector29__xtoHashFNbNeKxS6vector14__T7Vector2TfZ7Vector2Zk
+	3773613	_D6vector14__T7Vector2TfZ7Vector211__xopEqualsFKxS6vector14__T7Vector2TfZ7Vector2KxS6vector14__T7Vector2TfZ7Vector2Zb
+------------------
+	10000	_D5world5World8new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23setMFC4area4AreaS6vector14__T7Vector2TfZ7Vector2Zv	10000	23451	18637
+	10000	_D6vector14__T7Vector2TfZ7Vector29__xtoHashFNbNeKxS6vector14__T7Vector2TfZ7Vector2Zk
+	73940	_D6vector14__T7Vector2TfZ7Vector211__xopEqualsFKxS6vector14__T7Vector2TfZ7Vector2KxS6vector14__T7Vector2TfZ7Vector2Zb
+------------------
+	14935000	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZi
+_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZ14__foreachbody2MFKC4area4AreaZi	14935000	39427934	1703496
+	7467500	_D5world5World6updateMFlfZ14__foreachbody3MFKC4area4AreaZi
+	7467500	_D5world5World6renderMFlZ14__foreachbody2MFKC4area4AreaZi
+------------------
+	 2987	_D5world5World6updateMFlfZv
+	 2987	_D5world5World6renderMFlZv
+_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZi	5974	41057309	1629375
+	14935000	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZ14__foreachbody2MFKC4area4AreaZi
+------------------
+	  340	_D9fireball19Fireball16__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC9fireball19Fireball1
+_D4shot4Shot6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC4shot4Shot	340	1465	181
+	  340	_D5agent5Agent6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC5agent5Agent
+------------------
+	  340	_D9fireball19Fireball16updateMFlfZv
+_D4shot4Shot7destroyMFZv	340	3093	198
+	  340	_D5agent5Agent7destroyMFZv
+------------------
+	25513	_D10renderable10Renderable6renderMFlZv
+_D4wall4Wall12render_depthMFZf	25513	2856	2856
+------------------
+	  800	_D7cactus17Cactus16__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC7cactus17Cactus1
+_D4wall4Wall6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC4wall4Wall	800	164	48
+	  800	_D6rooted6Rooted6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6rooted6Rooted
+------------------
+	  415	_D7cactus17Cactus17collideMFC5agent5AgentZv
+_D4wall4Wall7collideMFC5agent5AgentZv	415	412	236
+	  830	_D6vector12__T5floorTfZ5floorFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	  415	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2dZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+------------------
+	   16	_D4area4Area10unset_wallMFZv
+_D4wall4Wall7destroyMFZv	16	158	6
+	   16	_D6rooted6Rooted7destroyMFZv
+------------------
+	  415	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+_D4wall4Wall9interactsMFZb	415	32	32
+------------------
+	    4	_D5agent5Agent12_staticCtor1FZv
+	10000	_D4area4Area6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+_D5agent10Agent_list6__ctorMFZC5agent10Agent_list	10004	2009	1344
+	10004	_D6sllist24__T5LListTC5agent5AgentZ5LList6__ctorMFNbNiNfZC6sllist24__T5LListTC5agent5AgentZ5LList
+------------------
+	 2987	_D6player13player_updateFlfZv
+	 2880	_D5agent5Agent6updateMFlfZv
+_D5agent5Agent10accelerateMFS6vector14__T7Vector2TfZ7Vector2fZv	5867	4211	2580
+	 5867	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2aZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2
+	 5867	_D6vector14__T7Vector2TfZ7Vector225__T10opOpAssignVAyaa1_2bZ10opOpAssignMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+------------------
+_D5agent5Agent12_staticCtor1FZv	0	77	34
+	    4	_D5agent10Agent_list6__ctorMFZC5agent10Agent_list
+------------------
+	23900	_D10renderable10Renderable6renderMFlZv
+_D5agent5Agent12render_depthMFZf	23900	2639	2639
+------------------
+	103956	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+_D5agent5Agent17check_for_overlapMFC5agent5AgentZb	103956	32404	21845
+	199368	_D3std4math10__T3absTfZ3absFNaNbNiNffZf
+------------------
+	23841	_D4area4Area6updateMFlfZ14__foreachbody3MFKC5agent5AgentZi
+_D5agent5Agent4overMFC6ground6GroundZv	23841	3840	3840
+------------------
+	    8	_D6entity6Entity6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC6entity6Entity
+	  340	_D4shot4Shot6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC4shot4Shot
+_D5agent5Agent6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC5agent5Agent	348	1413	391
+	  348	_D10renderable10Renderable6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC10renderable10Renderable
+	  348	_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+------------------
+	 5974	_D6entity6Entity6renderMFlZv
+	17926	_D5realm6renderFZ14__foreachbody1MFKC5agent5AgentZi
+_D5agent5Agent6renderMFlZv	23900	5756150	75246
+	191200	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	95600	_D15sgogl_interface12gr_draw_lineFS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2fZv
+	23900	_D10renderable10Renderable6renderMFlZv
+------------------
+	 5974	_D5realm6updateFZ14__foreachbody1MFKC5agent5AgentZi
+	14884	_D9fireball19Fireball16updateMFlfZv
+_D5agent5Agent6updateMFlfZv	20858	100868	10019
+	23524	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2aZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2
+	17764	_D6vector14__T7Vector2TfZ7Vector225__T10opOpAssignVAyaa1_2bZ10opOpAssignMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	17764	_D5world5World11place_agentMFC5agent5AgentZv
+	 2880	_D6vector14__T7Vector2TfZ7Vector222__T7opUnaryHVAyaa1_2dZ7opUnaryMFNaNbNiNfZS6vector14__T7Vector2TfZ7Vector2
+	 2880	_D5agent5Agent10accelerateMFS6vector14__T7Vector2TfZ7Vector2fZv
+------------------
+	  415	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+_D5agent5Agent7collideMFC4wall4WallZv	415	81	81
+------------------
+	  340	_D4shot4Shot7destroyMFZv
+_D5agent5Agent7destroyMFZv	340	2895	425
+	  680	_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6removeMFZv
+	  340	_D6object32__T7destroyTC8material8MaterialZ7destroyFC8material8MaterialZv
+	  340	_D9animation9Animation7destroyMFZv
+	  340	_D10renderable10Renderable7destroyMFZv
+------------------
+	168120	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+_D5agent5Agent7overlapMFC5agent5AgentZv	168120	14734	14734
+------------------
+	    4	_Dmain
+_D5realm10initializeFZv	4	966687	701441
+	    4	_D15sgogl_interface16gr_view_centeredFS6vector14__T7Vector2TfZ7Vector2fZv
+	    4	_D8commoner8Commoner15initialize_typeFZv
+	    4	_D13testing_world13Testing_world15initialize_typeFZv
+	    4	_D8commoner8Commoner6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC8commoner8Commoner
+	    4	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+	    4	_D5timer5Timer5startMFZv
+------------------
+	  873	_D5realm6updateFZv
+_D5realm12key_functionFZv	873	1074	433
+	  873	_D6player19player_key_functionFZv
+------------------
+	 1292	_D5realm6updateFZv
+_D5realm19mouse_move_functionFZv	1292	1680	1680
+------------------
+	  340	_D5realm6updateFZv
+_D5realm20mouse_click_functionFZv	340	7240	160
+	  340	_D6player27player_mouse_click_functionFZv
+------------------
+	23900	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+_D5realm6renderFZ14__foreachbody1MFKC5agent5AgentZi	23900	6128501	14338
+	 5974	_D6entity6Entity6renderMFlZv
+	17926	_D5agent5Agent6renderMFlZv
+------------------
+	 2987	_D5realm6updateFZv
+_D5realm6renderFZv	2987	40559292	1859964
+	 2987	_D5world5World6renderMFlZv
+	 2987	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+	 5974	_D15sgogl_interface12gr_draw_lineFS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2fZv
+	 2987	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2fZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2
+	 2987	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+------------------
+	20858	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+_D5realm6updateFZ14__foreachbody1MFKC5agent5AgentZi	20858	111949	4766
+	 5974	_D5agent5Agent6updateMFlfZv
+	14884	_D9fireball19Fireball16updateMFlfZv
+------------------
+	 2987	_Dmain
+_D5realm6updateFZv	2987	51147466	1619602
+	 5974	_D5timer5Timer5msecsMFZl
+	 2987	_D5timer5Timer5startMFZv
+	 1292	_D5realm19mouse_move_functionFZv
+	 2987	_D6player13player_updateFlfZv
+	 2987	_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi
+	 2987	_D5world5World6updateMFlfZv
+	 2987	_D5realm6renderFZv
+	 2987	_D5timer5Timer7hnsecsfMFZf
+	  340	_D5realm20mouse_click_functionFZv
+	   28	_D3std5stdio28__T7writelnTAyaTfTAyaTfTAyaZ7writelnFNfAyafAyafAyaZv
+	   28	_D3std5stdio18__T7writelnTAyaTiZ7writelnFNfAyaiZv
+	  873	_D5realm12key_functionFZv
+------------------
+	 2987	_D5timer5Timer7hnsecsfMFZf
+_D5timer14hnsecs_to_secsFlZf	2987	259	259
+------------------
+	 5974	_D5realm6updateFZv
+_D5timer5Timer5msecsMFZl	5974	16102	6139
+	 5974	_D4core4time42__T12MonoTimeImplVE4core4time9ClockTypei0Z12MonoTimeImpl22__T8opBinaryVAyaa1_2dZ8opBinaryMxFNaNbNiNfS4core4time42__T12MonoTimeImplVE4core4time9ClockTypei0Z12MonoTimeImplZS4core4time8Duration
+	 5974	_D4core4time8Duration27__T5totalVAyaa5_6d73656373Z5totalMxFNaNbNdNiNfZl
+------------------
+	    4	_D5realm10initializeFZv
+	 2987	_D5realm6updateFZv
+_D5timer5Timer5startMFZv	2991	455	455
+------------------
+	 2987	_D5timer5Timer7hnsecsfMFZf
+_D5timer5Timer6hnsecsMFZl	2987	4409	1546
+	 2987	_D4core4time42__T12MonoTimeImplVE4core4time9ClockTypei0Z12MonoTimeImpl22__T8opBinaryVAyaa1_2dZ8opBinaryMxFNaNbNiNfS4core4time42__T12MonoTimeImplVE4core4time9ClockTypei0Z12MonoTimeImplZS4core4time8Duration
+	 2987	_D4core4time8Duration29__T5totalVAyaa6_686e73656373Z5totalMxFNaNbNdNiNfZl
+------------------
+	 2987	_D5realm6updateFZv
+_D5timer5Timer7hnsecsfMFZf	2987	5753	1085
+	 2987	_D5timer5Timer6hnsecsMFZl
+	 2987	_D5timer14hnsecs_to_secsFlZf
+------------------
+	10000	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+_D5world5World10add_groundMFC6ground6GroundZv	10000	208351	3730
+	10000	_D5world5World15get_or_new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	10000	_D4area4Area10set_groundMFC6ground6GroundZv
+------------------
+	    8	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+	17764	_D5agent5Agent6updateMFlfZv
+_D5world5World11place_agentMFC5agent5AgentZv	17772	84670	6861
+	17772	_D5world5World8get_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	 3854	_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6removeMFZv
+	 3854	_D4area4Area9add_agentMFC5agent5AgentZv
+------------------
+	10000	_D5world5World10add_groundMFC6ground6GroundZv
+	  800	_D5world5World8add_wallMFC4wall4WallZv
+_D5world5World15get_or_new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area	10800	202629	2340
+	10800	_D5world5World8get_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	10000	_D5world5World8new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+------------------
+	10000	_D5world5World8new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+_D5world5World28connect_area_to_surroundingsMFC4area4AreaZv	10000	146279	12516
+	80000	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	80000	_D5world5World8get_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+------------------
+	7467500	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZ14__foreachbody2MFKC4area4AreaZi
+_D5world5World6renderMFlZ14__foreachbody2MFKC4area4AreaZi	7467500	30472343	1193392
+	7467500	_D4area4Area6renderMFlZv
+------------------
+	 2987	_D5realm6renderFZv
+_D5world5World6renderMFlZv	2987	32287259	2028
+	 2987	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZi
+------------------
+	7467500	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZ14__foreachbody2MFKC4area4AreaZi
+_D5world5World6updateMFlfZ14__foreachbody3MFKC4area4AreaZi	7467500	7252095	832685
+	7467500	_D4area4Area6updateMFlfZv
+------------------
+	 2987	_D5realm6updateFZv
+_D5world5World6updateMFlfZv	2987	8773405	1327
+	 2987	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZi
+------------------
+	  800	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+_D5world5World8add_wallMFC4wall4WallZv	800	1319	177
+	  800	_D5world5World15get_or_new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	  800	_D4area4Area8set_wallMFC4wall4WallZv
+------------------
+	10800	_D5world5World15get_or_new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	80000	_D5world5World28connect_area_to_surroundingsMFC4area4AreaZv
+	17772	_D5world5World11place_agentMFC5agent5AgentZv
+	261696	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+_D5world5World8get_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area	370268	679009	82042
+	370268	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23getMFS6vector14__T7Vector2TfZ7Vector2ZPC4area4Area
+------------------
+	10000	_D5world5World15get_or_new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+_D5world5World8new_areaMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area	10000	183209	7306
+	10000	_D4area4Area6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC4area4Area
+	10000	_D5world5World28connect_area_to_surroundingsMFC4area4AreaZv
+	10000	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23setMFC4area4AreaS6vector14__T7Vector2TfZ7Vector2Zv
+------------------
+	    8	_D8commoner8Commoner6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC8commoner8Commoner
+_D6entity6Entity6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC6entity6Entity	8	132	3
+	    8	_D5agent5Agent6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC5agent5Agent
+------------------
+	 5974	_D5realm6renderFZ14__foreachbody1MFKC5agent5AgentZi
+_D6entity6Entity6renderMFlZv	5974	1809399	11996
+	 5974	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	 5974	_D15sgogl_interface12gr_draw_lineFS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2fZv
+	 5974	_D5agent5Agent6renderMFlZv
+------------------
+	432044	_D10renderable10Renderable6renderMFlZv
+_D6ground6Ground12render_depthMFZf	432044	43377	43377
+------------------
+	10000	_D12rocky_ground12Rocky_ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC12rocky_ground12Rocky_ground
+_D6ground6Ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6ground6Ground	10000	3211	1377
+	10000	_D6rooted6Rooted6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6rooted6Rooted
+------------------
+	  356	_D7refable7Refable7destroyMFZv
+_D6object30__T7destroyTC7refable7RefableZ7destroyFC7refable7RefableZv	356	175	175
+------------------
+	  340	_D5agent5Agent7destroyMFZv
+_D6object32__T7destroyTC8material8MaterialZ7destroyFC8material8MaterialZv	340	89	89
+------------------
+	  340	_D9animation9Animation7destroyMFZv
+_D6object34__T7destroyTC9animation9AnimationZ7destroyFC9animation9AnimationZv	340	108	108
+------------------
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList7Element7destroyMFZv
+_D6object61__T7destroyTC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZ7destroyFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv	4186	4229	4229
+------------------
+	 2987	_D5realm6updateFZv
+_D6player13player_updateFlfZv	2987	25363	5440
+	 2987	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2aZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2
+	 2987	_D5agent5Agent10accelerateMFS6vector14__T7Vector2TfZ7Vector2fZv
+	 2987	_D15sgogl_interface16gr_view_centeredFS6vector14__T7Vector2TfZ7Vector2fZv
+	 2847	_D6vector14__T7Vector2TfZ7Vector225__T10opOpAssignVAyaa1_2bZ10opOpAssignMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+------------------
+	  873	_D5realm12key_functionFZv
+_D6player19player_key_functionFZv	873	641	641
+------------------
+	  340	_D5realm20mouse_click_functionFZv
+_D6player27player_mouse_click_functionFZv	340	7080	643
+	  340	_D6vector14__T7Vector2TfZ7Vector29normalizeMFNaNbNiNfZS6vector14__T7Vector2TfZ7Vector2
+	  340	_D8commoner8Commoner14regular_attackMFZv
+------------------
+	10000	_D6ground6Ground6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6ground6Ground
+	  800	_D4wall4Wall6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC4wall4Wall
+_D6rooted6Rooted6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC6rooted6Rooted	10800	1950	1332
+	10800	_D10renderable10Renderable6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC10renderable10Renderable
+------------------
+	   16	_D4wall4Wall7destroyMFZv
+_D6rooted6Rooted7destroyMFZv	16	152	4
+	   16	_D10renderable10Renderable7destroyMFZv
+------------------
+	  348	_D5agent5Agent6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC5agent5Agent
+	 3854	_D4area4Area9add_agentMFC5agent5AgentZv
+_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index	4202	12148	4754
+	 1926	_D6sllist24__T5LListTC5agent5AgentZ5LList9add_firstMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+	 2276	_D6sllist24__T5LListTC5agent5AgentZ5LList7Element6__ctorMFNaNbNiNfC5agent5AgentZC6sllist24__T5LListTC5agent5AgentZ5LList7Element
+	 2276	_D6sllist24__T5LListTC5agent5AgentZ5LList7connectMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv
+	 2276	_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6__ctorMFNaNbNcNiNfC6sllist24__T5LListTC5agent5AgentZ5LListC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+------------------
+	 1926	_D6sllist24__T5LListTC5agent5AgentZ5LList9add_firstMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+	 2276	_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6__ctorMFNaNbNcNiNfC6sllist24__T5LListTC5agent5AgentZ5LListC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZS6sllist24__T5LListTC5agent5AgentZ5LList5Index	4202	463	463
+------------------
+	 3854	_D5world5World11place_agentMFC5agent5AgentZv
+	  680	_D5agent5Agent7destroyMFZv
+_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6removeMFZv	4534	11076	1706
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList6removeMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv
+------------------
+	10004	_D5agent10Agent_list6__ctorMFZC5agent10Agent_list
+_D6sllist24__T5LListTC5agent5AgentZ5LList6__ctorMFNbNiNfZC6sllist24__T5LListTC5agent5AgentZ5LList	10004	665	665
+------------------
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6removeMFZv
+_D6sllist24__T5LListTC5agent5AgentZ5LList6removeMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv	4186	9370	2841
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList7connectMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList7Element7destroyMFZv
+------------------
+	 1926	_D6sllist24__T5LListTC5agent5AgentZ5LList9add_firstMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+	 2276	_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+_D6sllist24__T5LListTC5agent5AgentZ5LList7Element6__ctorMFNaNbNiNfC5agent5AgentZC6sllist24__T5LListTC5agent5AgentZ5LList7Element	4202	386	386
+------------------
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList6removeMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv
+_D6sllist24__T5LListTC5agent5AgentZ5LList7Element7destroyMFZv	4186	6046	1817
+	 4186	_D6object61__T7destroyTC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZ7destroyFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv
+------------------
+	 2276	_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+	 4186	_D6sllist24__T5LListTC5agent5AgentZ5LList6removeMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv
+_D6sllist24__T5LListTC5agent5AgentZ5LList7connectMFC6sllist24__T5LListTC5agent5AgentZ5LList7ElementC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZv	6462	744	744
+------------------
+	 2987	_D5realm6updateFZv
+	14935000	_D4area4Area6updateMFlfZv
+	214479	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+	 2987	_D5realm6renderFZv
+_D6sllist24__T5LListTC5agent5AgentZ5LList7opApplyMFMDFKC5agent5AgentZiZi	15155453	7755165	877314
+	20858	_D5realm6updateFZ14__foreachbody1MFKC5agent5AgentZi
+	23841	_D4area4Area6updateMFlfZ14__foreachbody3MFKC5agent5AgentZi
+	23841	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+	127797	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+	23900	_D5realm6renderFZ14__foreachbody1MFKC5agent5AgentZi
+------------------
+	 1926	_D6sllist24__T5LListTC5agent5AgentZ5LList3addMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+_D6sllist24__T5LListTC5agent5AgentZ5LList9add_firstMFC5agent5AgentZS6sllist24__T5LListTC5agent5AgentZ5LList5Index	1926	6801	6284
+	 1926	_D6sllist24__T5LListTC5agent5AgentZ5LList7Element6__ctorMFNaNbNiNfC5agent5AgentZC6sllist24__T5LListTC5agent5AgentZ5LList7Element
+	 1926	_D6sllist24__T5LListTC5agent5AgentZ5LList5Index6__ctorMFNaNbNcNiNfC6sllist24__T5LListTC5agent5AgentZ5LListC6sllist24__T5LListTC5agent5AgentZ5LList7ElementZS6sllist24__T5LListTC5agent5AgentZ5LList5Index
+------------------
+	  830	_D4wall4Wall7collideMFC5agent5AgentZv
+_D6vector12__T5floorTfZ5floorFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2	830	128	128
+------------------
+	3773613	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23getMFS6vector14__T7Vector2TfZ7Vector2ZPC4area4Area
+	73940	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23setMFC4area4AreaS6vector14__T7Vector2TfZ7Vector2Zv
+_D6vector14__T7Vector2TfZ7Vector211__xopEqualsFKxS6vector14__T7Vector2TfZ7Vector2KxS6vector14__T7Vector2TfZ7Vector2Zb	3847553	198637	198637
+------------------
+	 2880	_D5agent5Agent6updateMFlfZv
+_D6vector14__T7Vector2TfZ7Vector222__T7opUnaryHVAyaa1_2dZ7opUnaryMFNaNbNiNfZS6vector14__T7Vector2TfZ7Vector2	2880	398	398
+------------------
+	 2987	_D6player13player_updateFlfZv
+	 5867	_D5agent5Agent10accelerateMFS6vector14__T7Vector2TfZ7Vector2fZv
+	  340	_D9fireball19Fireball110initializeMFC6entity6EntityZv
+	23524	_D5agent5Agent6updateMFlfZv
+_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2aZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2	32718	2574	2574
+------------------
+	80000	_D5world5World28connect_area_to_surroundingsMFC4area4AreaZv
+	26478	_D6vector14__T7Vector2TfZ7Vector225__T10opOpAssignVAyaa1_2bZ10opOpAssignMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+	261696	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+	 5974	_D6entity6Entity6renderMFlZv
+	191200	_D5agent5Agent6renderMFlZv
+	 2987	_D5realm6renderFZv
+_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2	568335	37976	37976
+------------------
+	  415	_D4wall4Wall7collideMFC5agent5AgentZv
+_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2dZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2	415	48	48
+------------------
+	 2987	_D5realm6renderFZv
+	  340	_D6vector14__T7Vector2TfZ7Vector29normalizeMFNaNbNiNfZS6vector14__T7Vector2TfZ7Vector2
+_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2fZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2	3327	673	673
+------------------
+	 5867	_D5agent5Agent10accelerateMFS6vector14__T7Vector2TfZ7Vector2fZv
+	17764	_D5agent5Agent6updateMFlfZv
+	 2847	_D6player13player_updateFlfZv
+_D6vector14__T7Vector2TfZ7Vector225__T10opOpAssignVAyaa1_2bZ10opOpAssignMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2	26478	5299	3693
+	26478	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2bZ8opBinaryMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2ZS6vector14__T7Vector2TfZ7Vector2
+------------------
+	  340	_D6vector14__T7Vector2TfZ7Vector24normMFNaNbNiNfZf
+_D6vector14__T7Vector2TfZ7Vector23dotMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2Zf	340	38	38
+------------------
+	  340	_D6vector14__T7Vector2TfZ7Vector29normalizeMFNaNbNiNfZS6vector14__T7Vector2TfZ7Vector2
+_D6vector14__T7Vector2TfZ7Vector24normMFNaNbNiNfZf	340	211	173
+	  340	_D6vector14__T7Vector2TfZ7Vector23dotMFNaNbNiNfS6vector14__T7Vector2TfZ7Vector2Zf
+------------------
+	10000	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23setMFC4area4AreaS6vector14__T7Vector2TfZ7Vector2Zv
+	370232	_D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid23getMFS6vector14__T7Vector2TfZ7Vector2ZPC4area4Area
+_D6vector14__T7Vector2TfZ7Vector29__xtoHashFNbNeKxS6vector14__T7Vector2TfZ7Vector2Zk	380232	35416	35416
+------------------
+	  340	_D6player27player_mouse_click_functionFZv
+_D6vector14__T7Vector2TfZ7Vector29normalizeMFNaNbNiNfZS6vector14__T7Vector2TfZ7Vector2	340	457	217
+	  340	_D6vector14__T7Vector2TfZ7Vector24normMFNaNbNiNfZf
+	  340	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2fZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2
+------------------
+	    4	_D13testing_world13Testing_world15initialize_typeFZv
+_D7cactus17Cactus115initialize_typeFZv	4	6293	2113
+	    4	_D3std5stdio18__T7writelnTAyaTkZ7writelnFNfAyakZv
+	    4	_D9animation9Animation6__ctorMFAkfS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2ZC9animation9Animation
+------------------
+	  800	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+_D7cactus17Cactus16__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC7cactus17Cactus1	800	655	123
+	  800	_D4wall4Wall6__ctorMFS6vector14__T7Vector2TfZ7Vector2ZC4wall4Wall
+	  800	_D3std6random27__T7uniformVAyaa2_5b29TiTiZ7uniformFNfiiZi
+------------------
+	25513	_D4area4Area6renderMFlZv
+_D7cactus17Cactus16renderMFlZv	25513	1384938	9778
+	25513	_D10renderable10Renderable6renderMFlZv
+------------------
+	585452	_D4area4Area6updateMFlfZv
+_D7cactus17Cactus16updateMFlfZv	585452	44060	44060
+------------------
+	  415	_D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+_D7cactus17Cactus17collideMFC5agent5AgentZv	415	564	152
+	  415	_D4wall4Wall7collideMFC5agent5AgentZv
+------------------
+	  356	_D10renderable10Renderable7destroyMFZv
+_D7refable7Refable7destroyMFZv	356	509	334
+	  356	_D6object30__T7destroyTC7refable7RefableZ7destroyFC7refable7RefableZv
+------------------
+	  340	_D6player27player_mouse_click_functionFZv
+_D8commoner8Commoner14regular_attackMFZv	340	5980	2486
+	  340	_D9fireball19Fireball16__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC9fireball19Fireball1
+	  340	_D9fireball19Fireball110initializeMFC6entity6EntityZv
+------------------
+	    4	_D5realm10initializeFZv
+_D8commoner8Commoner15initialize_typeFZv	4	14179	7810
+	    4	_D9fireball19Fireball115initialize_typeFZv
+------------------
+	    4	_D5realm10initializeFZv
+	    4	_D13testing_world13Testing_world6__ctorMFZC13testing_world13Testing_world
+_D8commoner8Commoner6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC8commoner8Commoner	8	166	33
+	    8	_D6entity6Entity6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC6entity6Entity
+	   24	_D9animation9Animation6__ctorMFAkfS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2ZC9animation9Animation
+------------------
+	481457	_D10renderable10Renderable6renderMFlZv
+_D9animation7gr_drawFC9animation9AnimationS6vector14__T7Vector2TfZ7Vector2ffZv	481457	28137055	28100076
+	481457	_D9animation9Animation13current_frameMFZk
+------------------
+	481457	_D9animation7gr_drawFC9animation9AnimationS6vector14__T7Vector2TfZ7Vector2ffZv
+_D9animation9Animation13current_frameMFZk	481457	36979	36979
+------------------
+	   12	_D12rocky_ground12Rocky_ground15initialize_typeFZv
+	    4	_D7cactus17Cactus115initialize_typeFZv
+	   24	_D8commoner8Commoner6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC8commoner8Commoner
+	  340	_D9fireball19Fireball16__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC9fireball19Fireball1
+_D9animation9Animation6__ctorMFAkfS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2ZC9animation9Animation	380	26	26
+------------------
+	  340	_D5agent5Agent7destroyMFZv
+_D9animation9Animation7destroyMFZv	340	275	167
+	  340	_D6object34__T7destroyTC9animation9AnimationZ7destroyFC9animation9AnimationZv
+------------------
+	  340	_D8commoner8Commoner14regular_attackMFZv
+_D9fireball19Fireball110initializeMFC6entity6EntityZv	340	250	197
+	  340	_D6vector14__T7Vector2TfZ7Vector222__T8opBinaryVAyaa1_2aZ8opBinaryMFNaNbNiNffZS6vector14__T7Vector2TfZ7Vector2
+------------------
+	    4	_D8commoner8Commoner15initialize_typeFZv
+_D9fireball19Fireball115initialize_typeFZv	4	6369	6369
+------------------
+	  340	_D8commoner8Commoner14regular_attackMFZv
+_D9fireball19Fireball16__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC9fireball19Fireball1	340	3244	1757
+	  340	_D4shot4Shot6__ctorMFS6vector14__T7Vector2TfZ7Vector2fZC4shot4Shot
+	  340	_D9animation9Animation6__ctorMFAkfS6vector14__T7Vector2TfZ7Vector2S6vector14__T7Vector2TfZ7Vector2ZC9animation9Animation
+------------------
+	14884	_D5realm6updateFZ14__foreachbody1MFKC5agent5AgentZi
+_D9fireball19Fireball16updateMFlfZv	14884	69846	3222
+	14884	_D5agent5Agent6updateMFlfZv
+	  340	_D4shot4Shot7destroyMFZv
+------------------
+_Dmain	0	52118192	1529
+	    4	_D3std5stdio16__T7writelnTAyaZ7writelnFNfAyaZv
+	    4	_D5realm10initializeFZv
+	 2987	_D5realm6updateFZv
+
+======== Timer Is 2533319 Ticks/Sec, Times are in Microsecs ========
+
+  Num          Tree        Func        Per
+  Calls        Time        Time        Call
+
+ 481457    11106795    11092198          23     void animation.gr_draw(animation.Animation, vector.Vector2!(float).Vector2, float, float)
+ 107548     1916620     1916620          17     void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+7467500     2533991     1521665           0     void area.Area.update(long, float)
+   2987    16010337      734200         245     void realm.render()
+14935000    15563746      672436           0     _D4grid30__T10Dict_grid2TC4area4AreaTfZ10Dict_grid27opApplyMFMDFKC4area4AreaZiZ14__foreachbody2MFKC4area4AreaZi
+   5974    16206924      643177         107     int grid.Dict_grid2!(area.Area, float).Dict_grid2.opApply(scope int delegate(ref area.Area))
+   2987    20189903      639320         214     void realm.update()
+7467500    11557546      498223           0     void area.Area.render(long)
+7467500    12028624      471078           0     _D5world5World6renderMFlZ14__foreachbody2MFKC4area4AreaZi
+15155453     3061266      346310           0     int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+7467500     2862685      328693           0     _D5world5World6updateMFlfZ14__foreachbody3MFKC4area4AreaZi
+      4      381589      276886       69221     void realm.initialize()
+7467500      244598      244598           0     bool sgogl_interface.point_in_view(vector.Vector2!(float).Vector2, float)
+7467500      216573      216573           0     void rocky_ground.Rocky_ground.update(long, float)
+7467500      185559      185559           0     bool rocky_ground.Rocky_ground.interacts()
+ 370268      235646      145156           0     area.Area* grid.Dict_grid2!(area.Area, float).Dict_grid2.get(vector.Vector2!(float).Vector2)
+ 432044    10268034      134558           0     void rocky_ground.Rocky_ground.render(long)
+ 481457    11238871       97207           0     void renderable.Renderable.render(long)
+3847553       78409       78409           0     bool vector.Vector2!(float).Vector2.__xopEquals(ref const(vector.Vector2!(float).Vector2), ref const(vector.Vector2!(float).Vector2))
+ 370268      268031       32385           0     area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+  23900     2272177       29702           1     void agent.Agent.render(long)
+  23841      255547       24471           1     _D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZi
+ 585452       17392       17392           0     void cactus1.Cactus1.update(long, float)
+ 432044       17122       17122           0     float ground.Ground.render_depth()
+ 481457       15576       15576           0     bool renderable.Renderable.y_shift()
+ 568335       14990       14990           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+ 481457       14597       14597           0     uint animation.Animation.current_frame()
+ 380232       13980       13980           0     nothrow @trusted uint vector.Vector2!(float).Vector2.__xtoHash(ref const(vector.Vector2!(float).Vector2))
+     64       10440       10440         163     _D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNfaZ12trustedFPUTCFNbNiNeiPS4core4stdc5stdio6_iobufZi
+ 127797       27580        8972           0     _D4area4Area6updateMFlfZ14__foreachbody4MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+ 103956       12791        8623           0     bool agent.Agent.check_for_overlap(agent.Agent)
+  10000        9257        7356           0     void grid.Dict_grid2!(area.Area, float).Dict_grid2.set(area.Area, vector.Vector2!(float).Vector2)
+   2991        6090        6090           2     void sgogl_interface.gr_view_centered(vector.Vector2!(float).Vector2, float)
+ 168120        5816        5816           0     void agent.Agent.overlap(agent.Agent)
+  23900     2419158        5659           0     int realm.render().__foreachbody1(ref agent.Agent)
+  10000       57742        4940           0     void world.World.connect_area_to_surroundings(area.Area)
+   5974      714240        4735           0     void entity.Entity.render(long)
+ 199368        4168        4168           0     pure nothrow @nogc @safe float std.math.abs!(float).abs(float)
+  20858       39816        3954           0     void agent.Agent.update(long, float)
+  25513      546689        3859           0     void cactus1.Cactus1.render(long)
+      4       93978        3346         836     testing_world.Testing_world testing_world.Testing_world.__ctor()
+  23841        5536        3234           0     _D4area4Area6updateMFlfZ14__foreachbody3MFKC5agent5AgentZi
+      4        5597        3082         770     void commoner.Commoner.initialize_type()
+  10000       72319        2883           0     area.Area world.World.new_area(vector.Vector2!(float).Vector2)
+  17772       33422        2708           0     void world.World.place_agent(agent.Agent)
+      4        2542        2542         635     void rocky_ground.Rocky_ground.initialize_type()
+      4        2514        2514         628     void fireball1.Fireball1.initialize_type()
+   1926        2684        2480           1     sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)
+   5974        6356        2423           0     long timer.Timer.msecs()
+   8961        2381        2381           0     const(pure nothrow @nogc @safe core.time.Duration function(core.time.MonoTimeImpl!(0).MonoTimeImpl)) core.time.MonoTimeImpl!(0).MonoTimeImpl.opBinary!("-").opBinary
+  20800        4096        2285           0     pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+   2987       10011        2147           0     void player.player_update(long, float)
+  20858       44190        1881           0     int realm.update().__foreachbody1(ref agent.Agent)
+   4202        4795        1876           0     sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+   4186        1669        1669           0     void object.destroy!(sllist.LList!(agent.Agent).LList.Element).destroy(sllist.LList!(agent.Agent).LList.Element)
+  10000        2436        1660           0     area.Area area.Area.__ctor(vector.Vector2!(float).Vector2)
+  23841        1515        1515           0     void agent.Agent.over(ground.Ground)
+  10000       82244        1472           0     void world.World.add_ground(ground.Ground)
+  26478        2091        1457           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)
+  14884       27570        1271           0     void fireball1.Fireball1.update(long, float)
+  20800        5314        1217           0     @safe int std.random.uniform!("[)", int, int).uniform(int, int)
+  10000        7590        1153           0     rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+  25513        1127        1127           0     float wall.Wall.render_depth()
+   4186        3698        1121           0     void sllist.LList!(agent.Agent).LList.remove(sllist.LList!(agent.Agent).LList.Element)
+  23900        1041        1041           0     float agent.Agent.render_depth()
+   5867        1662        1018           0     void agent.Agent.accelerate(vector.Vector2!(float).Vector2, float)
+  32718        1016        1016           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+    340        2360         981           2     void commoner.Commoner.regular_attack()
+  10800       79985         923           0     area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+  20800         884         884           0     pure nothrow @safe uint std.random.uniform!(uint, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+      4        2484         834         208     void cactus1.Cactus1.initialize_type()
+   2987    12745042         800           0     void world.World.render(long)
+   3854        5484         794           0     void area.Area.add_agent(agent.Agent)
+  23841         786         786           0     void rocky_ground.Rocky_ground.under(agent.Agent)
+   5974        1775         740           0     const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("msecs").total
+  10000        1102         721           0     void area.Area.set_ground(ground.Ground)
+   4186        2386         717           0     void sllist.LList!(agent.Agent).LList.Element.destroy()
+    340        1280         693           2     fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+   4534        4372         673           0     void sllist.LList!(agent.Agent).LList.Index.remove()
+   1292         663         663           0     void realm.mouse_move_function()
+   5974        1034         635           0     pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("msecs").getUnitsFromHNSecs(long)
+   2987        1740         610           0     long timer.Timer.hnsecs()
+      1    20573086         603         603     _Dmain
+  10000        1267         543           0     ground.Ground ground.Ground.__ctor(vector.Vector2!(float).Vector2)
+  10004         793         530           0     agent.Agent_list agent.Agent_list.__ctor()
+  10800         769         525           0     rooted.Rooted rooted.Rooted.__ctor(vector.Vector2!(float).Vector2)
+   2987     3463205         523           0     void world.World.update(long, float)
+  20800         472         472           0     pure nothrow @nogc @safe uint std.conv.unsigned!(int).unsigned(int)
+  20864         456         456           0     pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+   2987         905         430           0     const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("hnsecs").total
+   2987        2270         428           0     float timer.Timer.hnsecsf()
+   5974         398         398           0     pure nothrow @nogc @safe long core.time.convert!("hnsecs", "msecs").convert(long)
+  10000         380         380           0     void area.Area.unset_ground()
+   2987         475         370           0     pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("hnsecs").getUnitsFromHNSecs(long)
+   6462         293         293           0     void sllist.LList!(agent.Agent).LList.connect(sllist.LList!(agent.Agent).LList.Element, sllist.LList!(agent.Agent).LList.Element)
+   3854         290         290           0     bool area.Area.inside(vector.Vector2!(float).Vector2)
+   3327         265         265           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("/").opBinary(float)
+  10004         262         262           0     nothrow @nogc @safe sllist.LList!(agent.Agent).LList sllist.LList!(agent.Agent).LList.__ctor()
+    340        2794         253           0     void player.player_mouse_click_function()
+    873         253         253           0     void player.player_key_function()
+  11148         251         251           0     renderable.Renderable renderable.Renderable.__ctor(vector.Vector2!(float).Vector2)
+     28        6542         204           7     @safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+     56         183         183           3     nothrow @nogc @trusted int std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
+   4202         182         182           0     pure nothrow ref @nogc @safe sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.Index.__ctor(sllist.LList!(agent.Agent).LList, sllist.LList!(agent.Agent).LList.Element)
+   2991         179         179           0     void timer.Timer.start()
+    873         423         170           0     void realm.key_function()
+    340        1142         167           0     void agent.Agent.destroy()
+   2880         157         157           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opUnary!("-").opUnary()
+    348         557         154           0     agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)
+   4202         152         152           0     pure nothrow @nogc @safe sllist.LList!(agent.Agent).LList.Element sllist.LList!(agent.Agent).LList.Element.__ctor(agent.Agent)
+    356         200         131           0     void refable.Refable.destroy()
+    120         116         116           0     _D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFAyaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+   2987         105         105           0     pure nothrow @nogc @safe long core.time.convert!("hnsecs", "hnsecs").convert(long)
+   2987         102         102           0     float timer.hnsecs_to_secs(long)
+    415         162          93           0     void wall.Wall.collide(agent.Agent)
+    340         180          85           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+     56         331          82           1     @safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+    340        1220          78           0     void shot.Shot.destroy()
+    340          98          77           0     void fireball1.Fireball1.initialize(entity.Entity)
+    340         578          71           0     shot.Shot shot.Shot.__ctor(vector.Vector2!(float).Vector2, float)
+    800         520          69           0     void world.World.add_wall(wall.Wall)
+    356          69          69           0     void object.destroy!(refable.Refable).destroy(refable.Refable)
+    340          83          68           0     pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()
+    340         108          65           0     void animation.Animation.destroy()
+      4        1646          64          16     @safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+    340        2857          63           0     void realm.mouse_click_function()
+    415         222          60           0     void cactus1.Cactus1.collide(agent.Agent)
+     56         529          57           1     @safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+    112         120          54           0     @safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
+     28        2362          54           1     @safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+    830          50          50           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.floor!(float).floor(vector.Vector2!(float).Vector2)
+    800         258          48           0     cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+    800         134          48           0     void area.Area.set_wall(wall.Wall)
+     56          57          47           0     @safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])
+    356         245          44           0     void renderable.Renderable.destroy()
+    340          42          42           0     void object.destroy!(animation.Animation).destroy(animation.Animation)
+      4         990          36           9     @safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])
+    340          35          35           0     void object.destroy!(material.Material).destroy(material.Material)
+    415          31          31           0     void agent.Agent.collide(wall.Wall)
+    800          86          24           0     void area.Area.unset_wall()
+      4          29          23           5     @safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)
+     28        6565          22           0     @safe void std.stdio.writeln!(immutable(char)[], float, immutable(char)[], float, immutable(char)[]).writeln(immutable(char)[], float, immutable(char)[], float, immutable(char)[])
+    415          18          18           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("-").opBinary(vector.Vector2!(float).Vector2)
+    800          64          18           0     wall.Wall wall.Wall.__ctor(vector.Vector2!(float).Vector2)
+     88          16          16           0     _D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFAaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+     56          30          15           0     pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
+    340          15          15           0     pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.dot(vector.Vector2!(float).Vector2)
+     56         345          14           0     void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, float, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+     56          13          13           0     pure nothrow @nogc @trusted immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char).trustedMemchr(ref immutable(char)[], ref char)
+      1          30          13          13     void agent.Agent._staticCtor1()
+      8          65          13           1     commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)
+    415          12          12           0     bool wall.Wall.interacts()
+    116          89          11           0     @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, immutable(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref immutable(char)[])
+     88          38          11           0     @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char[]).doPut(ref std.stdio.File.LockingTextWriter, ref char[])
+     88          27          10           0     @safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])
+    380          10          10           0     animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+    120         126          10           0     @safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
+     56           9           9           0     _D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFAxaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+     28        2371           9           0     @safe void std.stdio.writeln!(immutable(char)[], int).writeln(immutable(char)[], int)
+    116          98           9           0     @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+     28          18           7           0     @safe void std.conv.toTextRange!(int, std.stdio.File.LockingTextWriter).toTextRange(int, std.stdio.File.LockingTextWriter)
+     56          63           5           0     @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, const(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref const(char)[])
+     64       10446           5           0     nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+     60        9549           5           0     nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+     60        9544           5           0     nothrow @nogc @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char).doPut(ref std.stdio.File.LockingTextWriter, ref char)
+     56           9           4           0     pure nothrow @nogc @safe immutable(int) std.algorithm.comparison.min!(immutable(int), uint).min(immutable(int), uint)
+     88          42           3           0     @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+     56           3           3           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda5()
+     56           4           3           0     pure nothrow @nogc @safe bool std.functional.safeOp!("<").safeOp!(immutable(int), uint).safeOp(ref immutable(int), ref uint)
+      4        1649           3           0     @safe void std.stdio.writeln!(immutable(char)[], uint).writeln(immutable(char)[], uint)
+     56          66           3           0     @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, const(char)[]).put(ref std.stdio.File.LockingTextWriter, const(char)[])
+      4        5029           2           0     void testing_world.Testing_world.initialize_type()
+     16          62           2           0     void wall.Wall.destroy()
+     56           1           1           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda6!(float).__lambda6(ref float)
+     56           1           1           0     pure nothrow @nogc @safe bool std.utf.canSearchInCodeUnits!(char).canSearchInCodeUnits(dchar)
+     16          60           1           0     void rooted.Rooted.destroy()
+      8          52           1           0     entity.Entity entity.Entity.__ctor(vector.Vector2!(float).Vector2, float)
+     56           0           0           0     pure nothrow @nogc @safe bool std.functional.safeOp!("<").unsafeOp!(immutable(int), uint).unsafeOp(immutable(int), uint)

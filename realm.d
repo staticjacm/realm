@@ -5,6 +5,7 @@ import sgogl;
 import sgogl_interface;
 
 import core.thread;
+import std.math;
 import timer;
 import testing_world;
 import world;
@@ -15,6 +16,9 @@ import ground;
 import rocky_ground;
 import vector;
 import player;
+
+// extern (C) void dmd_coverSourcePath( string pathname );
+// extern (C) void dmd_coverDestPath( string pathname );
 
 alias Vector2f = Vector2!float;
 
@@ -91,6 +95,7 @@ void update(){
   current_game_time = game_timer.msecs;
   frame++;
   frame_timer.start;
+  
   gr_register_events();
   while(gr_has_event()){
     switch(gr_read()){
@@ -101,23 +106,30 @@ void update(){
       default: break;
     }
   }
+  
   player_update(current_game_time, frame_delta);
   foreach(Agent agent; Agent.master_list){
     agent.update(current_game_time, frame_delta);
   }
   test_world.update(current_game_time, frame_delta);
+  
   render;
+  
   current_frame_time = frame_timer.msecs;
   frame_delta = frame_timer.hnsecsf;
   if(frame % 100 == 0){
-    writeln("frame_delta: ", frame_delta);
+    writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
     writeln("  number of agents: ", Agent.master_list.length);
   }
-  Thread.sleep(2.dur!"msecs");
+  // if(current_game_time > 5000) running = false;
+  // Thread.sleep(2.dur!"msecs");
 }
 
 void main(){
   "start".writeln;
+  
+  // dmd_coverSourcePath("cov");
+  // dmd_coverDestPath("cov");
   
   initialize;
   

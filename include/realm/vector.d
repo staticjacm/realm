@@ -37,7 +37,6 @@ struct Vector2(T) {
         return Vector2!T(x - other.x, y - other.y);
       }
     }
-    
     Vector2!T opOpAssign(string op)(Vector2!T other){
       return this = this.opBinary!op(other);
     }

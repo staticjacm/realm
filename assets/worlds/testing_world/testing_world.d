@@ -20,25 +20,26 @@ class Testing_world : World {
   }
   
   this(){
-    for(int x = 0; x < 30; x++){
-      for(int y = 0; y < 30; y++){
+    float R = 50;
+    for(int x = 0; x < R; x++){
+      for(int y = 0; y < R; y++){
         add_ground(new Rocky_ground(Vector2f(x, y)));
       }
     }
-    for(int x = 0; x < 30; x++){
+    for(int x = 0; x < R; x++){
       int y = 0;
       add_wall(new Cactus1(Vector2f(x, y)));
     }
-    for(int x = 0; x < 30; x++){
-      int y = 29;
+    for(int x = 0; x < R; x++){
+      int y = cast(int)(R-1);
       add_wall(new Cactus1(Vector2f(x, y)));
     }
-    for(int y = 0; y < 30; y++){
+    for(int y = 0; y < R; y++){
       int x = 0;
       add_wall(new Cactus1(Vector2f(x, y)));
     }
-    for(int y = 0; y < 30; y++){
-      int x = 30;
+    for(int y = 0; y < R; y++){
+      int x = cast(int)(R-1);
       add_wall(new Cactus1(Vector2f(x, y)));
     }
     place_agent(player_entity);

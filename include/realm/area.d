@@ -45,23 +45,30 @@ class Area {
     foreach(Agent agent; agents){
       agent.area = null;
     }
-    wall.destroy;
-    ground.destroy;
-    agents.destroy;
+    unset_wall;
+    unset_ground;
+    if(agents !is null)
+      agents.destroy;
+    world.remove(position);
     object.destroy(this);
   }
   
   override string toString(){ return format("area %d", id); }
   
   void update(long time, float dt){
-    bool emptyq = true;
+    bool emptyq = false;
+    
+    // Update wall
     if(wall !is null){
       emptyq = false;
       wall.update(time, dt);
     }
+    
+    // Update Ground
     if(ground !is null){
       emptyq = false;
       ground.update(time, dt);
+      // Does collisions with all agents on this area
       if(ground.interacts){
         foreach(Agent agent; agents){
           ground.under(agent);
@@ -69,8 +76,10 @@ class Area {
         }
       }
     }
+    
+    // Update Agents
     foreach(Agent agent; agents){
-      /// Checking collision between agents and agents
+      // Checking collision between agents and agents
       int range = cast(int)((agent.size/2 + 1.0).floor);
       for(int xd = -range; xd <= range; xd++){
         for(int yd = -range; yd <= range; yd++){
@@ -86,8 +95,8 @@ class Area {
             }
         }
       }
-      /// Checking collisions between agent and surrounding walls
-      /// Theres probably a faster way to do this
+      // Checking collisions between agent and surrounding walls
+      // Theres probably a faster way to do this
       if(agent.position.x - agent.size/2 < position.x){
         Area collider_area = world.get_area(position + Vector2f(-1, 0));
         if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){

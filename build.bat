@@ -1,5 +1,8 @@
+@echo off
 @del realm.exe
-@dmd -g -odobj realm ^
+REM Use the following line for an optimized build
+REM @dmd -release -O -inline -noboundscheck -odobj realm ^
+@dmd -g -profile -odobj realm ^
 include/sgogl ^
 include/realm/timer ^
 include/realm/sgogl_interface ^
