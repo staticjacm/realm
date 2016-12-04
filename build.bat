@@ -4,6 +4,7 @@ REM Use the following line for an optimized build
 REM @dmd -release -O -inline -noboundscheck -odobj realm ^
 @dmd -g -profile -odobj realm ^
 include/sgogl ^
+include/realm/game ^
 include/realm/timer ^
 include/realm/sgogl_interface ^
 include/realm/agent ^
@@ -24,6 +25,7 @@ include/realm/shot ^
 include/realm/player ^
 assets/entities/commoner/commoner ^
 assets/shots/fireball1/fireball1 ^
+assets/shots/fireball2/fireball2 ^
 assets/grounds/rocky/rocky_ground ^
 assets/walls/cactus1/cactus1 ^
 assets/worlds/testing_world/testing_world ^

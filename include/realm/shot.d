@@ -12,11 +12,11 @@ An agent that is primarily intended to exchange information between entities
 ++/
 class Shot : Agent {
   
+  float energy; /// A catch-all stat for shots which represents how much of an effect it can have on other things
+  
   this(Vector2f _position, float _size){
     super(_position, _size);
   }
-  
-  void initialize(Entity entity){}
   
   override void destroy(){
     super.destroy;

@@ -2,6 +2,7 @@
 module entity;
 
 import vector;
+import game;
 import agent;
 import sgogl;
 import sgogl_interface;
@@ -30,10 +31,10 @@ class Entity : Agent {
   
   void regular_attack(){}
   
-  override void render(long time){
+  override void render(){
     gr_color(0.0, 0.0, 1.0, 1.0);
     gr_draw_line(position, position + direction, 1);
     gr_color_alpha(1.0);
-    super.render(time);
+    super.render;
   }
 }

@@ -16,5 +16,5 @@ abstract class Material {
   void overlap(Agent owner, Agent other){}
   void collide(Agent owner, Wall wall){}
   void over(Agent owner, Ground ground){}
-  void update(long time, float dt){}
+  void update(){}
 }

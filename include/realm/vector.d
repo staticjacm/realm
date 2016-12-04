@@ -1,11 +1,16 @@
 
 module vector;
+import std.random;
 import std.conv;
 import std.stdio;
 import std.math;
 import std.traits;
 
 alias Vector2f = Vector2!float;
+
+Vector2f rvector(float r){
+  return Vector2f(uniform(-r, r), uniform(-r, r));
+}
 
 /++
 An arbitrary 2-Tuple of values of type T

@@ -3,11 +3,13 @@ module rocky_ground;
 import std.random;
 import std.stdio;
 import std.string;
+import game;
 import sgogl;
 import animation;
 import vector;
 import ground;
 import agent;
+import refable;
 
 class Rocky_ground : Ground {
   static bool type_initialized = false;
@@ -26,10 +28,7 @@ class Rocky_ground : Ground {
     }
   }
   
-  long internal_time = 0;
-  long under_timer = 0;
-  long under_delay = 1000;
-  bool waiting = false;
+  bool onq = false;
   
   this(Vector2f _position){
     super(_position);
@@ -42,28 +41,19 @@ class Rocky_ground : Ground {
     }
   }
   
-  override void render(long time){
-    if(waiting)
+  override void render(){
+    if(onq)
       gr_color(1, 0, 0, 1);
-    super.render(time);
+    super.render;
     gr_color_alpha(1);
-  }
-  
-  override void update(long time, float dt){
-    internal_time = time;
-    // if(waiting) writefln("waiting %b, under_time %d, internal_time %d", waiting, under_timer, internal_time);
-    if(waiting && under_timer < internal_time){
-      waiting = false;
-    }
   }
   
   override bool interacts(){ return true; }
   
-  override void under(Agent agent){
-    if(!waiting){
-      // writeln("under agent");
-      under_timer = internal_time + under_delay;
-      waiting = true;
-    }
+  override void entered(Agent agent){
+    onq = true;
+  }
+  override void exited(Agent agent){
+    onq = false;
   }
 }

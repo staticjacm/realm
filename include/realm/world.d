@@ -3,6 +3,7 @@ module world;
 import std.stdio;
 import std.math;
 import grid;
+import game;
 import vector;
 import wall;
 import ground;
@@ -21,9 +22,9 @@ class World : world_grid_type!(Area, float) {
     object.destroy(this);
   }
   
-  void update(long time, float dt){
+  void update(){
     foreach(Area area; this){
-      area.update(time, dt);
+      area.update;
     }
   }
   
@@ -32,9 +33,9 @@ class World : world_grid_type!(Area, float) {
   /// For generating new stationaries when an agent is present but no stationaries are
   void generate(Area area){}
   
-  void render(long time){
+  void render(){
     foreach(Area area; this){
-      area.render(time);
+      area.render;
     }
   }
   
@@ -90,11 +91,13 @@ class World : world_grid_type!(Area, float) {
     Area area = get_area(agent.position);
     if(area !is null){
       if(area !is agent.area){
+        if(agent.area !is null)
+          agent.area.remove_agent(agent);
         agent.area_index.remove;
         area.add_agent(agent);
       }
     }
-    else{
+    else {
       agent.area_index.remove;
     }
   }

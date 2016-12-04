@@ -9,6 +9,7 @@ Responsibilities:
 import std.stdio;
 import std.string;
 import std.math;
+import game;
 import refable;
 import world;
 import ground;
@@ -55,48 +56,37 @@ class Area {
   
   override string toString(){ return format("area %d", id); }
   
-  void update(long time, float dt){
+  void update(){
     bool emptyq = false;
     
-    // Update wall
-    if(wall !is null){
-      emptyq = false;
-      wall.update(time, dt);
-    }
-    
-    // Update Ground
-    if(ground !is null){
-      emptyq = false;
-      ground.update(time, dt);
-      // Does collisions with all agents on this area
-      if(ground.interacts){
-        foreach(Agent agent; agents){
-          ground.under(agent);
-          agent.over(ground);
-        }
+    if(ground !is null && ground.interacts){
+      foreach(Agent agent; agents){
+        ground.under(agent);
+        agent.over(ground);
       }
     }
     
-    // Update Agents
+    
+    // Collision detecting agents
     foreach(Agent agent; agents){
-      // Checking collision between agents and agents
+      // Checking collision between agents and agents in a range
       int range = cast(int)((agent.size/2 + 1.0).floor);
       for(int xd = -range; xd <= range; xd++){
         for(int yd = -range; yd <= range; yd++){
           Area check_area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
-            if(check_area !is null){
-              foreach(Agent check_agent; check_area.agents){
-                if(agent !is check_agent && agent.check_for_overlap(check_agent)){
-                  // writeln(agent, " overlapped ", check_agent);
-                  agent.overlap(check_agent);
-                  check_agent.overlap(agent);
-                }
+          if(check_area !is null){
+            foreach(Agent check_agent; check_area.agents){
+              if(agent !is check_agent && agent.check_for_overlap(check_agent)){
+                // writeln(agent, " overlapped ", check_agent);
+                agent.overlap(check_agent);
+                check_agent.overlap(agent);
               }
             }
+          }
         }
       }
       // Checking collisions between agent and surrounding walls
-      // Theres probably a faster way to do this
+      // Theres probably a faster / more consise way to do this
       if(agent.position.x - agent.size/2 < position.x){
         Area collider_area = world.get_area(position + Vector2f(-1, 0));
         if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
@@ -130,17 +120,18 @@ class Area {
       emptyq = false;
     if(emptyq)
       destroy;
+    
   }
   
-  void render(long time){
+  void render(){
     if(point_in_view(position)){
       if(draw_boundaries){
         gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
       }
       if(ground !is null)
-        ground.render(time);
+        ground.render;
       if(wall !is null)
-        wall.render(time);
+        wall.render;
     }
   }
   
@@ -153,9 +144,19 @@ class Area {
     if(inside(agent.position)){
       agent.area = this;
       agent.area_index = agents.add(agent);
+      if(ground !is null)
+        ground.entered(agent);
     }
     else
       agent.area_index.remove;
+  }
+  
+  void remove_agent(Agent agent){
+    if(agent.area is this){
+      agent.area_index.remove;
+      if(ground !is null)
+        ground.exited(agent);
+    }
   }
   
   void set_wall(Wall _wall){

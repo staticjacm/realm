@@ -1,6 +1,7 @@
 
 module animation;
 
+import std.stdio;
 import vector;
 import sgogl;
 
@@ -13,17 +14,17 @@ also contains anchor (anx, any) information and scale (sx, sy) information
 ++/
 class Animation {
   uint[] frames;
-  float frame_rate = 1;
+  int frame_delay = 1; // how long a frame lasts
   int current_frame_index = 0;
-  long current_frame_time = 0;  // in ms
+  long current_frame_time = 0;  // when the current frame was switched to, in ms
   long next_frame_time = 0;     // in ms
   bool playing = false;
   Vector2f anchor;
   Vector2f scale;
   
-  this(uint[] _frames, float _frame_rate, Vector2f _anchor, Vector2f _scale){
+  this(uint[] _frames, float frame_rate, Vector2f _anchor, Vector2f _scale){
     frames = _frames;
-    frame_rate = _frame_rate;
+    frame_delay = cast(int)(1000.0f/frame_rate);
     anchor = _anchor;
     scale = _scale;
   }
@@ -56,15 +57,14 @@ class Animation {
     // if(frames.length == 1) ...
     current_frame_index = (current_frame_index + 1) % frames.length;
     current_frame_time = time;
-    next_frame_time = current_frame_time + cast(int)(1000.0f/frame_rate);
+    next_frame_time = current_frame_time + frame_delay;
   }
   
   Animation update(long time){
     // if(frames.length == 1) ...
-    if(time < current_frame_time)
+    if(next_frame_time < time){
       next_frame(time);
-    else
-      get_frame(current_frame_index);
+    }
     return this;
   }
 }

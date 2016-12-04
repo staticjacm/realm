@@ -3,6 +3,7 @@ module cactus1;
 import std.random;
 import std.stdio;
 import std.string;
+import game;
 import sgogl;
 import animation;
 import vector;
@@ -23,36 +24,36 @@ class Cactus1 : Wall {
     }
   }
   
-  long internal_time = 0;
-  long under_timer = 0;
-  long under_delay = 1000;
+  long endwait_time = 0;
+  long endwait_delay = 100;
   bool waiting = false;
   
   this(Vector2f _position){
     super(_position);
     int selection = uniform(0,3);
     animation = animation_1;
+    endwait_time = game_time + endwait_delay;
   }
   
-  override void render(long time){
-    // if(waiting)
-      // gr_color(1, 0, 0, 1);
-    super.render(time);
-    // gr_color_alpha(1);
+  override void render(){
+    if(waiting)
+      gr_color(1, 0, 0, 1);
+    super.render;
+    gr_color_alpha(1);
   }
   
-  override void update(long time, float dt){
-    internal_time = time;
-    // if(waiting) writefln("waiting %b, under_time %d, internal_time %d", waiting, under_timer, internal_time);
-    if(waiting && under_timer < internal_time){
+  override void update(){
+    // writeln("waiting ", waiting, " endwait_time ", endwait_time, " < game_time ", game_time);
+    if(!waiting || endwait_time < game_time){
       waiting = false;
+      set_updating = false;
     }
   }
   
   override void collide(Agent agent){
     if(!waiting){
-      // writeln("under agent");
-      under_timer = internal_time + under_delay;
+      endwait_time = game_time + endwait_delay;
+      set_updating = true;
       waiting = true;
     }
     super.collide(agent);

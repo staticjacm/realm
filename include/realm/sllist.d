@@ -45,7 +45,7 @@ class LList(T) {
     
     void remove(){
       if(valid) {
-        // writeln("-element ", element.value);
+        // writeln("-element ", element.value, " in list ", list.id);
         list.remove(element);
         valid = false;
       }
@@ -90,10 +90,12 @@ class LList(T) {
   int opApply(scope int delegate(ref T) dg){
     int result = 0;
     Element cel = first;
+    Element nel; // next element
     while(cel !is null){
+      nel = cel.next;
       result = dg(cel.value);
       if(result) break;
-      cel = cel.next;
+      cel = nel;
     }
     return result;
   }

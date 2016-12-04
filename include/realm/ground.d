@@ -1,5 +1,6 @@
 module ground;
 
+import std.stdio;
 import vector;
 import agent;
 import rooted;
@@ -9,7 +10,13 @@ class Ground : Rooted {
     super(_position);
   }
   
+  // ~this(){
+    // writeln("destructed ground ", id);
+  // }
+  
   override void destroy(){
+    // if(area !is null)
+      // area.ground = null;
     super.destroy;
   }
   
@@ -20,4 +27,6 @@ class Ground : Rooted {
   override bool interacts(){ return false; }
   
   void under(Agent agent){}
+  void entered(Agent agent){}
+  void exited(Agent agent){}
 }

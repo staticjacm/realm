@@ -5,6 +5,7 @@ import std.stdio;
 import sgogl_interface;
 import entity;
 import sgogl;
+import game;
 import vector;
 
 float view_size = 10;
@@ -20,14 +21,14 @@ bool move_left_pressed = false;
 bool move_down_pressed = false;
 bool move_right_pressed = false;
 
-void player_update(long time, float dt){
+void player_update(){
   float boost = 100.0;
   Vector2f acceleration = Vector2f(0.0f, 0.0f);
   if(move_up_pressed) acceleration += Vector2f(0.0, 1.0f);
   else if(move_down_pressed) acceleration += Vector2f(0.0, -1.0f);
   if(move_left_pressed) acceleration += Vector2f(-1.0, 0.0f);
   else if(move_right_pressed) acceleration += Vector2f(1.0, 0.0f);
-  player_entity.accelerate(acceleration*boost, dt);
+  player_entity.accelerate(acceleration*boost);
   
   gr_view_centered(player_entity.position, view_size);
 }

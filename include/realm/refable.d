@@ -11,7 +11,11 @@ import std.stdio;
 ++/
 class Refable {
   uint ref_count = 0;
-  bool valid = true;
+  bool valid = false;
+  
+  this(){
+    valid = true;
+  }
   
   void destroy(){
     valid = false;

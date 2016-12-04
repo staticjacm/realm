@@ -4,6 +4,7 @@ module agent;
 import std.stdio;
 import std.string;
 import std.math;
+import game;
 import world;
 import area;
 import wall;
@@ -23,7 +24,7 @@ Proxy class from LList!AgentR
 ++/
 class Agent_list : LList!Agent {}
 
-bool render_overlap_boundary = true;
+bool render_overlap_boundary = false;
 
 /++
 Represents a physical object that can inhabit a world.
@@ -48,15 +49,15 @@ class Agent : Renderable {
     master_list = new Agent_list;
   }
   
-  static render_all(long time){
+  static render_all(){
     foreach(Agent agent; master_list){
-      agent.render(time);
+      agent.render;
     }
   }
   
-  static update_all(long time, float dt){
+  static update_all(){
     foreach(Agent agent; master_list){
-      agent.update(time, dt);
+      agent.update;
     }
   }
   
@@ -71,8 +72,8 @@ class Agent : Renderable {
   Material material;
   Vector2f velocity = Vector2f(0, 0);
   float mass = 1;
-  bool moving = false;
-  bool moved = false;
+  bool moving = false; /// is its velocity nonzero?
+  bool moved = false; /// has the agent been moved since it was last placed?
   float height = 0;
   float size = 1;
   float friction = 1.0;
@@ -84,17 +85,21 @@ class Agent : Renderable {
     id = gid++;
     super(_position);
     size = _size;
-    master_index = master_list.add(this);
+    master_index = master_list.add_front(this);
   }
   
   int agent_subtype_id(){ return 0; }
   
   override void destroy(){
+    // writeln("agent destroyed");
     master_index.remove;
-    area_index.remove;
-    material.destroy;
+    if(area !is null)
+      area.remove_agent(this);
+    if(material !is null)
+      material.destroy;
     material = null;
-    animation.destroy;
+    if(animation !is null)
+      animation.destroy;
     animation = null;
     super.destroy;
   }
@@ -104,15 +109,18 @@ class Agent : Renderable {
   /++
     Updating & Collision detection
   ++/
-  void update(long time, float dt){
+  void update(){
+    // move_by(Vector2f(0.03, 0));
     if(material !is null)
-      material.update(time, dt);
+      material.update;
     if(moving){
       if(friction != 0)
-        accelerate(-velocity*friction*10.0f, dt);
-      position += velocity*dt;
-      if(world !is null)
+        accelerate(-velocity*friction*10.0f);
+      move_by(velocity*frame_delta);
+      if(world !is null && moved){
         world.place_agent(this);
+        moved = false;
+      }
     }
   }
   
@@ -141,29 +149,43 @@ class Agent : Renderable {
   /++
     Movement Dynamics
   ++/
-  void accelerate(Vector2f acceleration, float dt){
-    velocity += acceleration*dt;
+  void accelerate(Vector2f acceleration){
+    velocity += acceleration*frame_delta;
     if(velocity.x != 0 || velocity.y != 0)
       moving = true;
+    else
+      moving = false;
   }
-  void apply_impulse(Vector2f force, float dt){
-    accelerate(force/mass, dt);
+  void apply_impulse(Vector2f force){
+    accelerate(force/mass);
+  }
+  void set_velocity(Vector2f new_velocity){
+    velocity = new_velocity;
+    if(velocity.x != 0 || velocity.y != 0)
+      moving = true;
+    else
+      moving = false;
   }
   
   void move_by(Vector2f delta){
-    position += delta;
-    moved = true;
+    if(delta.x != 0 || delta.y != 0){
+      position += delta;
+      moved = true;
+    }
+    // position += Vector2f(0.01, 0);
   }
   void move_to(Vector2f new_position){
-    position = new_position;
-    moved = true;
+    if(new_position.x != position.x || new_position.y != position.y){
+      position = new_position;
+      moved = true;
+    }
   }
   
   /++
     Rendering
   ++/
   override float render_depth(){ return 200; }
-  override void render(long time){
+  override void render(){
     if(render_overlap_boundary){
       gr_color_alpha(1);
       gr_draw_line(position + Vector2f(size/2, size/2), position + Vector2f(-size/2, size/2), 1);
@@ -171,6 +193,6 @@ class Agent : Renderable {
       gr_draw_line(position + Vector2f(-size/2, -size/2), position + Vector2f(size/2, -size/2), 1);
       gr_draw_line(position + Vector2f(size/2, -size/2), position + Vector2f(size/2, size/2), 1);
     }
-    super.render(time);
+    super.render;
   }
 }

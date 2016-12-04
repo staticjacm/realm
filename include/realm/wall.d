@@ -11,7 +11,13 @@ class Wall : Rooted {
     super(_position);
   }
   
+  // ~this(){
+    // writeln("destructed wall ", id);
+  // }
+  
   override void destroy(){
+    // if(area !is null)
+      // area.wall = null;
     super.destroy;
   }
   
@@ -23,18 +29,21 @@ class Wall : Rooted {
   
   void collide(Agent agent){
     Vector2f pdif = agent.position.floor - position.floor;
-    // writeln("collided ", agent.position.floor, " - ", position, " = ", pdif);
     if(pdif.x == 1 && agent.velocity.x < 0){
       agent.velocity.x *= -1;
+      agent.position.x = position.x + 1 + agent.size/2;
     }
     else if(pdif.x == -1 && 0 < agent.velocity.x){
       agent.velocity.x *= -1;
+      agent.position.x = position.x - agent.size/2;
     }
     if(pdif.y == 1 && agent.velocity.y < 0){
       agent.velocity.y *= -1;
+      agent.position.y = position.y + 1 + agent.size/2;
     }
     else if(pdif.y == -1 && 0 < agent.velocity.y){
       agent.velocity.y *= -1;
+      agent.position.y = position.y - agent.size/2;
     }
   }
 }
