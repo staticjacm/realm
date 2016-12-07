@@ -2,13 +2,16 @@
 module player;
 
 import std.stdio;
+import std.math;
 import sgogl_interface;
 import entity;
 import sgogl;
+import world;
+import area;
 import game;
 import vector;
 
-float view_size = 10;
+float view_size = 20;
 
 Entity player_entity;
 int move_up_button    = GR_W;
@@ -31,6 +34,26 @@ void player_update(){
   player_entity.accelerate(acceleration*boost);
   
   gr_view_centered(player_entity.position, view_size);
+}
+
+void player_render_near(){
+  if(player_entity.world !is null){
+    // get topleft corner of screen
+    float view_left = gr_view_left.floor;
+    float view_bottom = gr_view_bottom.floor;
+    float view_top = gr_view_top.ceil;
+    float view_right = gr_view_right.ceil;
+    // progress downright to other corner of screen
+    for(float x = view_left; x < view_right; x++){
+      for(float y = view_bottom; y < view_top; y++){
+        Area render_area = player_entity.world.get_area(Vector2f(x, y));
+        if(render_area !is null){
+          render_area.render;
+        } 
+      } 
+    }
+    // render everything inside
+  }
 }
 
 void player_key_function(){

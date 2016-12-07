@@ -45,7 +45,10 @@ class Agent : Renderable {
   static int gid = 0;
   static Agent_list master_list;
   
-  static this(){
+  // static this(){
+    // master_list = new Agent_list;
+  // }
+  static initialize(){
     master_list = new Agent_list;
   }
   
@@ -116,6 +119,7 @@ class Agent : Renderable {
     if(moving){
       if(friction != 0)
         accelerate(-velocity*friction*10.0f);
+        // ^ should be accelerate(-velocity.normalize*friction*K);
       move_by(velocity*frame_delta);
       if(world !is null && moved){
         world.place_agent(this);

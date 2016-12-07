@@ -42,6 +42,11 @@ class Dict_grid2(T, V) : Grid2!(T, V) {
   }
 }
 
+/// A Grid2 type which uses an array of arrays to store values
+class Array_grid2(T, V): Grid2!(T, V) {
+  
+}
+
 // Get/set/remove/exists unittest
 unittest {
   alias intv = Vector2!int;

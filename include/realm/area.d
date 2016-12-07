@@ -16,21 +16,34 @@ import ground;
 import wall;
 import agent;
 import vector;
+import sllist;
 import sgogl_interface;
 
 alias Vector2f = Vector2!float;
 
 bool draw_boundaries = false;
 
+class Area_list : LList!Area {}
+
 class Area {
+  static Area_list update_list;
+  
   static int gid = 0;
   static const(float) area_width = 1.0f, area_height = 1.0f;
+  
+  // static this(){
+    // update_list = new Area_list;
+  // }
+  static initialize(){
+    update_list = new Area_list;
+  }
   
   int id = 0;
   int object_count = 0;
   World world;
   Wall wall;
   Ground ground;
+  Area_list.Index update_index; /// Its index in Area.update_list - so it will update
   Agent_list agents; /// Mobile objects
   Vector2f position;
   /// Holding adjacencies might not be necessary
@@ -46,6 +59,7 @@ class Area {
     foreach(Agent agent; agents){
       agent.area = null;
     }
+    update_index.remove;
     unset_wall;
     unset_ground;
     if(agents !is null)
@@ -56,6 +70,21 @@ class Area {
   
   override string toString(){ return format("area %d", id); }
   
+  bool updates(){ return update_index.valid; }
+  
+  void set_updating(bool ud){
+    if(ud){
+      if(!update_index.valid){
+        update_index = update_list.add(this);
+      }
+    }
+    else{
+      if(update_index.valid){
+        update_index.remove;
+      }
+    }
+  }
+  
   void update(){
     bool emptyq = false;
     
@@ -65,7 +94,6 @@ class Area {
         agent.over(ground);
       }
     }
-    
     
     // Collision detecting agents
     foreach(Agent agent; agents){
@@ -118,6 +146,8 @@ class Area {
     }
     if(agents.length > 0)
       emptyq = false;
+    else
+      set_updating = false;
     if(emptyq)
       destroy;
     
@@ -125,6 +155,7 @@ class Area {
   
   void render(){
     if(point_in_view(position)){
+      // test_timer.start;
       if(draw_boundaries){
         gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
       }
@@ -132,6 +163,7 @@ class Area {
         ground.render;
       if(wall !is null)
         wall.render;
+      // writefln("render: %f", test_timer.hnsecsf*1000.0f);
     }
   }
   
@@ -143,6 +175,7 @@ class Area {
   void add_agent(Agent agent){
     if(inside(agent.position)){
       agent.area = this;
+      set_updating = true;
       agent.area_index = agents.add(agent);
       if(ground !is null)
         ground.entered(agent);
@@ -157,6 +190,8 @@ class Area {
       if(ground !is null)
         ground.exited(agent);
     }
+    if(agents.length == 0)
+      set_updating = false;
   }
   
   void set_wall(Wall _wall){

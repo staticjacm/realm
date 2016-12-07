@@ -11,6 +11,7 @@ import sgogl_interface;
 import timer;
 import testing_world;
 import world;
+import area;
 import commoner;
 import rooted;
 import entity;
@@ -30,6 +31,8 @@ Entity test_entity;
 World test_world;
 
 bool running = true;
+
+Timer test_timer;
 
 Timer game_timer;
 Timer frame_timer;
@@ -56,10 +59,24 @@ void mouse_move_function(){
 }
 
 void initialize(){
+  test_timer.start;
   gr_open;
   gr_activate_depth_testing(1);
   gr_activate_linear_filtering(0);
   gr_set_max_depth(1000.0f);
+  writefln("graphics init %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
+  Area.initialize;
+  // writefln("area init %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
+  Agent.initialize;
+  // writefln("area init %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
+  Rooted.initialize;
+  // writefln("rooted init %f", test_timer.hnsecsf*1000.0f);
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   
@@ -67,12 +84,20 @@ void initialize(){
   
   // Rooted.initialize;
   
+  // test_timer.start;
   Commoner.initialize_type;
+  // writefln("commoner init %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
   Testing_world.initialize_type;
+  // writefln("test_world init %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
   test_entity = new Commoner(Vector2f(10.5, 10.5), 1);
   player_entity = test_entity;
   test_world = new Testing_world();
   test_entity.world = test_world;
+  // writefln("additions init %f", test_timer.hnsecsf*1000.0f);
   
   // Ground new_ground = new Rocky_ground(Vector2f(-2,-2));
   // Wall new_wall = new Cactus1(Vector2f(-2,-2));
@@ -90,29 +115,47 @@ void quit(){
 
 void render(){
   gr_clear;
+  
+  // test_timer.start;
   test_world.render;
+  // writefln("test_world.render %f", test_timer.hnsecsf*1000.0f);
+  
+  
+  // test_timer.start;
   foreach(Agent agent; Agent.master_list){
     agent.render;
   }
+  // writefln("agents render %f", test_timer.hnsecsf*1000.0f);
   
+  player_render_near;
+  
+  // test_timer.start;
   gr_draw_centered(test_img, test_x, test_y, 1.0, 0.0, 0.5, 0.5);
+  // writefln("gr_draw_centered %f", test_timer.hnsecsf*1000.0f);
   
+  // test_timer.start;
   gr_color(1.0, 0.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, Vector2f(0, 0), 1.0);
   gr_color(0.0, 1.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
   gr_color_alpha(1.0);
+  // writefln("other stuff %f", test_timer.hnsecsf*1000.0f);
   
   gr_refresh;
 }
 
 void update(){
+  
   game_time = game_timer.msecs;
   // writeln("game time ", game_time);
   frame++;
   frame_timer.start;
   
+  // test_timer.start;
   gr_register_events();
+  // writefln("register events %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
   while(gr_has_event()){
     switch(gr_read()){
       case GR_CLOSE: running = false; break;
@@ -122,17 +165,35 @@ void update(){
       default: break;
     }
   }
+  // writefln("do events %f", test_timer.hnsecsf*1000.0f);
   
+  // test_timer.start;
   player_update;
+  // writefln("player_update %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
   foreach(Agent agent; Agent.master_list){
     agent.update;
   }
+  // writefln("agent.update_list %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_timer.start;
   foreach(Rooted rooted; Rooted.update_list){
     rooted.update;
   }
-  test_world.update;
+  // writefln("rooted.update_list %f", test_timer.hnsecsf*1000.0f);
   
+  // test_timer.start;
+  foreach(Area area; Area.update_list){
+    area.update;
+  }
+  // writefln("area.update_list %f", test_timer.hnsecsf*1000.0f);
+  
+  // test_world.update;
+  
+  // test_timer.start;
   render;
+  // writefln("render %f", test_timer.hnsecsf*1000.0f);
   
   frame_time = frame_timer.msecs;
   frame_delta = frame_timer.hnsecsf;
@@ -141,5 +202,5 @@ void update(){
     writeln("  number of agents: ", Agent.master_list.length);
   }
   // if(current_game_time > 5000) running = false;
-  Thread.sleep(dur!"msecs"(5));
+  Thread.sleep(dur!"msecs"(0));
 }

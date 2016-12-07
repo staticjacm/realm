@@ -16,7 +16,10 @@ class Rooted : Renderable {
   static Rooted_list update_list;
   static int gid = 0;
   
-  static this(){
+  // static this(){
+    // update_list = new Rooted_list;
+  // }
+  static initialize(){
     update_list = new Rooted_list;
   }
 

@@ -1,13 +1,18 @@
 
 # To do:
 
+* Initialization takes a strangely long time for some reason. This is a problem for every initialization function, apparently.
+
+* Agent friction increases when fps is low.
+
 * Agents always experience four (4) collisions when colliding with an agent - two when agent A detects a collision with agent B (A.overlap(B), B.overlap(A)), and two when B detects a collision with agent A (B.overlap(A), A.overlap(B)). This can easily be avoided by only overlapping if one agents id is larger than the others, and detecting if the other will detect a collision with this one by checking its size
 * Squares aren't going to cut it for collision detection when dealing with rotating objects. Implement a generic collision detection scheme for more precise collision shapes (which are guaranteed to be a contained in the agent's collision square) - can use virtual functions
 
 * Organize and implement a scheme for slowed / delayed updating of certain objects. For example: areas outside the view can be updated less often than areas inside the view. Only update agents every 0.1 ms, or whatever timing makes sense.
 * The ``Thread.sleep`` call should be adjusted every frame to maintain a constant fps (could also include a switch for unbound fps)
 
-* Move all global game related stuff into its own module
+* Make a LList!Ref!T class/extension of sllist
+* Create a function in World to get a LList!Ref!Agent of all agents in a particular area
 
 * Write Item module
 * Write Weapon module
@@ -15,19 +20,32 @@
 * Write Armor module
 * Write Drop module
 * Write Structured Entity module
+* Write Metaobject module
 
 * ``core.exception.InvalidMemoryOperationError@src\core\exception.d(693): Invalid memory operation`` Doesn't apparently hurt anything but it is annoying. Happens at shutdown
 
 * Find and implement a sound library
 
+
+# Future To Dos:
+
+* User interface
+
+* Menus
+
+* Content
+
+* Find a different compiler for release builds. Supposedly the gnu compiler produces much faster binaries than dmd
+
+
 # Possible To Dos:
 
 * Agent.size could be an overridable function instead of a variable
 
-* There should be some way to get all agents, rooted etc in a region - a way to check overlaps within an arbitrary area of space
-
 
 # Already done:
+
+* World.update is slow because World.update's timing varies proportionally to the number of Areas in World. The timing of one Area.update is around 0.003 ms. Ideally there should be less than 1000 areas updating at any one time. Implement an updating scheme similar to Rooted.update_list. Area list now at 0.3 ms/frame latent. game.render() varies with number of areas. This delay is coming from world.render
 
 * Add a function in Area and ground for when agent newly enters the area, and for when it leaves
 
@@ -35,6 +53,7 @@
 
 * Create a master list of updating rooteds - most rooteds will not be updating every frame
 
+* Move all global game related stuff into its own module
 * Incorporate time, frame delta etc into game module
 
 * Make it so that Agents can't push through solid objects by constantly accelerating towards them (just move the agent to the solid object's boundary when a collision takes place)
