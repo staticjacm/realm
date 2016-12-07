@@ -26,7 +26,7 @@ class Fireball1 : Shot {
     }
   }
   
-  long end_time = 100;
+  long end_time;
   long lifetime = 1000;
   
   this(Vector2f _position, float _size){
@@ -34,6 +34,11 @@ class Fireball1 : Shot {
     animation = new Animation([image_1, image_2, image_3], 30, Vector2f(0.5, 0.5), Vector2f(1, 1));
     friction = 0;
     end_time = game_time + lifetime + uniform(0, 500);
+  }
+  
+  void set_lifetime(long lifetime_){
+    lifetime = lifetime_;
+    end_time = game_time + lifetime_;
   }
   
   override void update(){

@@ -1,8 +1,8 @@
 @echo off
-@del realm.exe
+if exist realm.exe del realm.exe
 REM Use the following line for an optimized build
-REM @dmd -release -O -inline -noboundscheck -odobj realm ^
-@dmd -g -profile -odobj realm ^
+REM dmd -g -profile -odobj realm ^
+@dmd -release -O -inline -noboundscheck -odobj realm ^
 include/sgogl ^
 include/realm/game ^
 include/realm/timer ^
@@ -26,6 +26,7 @@ include/realm/player ^
 assets/entities/commoner/commoner ^
 assets/shots/fireball1/fireball1 ^
 assets/shots/fireball2/fireball2 ^
+assets/shots/rocket1/rocket1 ^
 assets/grounds/rocky/rocky_ground ^
 assets/walls/cactus1/cactus1 ^
 assets/worlds/testing_world/testing_world ^

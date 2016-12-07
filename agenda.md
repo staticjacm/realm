@@ -3,6 +3,13 @@
 
 * Initialization takes a strangely long time for some reason. This is a problem for every initialization function, apparently.
 
+* Add effects due to height (shadow, higher y, etc)
+
+* Convert regular_attack to regular_attack_start, regular_attack_end for prolonged/held attacks
+* Fix player.player_mouse_click_function so that left, right and middle clicks are registered correctly
+
+* Add Agent.create_shot for convenience
+
 * Agent friction increases when fps is low.
 
 * Agents always experience four (4) collisions when colliding with an agent - two when agent A detects a collision with agent B (A.overlap(B), B.overlap(A)), and two when B detects a collision with agent A (B.overlap(A), A.overlap(B)). This can easily be avoided by only overlapping if one agents id is larger than the others, and detecting if the other will detect a collision with this one by checking its size

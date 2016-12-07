@@ -37,7 +37,7 @@ class Testing_world : World {
   
   override void generate_adjacent_area(Area area){
     area.set_ground = new Rocky_ground(area.position);
-    if(uniform(0, 100) < 10)
+    if(uniform(0, 100) < 80)
       area.set_wall = new Cactus1(area.position);
   }
   

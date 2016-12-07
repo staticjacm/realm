@@ -200,6 +200,7 @@ void update(){
   if(frame % 100 == 0){
     writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
     writeln("  number of agents: ", Agent.master_list.length);
+    writeln("  number of areas: ", test_world.length);
   }
   // if(current_game_time > 5000) running = false;
   Thread.sleep(dur!"msecs"(0));

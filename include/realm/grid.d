@@ -8,6 +8,7 @@ abstract class Grid2(T, V) {
   void set(T, Vector2!V);
   void remove(Vector2!V);
   bool exists(Vector2!V);
+  int length();
 }
 
 /// A Grid2 type which uses a hash based dictionary to store values
@@ -39,6 +40,10 @@ class Dict_grid2(T, V) : Grid2!(T, V) {
   
   override bool exists(Vector2!V vector){
     return (get(vector) !is null);
+  }
+  
+  override int length(){
+    return dictionary.length;
   }
 }
 

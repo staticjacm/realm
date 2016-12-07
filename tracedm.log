@@ -1,0 +1,1554 @@
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	0	0	0
+------------------
+	15927140	void renderable.Renderable.render()
+	    0	
+	  320	
+	  280	@safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
+	  240	void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, float, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+float renderable.Renderable.render_angle()	15927980	1218656	1218656
+------------------
+	 5979	agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)
+	173838	rooted.Rooted rooted.Rooted.__ctor(vector.Vector2!(float).Vector2)
+renderable.Renderable renderable.Renderable.__ctor(vector.Vector2!(float).Vector2)	179817	29099	20936
+	179817	refable.Refable refable.Refable.__ctor()
+------------------
+	382234	void agent.Agent.render()
+	14068630	void rocky_ground.Rocky_ground.render()
+	1676276	void cactus1.Cactus1.render()
+void renderable.Renderable.render()	16127140	934340398	11886158
+	16127140	bool renderable.Renderable.y_shift()
+	16127140	animation.Animation animation.Animation.update(long)
+	382234	float agent.Agent.render_depth()
+	15927140	float renderable.Renderable.render_angle()
+	16127140	void animation.gr_draw(animation.Animation, vector.Vector2!(float).Vector2, float, float)
+	14068630	float ground.Ground.render_depth()
+	1676276	float wall.Wall.render_depth()
+	200000	float rocket1.Rocket1.render_angle()
+------------------
+	16482	void rooted.Rooted.destroy()
+	 5581	void agent.Agent.destroy()
+void renderable.Renderable.destroy()	22063	16361	4811
+	22063	void refable.Refable.destroy()
+------------------
+	16127140	void renderable.Renderable.render()
+bool renderable.Renderable.y_shift()	16127140	1355755	1355755
+------------------
+	   41	void testing_world.Testing_world.initialize_type()
+void rocky_ground.Rocky_ground.initialize_type()	41	52544	52519
+	  123	animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+------------------
+	16400	testing_world.Testing_world testing_world.Testing_world.__ctor()
+	32706	void testing_world.Testing_world.generate_area(area.Area)
+	  202	void testing_world.Testing_world.generate_adjacent_area(area.Area)
+	    8	
+	  226	
+rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)	49542	273985	42804
+	159882	ground.Ground ground.Ground.__ctor(vector.Vector2!(float).Vector2)
+	319764	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+------------------
+	74099	void area.Area.remove_agent(agent.Agent)
+void rocky_ground.Rocky_ground.exited(agent.Agent)	74099	9428	9428
+------------------
+	14068630	void area.Area.render()
+void rocky_ground.Rocky_ground.render()	14068630	823545163	9824332
+	14068630	void renderable.Renderable.render()
+------------------
+	74470	void area.Area.add_agent(agent.Agent)
+void rocky_ground.Rocky_ground.entered(agent.Agent)	74470	7004	7004
+------------------
+	313895	void area.Area.update()
+bool rocky_ground.Rocky_ground.interacts()	313895	30511	30511
+------------------
+	16400	area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+	16306	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+void testing_world.Testing_world.generate_area(area.Area)	32706	103194	26452
+	32706	rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+	32706	void area.Area.set_ground(ground.Ground)
+------------------
+	   41	void game.initialize()
+void testing_world.Testing_world.initialize_type()	41	135229	444
+	   41	void rocky_ground.Rocky_ground.initialize_type()
+	   41	void cactus1.Cactus1.initialize_type()
+	   41	void fireball1.Fireball1.initialize_type()
+------------------
+	  202	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+void testing_world.Testing_world.generate_adjacent_area(area.Area)	202	840	222
+	  202	rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+	  202	void area.Area.set_ground(ground.Ground)
+	  202	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+	  169	cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+	  169	void area.Area.set_wall(wall.Wall)
+------------------
+	   43	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+bool testing_world.Testing_world.generate_adjacent_areas()	43	9	9
+------------------
+	   13	void game.initialize()
+	   80	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+	   65	rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+	   65	void area.Area.set_ground(ground.Ground)
+	   65	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+	   53	cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+	   53	void area.Area.set_wall(wall.Wall)
+	   64	
+testing_world.Testing_world testing_world.Testing_world.__ctor()	458	130983	4135
+	 5200	rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+	 5200	void world.World.add_ground(ground.Ground)
+	  780	cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+	  780	void rooted.Rooted.set_updating(bool)
+	  780	void world.World.add_wall(wall.Wall)
+	   26	void world.World.place_agent(agent.Agent)
+	   13	commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)
+------------------
+	12016	void entity.Entity.render()
+	12016	void game.render()
+	11126	void rocket1.Rocket1.render()
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+	   91	
+void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)	35416	2235655	2235655
+------------------
+	2111161	void area.Area.render()
+bool sgogl_interface.point_in_view(vector.Vector2!(float).Vector2, float)	2111161	423538	423538
+------------------
+	   13	void game.initialize()
+	 6008	void player.player_update()
+void sgogl_interface.gr_view_centered(vector.Vector2!(float).Vector2, float)	6021	38733	38733
+------------------
+	  121	pure nothrow @nogc @safe immutable(int) std.algorithm.comparison.min!(immutable(int), uint).min(immutable(int), uint)
+pure nothrow @nogc @safe bool std.functional.safeOp!("<").safeOp!(immutable(int), uint).safeOp(ref immutable(int), ref uint)	121	37	24
+	  121	pure nothrow @nogc @safe bool std.functional.safeOp!("<").unsafeOp!(immutable(int), uint).unsafeOp(immutable(int), uint)
+------------------
+	  121	pure nothrow @nogc @safe bool std.functional.safeOp!("<").safeOp!(immutable(int), uint).safeOp(ref immutable(int), ref uint)
+pure nothrow @nogc @safe bool std.functional.safeOp!("<").unsafeOp!(immutable(int), uint).unsafeOp(immutable(int), uint)	121	13	13
+------------------
+	  121	pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
+pure nothrow @nogc @safe bool std.utf.canSearchInCodeUnits!(char).canSearchInCodeUnits(dchar)	121	13	13
+------------------
+	39232	pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+pure nothrow @nogc @safe uint std.conv.unsigned!(int).unsigned(int)	39232	1949	1949
+------------------
+	   62	@safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+@safe void std.conv.toTextRange!(int, std.stdio.File.LockingTextWriter).toTextRange(int, std.stdio.File.LockingTextWriter)	62	86	41
+	   62	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+------------------
+	   13	@safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+	   46	
+	   46	
+	   46	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+@safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)	151	36	11
+	   13	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+------------------
+	1250746	bool agent.Agent.check_for_overlap(agent.Agent)
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+	   91	
+pure nothrow @nogc @safe float std.math.abs!(float).abs(float)	1251004	57620	57620
+------------------
+	  132	@safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+pure nothrow @nogc @safe double std.math.nextafter!(double).nextafter(const(double), const(double))	132	51	51
+------------------
+	  646	@safe real std.random.uniform!("[)", real, real, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(real, real, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+pure nothrow @nogc @safe real std.math.nextafter!(real).nextafter(const(real), const(real))	646	119	119
+------------------
+	160974	@safe float std.random.uniform!("[)", float, float, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(float, float, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+pure nothrow @nogc @safe float std.math.nextafter!(float).nextafter(const(float), const(float))	160974	12273	12273
+------------------
+	   13	@safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+	   31	@safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+	   62	@safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+	   69	
+nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)	175	56266	35
+	  175	nothrow @nogc @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char).doPut(ref std.stdio.File.LockingTextWriter, ref char)
+------------------
+	  121	@safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+	   13	@safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)
+	   62	@safe void std.conv.toTextRange!(int, std.stdio.File.LockingTextWriter).toTextRange(int, std.stdio.File.LockingTextWriter)
+@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])	196	206	36
+	  242	@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char[]).doPut(ref std.stdio.File.LockingTextWriter, ref char[])
+------------------
+	  121	@safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
+@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, const(char)[]).put(ref std.stdio.File.LockingTextWriter, const(char)[])	121	334	21
+	  121	@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, const(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref const(char)[])
+------------------
+	   13	@safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+	   93	@safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+	   62	@safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])	168	663	81
+	  283	@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, immutable(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref immutable(char)[])
+------------------
+	  175	nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+nothrow @nogc @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char).doPut(ref std.stdio.File.LockingTextWriter, ref char)	175	56231	83
+	  175	nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+------------------
+	  242	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char[]).doPut(ref std.stdio.File.LockingTextWriter, ref char[])	242	170	54
+	  242	@safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])
+------------------
+	  121	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, const(char)[]).put(ref std.stdio.File.LockingTextWriter, const(char)[])
+@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, const(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref const(char)[])	121	313	202
+	  121	@safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])
+------------------
+	  283	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, immutable(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref immutable(char)[])	283	582	130
+	  283	@safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
+------------------
+	   13	_Dmain
+@safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])	13	9628	313
+	   13	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   13	@safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
+	   13	nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+------------------
+	   62	void game.update()
+@safe void std.stdio.writeln!(immutable(char)[], int).writeln(immutable(char)[], int)	62	14654	28
+	   62	@safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+------------------
+	   13	void cactus1.Cactus1.initialize_type()
+	   46	void game.update()
+@safe void std.stdio.writeln!(immutable(char)[], uint).writeln(immutable(char)[], uint)	59	4702	13
+	   13	@safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+------------------
+	   13	void game.initialize()
+@safe void std.stdio.writefln!(immutable(char)[], float).writefln(immutable(char)[], float)	13	4444	12
+	   13	@safe void std.stdio.File.writefln!(char, float).writefln(const(char[]), float)
+------------------
+	   31	void game.update()
+@safe void std.stdio.writeln!(immutable(char)[], float, immutable(char)[], float, immutable(char)[]).writeln(immutable(char)[], float, immutable(char)[], float, immutable(char)[])	31	18124	45
+	   31	@safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+------------------
+	   13	@safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])
+	   13	@safe void std.stdio.File.writefln!(char, float).writefln(const(char[]), float)
+	  175	nothrow @nogc @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char).doPut(ref std.stdio.File.LockingTextWriter, ref char)
+	   23	void game.update()
+	   23	
+nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)	247	68523	48
+	  201	_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNfaZ12trustedFPUTCFNbNiNeiPS4core4stdc5stdio6_iobufZi
+------------------
+	  201	nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+_D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNfaZ12trustedFPUTCFNbNiNeiPS4core4stdc5stdio6_iobufZi	201	68475	68475
+------------------
+	  242	@safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])
+_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFAaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk	242	76	76
+------------------
+	  242	@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char[]).doPut(ref std.stdio.File.LockingTextWriter, ref char[])
+@safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])	242	116	40
+	  242	_D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFAaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+------------------
+	  121	@safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])
+_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFAxaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk	121	66	66
+------------------
+	  121	@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, const(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref const(char)[])
+@safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])	121	111	45
+	  121	_D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFAxaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+------------------
+	  296	@safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
+_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFAyaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk	296	958	958
+------------------
+	   13	@safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])
+	  283	@safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, immutable(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref immutable(char)[])
+@safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])	296	1057	99
+	  296	_D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFAyaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+------------------
+	   13	@safe void std.stdio.writefln!(immutable(char)[], float).writefln(immutable(char)[], float)
+@safe void std.stdio.File.writefln!(char, float).writefln(const(char[]), float)	13	4432	53
+	   13	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   13	@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+	   13	nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+------------------
+	   62	@safe void std.stdio.writeln!(immutable(char)[], int).writeln(immutable(char)[], int)
+@safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)	62	14626	95
+	   62	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   62	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+	   62	@safe void std.conv.toTextRange!(int, std.stdio.File.LockingTextWriter).toTextRange(int, std.stdio.File.LockingTextWriter)
+	   62	nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+------------------
+	   13	@safe void std.stdio.writeln!(immutable(char)[], uint).writeln(immutable(char)[], uint)
+	   46	
+	   46	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   46	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+	   46	nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+@safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)	197	4689	468
+	   13	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   13	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+	   13	@safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)
+	   13	nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+------------------
+	   31	@safe void std.stdio.writeln!(immutable(char)[], float, immutable(char)[], float, immutable(char)[]).writeln(immutable(char)[], float, immutable(char)[], float, immutable(char)[])
+@safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)	31	18079	192
+	   31	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   93	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+	   62	@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+	   31	nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+------------------
+	  288	@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+	   23	
+	   23	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	   69	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+	   23	nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+@safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)	426	642	308
+	  121	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, const(char)[]).put(ref std.stdio.File.LockingTextWriter, const(char)[])
+------------------
+	  121	void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, float, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+@safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)	121	1661	466
+	  121	pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
+	  121	nothrow @nogc @trusted int std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
+	  121	pure nothrow @nogc @safe immutable(int) std.algorithm.comparison.min!(immutable(int), uint).min(immutable(int), uint)
+	  121	@safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+------------------
+	  121	@safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+nothrow @nogc @trusted int std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()	121	851	851
+------------------
+	  121	@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, float, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)	121	1719	58
+	  121	@safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+------------------
+	   13	@safe void std.stdio.File.writefln!(char, float).writefln(const(char[]), float)
+	   62	@safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+	   46	
+@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)	121	2881	497
+	  121	pure nothrow @nogc @trusted pure nothrow @safe void function(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda5()
+	  121	pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda6!(float).__lambda6(ref float)
+	  242	@safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
+	  121	void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, float, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+------------------
+	  121	@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda6!(float).__lambda6(ref float)	121	10	10
+------------------
+	  121	@safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+pure nothrow @nogc @trusted pure nothrow @safe void function(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda5()	121	13	13
+------------------
+	39232	pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+pure nothrow @safe uint std.random.uniform!(uint, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)	39232	3959	3959
+------------------
+	  132	@safe double std.random.uniform!("[)", double, double).uniform(double, double)
+@safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)	132	257	193
+	  132	pure nothrow @nogc @safe double std.math.nextafter!(double).nextafter(const(double), const(double))
+	  132	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+------------------
+	  646	@safe real std.random.uniform!("[)", real, real).uniform(real, real)
+@safe real std.random.uniform!("[)", real, real, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(real, real, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)	646	352	202
+	  646	pure nothrow @nogc @safe real std.math.nextafter!(real).nextafter(const(real), const(real))
+	  646	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+------------------
+	160974	@safe float std.random.uniform!("[)", float, float).uniform(float, float)
+@safe float std.random.uniform!("[)", float, float, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(float, float, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)	160974	64779	42429
+	160974	pure nothrow @nogc @safe float std.math.nextafter!(float).nextafter(const(float), const(float))
+	160974	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+------------------
+	39232	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)	39232	20457	12518
+	39232	pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+	39232	pure nothrow @nogc @safe uint std.conv.unsigned!(int).unsigned(int)
+	39232	pure nothrow @safe uint std.random.uniform!(uint, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+------------------
+	  132	rocket1.Rocket1 rocket1.Rocket1.__ctor(vector.Vector2!(float).Vector2, float)
+@safe double std.random.uniform!("[)", double, double).uniform(double, double)	132	325	68
+	  132	@safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+------------------
+	  646	void rocket1.Rocket1.explode()
+@safe real std.random.uniform!("[)", real, real).uniform(real, real)	646	463	111
+	  646	@safe real std.random.uniform!("[)", real, real, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(real, real, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+------------------
+	160974	vector.Vector2!(float).Vector2 vector.rvector(float)
+@safe float std.random.uniform!("[)", float, float).uniform(float, float)	160974	86687	21908
+	160974	@safe float std.random.uniform!("[)", float, float, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(float, float, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+------------------
+	21450	rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+	 1002	cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+	11341	void rocket1.Rocket1.update()
+	 4428	fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+	  744	void rocket1.Rocket1.explode()
+	  202	void testing_world.Testing_world.generate_adjacent_area(area.Area)
+	    8	
+	   57	
+@safe int std.random.uniform!("[)", int, int).uniform(int, int)	39232	26624	6167
+	39232	pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+------------------
+	  121	@safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+pure nothrow @nogc @safe immutable(int) std.algorithm.comparison.min!(immutable(int), uint).min(immutable(int), uint)	121	55	18
+	  121	pure nothrow @nogc @safe bool std.functional.safeOp!("<").safeOp!(immutable(int), uint).safeOp(ref immutable(int), ref uint)
+------------------
+	  121	pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
+pure nothrow @nogc @trusted immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char).trustedMemchr(ref immutable(char)[], ref char)	121	86	86
+------------------
+	  121	@safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)	121	184	85
+	  121	pure nothrow @nogc @safe bool std.utf.canSearchInCodeUnits!(char).canSearchInCodeUnits(dchar)
+	  121	pure nothrow @nogc @trusted immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char).trustedMemchr(ref immutable(char)[], ref char)
+------------------
+	   13	@safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])
+	   13	@safe void std.stdio.File.writefln!(char, float).writefln(const(char[]), float)
+	   13	@safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+	39232	pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+	  132	@safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+	160974	@safe float std.random.uniform!("[)", float, float, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(float, float, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+	  646	@safe real std.random.uniform!("[)", real, real, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(real, real, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+	   31	@safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+	   62	@safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+	   69	
+pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)	201185	12182	12182
+------------------
+	   13	void game.initialize()
+void area.Area.initialize()	13	341	186
+	   13	area.Area_list area.Area_list.__ctor()
+------------------
+	 5258	void testing_world.Testing_world.generate_area(area.Area)
+	 5200	void world.World.add_ground(ground.Ground)
+	  202	void testing_world.Testing_world.generate_adjacent_area(area.Area)
+	    8	
+	   57	
+void area.Area.set_ground(ground.Ground)	10725	9873	1921
+	10725	void area.Area.unset_ground()
+------------------
+	 1002	void area.Area.set_wall(wall.Wall)
+void area.Area.unset_wall()	1002	169	96
+	   26	void wall.Wall.destroy()
+------------------
+	15184	void world.World.place_agent(agent.Agent)
+	 4450	void agent.Agent.destroy()
+void area.Area.remove_agent(agent.Agent)	19634	55588	10303
+	19634	void sllist.LList!(agent.Agent).LList.Index.remove()
+	19634	void rocky_ground.Rocky_ground.exited(agent.Agent)
+	 9176	void area.Area.set_updating(bool)
+------------------
+	19751	void area.Area.add_agent(agent.Agent)
+	 9176	void area.Area.remove_agent(agent.Agent)
+	   49	void area.Area.update()
+void area.Area.set_updating(bool)	28976	40792	7301
+	 9254	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)
+	 9176	void sllist.LList!(area.Area).LList.Index.remove()
+------------------
+	10725	void area.Area.set_ground(ground.Ground)
+void area.Area.unset_ground()	10725	7952	1682
+	 5200	void ground.Ground.destroy()
+------------------
+	 5200	area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+	  325	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+area.Area area.Area.__ctor(vector.Vector2!(float).Vector2)	5525	3768	2654
+	 5525	agent.Agent_list agent.Agent_list.__ctor()
+------------------
+	19751	void area.Area.add_agent(agent.Agent)
+bool area.Area.inside(vector.Vector2!(float).Vector2)	19751	2585	2585
+------------------
+	2111161	void player.player_render_near()
+void area.Area.render()	2111161	140192427	1418688
+	2111161	bool sgogl_interface.point_in_view(vector.Vector2!(float).Vector2, float)
+	2111161	void rocky_ground.Rocky_ground.render()
+	270650	void cactus1.Cactus1.render()
+------------------
+	94999	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+_D4area4Area6updateMFZ14__foreachbody1MFKC5agent5AgentZi	94999	36847	19506
+	94999	void ground.Ground.under(agent.Agent)
+	94999	void agent.Agent.over(ground.Ground)
+------------------
+	788531	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi	788531	397940	123850
+	693532	bool agent.Agent.check_for_overlap(agent.Agent)
+	924656	void agent.Agent.overlap(agent.Agent)
+------------------
+	94999	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi	94999	1758398	220246
+	1042404	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	1042404	area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+	852472	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+	 5960	bool wall.Wall.interacts()
+	  655	void rocket1.Rocket1.collide(wall.Wall)
+	 5960	void cactus1.Cactus1.collide(agent.Agent)
+	 5305	void agent.Agent.collide(wall.Wall)
+	 1008	
+------------------
+	59801	int game.update().__foreachbody3(ref area.Area)
+void area.Area.update()	59801	1847803	22008
+	59801	bool rocky_ground.Rocky_ground.interacts()
+	119602	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+	   49	void area.Area.set_updating(bool)
+------------------
+	  780	void world.World.add_wall(wall.Wall)
+	  169	void testing_world.Testing_world.generate_adjacent_area(area.Area)
+	    7	
+	   46	
+void area.Area.set_wall(wall.Wall)	1002	337	168
+	 1002	void area.Area.unset_wall()
+------------------
+	19751	void world.World.place_agent(agent.Agent)
+void area.Area.add_agent(agent.Agent)	19751	85647	15675
+	19751	bool area.Area.inside(vector.Vector2!(float).Vector2)
+	19751	void area.Area.set_updating(bool)
+	19751	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+	19751	void rocky_ground.Rocky_ground.entered(agent.Agent)
+------------------
+	   13	void area.Area.initialize()
+area.Area_list area.Area_list.__ctor()	13	155	151
+	   13	nothrow @nogc @safe sllist.LList!(area.Area).LList sllist.LList!(area.Area).LList.__ctor()
+------------------
+	12016	const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("msecs").total
+pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("msecs").getUnitsFromHNSecs(long)	12016	3654	2027
+	12016	pure nothrow @nogc @safe long core.time.convert!("hnsecs", "msecs").convert(long)
+------------------
+	 6021	long timer.Timer.hnsecs()
+	12016	long timer.Timer.msecs()
+const(pure nothrow @nogc @safe core.time.Duration function(core.time.MonoTimeImpl!(0).MonoTimeImpl)) core.time.MonoTimeImpl!(0).MonoTimeImpl.opBinary!("-").opBinary	18037	11930	11930
+------------------
+	 6021	const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("hnsecs").total
+pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("hnsecs").getUnitsFromHNSecs(long)	6021	2037	1186
+	 6021	pure nothrow @nogc @safe long core.time.convert!("hnsecs", "hnsecs").convert(long)
+------------------
+	12016	pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("msecs").getUnitsFromHNSecs(long)
+pure nothrow @nogc @safe long core.time.convert!("hnsecs", "msecs").convert(long)	12016	1627	1627
+------------------
+	 6021	pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("hnsecs").getUnitsFromHNSecs(long)
+pure nothrow @nogc @safe long core.time.convert!("hnsecs", "hnsecs").convert(long)	6021	851	851
+------------------
+	12016	long timer.Timer.msecs()
+const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("msecs").total	12016	7105	3451
+	12016	pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("msecs").getUnitsFromHNSecs(long)
+------------------
+	 6021	long timer.Timer.hnsecs()
+const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("hnsecs").total	6021	4778	2741
+	 6021	pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("hnsecs").getUnitsFromHNSecs(long)
+------------------
+	   13	_Dmain
+void game.initialize()	13	1984835	1743059
+	   26	void timer.Timer.start()
+	   13	float timer.Timer.hnsecsf()
+	   13	@safe void std.stdio.writefln!(immutable(char)[], float).writefln(immutable(char)[], float)
+	   13	void area.Area.initialize()
+	   13	void agent.Agent.initialize()
+	   13	void rooted.Rooted.initialize()
+	   13	void sgogl_interface.gr_view_centered(vector.Vector2!(float).Vector2, float)
+	   13	void commoner.Commoner.initialize_type()
+	   13	void testing_world.Testing_world.initialize_type()
+	   13	commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)
+	   13	testing_world.Testing_world testing_world.Testing_world.__ctor()
+------------------
+	  568	void game.update()
+void game.key_function()	568	693	202
+	  568	void player.player_key_function()
+------------------
+	 2737	void game.update()
+void game.mouse_move_function()	2737	4116	4116
+------------------
+	  134	void game.update()
+void game.mouse_click_function()	134	3415	68
+	  134	void player.player_mouse_click_function()
+------------------
+	   13	_Dmain
+void game.quit()	13	329404	329404
+------------------
+	103726	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+int game.render().__foreachbody1(ref agent.Agent)	103726	8400063	41795
+	12016	void entity.Entity.render()
+	11126	void rocket1.Rocket1.render()
+	80584	void agent.Agent.render()
+------------------
+	 6008	void game.update()
+void game.render()	6008	159921722	3799354
+	 6008	void world.World.render()
+	 6008	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+	 6008	void player.player_render_near()
+	12016	void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+	 6008	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("/").opBinary(float)
+	 6008	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+------------------
+	103748	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+int game.update().__foreachbody1(ref agent.Agent)	103748	640340	22240
+	12016	void agent.Agent.update()
+	11245	void rocket1.Rocket1.update()
+	80487	void fireball1.Fireball1.update()
+------------------
+	 7742	int sllist.LList!(rooted.Rooted).LList.opApply(scope int delegate(ref rooted.Rooted))
+int game.update().__foreachbody2(ref rooted.Rooted)	7742	6741	1577
+	 7742	void cactus1.Cactus1.update()
+------------------
+	59801	int sllist.LList!(area.Area).LList.opApply(scope int delegate(ref area.Area))
+int game.update().__foreachbody3(ref area.Area)	59801	1856498	8695
+	59801	void area.Area.update()
+------------------
+	 6008	_Dmain
+void game.update()	6008	166105267	3479831
+	12016	long timer.Timer.msecs()
+	 6008	void timer.Timer.start()
+	 2737	void game.mouse_move_function()
+	 6008	void player.player_update()
+	 6008	int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+	 6008	int sllist.LList!(rooted.Rooted).LList.opApply(scope int delegate(ref rooted.Rooted))
+	 6008	int sllist.LList!(area.Area).LList.opApply(scope int delegate(ref area.Area))
+	 6008	void game.render()
+	 6008	float timer.Timer.hnsecsf()
+	  568	void game.key_function()
+	  134	void game.mouse_click_function()
+	   31	@safe void std.stdio.writeln!(immutable(char)[], float, immutable(char)[], float, immutable(char)[]).writeln(immutable(char)[], float, immutable(char)[], float, immutable(char)[])
+	   62	@safe void std.stdio.writeln!(immutable(char)[], int).writeln(immutable(char)[], int)
+	   31	int grid.Dict_grid2!(area.Area, float).Dict_grid2.length()
+	   92	
+------------------
+	4664112	area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+area.Area* grid.Dict_grid2!(area.Area, float).Dict_grid2.get(vector.Vector2!(float).Vector2)	4664112	4282388	2685070
+	4664099	nothrow @trusted uint vector.Vector2!(float).Vector2.__xtoHash(ref const(vector.Vector2!(float).Vector2))
+	15245706	bool vector.Vector2!(float).Vector2.__xopEquals(ref const(vector.Vector2!(float).Vector2), ref const(vector.Vector2!(float).Vector2))
+------------------
+	 5525	void world.World.integrate_area(area.Area)
+void grid.Dict_grid2!(area.Area, float).Dict_grid2.set(area.Area, vector.Vector2!(float).Vector2)	5525	17234	15891
+	 5525	nothrow @trusted uint vector.Vector2!(float).Vector2.__xtoHash(ref const(vector.Vector2!(float).Vector2))
+	13728	bool vector.Vector2!(float).Vector2.__xopEquals(ref const(vector.Vector2!(float).Vector2), ref const(vector.Vector2!(float).Vector2))
+------------------
+	   31	void game.update()
+int grid.Dict_grid2!(area.Area, float).Dict_grid2.length()	31	25	25
+------------------
+	  134	rocket1.Rocket1 rocket1.Rocket1.__ctor(vector.Vector2!(float).Vector2, float)
+	 4428	fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+	   23	void game.update()
+	   23	
+shot.Shot shot.Shot.__ctor(vector.Vector2!(float).Vector2, float)	4608	8895	1071
+	 4562	agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)
+------------------
+	 4331	void fireball1.Fireball1.update()
+	  103	void rocket1.Rocket1.explode()
+	   16	
+void shot.Shot.destroy()	4450	28761	1431
+	 4450	void agent.Agent.destroy()
+------------------
+	270650	void renderable.Renderable.render()
+float wall.Wall.render_depth()	270650	28517	28517
+------------------
+	 1002	cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+wall.Wall wall.Wall.__ctor(vector.Vector2!(float).Vector2)	1002	318	89
+	 1002	rooted.Rooted rooted.Rooted.__ctor(vector.Vector2!(float).Vector2)
+------------------
+	 5960	void cactus1.Cactus1.collide(agent.Agent)
+void wall.Wall.collide(agent.Agent)	5960	4372	2189
+	11920	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.floor!(float).floor(vector.Vector2!(float).Vector2)
+	 5960	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("-").opBinary(vector.Vector2!(float).Vector2)
+------------------
+	   26	void area.Area.unset_wall()
+	  336	
+	 1344	
+void wall.Wall.destroy()	1706	73	4
+	   26	void rooted.Rooted.destroy()
+------------------
+	 5960	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+bool wall.Wall.interacts()	5960	595	595
+------------------
+	   13	void agent.Agent.initialize()
+	 5525	area.Area area.Area.__ctor(vector.Vector2!(float).Vector2)
+	  336	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	  336	
+agent.Agent_list agent.Agent_list.__ctor()	6210	1253	919
+	 5538	nothrow @nogc @safe sllist.LList!(agent.Agent).LList sllist.LList!(agent.Agent).LList.__ctor()
+------------------
+	 6008	void player.player_update()
+	 5546	void agent.Agent.update()
+	 7559	void rocket1.Rocket1.update()
+	80487	void fireball1.Fireball1.update()
+void agent.Agent.accelerate(vector.Vector2!(float).Vector2)	99600	50736	27988
+	99600	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+	99600	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)
+------------------
+	   13	void game.initialize()
+void agent.Agent.initialize()	13	158	19
+	   13	agent.Agent_list agent.Agent_list.__ctor()
+------------------
+	103726	void renderable.Renderable.render()
+float agent.Agent.render_depth()	103726	9651	9651
+------------------
+	  134	void commoner.Commoner.regular_attack()
+void agent.Agent.set_velocity(vector.Vector2!(float).Vector2)	134	39	39
+------------------
+	693532	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+bool agent.Agent.check_for_overlap(agent.Agent)	693532	191756	134164
+	1250746	pure nothrow @nogc @safe float std.math.abs!(float).abs(float)
+------------------
+	94999	_D4area4Area6updateMFZ14__foreachbody1MFKC5agent5AgentZi
+void agent.Agent.over(ground.Ground)	94999	10968	10968
+------------------
+	   26	entity.Entity entity.Entity.__ctor(vector.Vector2!(float).Vector2, float)
+	 4562	shot.Shot shot.Shot.__ctor(vector.Vector2!(float).Vector2, float)
+agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)	4588	8115	1716
+	 4588	renderable.Renderable renderable.Renderable.__ctor(vector.Vector2!(float).Vector2)
+	 4588	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)
+------------------
+	12016	void entity.Entity.render()
+	11126	void rocket1.Rocket1.render()
+	80584	int game.render().__foreachbody1(ref agent.Agent)
+void agent.Agent.render()	103726	6699374	47780
+	103726	void renderable.Renderable.render()
+------------------
+	12016	int game.update().__foreachbody1(ref agent.Agent)
+	11245	void rocket1.Rocket1.update()
+	80487	void fireball1.Fireball1.update()
+void agent.Agent.update()	103748	369692	41632
+	 5546	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opUnary!("-").opUnary()
+	103585	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+	 5546	void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+	92493	void agent.Agent.move_by(vector.Vector2!(float).Vector2)
+	92493	void world.World.place_agent(agent.Agent)
+------------------
+	  655	void rocket1.Rocket1.collide(wall.Wall)
+	 5305	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+void agent.Agent.collide(wall.Wall)	5960	757	757
+------------------
+	 4450	void shot.Shot.destroy()
+	  427	
+	  245	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+void agent.Agent.destroy()	5122	27330	3795
+	 4450	void sllist.LList!(agent.Agent).LList.Index.remove()
+	 4450	void area.Area.remove_agent(agent.Agent)
+	 4450	void animation.Animation.destroy()
+	 4450	void renderable.Renderable.destroy()
+------------------
+	92493	void agent.Agent.update()
+void agent.Agent.move_by(vector.Vector2!(float).Vector2)	92493	27631	12676
+	92493	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)
+------------------
+	924656	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+void agent.Agent.overlap(agent.Agent)	924656	82334	82334
+------------------
+	 6021	float timer.Timer.hnsecsf()
+float timer.hnsecs_to_secs(long)	6021	456	456
+------------------
+	12016	void game.update()
+long timer.Timer.msecs()	12016	32333	14304
+	12016	const(pure nothrow @nogc @safe core.time.Duration function(core.time.MonoTimeImpl!(0).MonoTimeImpl)) core.time.MonoTimeImpl!(0).MonoTimeImpl.opBinary!("-").opBinary
+	12016	const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("msecs").total
+------------------
+	   26	void game.initialize()
+	 6008	void game.update()
+void timer.Timer.start()	6034	786	786
+------------------
+	 6021	float timer.Timer.hnsecsf()
+long timer.Timer.hnsecs()	6021	8022	2238
+	 6021	const(pure nothrow @nogc @safe core.time.Duration function(core.time.MonoTimeImpl!(0).MonoTimeImpl)) core.time.MonoTimeImpl!(0).MonoTimeImpl.opBinary!("-").opBinary
+	 6021	const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("hnsecs").total
+------------------
+	   13	void game.initialize()
+	 6008	void game.update()
+float timer.Timer.hnsecsf()	6021	13088	4610
+	 6021	long timer.Timer.hnsecs()
+	 6021	float timer.hnsecs_to_secs(long)
+------------------
+	 5200	testing_world.Testing_world testing_world.Testing_world.__ctor()
+void world.World.add_ground(ground.Ground)	5200	112509	2203
+	 5200	area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+	 5200	void area.Area.set_ground(ground.Ground)
+------------------
+	   26	testing_world.Testing_world testing_world.Testing_world.__ctor()
+	92493	void agent.Agent.update()
+void world.World.place_agent(agent.Agent)	92519	291339	28228
+	92519	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+	19751	void sllist.LList!(agent.Agent).LList.Index.remove()
+	19751	void area.Area.add_agent(agent.Agent)
+	15184	void area.Area.remove_agent(agent.Agent)
+------------------
+	 5200	area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+	  325	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+void world.World.integrate_area(area.Area)	5525	74899	2196
+	 5525	void grid.Dict_grid2!(area.Area, float).Dict_grid2.set(area.Area, vector.Vector2!(float).Vector2)
+	 5525	void world.World.connect_area_to_surroundings(area.Area)
+------------------
+	92519	void world.World.place_agent(agent.Agent)
+area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)	92519	130662	16776
+	92983	area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+	  325	area.Area area.Area.__ctor(vector.Vector2!(float).Vector2)
+	  325	void world.World.integrate_area(area.Area)
+	   58	void testing_world.Testing_world.generate_area(area.Area)
+	   43	bool testing_world.Testing_world.generate_adjacent_areas()
+	  464	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	  202	void testing_world.Testing_world.generate_adjacent_area(area.Area)
+	   80	
+------------------
+	 5200	void world.World.add_ground(ground.Ground)
+	  780	void world.World.add_wall(wall.Wall)
+area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)	5980	102696	5017
+	 5980	area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+	 5200	area.Area area.Area.__ctor(vector.Vector2!(float).Vector2)
+	 5200	void world.World.integrate_area(area.Area)
+	 5200	void testing_world.Testing_world.generate_area(area.Area)
+------------------
+	 5525	void world.World.integrate_area(area.Area)
+void world.World.connect_area_to_surroundings(area.Area)	5525	55469	7439
+	44200	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	44200	area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+------------------
+	 6008	void game.render()
+void world.World.render()	6008	1390	1390
+------------------
+	  780	testing_world.Testing_world testing_world.Testing_world.__ctor()
+void world.World.add_wall(wall.Wall)	780	1067	205
+	  780	area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+	  780	void area.Area.set_wall(wall.Wall)
+------------------
+	 5980	area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+	44200	void world.World.connect_area_to_surroundings(area.Area)
+	92983	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+	1042404	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	3478545	void player.player_render_near()
+area.Area world.World.get_area(vector.Vector2!(float).Vector2)	4664112	6406515	2124127
+	4664112	area.Area* grid.Dict_grid2!(area.Area, float).Dict_grid2.get(vector.Vector2!(float).Vector2)
+------------------
+	   26	commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)
+entity.Entity entity.Entity.__ctor(vector.Vector2!(float).Vector2, float)	26	332	41
+	   26	agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)
+------------------
+	12016	int game.render().__foreachbody1(ref agent.Agent)
+void entity.Entity.render()	12016	1892949	26995
+	12016	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	12016	void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+	12016	void agent.Agent.render()
+------------------
+	2111161	void renderable.Renderable.render()
+float ground.Ground.render_depth()	2111161	186481	186481
+------------------
+	94999	_D4area4Area6updateMFZ14__foreachbody1MFKC5agent5AgentZi
+void ground.Ground.under(agent.Agent)	94999	6373	6373
+------------------
+	10725	rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+ground.Ground ground.Ground.__ctor(vector.Vector2!(float).Vector2)	10725	5029	1515
+	10725	rooted.Rooted rooted.Rooted.__ctor(vector.Vector2!(float).Vector2)
+------------------
+	 5200	void area.Area.unset_ground()
+void ground.Ground.destroy()	5200	6270	1055
+	 5200	void rooted.Rooted.destroy()
+------------------
+	 9676	void refable.Refable.destroy()
+void object.destroy!(refable.Refable).destroy(refable.Refable)	9676	2797	2797
+------------------
+	 4450	void animation.Animation.destroy()
+void object.destroy!(animation.Animation).destroy(animation.Animation)	4450	1098	1098
+------------------
+	 9176	void sllist.LList!(area.Area).LList.Element.destroy()
+void object.destroy!(sllist.LList!(area.Area).LList.Element).destroy(sllist.LList!(area.Area).LList.Element)	9176	2173	2173
+------------------
+	24084	void sllist.LList!(agent.Agent).LList.Element.destroy()
+void object.destroy!(sllist.LList!(agent.Agent).LList.Element).destroy(sllist.LList!(agent.Agent).LList.Element)	24084	10072	10072
+------------------
+	 2092	void sllist.LList!(rooted.Rooted).LList.Element.destroy()
+void object.destroy!(sllist.LList!(rooted.Rooted).LList.Element).destroy(sllist.LList!(rooted.Rooted).LList.Element)	2092	486	486
+------------------
+	 6008	void game.update()
+void player.player_update()	6008	63785	12736
+	 6008	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+	 6008	void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+	 6008	void sgogl_interface.gr_view_centered(vector.Vector2!(float).Vector2, float)
+	 3098	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)
+------------------
+	 6008	void game.render()
+void player.player_render_near()	6008	147090771	1587091
+	3478545	area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+	2111161	void area.Area.render()
+------------------
+	  568	void game.key_function()
+void player.player_key_function()	568	491	491
+------------------
+	  134	void game.mouse_click_function()
+void player.player_mouse_click_function()	134	3347	267
+	  134	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+	  134	void commoner.Commoner.regular_attack()
+------------------
+	   13	void rooted.Rooted.initialize()
+rooted.Rooted_list rooted.Rooted_list.__ctor()	13	130	130
+	   13	nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList sllist.LList!(rooted.Rooted).LList.__ctor()
+------------------
+	   13	void game.initialize()
+void rooted.Rooted.initialize()	13	143	13
+	   13	rooted.Rooted_list rooted.Rooted_list.__ctor()
+------------------
+	  780	testing_world.Testing_world testing_world.Testing_world.__ctor()
+	 2066	void cactus1.Cactus1.update()
+	 1209	void cactus1.Cactus1.collide(agent.Agent)
+void rooted.Rooted.set_updating(bool)	4055	7195	1270
+	 2102	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)
+	 2066	void sllist.LList!(rooted.Rooted).LList.Index.remove()
+------------------
+	10725	ground.Ground ground.Ground.__ctor(vector.Vector2!(float).Vector2)
+	 1002	wall.Wall wall.Wall.__ctor(vector.Vector2!(float).Vector2)
+rooted.Rooted rooted.Rooted.__ctor(vector.Vector2!(float).Vector2)	11727	3743	1521
+	11727	renderable.Renderable renderable.Renderable.__ctor(vector.Vector2!(float).Vector2)
+------------------
+	 5200	void ground.Ground.destroy()
+	   26	void wall.Wall.destroy()
+void rooted.Rooted.destroy()	5226	5284	1393
+	 5226	void sllist.LList!(rooted.Rooted).LList.Index.remove()
+	 5226	void renderable.Renderable.destroy()
+------------------
+	 9254	void area.Area.set_updating(bool)
+sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)	9254	19806	18007
+	   13	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add_first(area.Area)
+	 9241	pure nothrow @nogc @safe sllist.LList!(area.Area).LList.Element sllist.LList!(area.Area).LList.Element.__ctor(area.Area)
+	 9241	void sllist.LList!(area.Area).LList.connect(sllist.LList!(area.Area).LList.Element, sllist.LList!(area.Area).LList.Element)
+	 9241	pure nothrow ref @nogc @safe sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.Index.__ctor(sllist.LList!(area.Area).LList, sllist.LList!(area.Area).LList.Element)
+------------------
+	   13	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add_first(area.Area)
+	 9241	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)
+pure nothrow ref @nogc @safe sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.Index.__ctor(sllist.LList!(area.Area).LList, sllist.LList!(area.Area).LList.Element)	9254	512	512
+------------------
+	 9176	void area.Area.set_updating(bool)
+void sllist.LList!(area.Area).LList.Index.remove()	9176	13685	2492
+	 9176	void sllist.LList!(area.Area).LList.remove(sllist.LList!(area.Area).LList.Element)
+------------------
+	   13	area.Area_list area.Area_list.__ctor()
+nothrow @nogc @safe sllist.LList!(area.Area).LList sllist.LList!(area.Area).LList.__ctor()	13	4	4
+------------------
+	 9176	void sllist.LList!(area.Area).LList.Index.remove()
+void sllist.LList!(area.Area).LList.remove(sllist.LList!(area.Area).LList.Element)	9176	11193	4978
+	 9176	void sllist.LList!(area.Area).LList.connect(sllist.LList!(area.Area).LList.Element, sllist.LList!(area.Area).LList.Element)
+	 9176	void sllist.LList!(area.Area).LList.Element.destroy()
+------------------
+	   13	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add_first(area.Area)
+	 9241	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)
+pure nothrow @nogc @safe sllist.LList!(area.Area).LList.Element sllist.LList!(area.Area).LList.Element.__ctor(area.Area)	9254	527	527
+------------------
+	 9176	void sllist.LList!(area.Area).LList.remove(sllist.LList!(area.Area).LList.Element)
+void sllist.LList!(area.Area).LList.Element.destroy()	9176	5434	3261
+	 9176	void object.destroy!(sllist.LList!(area.Area).LList.Element).destroy(sllist.LList!(area.Area).LList.Element)
+------------------
+	 9241	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)
+	 9176	void sllist.LList!(area.Area).LList.remove(sllist.LList!(area.Area).LList.Element)
+void sllist.LList!(area.Area).LList.connect(sllist.LList!(area.Area).LList.Element, sllist.LList!(area.Area).LList.Element)	18417	1525	1525
+------------------
+	 6008	void game.update()
+int sllist.LList!(area.Area).LList.opApply(scope int delegate(ref area.Area))	6008	1864813	8315
+	59801	int game.update().__foreachbody3(ref area.Area)
+------------------
+	   13	sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)
+sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add_first(area.Area)	13	18	16
+	   13	pure nothrow @nogc @safe sllist.LList!(area.Area).LList.Element sllist.LList!(area.Area).LList.Element.__ctor(area.Area)
+	   13	pure nothrow ref @nogc @safe sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.Index.__ctor(sllist.LList!(area.Area).LList, sllist.LList!(area.Area).LList.Element)
+------------------
+	19751	void area.Area.add_agent(agent.Agent)
+sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)	19751	40853	31167
+	 9254	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)
+	10497	pure nothrow @nogc @safe sllist.LList!(agent.Agent).LList.Element sllist.LList!(agent.Agent).LList.Element.__ctor(agent.Agent)
+	10497	void sllist.LList!(agent.Agent).LList.connect(sllist.LList!(agent.Agent).LList.Element, sllist.LList!(agent.Agent).LList.Element)
+	10497	pure nothrow ref @nogc @safe sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.Index.__ctor(sllist.LList!(agent.Agent).LList, sllist.LList!(agent.Agent).LList.Element)
+------------------
+	 9267	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)
+	 4575	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)
+	10497	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+pure nothrow ref @nogc @safe sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.Index.__ctor(sllist.LList!(agent.Agent).LList, sllist.LList!(agent.Agent).LList.Element)	24339	1634	1634
+------------------
+	19751	void world.World.place_agent(agent.Agent)
+	19634	void area.Area.remove_agent(agent.Agent)
+	 4450	void agent.Agent.destroy()
+void sllist.LList!(agent.Agent).LList.Index.remove()	43835	34489	7033
+	24084	void sllist.LList!(agent.Agent).LList.remove(sllist.LList!(agent.Agent).LList.Element)
+------------------
+	 5538	agent.Agent_list agent.Agent_list.__ctor()
+nothrow @nogc @safe sllist.LList!(agent.Agent).LList sllist.LList!(agent.Agent).LList.__ctor()	5538	334	334
+------------------
+	24084	void sllist.LList!(agent.Agent).LList.Index.remove()
+void sllist.LList!(agent.Agent).LList.remove(sllist.LList!(agent.Agent).LList.Element)	24084	27456	9882
+	24084	void sllist.LList!(agent.Agent).LList.connect(sllist.LList!(agent.Agent).LList.Element, sllist.LList!(agent.Agent).LList.Element)
+	24084	void sllist.LList!(agent.Agent).LList.Element.destroy()
+------------------
+	 9267	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)
+	 4575	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)
+	10497	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+pure nothrow @nogc @safe sllist.LList!(agent.Agent).LList.Element sllist.LList!(agent.Agent).LList.Element.__ctor(agent.Agent)	24339	1453	1453
+------------------
+	24084	void sllist.LList!(agent.Agent).LList.remove(sllist.LList!(agent.Agent).LList.Element)
+void sllist.LList!(agent.Agent).LList.Element.destroy()	24084	15521	5449
+	24084	void object.destroy!(sllist.LList!(agent.Agent).LList.Element).destroy(sllist.LList!(agent.Agent).LList.Element)
+------------------
+	 4575	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)
+	24084	void sllist.LList!(agent.Agent).LList.remove(sllist.LList!(agent.Agent).LList.Element)
+	10497	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+void sllist.LList!(agent.Agent).LList.connect(sllist.LList!(agent.Agent).LList.Element, sllist.LList!(agent.Agent).LList.Element)	39156	3378	3378
+------------------
+	 6008	void game.update()
+	119602	void area.Area.update()
+	852472	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	 6008	void game.render()
+int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))	984090	10905556	181981
+	103748	int game.update().__foreachbody1(ref agent.Agent)
+	94999	_D4area4Area6updateMFZ14__foreachbody1MFKC5agent5AgentZi
+	94999	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	788531	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+	103726	int game.render().__foreachbody1(ref agent.Agent)
+------------------
+	   13	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)
+	 9254	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)	9267	7302	6183
+	 9267	pure nothrow @nogc @safe sllist.LList!(agent.Agent).LList.Element sllist.LList!(agent.Agent).LList.Element.__ctor(agent.Agent)
+	 9267	pure nothrow ref @nogc @safe sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.Index.__ctor(sllist.LList!(agent.Agent).LList, sllist.LList!(agent.Agent).LList.Element)
+------------------
+	 4588	agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)
+sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)	4588	4911	4002
+	   13	sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)
+	 4575	pure nothrow @nogc @safe sllist.LList!(agent.Agent).LList.Element sllist.LList!(agent.Agent).LList.Element.__ctor(agent.Agent)
+	 4575	void sllist.LList!(agent.Agent).LList.connect(sllist.LList!(agent.Agent).LList.Element, sllist.LList!(agent.Agent).LList.Element)
+	 4575	pure nothrow ref @nogc @safe sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.Index.__ctor(sllist.LList!(agent.Agent).LList, sllist.LList!(agent.Agent).LList.Element)
+------------------
+	 2102	void rooted.Rooted.set_updating(bool)
+sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)	2102	3345	2494
+	  150	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add_first(rooted.Rooted)
+	 1952	pure nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList.Element sllist.LList!(rooted.Rooted).LList.Element.__ctor(rooted.Rooted)
+	 1952	void sllist.LList!(rooted.Rooted).LList.connect(sllist.LList!(rooted.Rooted).LList.Element, sllist.LList!(rooted.Rooted).LList.Element)
+	 1952	pure nothrow ref @nogc @safe sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.Index.__ctor(sllist.LList!(rooted.Rooted).LList, sllist.LList!(rooted.Rooted).LList.Element)
+------------------
+	  150	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add_first(rooted.Rooted)
+	 1952	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)
+pure nothrow ref @nogc @safe sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.Index.__ctor(sllist.LList!(rooted.Rooted).LList, sllist.LList!(rooted.Rooted).LList.Element)	2102	108	108
+------------------
+	 5226	void rooted.Rooted.destroy()
+	 2066	void rooted.Rooted.set_updating(bool)
+void sllist.LList!(rooted.Rooted).LList.Index.remove()	7292	3102	983
+	 2092	void sllist.LList!(rooted.Rooted).LList.remove(sllist.LList!(rooted.Rooted).LList.Element)
+------------------
+	   13	rooted.Rooted_list rooted.Rooted_list.__ctor()
+nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList sllist.LList!(rooted.Rooted).LList.__ctor()	13	0	0
+------------------
+	 2092	void sllist.LList!(rooted.Rooted).LList.Index.remove()
+void sllist.LList!(rooted.Rooted).LList.remove(sllist.LList!(rooted.Rooted).LList.Element)	2092	2119	913
+	 2092	void sllist.LList!(rooted.Rooted).LList.connect(sllist.LList!(rooted.Rooted).LList.Element, sllist.LList!(rooted.Rooted).LList.Element)
+	 2092	void sllist.LList!(rooted.Rooted).LList.Element.destroy()
+------------------
+	  150	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add_first(rooted.Rooted)
+	 1952	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)
+pure nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList.Element sllist.LList!(rooted.Rooted).LList.Element.__ctor(rooted.Rooted)	2102	108	108
+------------------
+	 2092	void sllist.LList!(rooted.Rooted).LList.remove(sllist.LList!(rooted.Rooted).LList.Element)
+void sllist.LList!(rooted.Rooted).LList.Element.destroy()	2092	1014	528
+	 2092	void object.destroy!(sllist.LList!(rooted.Rooted).LList.Element).destroy(sllist.LList!(rooted.Rooted).LList.Element)
+------------------
+	 1952	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)
+	 2092	void sllist.LList!(rooted.Rooted).LList.remove(sllist.LList!(rooted.Rooted).LList.Element)
+void sllist.LList!(rooted.Rooted).LList.connect(sllist.LList!(rooted.Rooted).LList.Element, sllist.LList!(rooted.Rooted).LList.Element)	4044	356	356
+------------------
+	 6008	void game.update()
+int sllist.LList!(rooted.Rooted).LList.opApply(scope int delegate(ref rooted.Rooted))	6008	10831	4090
+	 7742	int game.update().__foreachbody2(ref rooted.Rooted)
+------------------
+	  150	sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)
+sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add_first(rooted.Rooted)	150	486	471
+	  150	pure nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList.Element sllist.LList!(rooted.Rooted).LList.Element.__ctor(rooted.Rooted)
+	  150	pure nothrow ref @nogc @safe sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.Index.__ctor(sllist.LList!(rooted.Rooted).LList, sllist.LList!(rooted.Rooted).LList.Element)
+------------------
+	11920	void wall.Wall.collide(agent.Agent)
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.floor!(float).floor(vector.Vector2!(float).Vector2)	11920	1718	1718
+------------------
+	15245706	area.Area* grid.Dict_grid2!(area.Area, float).Dict_grid2.get(vector.Vector2!(float).Vector2)
+	13728	void grid.Dict_grid2!(area.Area, float).Dict_grid2.set(area.Area, vector.Vector2!(float).Vector2)
+bool vector.Vector2!(float).Vector2.__xopEquals(ref const(vector.Vector2!(float).Vector2), ref const(vector.Vector2!(float).Vector2))	15259434	936703	936703
+------------------
+	 5546	void agent.Agent.update()
+	 3782	void rocket1.Rocket1.update()
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opUnary!("-").opUnary()	9328	1198	1198
+------------------
+	 6008	void player.player_update()
+	99600	void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+	103585	void agent.Agent.update()
+	  134	void commoner.Commoner.regular_attack()
+	11341	void rocket1.Rocket1.update()
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)	220668	13823	13823
+------------------
+	27688	void world.World.connect_area_to_surroundings(area.Area)
+	155606	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)
+	836532	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	 8942	void entity.Entity.render()
+	 4471	void game.render()
+	 8496	void rocket1.Rocket1.render()
+	  334	void rocket1.Rocket1.collide(wall.Wall)
+	  368	area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+	   24	
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)	1042461	50620	50620
+------------------
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+	 5960	void wall.Wall.collide(agent.Agent)
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("-").opBinary(vector.Vector2!(float).Vector2)	6127	477	477
+------------------
+	 4471	void game.render()
+	  293	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+	   92	
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("/").opBinary(float)	4856	953	953
+------------------
+	78794	void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+	 2479	void player.player_update()
+	74333	void agent.Agent.move_by(vector.Vector2!(float).Vector2)
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)	155606	26482	18456
+	155606	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+------------------
+	  367	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+	   12	
+pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.dot(vector.Vector2!(float).Vector2)	546	40	40
+------------------
+	  293	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+	   64	void rocket1.Rocket1.collide(wall.Wall)
+	   10	
+pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()	367	140	115
+	  367	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.dot(vector.Vector2!(float).Vector2)
+------------------
+	  114	void commoner.Commoner.regular_attack()
+pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.angled()	114	94	94
+------------------
+	 3461	void grid.Dict_grid2!(area.Area, float).Dict_grid2.set(area.Area, vector.Vector2!(float).Vector2)
+	3532329	area.Area* grid.Dict_grid2!(area.Area, float).Dict_grid2.get(vector.Vector2!(float).Vector2)
+nothrow @trusted uint vector.Vector2!(float).Vector2.__xtoHash(ref const(vector.Vector2!(float).Vector2))	3535790	489780	489780
+------------------
+	  114	void player.player_mouse_click_function()
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+	   12	
+pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()	293	301	145
+	  293	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()
+	  293	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("/").opBinary(float)
+------------------
+	13752	vector.Vector2!(float).Vector2 vector.cs2d(float)
+	  646	void rocket1.Rocket1.explode()
+vector.Vector2!(float).Vector2 vector.cs2(float)	14398	5120	5120
+------------------
+	 8496	void rocket1.Rocket1.render()
+	 5077	void rocket1.Rocket1.update()
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+vector.Vector2!(float).Vector2 vector.cs2d(float)	13740	7229	2294
+	13752	vector.Vector2!(float).Vector2 vector.cs2(float)
+------------------
+	  167	void rocket1.Rocket1.collide(wall.Wall)
+float vector.angle3(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)	167	87	87
+------------------
+	64937	void fireball1.Fireball1.update()
+vector.Vector2!(float).Vector2 vector.rvector(float)	64937	81553	13039
+	129874	@safe float std.random.uniform!("[)", float, float).uniform(float, float)
+------------------
+	    8	void testing_world.Testing_world.initialize_type()
+void cactus1.Cactus1.initialize_type()	8	6141	3549
+	    8	@safe void std.stdio.writeln!(immutable(char)[], uint).writeln(immutable(char)[], uint)
+	    8	animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+------------------
+	  480	testing_world.Testing_world testing_world.Testing_world.__ctor()
+	  169	void testing_world.Testing_world.generate_adjacent_area(area.Area)
+	   12	
+cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)	661	657	130
+	  661	wall.Wall wall.Wall.__ctor(vector.Vector2!(float).Vector2)
+	  661	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+------------------
+	199216	void area.Area.render()
+void cactus1.Cactus1.render()	199216	11332257	178225
+	199216	void renderable.Renderable.render()
+------------------
+	 6819	int game.update().__foreachbody2(ref rooted.Rooted)
+void cactus1.Cactus1.update()	6819	4343	1732
+	 1681	void rooted.Rooted.set_updating(bool)
+------------------
+	 5960	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+void cactus1.Cactus1.collide(agent.Agent)	5960	8565	1373
+	 1209	void rooted.Rooted.set_updating(bool)
+	 5960	void wall.Wall.collide(agent.Agent)
+------------------
+	10622	renderable.Renderable renderable.Renderable.__ctor(vector.Vector2!(float).Vector2)
+	   34	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	   15	void rooted.Rooted.set_updating(bool)
+	   34	
+refable.Refable refable.Refable.__ctor()	10705	630	630
+------------------
+	 6431	void renderable.Renderable.destroy()
+void refable.Refable.destroy()	6431	3696	1773
+	 6431	void object.destroy!(refable.Refable).destroy(refable.Refable)
+------------------
+	 8496	void renderable.Renderable.render()
+float rocket1.Rocket1.render_angle()	8496	1216	1216
+------------------
+	    8	void commoner.Commoner.initialize_type()
+void rocket1.Rocket1.initialize_type()	8	2979	2979
+------------------
+	  114	void commoner.Commoner.regular_attack()
+rocket1.Rocket1 rocket1.Rocket1.__ctor(vector.Vector2!(float).Vector2, float)	114	1401	588
+	  114	shot.Shot shot.Shot.__ctor(vector.Vector2!(float).Vector2, float)
+	  114	animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+	  114	@safe double std.random.uniform!("[)", double, double).uniform(double, double)
+------------------
+	 8496	int game.render().__foreachbody1(ref agent.Agent)
+void rocket1.Rocket1.render()	8496	1029991	10109
+	 8496	vector.Vector2!(float).Vector2 vector.cs2d(float)
+	 8496	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	 8496	void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+	 8496	void agent.Agent.render()
+------------------
+	 8601	int game.update().__foreachbody1(ref agent.Agent)
+void rocket1.Rocket1.update()	8601	81202	10146
+	 8601	void agent.Agent.update()
+	 5077	vector.Vector2!(float).Vector2 vector.cs2d(float)
+	 7601	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+	 5077	void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+	 7601	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+	 2524	fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+	 2524	void fireball1.Fireball1.set_lifetime(long)
+	 2524	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opUnary!("-").opUnary()
+------------------
+	  655	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+void rocket1.Rocket1.collide(wall.Wall)	655	26780	617
+	  655	void agent.Agent.collide(wall.Wall)
+	  334	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	  167	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("-").opBinary(vector.Vector2!(float).Vector2)
+	  167	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+	  167	void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+	  167	vector.Vector2!(float).Vector2 vector.cs2d(float)
+	  167	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.dot(vector.Vector2!(float).Vector2)
+	  167	float vector.angle3(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+	  167	pure nothrow @nogc @safe float std.math.abs!(float).abs(float)
+	  103	void rocket1.Rocket1.explode()
+	   64	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()
+------------------
+	  103	void rocket1.Rocket1.collide(wall.Wall)
+void rocket1.Rocket1.explode()	103	5261	1138
+	  744	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+	  646	fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+	  646	@safe real std.random.uniform!("[)", real, real).uniform(real, real)
+	  646	vector.Vector2!(float).Vector2 vector.cs2(float)
+	  103	void shot.Shot.destroy()
+------------------
+	  114	void player.player_mouse_click_function()
+	   12	
+	   12	_D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+	   24	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+	   12	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+	   12	void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+	   12	vector.Vector2!(float).Vector2 vector.cs2d(float)
+	   12	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.dot(vector.Vector2!(float).Vector2)
+	   16	
+	   12	pure nothrow @nogc @safe float std.math.abs!(float).abs(float)
+	   10	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()
+	    2	void shot.Shot.destroy()
+void commoner.Commoner.regular_attack()	250	2450	912
+	  114	rocket1.Rocket1 rocket1.Rocket1.__ctor(vector.Vector2!(float).Vector2, float)
+	  114	pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+	  114	void agent.Agent.set_velocity(vector.Vector2!(float).Vector2)
+	  114	pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.angled()
+------------------
+	    8	void game.initialize()
+void commoner.Commoner.initialize_type()	8	38506	14097
+	    8	void fireball1.Fireball1.initialize_type()
+	    8	void fireball2.Fireball2.initialize_type()
+	    8	void rocket1.Rocket1.initialize_type()
+------------------
+	    8	void game.initialize()
+	    8	testing_world.Testing_world testing_world.Testing_world.__ctor()
+commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)	16	357	148
+	   16	entity.Entity entity.Entity.__ctor(vector.Vector2!(float).Vector2, float)
+	   48	animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+------------------
+	1818375	void renderable.Renderable.render()
+void animation.gr_draw(animation.Animation, vector.Vector2!(float).Vector2, float, float)	1818375	102959826	102814501
+	1818375	uint animation.Animation.current_frame()
+------------------
+	32619	animation.Animation animation.Animation.update(long)
+void animation.Animation.next_frame(long)	32619	3205	3205
+------------------
+	1818375	void animation.gr_draw(animation.Animation, vector.Vector2!(float).Vector2, float, float)
+uint animation.Animation.current_frame()	1818375	145325	145325
+------------------
+	   24	void rocky_ground.Rocky_ground.initialize_type()
+	    8	void cactus1.Cactus1.initialize_type()
+	   48	commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)
+	  114	rocket1.Rocket1 rocket1.Rocket1.__ctor(vector.Vector2!(float).Vector2, float)
+	 3170	fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)	3364	257	257
+------------------
+	1818375	void renderable.Renderable.render()
+animation.Animation animation.Animation.update(long)	1818375	167060	163855
+	32619	void animation.Animation.next_frame(long)
+------------------
+	 3215	void agent.Agent.destroy()
+void animation.Animation.destroy()	3215	2055	1218
+	 3215	void object.destroy!(animation.Animation).destroy(animation.Animation)
+------------------
+	 2524	void rocket1.Rocket1.update()
+void fireball1.Fireball1.set_lifetime(long)	2524	264	264
+------------------
+	    8	void commoner.Commoner.initialize_type()
+	    8	void testing_world.Testing_world.initialize_type()
+void fireball1.Fireball1.initialize_type()	16	22837	22837
+------------------
+	 2524	void rocket1.Rocket1.update()
+	  646	void rocket1.Rocket1.explode()
+fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)	3170	16722	9011
+	 3170	shot.Shot shot.Shot.__ctor(vector.Vector2!(float).Vector2, float)
+	 3170	animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+	 3170	@safe int std.random.uniform!("[)", int, int).uniform(int, int)
+------------------
+	64937	int game.update().__foreachbody1(ref agent.Agent)
+void fireball1.Fireball1.update()	64937	377454	23649
+	64937	void agent.Agent.update()
+	64937	vector.Vector2!(float).Vector2 vector.rvector(float)
+	64937	void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+	 3110	void shot.Shot.destroy()
+------------------
+	    8	void commoner.Commoner.initialize_type()
+void fireball2.Fireball2.initialize_type()	8	7687	7687
+------------------
+_Dmain	0	123099895	4787
+	    8	@safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])
+	    8	void game.initialize()
+	 4471	void game.update()
+	    8	void game.quit()
+
+======== Timer Is 2533320 Ticks/Sec, Times are in Microsecs ========
+
+  Num          Tree        Func        Per
+  Calls        Time        Time        Call
+
+1818375    40642250    40584885          22     void animation.gr_draw(animation.Animation, vector.Vector2!(float).Vector2, float, float)
+16127140   368820519     4691929           0     void renderable.Renderable.render()
+14068630   325085327     3878046           0     void rocky_ground.Rocky_ground.render()
+   6008    63127327     1499752         249     void game.render()
+   6008    65568213     1373624         228     void game.update()
+4664112     1690425     1059901           0     area.Area* grid.Dict_grid2!(area.Area, float).Dict_grid2.get(vector.Vector2!(float).Vector2)
+  35416      882500      882500          24     void sgogl_interface.gr_draw_line(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2, float)
+4664112     2528900      838475           0     area.Area world.World.get_area(vector.Vector2!(float).Vector2)
+     13      783491      688053       52927     void game.initialize()
+   6008    58062452      626486         104     void player.player_render_near()
+2111161    55339407      560011           0     void area.Area.render()
+16127140      535169      535169           0     bool renderable.Renderable.y_shift()
+15927980      481050      481050           0     float renderable.Renderable.render_angle()
+15259434      369753      369753           0     bool vector.Vector2!(float).Vector2.__xopEquals(ref const(vector.Vector2!(float).Vector2), ref const(vector.Vector2!(float).Vector2))
+3535790      193335      193335           0     nothrow @trusted uint vector.Vector2!(float).Vector2.__xtoHash(ref const(vector.Vector2!(float).Vector2))
+2111161      167186      167186           0     bool sgogl_interface.point_in_view(vector.Vector2!(float).Vector2, float)
+     13      130028      130028       10002     void game.quit()
+  94999      694108       86939           0     _D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZi
+2111161       73611       73611           0     float ground.Ground.render_depth()
+ 984090     4304847       71834           0     int sllist.LList!(agent.Agent).LList.opApply(scope int delegate(ref agent.Agent))
+ 199216     4473282       70352           0     void cactus1.Cactus1.render()
+1818375       65945       64679           0     animation.Animation animation.Animation.update(long)
+1818375       57365       57365           0     uint animation.Animation.current_frame()
+ 693532       75693       52959           0     bool agent.Agent.check_for_overlap(agent.Agent)
+ 788531      157082       48888           0     _D4area4Area6updateMFZ14__foreachbody2MFKC5agent5AgentZ14__foreachbody2MFKC5agent5AgentZi
+ 924656       32500       32500           0     void agent.Agent.overlap(agent.Agent)
+    201       27029       27029         134     _D3std5stdio4File17LockingTextWriter10__T3putTaZ3putMFNfaZ12trustedFPUTCFNbNiNeiPS4core4stdc5stdio6_iobufZi
+1251004       22744       22744           0     pure nothrow @nogc @safe float std.math.abs!(float).abs(float)
+     41       20741       20731         505     void rocky_ground.Rocky_ground.initialize_type()
+1042461       19981       19981           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("+").opBinary(vector.Vector2!(float).Vector2)
+ 103726     2644503       18860           0     void agent.Agent.render()
+  49542      108152       16896           0     rocky_ground.Rocky_ground rocky_ground.Rocky_ground.__ctor(vector.Vector2!(float).Vector2)
+ 160974       25570       16748           0     @safe float std.random.uniform!("[)", float, float, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(float, float, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+ 103726     3315831       16498           0     int game.render().__foreachbody1(ref agent.Agent)
+ 103748      145931       16433           0     void agent.Agent.update()
+   6021       15289       15289           2     void sgogl_interface.gr_view_centered(vector.Vector2!(float).Vector2, float)
+  19751       16126       12302           0     sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add(agent.Agent)
+ 313895       12043       12043           0     bool rocky_ground.Rocky_ground.interacts()
+ 270650       11256       11256           0     float wall.Wall.render_depth()
+  92519      115002       11142           0     void world.World.place_agent(agent.Agent)
+  99600       20027       11047           0     void agent.Agent.accelerate(vector.Vector2!(float).Vector2)
+  12016      747220       10655           0     void entity.Entity.render()
+  32706       40734       10441           0     void testing_world.Testing_world.generate_area(area.Area)
+  64937      148995        9335           0     void fireball1.Fireball1.update()
+     16        9014        9014         563     void fireball1.Fireball1.initialize_type()
+ 103748      252767        8778           0     int game.update().__foreachbody1(ref agent.Agent)
+  59801      729399        8687           0     void area.Area.update()
+ 160974       34218        8647           0     @safe float std.random.uniform!("[)", float, float).uniform(float, float)
+ 179817       11486        8264           0     renderable.Renderable renderable.Renderable.__ctor(vector.Vector2!(float).Vector2)
+  94999       14544        7699           0     _D4area4Area6updateMFZ14__foreachbody1MFKC5agent5AgentZi
+ 155606       10453        7285           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opOpAssign!("+").opOpAssign(vector.Vector2!(float).Vector2)
+   9254        7818        7108           0     sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add(area.Area)
+  92519       51577        6622           0     area.Area world.World.get_or_new_area(vector.Vector2!(float).Vector2)
+   5525        6802        6272           1     void grid.Dict_grid2!(area.Area, float).Dict_grid2.set(area.Area, vector.Vector2!(float).Vector2)
+  19751       33808        6187           0     void area.Area.add_agent(agent.Agent)
+  12016       12763        5646           0     long timer.Timer.msecs()
+      8       15199        5564         695     void commoner.Commoner.initialize_type()
+ 220668        5456        5456           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("*").opBinary(float)
+  64937       32192        5147           0     vector.Vector2!(float).Vector2 vector.rvector(float)
+   6008       25178        5027           0     void player.player_update()
+  92493       10907        5003           0     void agent.Agent.move_by(vector.Vector2!(float).Vector2)
+  39232        8075        4941           0     pure @safe int std.random.uniform!("[)", int, int, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(int, int, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+ 160974        4844        4844           0     pure nothrow @nogc @safe float std.math.nextafter!(float).nextafter(const(float), const(float))
+ 201185        4808        4808           0     pure @safe bool std.exception.enforce!(Exception, bool).enforce(bool, lazy const(char)[], immutable(char)[], uint)
+  18037        4709        4709           0     const(pure nothrow @nogc @safe core.time.Duration function(core.time.MonoTimeImpl!(0).MonoTimeImpl)) core.time.MonoTimeImpl!(0).MonoTimeImpl.opBinary!("-").opBinary
+  94999        4329        4329           0     void agent.Agent.over(ground.Ground)
+  19634       21942        4066           0     void area.Area.remove_agent(agent.Agent)
+   8601       32053        4005           0     void rocket1.Rocket1.update()
+   8496      406577        3990           0     void rocket1.Rocket1.render()
+  24084        3975        3975           0     void object.destroy!(sllist.LList!(agent.Agent).LList.Element).destroy(sllist.LList!(agent.Agent).LList.Element)
+  24084       10837        3900           0     void sllist.LList!(agent.Agent).LList.remove(sllist.LList!(agent.Agent).LList.Element)
+ 103726        3809        3809           0     float agent.Agent.render_depth()
+  74099        3721        3721           0     void rocky_ground.Rocky_ground.exited(agent.Agent)
+   3170        6600        3556           1     fireball1.Fireball1 fireball1.Fireball1.__ctor(vector.Vector2!(float).Vector2, float)
+  59801      732832        3432           0     int game.update().__foreachbody3(ref area.Area)
+   6008      736114        3282           0     int sllist.LList!(area.Area).LList.opApply(scope int delegate(ref area.Area))
+      8        3034        3034         379     void fireball2.Fireball2.initialize_type()
+   5525       21895        2936           0     void world.World.connect_area_to_surroundings(area.Area)
+  28976       16102        2881           0     void area.Area.set_updating(bool)
+  43835       13614        2776           0     void sllist.LList!(agent.Agent).LList.Index.remove()
+  74470        2764        2764           0     void rocky_ground.Rocky_ground.entered(agent.Agent)
+  94999        2515        2515           0     void ground.Ground.under(agent.Agent)
+   9267        2882        2440           0     sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_first(agent.Agent)
+  39232       10509        2434           0     @safe int std.random.uniform!("[)", int, int).uniform(int, int)
+  24084        6126        2150           0     void sllist.LList!(agent.Agent).LList.Element.destroy()
+  14398        2021        2021           0     vector.Vector2!(float).Vector2 vector.cs2(float)
+   5980       40538        1980           0     area.Area world.World.get_or_new_area_single(vector.Vector2!(float).Vector2)
+   9176        4418        1965           0     void sllist.LList!(area.Area).LList.remove(sllist.LList!(area.Area).LList.Element)
+  22063        6458        1899           0     void renderable.Renderable.destroy()
+      1    48592319        1889        1889     _Dmain
+   6021        5166        1819           0     float timer.Timer.hnsecsf()
+    458       51704        1632           3     testing_world.Testing_world testing_world.Testing_world.__ctor()
+   2737        1624        1624           0     void game.mouse_move_function()
+   6008        4275        1614           0     int sllist.LList!(rooted.Rooted).LList.opApply(scope int delegate(ref rooted.Rooted))
+   4588        1938        1579           0     sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.add_front(agent.Agent)
+  39232        1562        1562           0     pure nothrow @safe uint std.random.uniform!(uint, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+   5122       10788        1498           0     void agent.Agent.destroy()
+      8        2424        1400         175     void cactus1.Cactus1.initialize_type()
+  12016        2804        1362           0     const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("msecs").total
+  39156        1333        1333           0     void sllist.LList!(agent.Agent).LList.connect(sllist.LList!(agent.Agent).LList.Element, sllist.LList!(agent.Agent).LList.Element)
+   9176        2145        1287           0     void sllist.LList!(area.Area).LList.Element.destroy()
+  32619        1265        1265           0     void animation.Animation.next_frame(long)
+      8        1175        1175         146     void rocket1.Rocket1.initialize_type()
+   9676        1104        1104           0     void object.destroy!(refable.Refable).destroy(refable.Refable)
+   6021        1886        1081           0     const(pure nothrow @property @nogc @safe long function()) core.time.Duration.total!("hnsecs").total
+   5525        1487        1047           0     area.Area area.Area.__ctor(vector.Vector2!(float).Vector2)
+  19751        1020        1020           0     bool area.Area.inside(vector.Vector2!(float).Vector2)
+   2102        1320         984           0     sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add(rooted.Rooted)
+   9176        5402         983           0     void sllist.LList!(area.Area).LList.Index.remove()
+  13740        2853         905           0     vector.Vector2!(float).Vector2 vector.cs2d(float)
+   6021        3166         883           0     long timer.Timer.hnsecs()
+   5200       44411         869           0     void world.World.add_ground(ground.Ground)
+   5525       29565         866           0     void world.World.integrate_area(area.Area)
+   5960        1725         864           0     void wall.Wall.collide(agent.Agent)
+   9176         857         857           0     void object.destroy!(sllist.LList!(area.Area).LList.Element).destroy(sllist.LList!(area.Area).LList.Element)
+  12016        1442         800           0     pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("msecs").getUnitsFromHNSecs(long)
+  39232         769         769           0     pure nothrow @nogc @safe uint std.conv.unsigned!(int).unsigned(int)
+  10725        3897         758           0     void area.Area.set_ground(ground.Ground)
+   6431        1458         699           0     void refable.Refable.destroy()
+   6819        1714         683           0     void cactus1.Cactus1.update()
+  11920         678         678           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.floor!(float).floor(vector.Vector2!(float).Vector2)
+   4588        3203         677           0     agent.Agent agent.Agent.__ctor(vector.Vector2!(float).Vector2, float)
+  10725        3138         663           0     void area.Area.unset_ground()
+  24339         645         645           0     pure nothrow ref @nogc @safe sllist.LList!(agent.Agent).LList.Index sllist.LList!(agent.Agent).LList.Index.__ctor(sllist.LList!(agent.Agent).LList, sllist.LList!(agent.Agent).LList.Element)
+  12016         642         642           0     pure nothrow @nogc @safe long core.time.convert!("hnsecs", "msecs").convert(long)
+   7742        2660         622           0     int game.update().__foreachbody2(ref rooted.Rooted)
+  18417         601         601           0     void sllist.LList!(area.Area).LList.connect(sllist.LList!(area.Area).LList.Element, sllist.LList!(area.Area).LList.Element)
+  11727        1477         600           0     rooted.Rooted rooted.Rooted.__ctor(vector.Vector2!(float).Vector2)
+  10725        1985         598           0     ground.Ground ground.Ground.__ctor(vector.Vector2!(float).Vector2)
+  24339         573         573           0     pure nothrow @nogc @safe sllist.LList!(agent.Agent).LList.Element sllist.LList!(agent.Agent).LList.Element.__ctor(agent.Agent)
+   4450       11353         564           0     void shot.Shot.destroy()
+   5226        2085         549           0     void rooted.Rooted.destroy()
+   6008         548         548           0     void world.World.render()
+   5960        3380         541           0     void cactus1.Cactus1.collide(agent.Agent)
+   4055        2840         501           0     void rooted.Rooted.set_updating(bool)
+   3215         811         480           0     void animation.Animation.destroy()
+   8496         480         480           0     float rocket1.Rocket1.render_angle()
+   9328         472         472           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opUnary!("-").opUnary()
+   6021         804         468           0     pure nothrow @nogc @safe long core.time.getUnitsFromHNSecs!("hnsecs").getUnitsFromHNSecs(long)
+    103        2076         449           4     void rocket1.Rocket1.explode()
+   4450         433         433           0     void object.destroy!(animation.Animation).destroy(animation.Animation)
+   4608        3511         422           0     shot.Shot shot.Shot.__ctor(vector.Vector2!(float).Vector2, float)
+   5200        2475         416           0     void ground.Ground.destroy()
+   7292        1224         388           0     void sllist.LList!(rooted.Rooted).LList.Index.remove()
+    296         378         378           1     _D3std5stdio4File17LockingTextWriter12__T3putTAyaZ3putMFAyaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+   4856         376         376           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("/").opBinary(float)
+   6210         494         362           0     agent.Agent_list agent.Agent_list.__ctor()
+   2092         836         360           0     void sllist.LList!(rooted.Rooted).LList.remove(sllist.LList!(rooted.Rooted).LList.Element)
+    250         967         360           1     void commoner.Commoner.regular_attack()
+   6021         335         335           0     pure nothrow @nogc @safe long core.time.convert!("hnsecs", "hnsecs").convert(long)
+    121         335         335           2     nothrow @nogc @trusted int std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec).__lambda6()
+   6034         310         310           0     void timer.Timer.start()
+   5960         298         298           0     void agent.Agent.collide(wall.Wall)
+  10705         248         248           0     refable.Refable refable.Refable.__ctor()
+    655       10571         243           0     void rocket1.Rocket1.collide(wall.Wall)
+   5960         234         234           0     bool wall.Wall.interacts()
+    114         553         232           2     rocket1.Rocket1 rocket1.Rocket1.__ctor(vector.Vector2!(float).Vector2, float)
+   2092         400         208           0     void sllist.LList!(rooted.Rooted).LList.Element.destroy()
+   9254         208         208           0     pure nothrow @nogc @safe sllist.LList!(area.Area).LList.Element sllist.LList!(area.Area).LList.Element.__ctor(area.Area)
+   9254         202         202           0     pure nothrow ref @nogc @safe sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.Index.__ctor(sllist.LList!(area.Area).LList, sllist.LList!(area.Area).LList.Element)
+    121        1137         196           1     @safe uint std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float)
+    568         193         193           0     void player.player_key_function()
+   2092         191         191           0     void object.destroy!(sllist.LList!(rooted.Rooted).LList.Element).destroy(sllist.LList!(rooted.Rooted).LList.Element)
+   6127         188         188           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.opBinary!("-").opBinary(vector.Vector2!(float).Vector2)
+    150         191         185           1     sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.add_first(rooted.Rooted)
+    197        1850         184           0     @safe void std.stdio.File.write!(immutable(char)[], uint, char).write(immutable(char)[], uint, char)
+    121         655         183           1     @safe void std.format.formatValue!(std.stdio.File.LockingTextWriter, float, char).formatValue(std.stdio.File.LockingTextWriter, float, ref std.format.FormatSpec!(char).FormatSpec)
+   6021         180         180           0     float timer.hnsecs_to_secs(long)
+     41       53380         175           4     void testing_world.Testing_world.initialize_type()
+   4044         140         140           0     void sllist.LList!(rooted.Rooted).LList.connect(sllist.LList!(rooted.Rooted).LList.Element, sllist.LList!(rooted.Rooted).LList.Element)
+   5538         131         131           0     nothrow @nogc @safe sllist.LList!(agent.Agent).LList sllist.LList!(agent.Agent).LList.__ctor()
+     13        3800         123           9     @safe void std.stdio.writeln!(immutable(char)[]).writeln(immutable(char)[])
+    426         253         121           0     @safe bool std.format.FormatSpec!(char).FormatSpec.writeUpToNextSpec!(std.stdio.File.LockingTextWriter).writeUpToNextSpec(std.stdio.File.LockingTextWriter)
+    134        1321         105           0     void player.player_mouse_click_function()
+   2524         104         104           0     void fireball1.Fireball1.set_lifetime(long)
+   3364         101         101           0     animation.Animation animation.Animation.__ctor(uint[], float, vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+    202         331          87           0     void testing_world.Testing_world.generate_adjacent_area(area.Area)
+    780         421          80           0     void world.World.add_wall(wall.Wall)
+    646         138          79           0     @safe real std.random.uniform!("[)", real, real, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(real, real, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+    568         273          79           0     void game.key_function()
+    121         123          79           0     @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, const(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref const(char)[])
+    132         101          76           0     @safe double std.random.uniform!("[)", double, double, std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine).uniform(double, double, ref std.random.MersenneTwisterEngine!(uint, 32u, 624u, 397u, 31u, 2567483615u, 11u, 7u, 2636928640u, 15u, 4022730752u, 18u).MersenneTwisterEngine)
+     31        7136          75           2     @safe void std.stdio.File.write!(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char).write(immutable(char)[], float, immutable(char)[], float, immutable(char)[], char)
+     13         134          73           5     void area.Area.initialize()
+   1002         133          66           0     void area.Area.set_wall(wall.Wall)
+     13          61          59           4     area.Area_list area.Area_list.__ctor()
+     16         140          58           3     commoner.Commoner commoner.Commoner.__ctor(vector.Vector2!(float).Vector2, float)
+    293         118          57           0     pure nothrow @nogc @safe vector.Vector2!(float).Vector2 vector.Vector2!(float).Vector2.normalize()
+    283         229          51           0     @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, immutable(char)[]).doPut(ref std.stdio.File.LockingTextWriter, ref immutable(char)[])
+    661         259          51           0     cactus1.Cactus1 cactus1.Cactus1.__ctor(vector.Vector2!(float).Vector2)
+     13          51          51           3     rooted.Rooted_list rooted.Rooted_list.__ctor()
+    646          46          46           0     pure nothrow @nogc @safe real std.math.nextafter!(real).nextafter(const(real), const(real))
+    367          55          45           0     pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.norm()
+    646         182          43           0     @safe real std.random.uniform!("[)", real, real).uniform(real, real)
+   2102          42          42           0     pure nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList.Element sllist.LList!(rooted.Rooted).LList.Element.__ctor(rooted.Rooted)
+   2102          42          42           0     pure nothrow ref @nogc @safe sllist.LList!(rooted.Rooted).LList.Index sllist.LList!(rooted.Rooted).LList.Index.__ctor(sllist.LList!(rooted.Rooted).LList, sllist.LList!(rooted.Rooted).LList.Element)
+    296         417          39           0     @safe void std.stdio.File.LockingTextWriter.put!(immutable(char)[]).put(immutable(char)[])
+   1002          66          37           0     void area.Area.unset_wall()
+     62        5773          37           0     @safe void std.stdio.File.write!(immutable(char)[], int, char).write(immutable(char)[], int, char)
+    114          37          37           0     pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.angled()
+   1002         125          35           0     wall.Wall wall.Wall.__ctor(vector.Vector2!(float).Vector2)
+    167          34          34           0     float vector.angle3(vector.Vector2!(float).Vector2, vector.Vector2!(float).Vector2)
+    121          33          33           0     pure nothrow @nogc @trusted immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char).trustedMemchr(ref immutable(char)[], ref char)
+    121          72          33           0     pure @safe immutable(char)[] std.algorithm.searching.find!("a == b", immutable(char)[], char).find(immutable(char)[], char)
+    175       22196          32           0     nothrow @nogc @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char).doPut(ref std.stdio.File.LockingTextWriter, ref char)
+    168         261          31           0     @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, immutable(char)[]).put(ref std.stdio.File.LockingTextWriter, immutable(char)[])
+    242          30          30           0     _D3std5stdio4File17LockingTextWriter11__T3putTAaZ3putMFAaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+    132         128          26           0     @safe double std.random.uniform!("[)", double, double).uniform(double, double)
+    134        1348          26           0     void game.mouse_click_function()
+    121          26          26           0     _D3std5stdio4File17LockingTextWriter12__T3putTAxaZ3putMFAxaZ13trustedFwriteFNbNiNexPvkkPOS4core4stdc5stdio6_iobufZk
+    121         678          22           0     void std.format.formatGeneric!(std.stdio.File.LockingTextWriter, float, char).formatGeneric(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)
+    242          67          21           0     @safe void std.range.primitives.doPut!(std.stdio.File.LockingTextWriter, char[]).doPut(ref std.stdio.File.LockingTextWriter, ref char[])
+     13        1749          20           1     @safe void std.stdio.File.writefln!(char, float).writefln(const(char[]), float)
+    132          20          20           0     pure nothrow @nogc @safe double std.math.nextafter!(double).nextafter(const(double), const(double))
+    247       27048          18           0     nothrow @nogc @safe void std.stdio.File.LockingTextWriter.put!(char).put(char)
+    121          43          17           0     @safe void std.stdio.File.LockingTextWriter.put!(const(char)[]).put(const(char)[])
+     31        7154          17           0     @safe void std.stdio.writeln!(immutable(char)[], float, immutable(char)[], float, immutable(char)[]).writeln(immutable(char)[], float, immutable(char)[], float, immutable(char)[])
+     62          33          16           0     @safe void std.conv.toTextRange!(int, std.stdio.File.LockingTextWriter).toTextRange(int, std.stdio.File.LockingTextWriter)
+     26         131          16           0     entity.Entity entity.Entity.__ctor(vector.Vector2!(float).Vector2, float)
+    242          45          15           0     @safe void std.stdio.File.LockingTextWriter.put!(char[]).put(char[])
+    546          15          15           0     pure nothrow @nogc @safe float vector.Vector2!(float).Vector2.dot(vector.Vector2!(float).Vector2)
+    134          15          15           0     void agent.Agent.set_velocity(vector.Vector2!(float).Vector2)
+    196          81          14           0     @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char[]).put(ref std.stdio.File.LockingTextWriter, char[])
+    175       22210          13           0     nothrow @nogc @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, char).put(ref std.stdio.File.LockingTextWriter, char)
+     62        5784          11           0     @safe void std.stdio.writeln!(immutable(char)[], int).writeln(immutable(char)[], int)
+     31           9           9           0     int grid.Dict_grid2!(area.Area, float).Dict_grid2.length()
+    121          14           9           0     pure nothrow @nogc @safe bool std.functional.safeOp!("<").safeOp!(immutable(int), uint).safeOp(ref immutable(int), ref uint)
+    121         131           8           0     @safe void std.range.primitives.put!(std.stdio.File.LockingTextWriter, const(char)[]).put(ref std.stdio.File.LockingTextWriter, const(char)[])
+     13          62           7           0     void agent.Agent.initialize()
+    121          21           7           0     pure nothrow @nogc @safe immutable(int) std.algorithm.comparison.min!(immutable(int), uint).min(immutable(int), uint)
+     13           7           6           0     sllist.LList!(area.Area).LList.Index sllist.LList!(area.Area).LList.add_first(area.Area)
+     13          56           5           0     void rooted.Rooted.initialize()
+    121           5           5           0     pure nothrow @nogc @safe bool std.functional.safeOp!("<").unsafeOp!(immutable(int), uint).unsafeOp(immutable(int), uint)
+    121           5           5           0     pure nothrow @nogc @trusted pure nothrow @safe void function(std.stdio.File.LockingTextWriter, const(void)*, ref std.format.FormatSpec!(char).FormatSpec)* std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda5()
+    121           5           5           0     pure nothrow @nogc @safe bool std.utf.canSearchInCodeUnits!(char).canSearchInCodeUnits(dchar)
+     59        1856           5           0     @safe void std.stdio.writeln!(immutable(char)[], uint).writeln(immutable(char)[], uint)
+     13        1754           4           0     @safe void std.stdio.writefln!(immutable(char)[], float).writefln(immutable(char)[], float)
+    151          14           4           0     @safe void std.conv.toTextRange!(uint, std.stdio.File.LockingTextWriter).toTextRange(uint, std.stdio.File.LockingTextWriter)
+    121           3           3           0     pure nothrow @nogc @trusted const(void*) std.format.formattedWrite!(std.stdio.File.LockingTextWriter, char, float).formattedWrite(std.stdio.File.LockingTextWriter, const(char[]), float).__lambda6!(float).__lambda6(ref float)
+     43           3           3           0     bool testing_world.Testing_world.generate_adjacent_areas()
+     13           1           1           0     nothrow @nogc @safe sllist.LList!(area.Area).LList sllist.LList!(area.Area).LList.__ctor()
+   1706          28           1           0     void wall.Wall.destroy()
+      1           0           0           0     
+     13           0           0           0     nothrow @nogc @safe sllist.LList!(rooted.Rooted).LList sllist.LList!(rooted.Rooted).LList.__ctor()
+      1           0           0           0     
+      1           0           0           0     
+      1           0           0           0     
+      1           0           0           0     
+      1           0           0           0     
+      1           0           0           0     
+      1           0           0           0     
+      1           0           0           0     

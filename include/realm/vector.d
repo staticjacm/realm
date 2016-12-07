@@ -12,6 +12,19 @@ Vector2f rvector(float r){
   return Vector2f(uniform(-r, r), uniform(-r, r));
 }
 
+Vector2f cs2(float angle){
+  return Vector2f(cos(angle), sin(angle));
+}
+
+Vector2f cs2d(float angle){
+  return cs2(angle*(PI/180));
+}
+
+// Calculates small angles respecting direction (ccw -> position, cw -> negative)
+float angle3(Vector2f a, Vector2f b){
+  return 2.0*atan((a.y - b.y)/(a.x - b.x));
+}
+
 /++
 An arbitrary 2-Tuple of values of type T
 ++/
@@ -54,6 +67,11 @@ struct Vector2(T) {
     static if(isFloatingPoint!T){
       T norm(){ return sqrt(this.dot(this)); }
       Vector2!T normalize(){ return this/this.norm; }
+      float angle(){ return atan2(y, x); }
+      float angled(){ return atan2(y, x)*(180/PI); }
+      Vector2!T reflect(Vector2!T other){
+        return this - other*(dot(other)/other.dot(other))*2;
+      }
     }
   }
 }
