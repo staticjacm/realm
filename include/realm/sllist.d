@@ -66,6 +66,15 @@ class LList(T) {
     foreach(T t; tlist) add(t);
   }
   
+  ~this(){
+    Element cel = first, nel;
+    while(cel !is null){
+      nel = cel.next;
+      remove(cel);
+      cel = nel;
+    }
+  }
+  
   override string toString(){
     string ret = "";
     Element cel = first;
@@ -76,15 +85,6 @@ class LList(T) {
       cel = cel.next;
     }
     return ret;
-  }
-  
-  void destroy(){
-    Element cel = first, nel;
-    while(cel !is null){
-      nel = cel.next;
-      remove(cel);
-      cel = nel;
-    }
   }
   
   int opApply(scope int delegate(ref T) dg){
@@ -180,6 +180,7 @@ class LList(T) {
   void remove(Index index){
     index.remove;
   }
+  
 }
 
 // Add unittest

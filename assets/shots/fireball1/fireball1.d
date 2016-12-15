@@ -29,11 +29,12 @@ class Fireball1 : Shot {
   long end_time;
   long lifetime = 1000;
   
-  this(Vector2f _position, float _size){
-    super(_position, _size);
+  this(){
+    super();
     animation = new Animation([image_1, image_2, image_3], 30, Vector2f(0.5, 0.5), Vector2f(1, 1));
     friction = 0;
     end_time = game_time + lifetime + uniform(0, 500);
+    restitution = 0;
   }
   
   void set_lifetime(long lifetime_){
@@ -46,7 +47,7 @@ class Fireball1 : Shot {
     // accelerate(rvector(1));
     accelerate(rvector(100));
     if(end_time < game_time){
-      destroy;
+      destroy(this);
     }
   }
 }

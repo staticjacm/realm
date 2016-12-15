@@ -1,14 +1,9 @@
 
-module refable;
+module validatable;
 import std.stdio;
 
-/++
-  A class which can be used for guaranteed accurate validity checks on objects
-  
-  Refable has a reference count which Ref!T increases and decreases
-  Refable.destroy can only use object.destroy if its count is 0
-  Ref!T automatically destroys object if it is no longer valid
-++/
+/// Here lies the old implementation of Refable
+/*
 class Refable {
   uint ref_count = 0;
   bool valid = false;
@@ -85,4 +80,27 @@ unittest {
   ar.xp1;
   ar=a2;
   ar.xp1;
+}
+*/
+
+/++
+  A class which contains a single stupid variable which should be true when valid and false when invalid
+++/
+class Validatable {
+  bool valid = false;
+  this(){
+    valid = true;
+  }
+}
+
+unittest {
+  class A : Validatable {
+    int x;
+  }
+  
+  A a = new A;
+  
+  destroy(a);
+  
+  assert(!a.valid);
 }

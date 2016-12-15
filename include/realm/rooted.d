@@ -3,7 +3,7 @@ module rooted;
 import std.stdio;
 import vector;
 import game;
-import refable;
+import validatable;
 import animation;
 import renderable;
 import area;
@@ -13,14 +13,17 @@ class Rooted_list : LList!Rooted {}
 
 class Rooted : Renderable {
   
+  static bool type_initialized = false;
   static Rooted_list update_list;
   static int gid = 0;
   
   // static this(){
     // update_list = new Rooted_list;
   // }
-  static initialize(){
-    update_list = new Rooted_list;
+  static initialize_type(){
+    if(!type_initialized){
+      update_list = new Rooted_list;
+    }
   }
 
   enum {
@@ -34,7 +37,8 @@ class Rooted : Renderable {
   int id;
   
   this(Vector2f _position){
-    super(_position);
+    super();
+    position = _position;
     id = gid++;
   }
   
@@ -42,10 +46,8 @@ class Rooted : Renderable {
     // writeln("destructured rooted at ", position);
   // }
   
-  override void destroy(){
+  ~this(){
     update_index.remove;
-    area = null;
-    super.destroy;
   }
   
   int rooted_subtype_id(){ return subtype_rooted; }
@@ -55,6 +57,8 @@ class Rooted : Renderable {
   void update(){}
   
   bool updates(){ return update_index.valid; }
+  
+  override bool draw_shadow(){ return false; }
   
   void set_updating(bool ud){
     // writeln("setting updating to ", ud);

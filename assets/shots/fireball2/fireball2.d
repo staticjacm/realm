@@ -29,8 +29,8 @@ class Fireball2 : Shot {
   long end_time = 100;
   long lifetime = 300;
   
-  this(Vector2f _position, float _size){
-    super(_position, _size);
+  this(){
+    super();
     animation = new Animation([image_1, image_2, image_3], 1, Vector2f(0.5, 0.5), Vector2f(1, 1));
     friction = 0;
     end_time = game_time + lifetime;
@@ -39,7 +39,7 @@ class Fireball2 : Shot {
   override void update(){
     super.update;
     if(end_time < game_time){
-      destroy;
+      destroy(this);
     }
   }
 }

@@ -4,6 +4,7 @@ module animation;
 import std.stdio;
 import vector;
 import sgogl;
+import validatable;
 
 alias Vector2f = Vector2!float;
 
@@ -12,7 +13,7 @@ Iterates through a list of uints when playing
 uints correspond to sgogl images
 also contains anchor (anx, any) information and scale (sx, sy) information
 ++/
-class Animation {
+class Animation : Validatable {
   uint[] frames;
   int frame_delay = 1; // how long a frame lasts
   int current_frame_index = 0;
@@ -23,7 +24,9 @@ class Animation {
   Vector2f scale;
   
   this(uint[] _frames, float frame_rate, Vector2f _anchor, Vector2f _scale){
+    super();
     frames = _frames;
+    // todo: if frame_rate is 0 then set to static Animation
     frame_delay = cast(int)(1000.0f/frame_rate);
     anchor = _anchor;
     scale = _scale;

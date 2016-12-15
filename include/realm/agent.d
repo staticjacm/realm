@@ -7,12 +7,15 @@ import std.math;
 import game;
 import world;
 import area;
+import entity;
+import drop;
+import shot;
 import wall;
 import ground;
 import material;
 import vector;
 import renderable;
-import refable;
+import validatable;
 import sllist;
 import sgogl;
 import sgogl_interface;
@@ -35,21 +38,21 @@ class Agent : Renderable {
   /++
     Static Variables
   ++/
-  enum {
-    subtype_agent,
+  static enum {
+    subtype_none,
     subtype_shot,
     subtype_drop,
     subtype_entity
   };
   
+  static bool type_initialized = false;
   static int gid = 0;
   static Agent_list master_list;
   
-  // static this(){
-    // master_list = new Agent_list;
-  // }
-  static initialize(){
-    master_list = new Agent_list;
+  static initialize_type(){
+    if(!type_initialized){
+      master_list = new Agent_list;
+    }
   }
   
   static render_all(){
@@ -80,31 +83,26 @@ class Agent : Renderable {
   float height = 0;
   float size = 1;
   float friction = 1.0;
+  float restitution = 1.0;
+  int faction_id = 0; // determines what faction the agent belongs to - primarily for determining who hurts / targets who
   
   /++
     Constructors & Destructors
   ++/
-  this(Vector2f _position, float _size){
+  this(){
+    super();
     id = gid++;
-    super(_position);
-    size = _size;
     master_index = master_list.add_front(this);
   }
   
-  int agent_subtype_id(){ return 0; }
+  int agent_subtype_id(){ return subtype_none; }
   
-  override void destroy(){
-    // writeln("agent destroyed");
+  ~this(){
     master_index.remove;
-    if(area !is null)
+    if(area !is null && area.valid)
       area.remove_agent(this);
-    if(material !is null)
-      material.destroy;
-    material = null;
-    if(animation !is null)
-      animation.destroy;
-    animation = null;
-    super.destroy;
+    if(material !is null && material.valid)
+      destroy(material);
   }
   
   override string toString(){ return format("agent %d", id); }
@@ -137,17 +135,38 @@ class Agent : Renderable {
   bool interacts(T : Wall)(){   return true; }
   bool interacts(T : Ground)(){ return true; }
   /// void overlap(Agent) is called when a collision is detected (this's and agent's collision squares intersect)
-  void overlap(Agent agent){
+  void collide(Entity entity){
     if(material !is null)
-      material.overlap(this, agent);
+      material.collide(entity);
+  }
+  void collide(Shot shot){
+    if(material !is null)
+      material.collide(shot);
+  }
+  void collide(Drop drop){
+    if(material !is null)
+      material.collide(drop);
+  }
+  void collide(Agent agent){
+    if(material !is null)
+      material.collide(agent);
+  }
+  void collide_agent_subtype(Agent agent){
+    switch(agent.agent_subtype_id){
+      case subtype_none:
+      default: collide(agent); break;
+      case subtype_entity: collide(cast(Entity)agent); break;
+      case subtype_shot:   collide(cast(Shot)agent);   break;
+      case subtype_drop:   collide(cast(Drop)agent);   break;
+    }
   }
   void collide(Wall wall){
     if(material !is null)
-      material.collide(this, wall);
+      material.collide(wall);
   }
   void over(Ground ground){
     if(material !is null)
-      material.over(this, ground);
+      material.over(ground);
   }
   
   /++
@@ -183,6 +202,13 @@ class Agent : Renderable {
       position = new_position;
       moved = true;
     }
+  }
+  
+  Shot create_shot(Shot shot){
+    shot.position = position;
+    shot.world = world;
+    shot.faction_id = faction_id;
+    return shot;
   }
   
   /++

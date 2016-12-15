@@ -10,16 +10,6 @@ class Ground : Rooted {
     super(_position);
   }
   
-  // ~this(){
-    // writeln("destructed ground ", id);
-  // }
-  
-  override void destroy(){
-    // if(area !is null)
-      // area.ground = null;
-    super.destroy;
-  }
-  
   override float render_depth(){ return 300; }
   
   override int rooted_subtype_id(){ return Rooted.subtype_ground; }

@@ -9,8 +9,9 @@ Responsibilities:
 import std.stdio;
 import std.string;
 import std.math;
+import decoration;
 import game;
-import refable;
+import validatable;
 import world;
 import ground;
 import wall;
@@ -25,17 +26,16 @@ bool draw_boundaries = false;
 
 class Area_list : LList!Area {}
 
-class Area {
+class Area : Validatable {
   static Area_list update_list;
-  
+  static bool type_initialized = false;
   static int gid = 0;
   static const(float) area_width = 1.0f, area_height = 1.0f;
   
-  // static this(){
-    // update_list = new Area_list;
-  // }
-  static initialize(){
-    update_list = new Area_list;
+  static initialize_type(){
+    if(!type_initialized){
+      update_list = new Area_list;
+    }
   }
   
   int id = 0;
@@ -45,6 +45,7 @@ class Area {
   Ground ground;
   Area_list.Index update_index; /// Its index in Area.update_list - so it will update
   Agent_list agents; /// Mobile objects
+  Decoration_list decorations;
   Vector2f position;
   /// Holding adjacencies might not be necessary
   Area adjacent_ul, adjacent_u, adjacent_ur, adjacent_l, adjacent_r, adjacent_bl, adjacent_b, adjacent_br;
@@ -53,19 +54,25 @@ class Area {
     id = gid++;
     position = _position;
     agents = new Agent_list;
+    decorations = new Decoration_list;
   }
   
-  void destroy(){
-    foreach(Agent agent; agents){
-      agent.area = null;
+  ~this(){
+    if(agents !is null){
+      foreach(Agent agent; agents){
+        agent.area = null;
+      }
+      destroy(agents);
+    }
+    if(decorations !is null){
+      foreach(Decoration decor; decorations)
+        destroy(decor);
+      destroy(decorations);
     }
     update_index.remove;
     unset_wall;
     unset_ground;
-    if(agents !is null)
-      agents.destroy;
     world.remove(position);
-    object.destroy(this);
   }
   
   override string toString(){ return format("area %d", id); }
@@ -105,9 +112,9 @@ class Area {
           if(check_area !is null){
             foreach(Agent check_agent; check_area.agents){
               if(agent !is check_agent && agent.check_for_overlap(check_agent)){
-                // writeln(agent, " overlapped ", check_agent);
-                agent.overlap(check_agent);
-                check_agent.overlap(agent);
+                // writeln(agent.id, " overlapped ", check_agent.id);
+                agent.collide_agent_subtype(check_agent);
+                check_agent.collide_agent_subtype(agent);
               }
             }
           }
@@ -148,14 +155,32 @@ class Area {
       emptyq = false;
     else
       set_updating = false;
-    if(emptyq)
-      destroy;
+    if(emptyq){
+      writefln("destroy area %d", id);
+      destroy(this);
+    }
     
   }
   
-  void render(){
-    if(point_in_view(position)){
-      // test_timer.start;
+  void render(string checks = "careful")(){
+    static if(checks == "careful"){
+      if(point_in_view(position)){
+        if(draw_boundaries){
+          gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
+        }
+        if(ground !is null)
+          ground.render;
+        if(wall !is null)
+          wall.render;
+        foreach(Agent agent; agents){
+          agent.render;
+        }
+        foreach(Decoration decor; decorations){
+          decor.render;
+        }
+      }
+    }
+    else if(checks == "careless"){
       if(draw_boundaries){
         gr_draw_line([position, position + Vector2f(1, 0), position + Vector2f(1, 1), position + Vector2f(0, 1)], 1.0f);
       }
@@ -163,7 +188,12 @@ class Area {
         ground.render;
       if(wall !is null)
         wall.render;
-      // writefln("render: %f", test_timer.hnsecsf*1000.0f);
+      foreach(Agent agent; agents){
+        agent.render;
+      }
+      foreach(Decoration decor; decorations){
+        decor.render;
+      }
     }
   }
   
@@ -182,6 +212,10 @@ class Area {
     }
     else
       agent.area_index.remove;
+  }
+  
+  void add_decoration(Decoration decor){
+    decor.area_index = decorations.add(decor);
   }
   
   void remove_agent(Agent agent){
@@ -206,7 +240,7 @@ class Area {
   void unset_wall(){
     if(wall !is null){
       if(wall.area is this){
-        wall.destroy;
+        destroy(wall);
       }
       wall = null;
     }
@@ -224,7 +258,7 @@ class Area {
   void unset_ground(){
     if(ground !is null){
       if(ground.area is this){
-        ground.destroy;
+        destroy(ground);
       }
       ground = null;
     }

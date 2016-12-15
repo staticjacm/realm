@@ -2,6 +2,9 @@
 module shot;
 
 import vector;
+import drop;
+import wall;
+import ground;
 import entity;
 import agent;
 
@@ -14,15 +17,28 @@ class Shot : Agent {
   
   float energy; /// A catch-all stat for shots which represents how much of an effect it can have on other things
   
-  this(Vector2f _position, float _size){
-    super(_position, _size);
+  
+  this(){
+    super();
   }
   
-  override void destroy(){
-    super.destroy;
-  }
-  
-  override int agent_subtype_id(){ return 2; }
+  override int agent_subtype_id(){ return Agent.subtype_shot; }
   int shot_subtype_id(){ return 0; }
+  
+  float damage(){ return 0; }
+  
+  override void collide(Entity other){
+    if(other.faction_id != faction_id)
+      other.apply_damage(damage);
+  }
+  override void collide(Shot other){}
+  override void collide(Drop other){}
+  override void collide(Agent other){}
+  override void collide(Wall wall){
+    
+  }
+  override void over(Ground ground){
+    
+  }
   
 }

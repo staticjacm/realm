@@ -66,7 +66,11 @@ struct Vector2(T) {
     T dot(Vector2!T other){ return x*other.x + y*other.y; }
     static if(isFloatingPoint!T){
       T norm(){ return sqrt(this.dot(this)); }
-      Vector2!T normalize(){ return this/this.norm; }
+      Vector2!T normalize(){
+        float r = this.norm;
+        if(r == 0) r = 1;
+        return this/r; 
+      }
       float angle(){ return atan2(y, x); }
       float angled(){ return atan2(y, x)*(180/PI); }
       Vector2!T reflect(Vector2!T other){

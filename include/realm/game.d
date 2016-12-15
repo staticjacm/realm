@@ -10,6 +10,7 @@ import sgogl_interface;
 
 import timer;
 import testing_world;
+import renderable;
 import world;
 import area;
 import commoner;
@@ -46,6 +47,21 @@ float test_x = 0.0, test_y = 0.0;
 
 void key_function(){
   player_key_function();
+  // writefln(" key %d", gr_key);
+  switch(gr_scancode){
+    case GR_SCANCODE_LEFT: gr_set_screen_size(gr_screen_width - 10, gr_screen_height);  writefln("< screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
+    case GR_SCANCODE_RIGHT: gr_set_screen_size(gr_screen_width + 10, gr_screen_height); writefln("> screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
+    case GR_SCANCODE_UP: gr_set_screen_size(gr_screen_width, gr_screen_height + 10);    writefln("^ screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
+    case GR_SCANCODE_DOWN: gr_set_screen_size(gr_screen_width, gr_screen_height - 10);  writefln("v screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
+    case GR_SCANCODE_RETURN: gr_clear_all; break;
+    case GR_SCANCODE_R: gr_set_keep_window_aspect = 1; writeln("keep_window_aspect 1");   break;
+    case GR_SCANCODE_F: gr_set_keep_window_aspect = 0; writeln("keep_window_aspect 0");   break;
+    case GR_SCANCODE_T: gr_set_center_screen = 1;      writeln("center_screen 1");        break;
+    case GR_SCANCODE_G: gr_set_center_screen = 0;      writeln("center_screen 0");        break;
+    case GR_SCANCODE_Y: gr_set_stretch_screen = 1;     writeln("stretch_screen 1");       break;
+    case GR_SCANCODE_H: gr_set_stretch_screen = 0;     writeln("stretch_screen 0");       break;
+    default: break;
+  }
 }
 
 void mouse_click_function(){
@@ -58,53 +74,35 @@ void mouse_move_function(){
   test_y = gr_mouse_y.gr_screen_to_world_y;
 }
 
+void window_event_function(){
+}
+
 void initialize(){
-  test_timer.start;
   gr_open;
   gr_activate_depth_testing(1);
   gr_activate_linear_filtering(0);
   gr_set_max_depth(1000.0f);
-  writefln("graphics init %f", test_timer.hnsecsf*1000.0f);
+  gr_set_window_size(600, 400);
+  gr_set_center_screen = 1;
+  gr_set_screen_size(300, 200);
   
-  // test_timer.start;
-  Area.initialize;
-  // writefln("area init %f", test_timer.hnsecsf*1000.0f);
-  
-  // test_timer.start;
-  Agent.initialize;
-  // writefln("area init %f", test_timer.hnsecsf*1000.0f);
-  
-  // test_timer.start;
-  Rooted.initialize;
-  // writefln("rooted init %f", test_timer.hnsecsf*1000.0f);
+  World.initialize_type;
+  Area.initialize_type;
+  Agent.initialize_type;
+  Rooted.initialize_type;
+  Renderable.initialize_type;
+  Commoner.initialize_type;
+  Testing_world.initialize_type;
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
-  // Rooted.initialize;
-  
-  // test_timer.start;
-  Commoner.initialize_type;
-  // writefln("commoner init %f", test_timer.hnsecsf*1000.0f);
-  
-  // test_timer.start;
-  Testing_world.initialize_type;
-  // writefln("test_world init %f", test_timer.hnsecsf*1000.0f);
-  
-  // test_timer.start;
-  test_entity = new Commoner(Vector2f(10.5, 10.5), 1);
+  test_entity = new Commoner;
+  test_entity.position = Vector2f(10.5, 10.5);
   player_entity = test_entity;
   test_world = new Testing_world();
   test_entity.world = test_world;
-  // writefln("additions init %f", test_timer.hnsecsf*1000.0f);
-  
-  // Ground new_ground = new Rocky_ground(Vector2f(-2,-2));
-  // Wall new_wall = new Cactus1(Vector2f(-2,-2));
-  // new_ground.id = 77777;
-  // new_wall.id = 99999;
-  // test_world.add_ground(new_ground);
-  // test_world.add_wall(new_wall);
   
   game_timer.start;
 }
@@ -116,30 +114,21 @@ void quit(){
 void render(){
   gr_clear;
   
-  // test_timer.start;
   test_world.render;
-  // writefln("test_world.render %f", test_timer.hnsecsf*1000.0f);
   
-  
-  // test_timer.start;
-  foreach(Agent agent; Agent.master_list){
-    agent.render;
-  }
-  // writefln("agents render %f", test_timer.hnsecsf*1000.0f);
+  //foreach(Agent agent; Agent.master_list){
+  //  agent.render;
+  //}
   
   player_render_near;
   
-  // test_timer.start;
   gr_draw_centered(test_img, test_x, test_y, 1.0, 0.0, 0.5, 0.5);
-  // writefln("gr_draw_centered %f", test_timer.hnsecsf*1000.0f);
   
-  // test_timer.start;
   gr_color(1.0, 0.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, Vector2f(0, 0), 1.0);
   gr_color(0.0, 1.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
   gr_color_alpha(1.0);
-  // writefln("other stuff %f", test_timer.hnsecsf*1000.0f);
   
   gr_refresh;
 }
@@ -147,57 +136,44 @@ void render(){
 void update(){
   
   game_time = game_timer.msecs;
-  // writeln("game time ", game_time);
   frame++;
   frame_timer.start;
-  
-  // test_timer.start;
-  gr_register_events();
-  // writefln("register events %f", test_timer.hnsecsf*1000.0f);
-  
-  // test_timer.start;
+
+  gr_register_events();  
   while(gr_has_event()){
     switch(gr_read()){
       case GR_CLOSE: running = false; break;
       case GR_KEY_EVENT: key_function; break;
       case GR_MOUSE_BUTTON_EVENT: mouse_click_function; break;
       case GR_MOUSE_MOVE_EVENT: mouse_move_function; break;
+      case GR_WINDOW_EVENT: window_event_function; break;
       default: break;
     }
   }
-  // writefln("do events %f", test_timer.hnsecsf*1000.0f);
   
-  // test_timer.start;
   player_update;
-  // writefln("player_update %f", test_timer.hnsecsf*1000.0f);
   
-  // test_timer.start;
   foreach(Agent agent; Agent.master_list){
     agent.update;
   }
-  // writefln("agent.update_list %f", test_timer.hnsecsf*1000.0f);
   
-  // test_timer.start;
+  foreach(World world; World.master_list){
+    world.update;
+  }
+  
   foreach(Rooted rooted; Rooted.update_list){
     rooted.update;
   }
-  // writefln("rooted.update_list %f", test_timer.hnsecsf*1000.0f);
   
-  // test_timer.start;
   foreach(Area area; Area.update_list){
     area.update;
   }
-  // writefln("area.update_list %f", test_timer.hnsecsf*1000.0f);
   
-  // test_world.update;
-  
-  // test_timer.start;
   render;
-  // writefln("render %f", test_timer.hnsecsf*1000.0f);
   
   frame_time = frame_timer.msecs;
   frame_delta = frame_timer.hnsecsf;
-  if(frame % 100 == 0){
+  if(frame % 1000 == 0){
     writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
     writeln("  number of agents: ", Agent.master_list.length);
     writeln("  number of areas: ", test_world.length);

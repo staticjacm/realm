@@ -1,14 +1,14 @@
 @echo off
 if exist realm.exe del realm.exe
 REM Use the following line for an optimized build
-REM dmd -g -profile -odobj realm ^
-@dmd -release -O -inline -noboundscheck -odobj realm ^
+REM @dmd -release -O -inline -noboundscheck -odobj realm ^
+dmd -g -profile -odobj realm ^
 include/sgogl ^
 include/realm/game ^
 include/realm/timer ^
 include/realm/sgogl_interface ^
 include/realm/agent ^
-include/realm/refable ^
+include/realm/validatable ^
 include/realm/animation ^
 include/realm/renderable ^
 include/realm/ground ^
@@ -23,6 +23,15 @@ include/realm/vector ^
 include/realm/entity ^
 include/realm/shot ^
 include/realm/player ^
+include/realm/accessory ^
+include/realm/armor ^
+include/realm/decoration ^
+include/realm/drop ^
+include/realm/item ^
+include/realm/metaobject ^
+include/realm/structured_entity ^
+include/realm/weapon ^
+assets/decorations/twinkle1/twinkle1 ^
 assets/entities/commoner/commoner ^
 assets/shots/fireball1/fireball1 ^
 assets/shots/fireball2/fireball2 ^

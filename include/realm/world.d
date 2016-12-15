@@ -3,47 +3,60 @@ module world;
 import std.stdio;
 import std.math;
 import grid;
+import decoration;
 import game;
 import vector;
+import sllist;
 import wall;
 import ground;
 import agent;
 import entity;
 import area;
+import metaobject;
 import timer;
 
 Timer test_timer;
 
-alias world_grid_type = Dict_grid2;
+alias world_grid_type = Dict_grid2!(Area, float);
 
-class World : world_grid_type!(Area, float) {
+class World_list : LList!World {}
+
+class World : world_grid_type {
+  static World_list master_list;
+  static bool type_initialized = false;
   
-  void destroy(){
-    foreach(Area area; this){
-      area.destroy;
+  static void initialize_type(){
+    if(!type_initialized){
+      type_initialized = true;
+      master_list = new World_list;
     }
-    object.destroy(this);
   }
   
-  void update(){
-  //  test_timer.start;
-  //  foreach(Area area; this){
-  //    // .003 ms 20x20
-  //    // if(area.updates)
-  //      area.update;
-  //  }
-  //  writefln("foreach area %f", test_timer.hnsecsf*1000.0f);
+  World_list.Index world_index;
+  Metaobject_list metaobjects;
+  
+  this(){
+    super();
+    world_index = master_list.add(this);
+    metaobjects = new Metaobject_list;
   }
+  
+  ~this(){
+    world_index.remove;
+    foreach(Area area; this){
+      destroy(area);
+    }
+    foreach(Metaobject metaobj; metaobjects){
+      destroy(metaobj);
+    }
+  }
+  
+  void update(){}
   
   void initialize(){}
   
-  void render(){
-    // foreach(Area area; this){
-      // test_timer.start;
-      // area.render;
-      // writefln("render: %f", test_timer.hnsecsf*1000.0f);
-    // }
-  }
+  /// For rendering full screen effects (?)
+  void render(){}
   
   void connect_area_to_surroundings(Area area){
     Vector2f position = area.position;
@@ -57,17 +70,18 @@ class World : world_grid_type!(Area, float) {
     area.adjacent_br  = get_area(position + Vector2f(1, -1));
   }
   
-  /// Procedurally generates a new area. Usually used with areas generated at the location of agents
-  void generate_area(Area area){}
-  bool generate_adjacent_areas(){ return false; }
-  /// Procedurally generates a new area. Usually used with areas adjacent to generate_area's area
-  void generate_adjacent_area(Area area){}
+  ///// Procedurally generates a new area. Usually used with areas generated at the location of agents
+  //void generate_area(Area area){}
+  //bool generate_adjacent_areas(){ return false; }
+  ///// Procedurally generates a new area. Usually used with areas adjacent to generate_area's area
+  //void generate_adjacent_area(Area area){}
+  Area generate_area(Vector2f position){ return null; }
   
-  Area new_area(Vector2f position){
-    Area area = new Area(Vector2f(position.x.floor, position.y.floor));
-    integrate_area(area);
-    return area;
-  }
+  //Area new_area(Vector2f position){
+  //  Area area = new Area(Vector2f(position.x.floor, position.y.floor));
+  //  integrate_area(area);
+  //  return area;
+  //}
   
   void integrate_area(Area area){
     if(area !is null){
@@ -83,45 +97,49 @@ class World : world_grid_type!(Area, float) {
     }
   }
   
-  Area get_area(Vector2f position){
-    Area* areap = get(Vector2f(position.x.floor, position.y.floor));
-    if(areap !is null)
+  Area get_area(string checks = "careful")(Vector2f position){
+    Area* areap = get(position.floor);
+    static if(checks == "careful"){
+      if(areap !is null)
+        return *areap;
+      else
+        return null;
+    }
+    else static if(checks == "careless"){
       return *areap;
-    else
-      return null;
+    }
+  }
+  
+  Area new_area(string checks = "careful")(Vector2f position){
+    static if(checks == "careful"){
+      if(!exists(position)){
+        Area area = new Area(position.floor);
+        integrate_area(area);
+        return area;
+      }
+      else
+        return null;
+    }
+    else static if(checks == "careless"){
+      Area area = new Area(position.floor);
+      integrate_area(area);
+      return area;
+    }
   }
   
   Area get_or_new_area_single(Vector2f position){
     Area area = get_area(position);
     if(area is null){
-      Area generated_area = new Area(position);
-      integrate_area(generated_area);
-      generate_area(generated_area);
-      return generated_area;
+      return new_area!"careful"(position);
     }
     else
       return area;
   }
   
-  Area get_or_new_area(Vector2f position){
+  Area get_or_new_area_generate(Vector2f position){
     Area area = get_area(position);
     if(area is null){
-      Area generated_area = new Area(position);
-      integrate_area(generated_area);
-      generate_area(generated_area);
-      // Generate adjacent areas around this one
-      if(generate_adjacent_areas){
-        Vector2f[] adj_position_list = [Vector2f(-1, 1), Vector2f(0, 1), Vector2f(1, 1), Vector2f(-1, 0), Vector2f(1, 0), Vector2f(-1, -1), Vector2f(0, -1), Vector2f(1, -1)];
-        for(int i = 0; i < adj_position_list.length; i++){
-          Vector2f adj_position = generated_area.position + adj_position_list[i];
-          Area adj_area = get_area(adj_position);
-          if(adj_area is null){
-            adj_area = new Area(adj_position);
-            integrate_area(adj_area);
-            generate_adjacent_area(adj_area);
-          }
-        }
-      }
+      Area generated_area = generate_area(position);
       return generated_area;
     }
     else
@@ -141,7 +159,7 @@ class World : world_grid_type!(Area, float) {
   }
   
   void place_agent(Agent agent){
-    Area area = get_or_new_area(agent.position);
+    Area area = get_or_new_area_generate(agent.position);
     if(area !is null){
       if(area !is agent.area){
         if(agent.area !is null)
@@ -153,6 +171,14 @@ class World : world_grid_type!(Area, float) {
     else {
       agent.area_index.remove;
     }
+  }
+  
+  void place_decoration(Decoration decor){
+    Area area = get_area(decor.position);
+    if(area !is null)
+      area.add_decoration(decor);
+    else
+      destroy(decor);
   }
   
 }

@@ -1,14 +1,11 @@
 
 # To do:
 
+* Write status_effect module
+
+* Ground should be responsible for friction
+
 * Initialization takes a strangely long time for some reason. This is a problem for every initialization function, apparently.
-
-* Add effects due to height (shadow, higher y, etc)
-
-* Convert regular_attack to regular_attack_start, regular_attack_end for prolonged/held attacks
-* Fix player.player_mouse_click_function so that left, right and middle clicks are registered correctly
-
-* Add Agent.create_shot for convenience
 
 * Agent friction increases when fps is low.
 
@@ -18,20 +15,7 @@
 * Organize and implement a scheme for slowed / delayed updating of certain objects. For example: areas outside the view can be updated less often than areas inside the view. Only update agents every 0.1 ms, or whatever timing makes sense.
 * The ``Thread.sleep`` call should be adjusted every frame to maintain a constant fps (could also include a switch for unbound fps)
 
-* Make a LList!Ref!T class/extension of sllist
-* Create a function in World to get a LList!Ref!Agent of all agents in a particular area
-
-* Write Item module
-* Write Weapon module
-* Write Accessory module
-* Write Armor module
-* Write Drop module
-* Write Structured Entity module
-* Write Metaobject module
-
 * ``core.exception.InvalidMemoryOperationError@src\core\exception.d(693): Invalid memory operation`` Doesn't apparently hurt anything but it is annoying. Happens at shutdown
-
-* Find and implement a sound library
 
 
 # Future To Dos:
@@ -47,10 +31,41 @@
 
 # Possible To Dos:
 
+* A damage object for exchanging between shots - entities, etc
+
+* Put all image / audio loading into its own module
+
 * Agent.size could be an overridable function instead of a variable
 
 
 # Already done:
+
+* Write Shot stats
+* Implement functions which do damage to entities, shots, walls, grounds, etc
+
+* Write Entity stats
+
+* Write Drop module
+* Write Item module
+* Write Weapon module
+* Write Accessory module
+* Write Armor module
+* Write Structured Entity module
+* Write Metaobject module
+* Write Decoration module
+
+* Add Agent.create_shot for convenience
+
+* Convert regular_attack to regular_attack_start, regular_attack_end for prolonged/held attacks
+* Fix player.player_mouse_click_function so that left, right and middle clicks are registered correctly
+
+* Combine generate and generate_adjacent
+
+* Add effects due to height (shadow, higher y, etc)
+
+* Some types have static initialize and some have static initialize_type, convert the latter to static initialize
+
+* Find and implement a sound library
 
 * World.update is slow because World.update's timing varies proportionally to the number of Areas in World. The timing of one Area.update is around 0.003 ms. Ideally there should be less than 1000 areas updating at any one time. Implement an updating scheme similar to Rooted.update_list. Area list now at 0.3 ms/frame latent. game.render() varies with number of areas. This delay is coming from world.render
 

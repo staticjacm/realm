@@ -1,8 +1,11 @@
 module grid;
 
 import vector;
+import validatable;
 
-abstract class Grid2(T, V) {  
+abstract class Grid2(T, V) : Validatable {  
+  this(){ super(); }
+  
   T* get(Vector2!V);
   int opApply(scope int delegate(ref T));
   void set(T, Vector2!V);
