@@ -32,14 +32,19 @@ class Fireball1 : Shot {
   this(){
     super();
     animation = new Animation([image_1, image_2, image_3], 30, Vector2f(0.5, 0.5), Vector2f(1, 1));
-    friction = 0;
     end_time = game_time + lifetime + uniform(0, 500);
     restitution = 0;
   }
   
+  override bool uses_friction(){ return false; }
+  
   void set_lifetime(long lifetime_){
     lifetime = lifetime_;
     end_time = game_time + lifetime_;
+  }
+  
+  override float damage(){
+    return 10.0f;
   }
   
   override void update(){

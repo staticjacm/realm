@@ -25,6 +25,13 @@ float angle3(Vector2f a, Vector2f b){
   return 2.0*atan((a.y - b.y)/(a.x - b.x));
 }
 
+Vector2f rotate_by(Vector2f v, float angle){
+  return Vector2f( v.x * cos(angle) - v.y * sin(angle), v.x * sin(angle) + v.y * cos(angle));
+}
+Vector2f rotate_perpendicular(Vector2f v){
+  return Vector2f(v.x, -v.y);
+}
+
 /++
 An arbitrary 2-Tuple of values of type T
 ++/

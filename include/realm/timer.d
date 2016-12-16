@@ -17,7 +17,7 @@ struct Timer {
   float hnsecsf(){ return hnsecs.hnsecs_to_secs; }
   
   void report(string s){
-    writefln("%s %f", s, hnsecsf*1_000.0);
+    writefln("%s %f secs", s, hnsecsf);
   }
 }
 

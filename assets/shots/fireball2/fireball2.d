@@ -32,9 +32,10 @@ class Fireball2 : Shot {
   this(){
     super();
     animation = new Animation([image_1, image_2, image_3], 1, Vector2f(0.5, 0.5), Vector2f(1, 1));
-    friction = 0;
     end_time = game_time + lifetime;
   }
+  
+  override bool uses_friction(){ return false; }
   
   override void update(){
     super.update;

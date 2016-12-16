@@ -45,7 +45,7 @@ void shake_screen(float amount){
 
 void player_update(){
   
-  if(player_entity !is null){
+  if(player_entity !is null && player_entity.valid){
     
     gr_read_mouse;
     player_entity.direction = Vector2f(gr_mouse_x.gr_screen_to_world_x - player_entity.position.x, 
@@ -130,11 +130,11 @@ void player_key_function(){
 void player_mouse_click_function(){
   if(gr_mouse_button == GR_MOUSE_LEFT){
     if(gr_mouse_state == GR_PRESSED){
-      if(player_entity !is null)
+      if(player_entity !is null && player_entity.valid)
         player_entity.regular_attack_start;
     }
     else if(gr_mouse_state == GR_RELEASED){
-      if(player_entity !is null)
+      if(player_entity !is null && player_entity.valid)
         player_entity.regular_attack_end;
     }
   }

@@ -21,6 +21,7 @@ include/realm/world ^
 include/realm/sllist ^
 include/realm/vector ^
 include/realm/entity ^
+include/realm/effect ^
 include/realm/shot ^
 include/realm/player ^
 include/realm/accessory ^

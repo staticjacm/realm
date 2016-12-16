@@ -19,6 +19,7 @@ import entity;
 import agent;
 import ground;
 import rocky_ground;
+import decoration;
 import vector;
 import player;
 import game;
@@ -43,6 +44,7 @@ float frame_delta = 0.001;
 long frame = 0;
 
 uint test_img;
+uint gui_mockup_img;
 float test_x = 0.0, test_y = 0.0;
 
 void key_function(){
@@ -95,11 +97,13 @@ void initialize(){
   Testing_world.initialize_type;
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
+  gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
   test_entity = new Commoner;
   test_entity.position = Vector2f(10.5, 10.5);
+  test_entity.automatic_controls = false;
   player_entity = test_entity;
   test_world = new Testing_world();
   test_entity.world = test_world;
@@ -129,6 +133,8 @@ void render(){
   gr_color(0.0, 1.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
   gr_color_alpha(1.0);
+  
+  gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
   
   gr_refresh;
 }
@@ -176,6 +182,7 @@ void update(){
   if(frame % 1000 == 0){
     writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
     writeln("  number of agents: ", Agent.master_list.length);
+    writeln("  number of decorations: ", Decoration.total_number);
     writeln("  number of areas: ", test_world.length);
   }
   // if(current_game_time > 5000) running = false;

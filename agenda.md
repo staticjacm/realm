@@ -1,9 +1,7 @@
 
-# To do:
+# To Do:
 
-* Write status_effect module
-
-* Ground should be responsible for friction
+# Boring To dos:
 
 * Initialization takes a strangely long time for some reason. This is a problem for every initialization function, apparently.
 
@@ -39,6 +37,14 @@
 
 
 # Already done:
+
+* Add entity ai controls
+
+* Implement way to get all agents inside of a region
+
+* Ground should be responsible for friction
+
+* Write status_effect module
 
 * Write Shot stats
 * Implement functions which do damage to entities, shots, walls, grounds, etc

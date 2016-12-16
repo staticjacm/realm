@@ -13,15 +13,18 @@ class Decoration_list : LList!Decoration {}
     cannot interact with anything
 */
 class Decoration : Renderable {
+  static total_number = 0;
   
   Decoration_list.Index area_index;
   long death_time = 0;
   
   this(){
     super();
+    total_number++;
     death_time = game_time + lifetime;
   }
   ~this(){
+    total_number--;
     area_index.remove;
   }
   

@@ -16,6 +16,8 @@ class Ground : Rooted {
   
   override bool interacts(){ return false; }
   
+  float friction(){ return 0.8; }
+  
   void under(Agent agent){}
   void entered(Agent agent){}
   void exited(Agent agent){}

@@ -38,24 +38,26 @@ class Commoner : Entity {
   
   Animation animation_standing, animation_walking, animation_hurt;
   
+  bool attack_cooldown = false;
+  bool attacking = false;
+  long attack_end_time = 0;
+  long attack_delay = 300;
+  
   this(){
     super();
     animation_standing = new Animation([image_standing], 1, Vector2f(0.5, 0), image_dimensions);
     animation_walking  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
     animation_hurt     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
     animation = animation_walking;
+    l_defence = 1000.0f;
   }
   
   override int entity_subtype_id(){ return 1; }
   
   
-  bool attack_cooldown = false;
-  bool attacking = false;
-  long attack_end_time = 0;
-  long attack_delay = 300;
-  
   override void update(){
     super.update;
+    // writeln("attacking ", attacking);
     // writeln("update ", attacking, " ", attack_cooldown);
     if(attack_cooldown){
       if(attack_end_time < game_time)
@@ -81,11 +83,31 @@ class Commoner : Entity {
       }
     }
   }
+  
+  // override float targeting_range(){ return 5.0f; }
+  
+  override void kill(){
+    writeln("dead");
+    for(int i = 0; i < 10; i++){
+      Shot fireball = create_shot(new Fireball1);
+      fireball.set_velocity = rvector(4.0f);
+    }
+    super.kill;
+  }
+  
+  override void apply_damage(float damage){
+    super.apply_damage(damage);
+    if(valid)
+      writeln(id, " hp now ", health);
+  }
+  
   override void regular_attack_start(){
     attacking = true;
+    super.regular_attack_start;
   }
   
   override void regular_attack_end(){
     attacking = false;
+    super.regular_attack_end;
   }
 }

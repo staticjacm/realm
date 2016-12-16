@@ -883,6 +883,7 @@ void gr_set_panning(int channel, int pan){
 /** Drawing **/
 
 extern(C) {
+  void gr_screen_draw(uint, float, float, float, float, float, float, float, float);
   void gr_draw(uint, float, float, float, float, float, float, float, float);
   void gr_draw_centered(uint, float, float, float, float, float, float);
   void gr_point_size(float);

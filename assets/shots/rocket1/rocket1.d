@@ -30,11 +30,8 @@ class Rocket1 : Shot {
     if(!type_initialized){
       image_1 = gr_load_image("assets/shots/rocket1/rocket1_1.png".toStringz, 0);
       explosion_audio = gr_load_wav("assets/audio/explosions/explosion1.wav".toStringz, 0);
-      writeln("explosion_audio ", explosion_audio);
       fire_audio = gr_load_wav("assets/audio/projectiles/rocket/rocket_burst_1.wav".toStringz, 0);
-      writeln("fire_audio ", fire_audio);
       running_audio = gr_load_wav("assets/audio/projectiles/rocket/rocket_running_1.wav".toStringz, 0);
-      writeln("running_audio ", running_audio);
     }
   }
   
@@ -47,7 +44,6 @@ class Rocket1 : Shot {
   this(){
     super();
     animation = new Animation([image_1], 1, Vector2f(0.5, 0.5), Vector2f(1, 1));
-    friction = 0;
     spin = uniform(-15.0, 15.0);
     fire_time = game_time + fire_delay;
     restitution = 1.3;
@@ -55,10 +51,11 @@ class Rocket1 : Shot {
   
   override float render_angle(){ return -45.0; }
   
+  override bool uses_friction(){ return false; }
+  
   override void update(){
     super.update;
     if(firing){
-      friction = 0;
       Vector2f acceleration_vector = cs2d(angle);
       accelerate(acceleration_vector*50);
         // if(uniform(0, 100) < 1){

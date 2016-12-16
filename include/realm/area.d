@@ -103,7 +103,7 @@ class Area : Validatable {
     }
     
     // Collision detecting agents
-    foreach(Agent agent; agents){
+    first: foreach(Agent agent; agents){
       // Checking collision between agents and agents in a range
       int range = cast(int)((agent.size/2 + 1.0).floor);
       for(int xd = -range; xd <= range; xd++){
@@ -112,9 +112,12 @@ class Area : Validatable {
           if(check_area !is null){
             foreach(Agent check_agent; check_area.agents){
               if(agent !is check_agent && agent.check_for_overlap(check_agent)){
-                // writeln(agent.id, " overlapped ", check_agent.id);
+                // agent or checkagent might be killed here, so check validity
                 agent.collide_agent_subtype(check_agent);
-                check_agent.collide_agent_subtype(agent);
+                if(check_agent.valid)
+                  check_agent.collide_agent_subtype(agent);
+                if(!agent.valid)
+                  continue first;
               }
             }
           }

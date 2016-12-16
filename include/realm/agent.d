@@ -7,6 +7,7 @@ import std.math;
 import game;
 import world;
 import area;
+import effect;
 import entity;
 import drop;
 import shot;
@@ -82,7 +83,7 @@ class Agent : Renderable {
   bool moved = false; /// has the agent been moved since it was last placed?
   float height = 0;
   float size = 1;
-  float friction = 1.0;
+  // float friction = 1.0;
   float restitution = 1.0;
   int faction_id = 0; // determines what faction the agent belongs to - primarily for determining who hurts / targets who
   
@@ -99,8 +100,10 @@ class Agent : Renderable {
   
   ~this(){
     master_index.remove;
-    if(area !is null && area.valid)
+    if(area !is null && area.valid){
       area.remove_agent(this);
+      area_index.remove;
+    }
     if(material !is null && material.valid)
       destroy(material);
   }
@@ -115,8 +118,8 @@ class Agent : Renderable {
     if(material !is null)
       material.update;
     if(moving){
-      if(friction != 0)
-        accelerate(-velocity*friction*10.0f);
+      if(uses_friction && area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0)
+        accelerate(-velocity*area.ground.friction*10.0f);
         // ^ should be accelerate(-velocity.normalize*friction*K);
       move_by(velocity*frame_delta);
       if(world !is null && moved){
@@ -189,6 +192,7 @@ class Agent : Renderable {
     else
       moving = false;
   }
+  bool uses_friction(){ return true; }
   
   void move_by(Vector2f delta){
     if(delta.x != 0 || delta.y != 0){

@@ -34,36 +34,6 @@ class Testing_world : World {
   float spawn_next_time = 0;
   float spawn_delay = 300;
   
-  //override void generate_area(Area area){
-  //  area.set_ground = new Rocky_ground(area.position);
-  //}
-  //override bool generate_adjacent_areas(){ return true; }
-  //override void generate_adjacent_area(Area area){
-  //  area.set_ground = new Rocky_ground(area.position);
-  //  if(uniform(0, 100) < 60)
-  //    area.set_wall = new Cactus1(area.position);
-  //}
-  override Area generate_area(Vector2f position){
-    Area center_area;
-    for(int x = -2; x <= 2; x++){
-      for(int y = -2; y <= 2; y++){
-        if(x != 0 || y != 0){
-          Vector2f adj_pos = (position + Vector2f(x, y)).floor;
-          Area area = get_area(adj_pos);
-          if(area is null){
-            area = new_area!"careless"(adj_pos);
-            area.set_ground = new Rocky_ground(adj_pos);
-            if(uniform(0, 100) < 60)
-              area.set_wall = new Cactus1(adj_pos);
-          }
-        }
-      }
-    }
-    center_area = new_area(position.floor);
-    center_area.set_ground = new Rocky_ground(center_area.position);
-    return center_area;
-  }
-  
   this(){
     float R = 20;
     for(int x = 0; x < R; x++){
@@ -104,22 +74,44 @@ class Testing_world : World {
     
     Agent collider_entity = new Commoner;
     collider_entity.position = Vector2f(13, 13);
+    collider_entity.faction_id = 1;
     collider_entity.world = this;
     place_agent(collider_entity);
   }
   
   override void update(){
     super.update;
-    if(spawn_next_time < game_time){
-      spawn_next_time = game_time + spawn_delay;
-      Fireball1 fireball = new Fireball1;
-      fireball.position = Vector2f(10, 10);
-      fireball.world = this;
-      fireball.set_velocity = Vector2f(10.0, 0.0);
-    }
+    // if(spawn_next_time < game_time){
+      // spawn_next_time = game_time + spawn_delay;
+      // Fireball1 fireball = new Fireball1;
+      // fireball.position = Vector2f(10, 10);
+      // fireball.world = this;
+      // fireball.set_velocity = Vector2f(10.0, 0.0);
+    // }
       Twinkle1 twinkle = new Twinkle1;
-      twinkle.position = Vector2f(9, 10);
+      twinkle.position = Vector2f(9, 10) + rvector(1.0);
       place_decoration(twinkle);
+  }
+  
+  override Area generate_area(Vector2f position){
+    Area center_area;
+    for(int x = -2; x <= 2; x++){
+      for(int y = -2; y <= 2; y++){
+        if(x != 0 || y != 0){
+          Vector2f adj_pos = (position + Vector2f(x, y)).floor;
+          Area area = get_area(adj_pos);
+          if(area is null){
+            area = new_area!"careless"(adj_pos);
+            area.set_ground = new Rocky_ground(adj_pos);
+            if(uniform(0, 100) < 60)
+              area.set_wall = new Cactus1(adj_pos);
+          }
+        }
+      }
+    }
+    center_area = new_area(position.floor);
+    center_area.set_ground = new Rocky_ground(center_area.position);
+    return center_area;
   }
   
 }
