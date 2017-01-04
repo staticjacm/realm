@@ -49,7 +49,8 @@ class Commoner : Entity {
     animation_walking  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
     animation_hurt     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
     animation = animation_walking;
-    l_defence = 1000.0f;
+    l_defence = 0.0f;
+    m_defence = 100.0f;
   }
   
   override int entity_subtype_id(){ return 1; }
@@ -97,8 +98,8 @@ class Commoner : Entity {
   
   override void apply_damage(float damage){
     super.apply_damage(damage);
-    if(valid)
-      writeln(id, " hp now ", health);
+    // if(valid)
+      // writeln(id, "'s hp is now ", health);
   }
   
   override void regular_attack_start(){

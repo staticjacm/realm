@@ -36,6 +36,8 @@ bool running = true;
 
 Timer test_timer;
 
+uint test_font;
+
 Timer game_timer;
 Timer frame_timer;
 long frame_time = 0;
@@ -87,6 +89,14 @@ void initialize(){
   gr_set_window_size(600, 400);
   gr_set_center_screen = 1;
   gr_set_screen_size(300, 200);
+  // gr_set_screen_size(600, 400);
+  // writefln("a");
+  // test_font = gr_load_ttf("cour.ttf".toStringz, 128.0);
+  test_font = gr_load_ttf("ariblk.ttf".toStringz, 128.0);
+  // test_font = gr_load_ttf("", 32.0f);
+  // writefln("b");
+  
+  // load_character_images;
   
   World.initialize_type;
   Area.initialize_type;
@@ -134,7 +144,9 @@ void render(){
   gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
   gr_color_alpha(1.0);
   
-  gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
+  gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
+  
+  gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
   
   gr_refresh;
 }

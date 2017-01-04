@@ -3,9 +3,14 @@
 
 # Boring To dos:
 
+* Text rendering
+
+* Test entity is stopping attacking like it should after losing target then regaining it
+
 * Initialization takes a strangely long time for some reason. This is a problem for every initialization function, apparently.
 
 * Agent friction increases when fps is low.
+* When screen loses focus and then gains focus (or something like that) the frame_delta is fuckin huge and... well you can imagine the consequences
 
 * Agents always experience four (4) collisions when colliding with an agent - two when agent A detects a collision with agent B (A.overlap(B), B.overlap(A)), and two when B detects a collision with agent A (B.overlap(A), A.overlap(B)). This can easily be avoided by only overlapping if one agents id is larger than the others, and detecting if the other will detect a collision with this one by checking its size
 * Squares aren't going to cut it for collision detection when dealing with rotating objects. Implement a generic collision detection scheme for more precise collision shapes (which are guaranteed to be a contained in the agent's collision square) - can use virtual functions
@@ -18,8 +23,7 @@
 
 # Future To Dos:
 
-* User interface
-
+* User interface: displaying character images in sequences (text), buttons, dragables
 * Menus
 
 * Content
