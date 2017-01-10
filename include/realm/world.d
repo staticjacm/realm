@@ -222,3 +222,9 @@ class World : world_grid_type {
   }
   
 }
+
+// Tile map relation for tile mapping (the name is short to conserve memory in source files)
+struct Tmr {
+  int x, y;
+  int r,g,b;
+}

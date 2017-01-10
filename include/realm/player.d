@@ -123,6 +123,12 @@ void player_key_function(){
       else
         move_right_pressed = false;
       break;
+    case GR_Q: 
+      if(gr_key_pressed){
+        player_entity.interacts_with_walls = !player_entity.interacts_with_walls;
+        writeln("collides with walls toggled to: ", player_entity.interacts_with_walls);
+      }
+      break;
     default: break;
   }
 }

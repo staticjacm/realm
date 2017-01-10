@@ -97,60 +97,66 @@ class Area : Validatable {
     
     if(ground !is null && ground.interacts){
       foreach(Agent agent; agents){
-        ground.under(agent);
-        agent.over(ground);
+        if(agent.interacts_with_grounds){
+          ground.under(agent);
+          agent.over(ground);
+        }
       }
     }
     
     // Collision detecting agents
     first: foreach(Agent agent; agents){
-      // Checking collision between agents and agents in a range
-      int range = cast(int)((agent.size/2 + 1.0).floor);
-      for(int xd = -range; xd <= range; xd++){
-        for(int yd = -range; yd <= range; yd++){
-          Area check_area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
-          if(check_area !is null){
-            foreach(Agent check_agent; check_area.agents){
-              if(agent !is check_agent && agent.check_for_overlap(check_agent)){
-                // agent or checkagent might be killed here, so check validity
-                agent.collide_agent_subtype(check_agent);
-                if(check_agent.valid)
-                  check_agent.collide_agent_subtype(agent);
-                if(!agent.valid)
-                  continue first;
+      if(agent.interacts_with_agents){
+        // Checking collision between agents and agents in a range
+        int range = cast(int)((agent.size/2 + 1.0).floor);
+        for(int xd = -range; xd <= range; xd++){
+          for(int yd = -range; yd <= range; yd++){
+            Area check_area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
+            if(check_area !is null){
+              foreach(Agent check_agent; check_area.agents){
+                if(agent !is check_agent && agent.check_for_overlap(check_agent)){
+                  // agent or checkagent might be killed here, so check validity
+                  agent.collide_agent_subtype(check_agent);
+                  if(check_agent.valid)
+                    check_agent.collide_agent_subtype(agent);
+                  if(!agent.valid)
+                    continue first;
+                }
               }
             }
           }
         }
       }
-      // Checking collisions between agent and surrounding walls
-      // Theres probably a faster / more consise way to do this
-      if(agent.position.x - agent.size/2 < position.x){
-        Area collider_area = world.get_area(position + Vector2f(-1, 0));
-        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-          agent.collide(collider_area.wall);
-          collider_area.wall.collide(agent);
+      if(agent.interacts_with_walls){
+        // Checking collisions between agent and surrounding walls
+        // Theres probably a faster / more consise way to do this
+        if(agent.position.x - agent.size/2 < position.x){
+          Area collider_area = world.get_area(position + Vector2f(-1, 0));
+          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+            agent.collide(collider_area.wall);
+            collider_area.wall.collide(agent);
+          }
         }
-      }
-      else if(position.x + 1 < agent.position.x + agent.size/2){
-        Area collider_area = world.get_area(position + Vector2f(1, 0));
-        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-          agent.collide(collider_area.wall);
-          collider_area.wall.collide(agent);
+        else if(position.x + 1 < agent.position.x + agent.size/2){
+          Area collider_area = world.get_area(position + Vector2f(1, 0));
+          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+            agent.collide(collider_area.wall);
+            collider_area.wall.collide(agent);
+          }
         }
-      }
-      if(agent.position.y - agent.size/2 < position.y){
-        Area collider_area = world.get_area(position + Vector2f(0, -1));
-        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-          agent.collide(collider_area.wall);
-          collider_area.wall.collide(agent);
+        if(agent.position.y - agent.size/2 < position.y){
+          Area collider_area = world.get_area(position + Vector2f(0, -1));
+          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+            agent.collide(collider_area.wall);
+            collider_area.wall.collide(agent);
+          }
         }
-      }
-      else if(position.y + 1 < agent.position.y + agent.size/2){
-        Area collider_area = world.get_area(position + Vector2f(0, 1));
-        if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-          agent.collide(collider_area.wall);
-          collider_area.wall.collide(agent);
+        else if(position.y + 1 < agent.position.y + agent.size/2){
+          Area collider_area = world.get_area(position + Vector2f(0, 1));
+          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+            agent.collide(collider_area.wall);
+            collider_area.wall.collide(agent);
+          }
         }
       }
     }

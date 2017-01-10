@@ -3,7 +3,7 @@
 
 # Boring To dos:
 
-* Text rendering
+* Animation depth rendering isn't working properly again?
 
 * Test entity is stopping attacking like it should after losing target then regaining it
 
@@ -41,6 +41,10 @@
 
 
 # Already done:
+
+* World building through maps
+
+* Text rendering
 
 * Add entity ai controls
 

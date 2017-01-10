@@ -86,6 +86,9 @@ class Agent : Renderable {
   // float friction = 1.0;
   float restitution = 1.0;
   int faction_id = 0; // determines what faction the agent belongs to - primarily for determining who hurts / targets who
+  bool interacts_with_agents  = true;
+  bool interacts_with_walls   = true;
+  bool interacts_with_grounds = true;
   
   /++
     Constructors & Destructors
@@ -134,9 +137,9 @@ class Agent : Renderable {
     return (abs(agent.position.x - this.position.x) <= (agent.size/2 + this.size/2)) && 
            (abs(agent.position.y - this.position.y) <= (agent.size/2 + this.size/2));
   }
-  bool interacts(T : Agent)(){  return true; }
-  bool interacts(T : Wall)(){   return true; }
-  bool interacts(T : Ground)(){ return true; }
+  // bool interacts(T : Agent)(){  return true; }
+  // bool interacts(T : Wall)(){   return true; }
+  // bool interacts(T : Ground)(){ return true; }
   /// void overlap(Agent) is called when a collision is detected (this's and agent's collision squares intersect)
   void collide(Entity entity){
     if(material !is null)

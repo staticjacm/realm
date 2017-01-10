@@ -6,7 +6,9 @@ import game;
 import world;
 import player;
 import commoner;
-import rocky_ground;
+import rocky_ground_1;
+import stone_ground_1;
+import stone_wall_1;
 import agent;
 import area;
 import vector;
@@ -18,13 +20,17 @@ import twinkle1;
 
 Timer test_timer;
 
+Tmr[] tilemap_data = mixin(import("tilemap_data.txt"));
+
 class Testing_world : World {
   static bool type_initialized = false;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      Rocky_ground.initialize_type;
+      Rocky_ground_1.initialize_type;
+      Stone_ground_1.initialize_type;
+      Stone_wall_1.initialize_type;
       Cactus1.initialize_type;
       Fireball1.initialize_type;
       Twinkle1.initialize_type;
@@ -36,6 +42,25 @@ class Testing_world : World {
   
   this(){
     float R = 20;
+    
+    foreach(Tmr tmr; tilemap_data){
+      if(tmr.r == 255 && tmr.g == 255 && tmr.b == 255){
+        add_ground(new Stone_ground_1(Vector2f(tmr.x, tmr.y), 0));
+      }
+      else if(tmr.r == 0 && tmr.g == 255 && tmr.b == 0){
+        add_ground(new Stone_ground_1(Vector2f(tmr.x, tmr.y), 1));
+      }
+      else if(tmr.r == 255 && tmr.g == 0 && tmr.b == 0){
+        Wall new_wall;
+        new_wall = new Stone_wall_1(Vector2f(tmr.x, tmr.y));
+        new_wall.set_updating = true;
+        add_wall(new_wall);
+      }
+      // else if(tmr.r == 0 && tmr.g == 0 && tmr.b == 255){
+        // add_ground(new Rocky_ground(Vector2f(tmr.x, tmr.y)));
+      // }
+    }
+    /*
     for(int x = 0; x < R; x++){
       for(int y = 0; y < R; y++){
         add_ground(new Rocky_ground(Vector2f(x, y)));
@@ -70,13 +95,8 @@ class Testing_world : World {
       new_wall.set_updating = true;
       add_wall(new_wall);
     }
-    place_agent(player_entity);
+    */
     
-    Agent collider_entity = new Commoner;
-    collider_entity.position = Vector2f(13, 13);
-    collider_entity.faction_id = 1;
-    collider_entity.world = this;
-    place_agent(collider_entity);
   }
   
   override void update(){
@@ -102,7 +122,7 @@ class Testing_world : World {
           Area area = get_area(adj_pos);
           if(area is null){
             area = new_area!"careless"(adj_pos);
-            area.set_ground = new Rocky_ground(adj_pos);
+            area.set_ground = new Rocky_ground_1(adj_pos);
             if(uniform(0, 100) < 60)
               area.set_wall = new Cactus1(adj_pos);
           }
@@ -110,7 +130,7 @@ class Testing_world : World {
       }
     }
     center_area = new_area(position.floor);
-    center_area.set_ground = new Rocky_ground(center_area.position);
+    center_area.set_ground = new Rocky_ground_1(center_area.position);
     return center_area;
   }
   

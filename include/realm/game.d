@@ -18,19 +18,20 @@ import rooted;
 import entity;
 import agent;
 import ground;
-import rocky_ground;
+import rocky_ground_1;
 import decoration;
 import vector;
 import player;
 import game;
 import wall;
-import rocky_ground;
+import kernel;
 import cactus1;
 
 alias Vector2f = Vector2!float;
 
 Entity test_entity;
 World test_world;
+World kernel_world;
 
 bool running = true;
 
@@ -88,17 +89,20 @@ void initialize(){
   gr_set_max_depth(1000.0f);
   gr_set_window_size(600, 400);
   gr_set_center_screen = 1;
-  gr_set_screen_size(300, 200);
-  // gr_set_screen_size(600, 400);
+  // gr_set_screen_size(2400, 1600);
+  // gr_set_screen_size(1200, 800);
+  // gr_set_screen_size(300, 200);
+  gr_set_screen_size(600, 400);
   // writefln("a");
   // test_font = gr_load_ttf("cour.ttf".toStringz, 128.0);
-  test_font = gr_load_ttf("ariblk.ttf".toStringz, 128.0);
+  test_font = gr_load_ttf("assets/fonts/ariblk.ttf".toStringz, 128.0);
   // test_font = gr_load_ttf("", 32.0f);
   // writefln("b");
   
   // load_character_images;
   
   World.initialize_type;
+  Kernel.initialize_type;
   Area.initialize_type;
   Agent.initialize_type;
   Rooted.initialize_type;
@@ -115,8 +119,12 @@ void initialize(){
   test_entity.position = Vector2f(10.5, 10.5);
   test_entity.automatic_controls = false;
   player_entity = test_entity;
-  test_world = new Testing_world();
-  test_entity.world = test_world;
+  // test_world = new Testing_world();
+  // test_entity.world = test_world;
+  
+  kernel_world = new Kernel;
+  player_entity.world = kernel_world;
+  player_entity.position = Kernel.center_spawn;
   
   game_timer.start;
 }
@@ -128,7 +136,7 @@ void quit(){
 void render(){
   gr_clear;
   
-  test_world.render;
+  // test_world.render;
   
   //foreach(Agent agent; Agent.master_list){
   //  agent.render;
@@ -147,6 +155,7 @@ void render(){
   gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
   
   gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
+  gr_screen_draw_text(test_font, format("(%.2f, %.2f)", player_entity.position.x, player_entity.position.y).toStringz, 0.0f, 0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.5f);
   
   gr_refresh;
 }
@@ -195,7 +204,7 @@ void update(){
     writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
     writeln("  number of agents: ", Agent.master_list.length);
     writeln("  number of decorations: ", Decoration.total_number);
-    writeln("  number of areas: ", test_world.length);
+    // writeln("  number of areas: ", test_world.length);
   }
   // if(current_game_time > 5000) running = false;
   Thread.sleep(dur!"msecs"(0));

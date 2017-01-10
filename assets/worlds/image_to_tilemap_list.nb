@@ -1,0 +1,203 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7146,        195]
+NotebookOptionsPosition[      6864,        181]
+NotebookOutlinePosition[      7206,        196]
+CellTagsIndexPosition[      7163,        193]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"world", "=", "\"\<kernel\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetDirectory", "[", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], "<>", "world", "<>", 
+     "\"\<\\\\\>\""}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"image", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{"\"\<tilemap.png\>\"", ",", "\"\<Image\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"imagedata", "=", 
+   RowBox[{"ImageData", "[", "image", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"imagewidth", ",", "imageheight"}], "}"}], "=", 
+   RowBox[{"ImageDimensions", "[", "image", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"tilelist", "=", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+           "#2", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
+           RowBox[{
+           "#2", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], ",", 
+           RowBox[{"Round", "[", 
+            RowBox[{"255", "*", 
+             RowBox[{"#1", "\[LeftDoubleBracket]", 
+              RowBox[{"1", ";;", "3"}], "\[RightDoubleBracket]"}]}], "]"}]}], 
+          "}"}], "&"}], ",", "imagedata", ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}], ",", "1"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"offset", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"tilelist2", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+         "-", 
+         RowBox[{
+         "offset", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}], 
+        ",", 
+        RowBox[{"imageheight", "-", 
+         RowBox[{"#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+         "+", 
+         RowBox[{
+         "offset", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+        ",", 
+        RowBox[{"#", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}]}],
+        "}"}], "&"}], "/@", "tilelist"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"outstring", "=", 
+   RowBox[{"StringJoin", "[", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"\"\<[\>\"", ",", "\[IndentingNewLine]", 
+       RowBox[{"StringDrop", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"StringJoin", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"StringJoin", "[", "\[IndentingNewLine]", 
+             RowBox[{"\"\<Tmr(\>\"", ",", "\[IndentingNewLine]", 
+              RowBox[{"ToString", "[", 
+               RowBox[{
+               "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+               "]"}], ",", "\"\<,\>\"", ",", 
+              RowBox[{"ToString", "[", 
+               RowBox[{
+               "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+               "]"}], ",", "\"\<,\>\"", ",", "\[IndentingNewLine]", 
+              RowBox[{"ToString", "[", 
+               RowBox[{"#", "\[LeftDoubleBracket]", 
+                RowBox[{"3", ",", "1"}], "\[RightDoubleBracket]"}], "]"}], 
+              ",", "\"\<,\>\"", ",", 
+              RowBox[{"ToString", "[", 
+               RowBox[{"#", "\[LeftDoubleBracket]", 
+                RowBox[{"3", ",", "2"}], "\[RightDoubleBracket]"}], "]"}], 
+              ",", "\"\<,\>\"", ",", 
+              RowBox[{"ToString", "[", 
+               RowBox[{"#", "\[LeftDoubleBracket]", 
+                RowBox[{"3", ",", "3"}], "\[RightDoubleBracket]"}], "]"}], 
+              ",", "\[IndentingNewLine]", "\"\<),\>\""}], 
+             "\[IndentingNewLine]", "]"}], "&"}], "/@", "tilelist2"}], "]"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"-", "1"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       "\"\<]\>\""}], "\[IndentingNewLine]", "}"}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"world", "<>", "\"\<_tilemap_data.txt\>\""}], ",", "outstring"}], 
+   "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.692968887298217*^9, 3.6929689462016993`*^9}, {
+  3.692969144060376*^9, 3.692969478552477*^9}, {3.6929697498334436`*^9, 
+  3.6929697878417068`*^9}, {3.6929699080529532`*^9, 3.6929699661275625`*^9}, {
+  3.692970378688202*^9, 3.692970389109129*^9}, {3.6929706220940013`*^9, 
+  3.6929706222621145`*^9}, {3.69297145232414*^9, 3.6929714616823606`*^9}, {
+  3.6930557142681046`*^9, 3.693055746841756*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Column", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Show", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"image", ",", "\[IndentingNewLine]", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{"Red", ",", 
+             RowBox[{"Disk", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"ofx", ",", "ofy"}], "}"}], ",", "4"}], "]"}], ",", 
+             "Blue", ",", 
+             RowBox[{"Disk", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"ofx", ",", "ofy"}], "}"}], ",", "2"}], "]"}]}], 
+            "}"}], "\[IndentingNewLine]", "}"}], "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"ofy", ",", "ofx"}], "}"}]}], "\[IndentingNewLine]", "}"}], 
+    "]"}], "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ofx", ",", "1"}], "}"}], ",", "1", ",", "imagewidth", ",", 
+     "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ofy", ",", "1"}], "}"}], ",", "1", ",", "imageheight", ",", 
+     "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6929704230908213`*^9, 3.6929705954103627`*^9}, {
+  3.6929746004773607`*^9, 3.692974602297574*^9}}]
+},
+WindowSize->{783, 692},
+WindowMargins->{{Automatic, 140}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4821, 119, 487, "Input"],
+Cell[5382, 141, 1478, 38, 221, "Input"]
+}
+]
+*)
+
