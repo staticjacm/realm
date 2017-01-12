@@ -2,11 +2,14 @@
 module player;
 
 import std.stdio;
+import std.string;
 import std.math;
 import std.random;
 import sgogl_interface;
 import entity;
+import structured_entity;
 import sgogl;
+import animation;
 import world;
 import area;
 import game;
@@ -94,6 +97,36 @@ void player_render_near(){
       } 
     }
     // render everything inside
+  }
+}
+
+void player_render_gui(){
+  if(player_entity !is null && player_entity.valid){
+    gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
+    
+    gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
+    gr_screen_draw_text(test_font, format("(%.2f, %.2f)", player_entity.position.x, player_entity.position.y).toStringz, 0.0f, 0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.5f);
+    
+    // Health
+    gr_screen_draw_text(test_font, "HP", 0.02f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+    gr_screen_draw_text(test_font, format("%3.0f", player_entity.health).toStringz, 0.02f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+    
+    //NRG
+    gr_screen_draw_text(test_font, "NRG", 0.095f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+    gr_screen_draw_text(test_font, format("%3.0f", player_entity.energy).toStringz, 0.095f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+    
+    //Weapon
+    if(player_entity.entity_subtype_id == Entity.subtype_structured_entity){
+      Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
+      if(player_entity_structured.weapon !is null && player_entity_structured.weapon.valid)
+        gr_screen_draw(
+          player_entity_structured.weapon.animation.update(game_time), 
+          0.17f, 0.0f, 0.0f, 
+          0.0f, 0.0f, 
+          0.0f, 
+          0.045f
+        );
+    }
   }
 }
 

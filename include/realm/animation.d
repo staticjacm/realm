@@ -72,6 +72,22 @@ class Animation : Validatable {
   }
 }
 
+void gr_draw(Animation animation, float x, float y, float depth, float angle){
+  sgogl.gr_draw(animation.current_frame, x, y, depth, animation.anchor.x, animation.anchor.y, angle, animation.scale.x, animation.scale.y);
+}
+
 void gr_draw(Animation animation, Vector2f position, float depth, float angle){
   sgogl.gr_draw(animation.current_frame, position.x, position.y, depth, animation.anchor.x, animation.anchor.y, angle, animation.scale.x, animation.scale.y);
+}
+
+void gr_draw(Animation animation, float x, float y, float depth, float angle, float scale){
+  sgogl.gr_draw(animation.current_frame, x, y, depth, animation.anchor.x, animation.anchor.y, angle, scale*animation.scale.x, scale*animation.scale.y);
+}
+
+void gr_draw(Animation animation, Vector2f position, float depth, float angle, float scale){
+  sgogl.gr_draw(animation.current_frame, position.x, position.y, depth, animation.anchor.x, animation.anchor.y, angle, scale*animation.scale.x, scale*animation.scale.y);
+}
+
+void gr_screen_draw(Animation animation, float x, float y, float depth, float anx, float any, float angle, float scale){
+  sgogl.gr_screen_draw(animation.current_frame, x, y, depth, anx, any, angle, scale*animation.scale.x, scale*animation.scale.y);
 }

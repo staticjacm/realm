@@ -64,4 +64,12 @@ class Structured_entity : Entity {
       }
     }
   }
+  
+  override int entity_subtype_id(){ return Entity.subtype_structured_entity; }
+  
+  override void update(){
+    if(regular_attack_started && weapon !is null && weapon.valid)
+      weapon.use(this);
+    super.update;
+  }
 }

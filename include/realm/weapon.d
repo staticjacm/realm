@@ -1,8 +1,12 @@
 module weapon;
 
 import item;
+import animation;
 
 class Weapon : Item {
+  
+  // Animation attacking_animation;
+  
   this(){
     super();
   }

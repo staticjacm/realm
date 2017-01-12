@@ -14,8 +14,10 @@ import renderable;
 import world;
 import area;
 import commoner;
+import fire_staff;
 import rooted;
 import entity;
+import structured_entity;
 import agent;
 import ground;
 import rocky_ground_1;
@@ -29,7 +31,7 @@ import cactus1;
 
 alias Vector2f = Vector2!float;
 
-Entity test_entity;
+Structured_entity test_entity;
 World test_world;
 World kernel_world;
 
@@ -109,22 +111,27 @@ void initialize(){
   Renderable.initialize_type;
   Commoner.initialize_type;
   Testing_world.initialize_type;
+  Fire_staff_1.initialize_type;
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
+  // test_entity = cast(Structured_entity)(new Commoner);
   test_entity = new Commoner;
   test_entity.position = Vector2f(10.5, 10.5);
   test_entity.automatic_controls = false;
+  test_entity.weapon = new Fire_staff_1;
   player_entity = test_entity;
-  // test_world = new Testing_world();
-  // test_entity.world = test_world;
   
-  kernel_world = new Kernel;
-  player_entity.world = kernel_world;
-  player_entity.position = Kernel.center_spawn;
+  test_world = new Testing_world();
+  player_entity.world = test_world;
+  // player_entity.position = Kernel.center_spawn;
+  
+  // kernel_world = new Kernel;
+  // player_entity.world = kernel_world;
+  // player_entity.position = Kernel.center_spawn;
   
   game_timer.start;
 }
@@ -152,10 +159,7 @@ void render(){
   gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
   gr_color_alpha(1.0);
   
-  gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
-  
-  gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
-  gr_screen_draw_text(test_font, format("(%.2f, %.2f)", player_entity.position.x, player_entity.position.y).toStringz, 0.0f, 0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.5f);
+  player_render_gui;
   
   gr_refresh;
 }

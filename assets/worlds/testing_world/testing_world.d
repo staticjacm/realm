@@ -9,6 +9,7 @@ import commoner;
 import rocky_ground_1;
 import stone_ground_1;
 import stone_wall_1;
+import portal_carpet_1;
 import agent;
 import area;
 import vector;
@@ -20,7 +21,7 @@ import twinkle1;
 
 Timer test_timer;
 
-Tmr[] tilemap_data = mixin(import("tilemap_data.txt"));
+Tmr[] tilemap_data = mixin(import("testing_world_tilemap_data.txt"));
 
 class Testing_world : World {
   static bool type_initialized = false;
@@ -30,6 +31,7 @@ class Testing_world : World {
       type_initialized = true;
       Rocky_ground_1.initialize_type;
       Stone_ground_1.initialize_type;
+      Portal_carpet_1.initialize_type;
       Stone_wall_1.initialize_type;
       Cactus1.initialize_type;
       Fireball1.initialize_type;
@@ -41,7 +43,7 @@ class Testing_world : World {
   float spawn_delay = 300;
   
   this(){
-    float R = 20;
+    // float R = 20;
     
     foreach(Tmr tmr; tilemap_data){
       if(tmr.r == 255 && tmr.g == 255 && tmr.b == 255){
@@ -56,9 +58,9 @@ class Testing_world : World {
         new_wall.set_updating = true;
         add_wall(new_wall);
       }
-      // else if(tmr.r == 0 && tmr.g == 0 && tmr.b == 255){
-        // add_ground(new Rocky_ground(Vector2f(tmr.x, tmr.y)));
-      // }
+      else if(tmr.r == 0 && tmr.g == 0 && tmr.b == 255){
+        add_ground(new Portal_carpet_1(Vector2f(tmr.x, tmr.y)));
+      }
     }
     /*
     for(int x = 0; x < R; x++){

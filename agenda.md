@@ -1,5 +1,14 @@
-
 # To Do:
+
+* GUI displaying weapon
+  * Sample weapon
+* GUI displaying armor
+  * Sample armor
+* GUI displaying accessory
+  * Sample accessory
+* GUI displaying items
+  * Sample items
+* GUI displaying stats
 
 # Boring To dos:
 
@@ -41,6 +50,9 @@
 
 
 # Already done:
+
+* GUI displaying hp
+* GUI displaying energy
 
 * World building through maps
 

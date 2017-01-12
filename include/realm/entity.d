@@ -28,6 +28,11 @@ An agent with stats
 class Entity : Agent {
   static int targeting_cycle = 1_000; // Delay between finding targets
   
+  enum {
+    subtype_entity,
+    subtype_structured_entity
+  }
+  
   Effect_list effects;
   Vector2f direction = Vector2f(1, 0); /// What direction they are aiming in
   
@@ -68,7 +73,7 @@ class Entity : Agent {
   }
   
   override int agent_subtype_id(){ return Agent.subtype_entity; }
-  int entity_subtype_id(){ return 0; }
+  int entity_subtype_id(){ return subtype_entity; }
   
   /// detected(agent) is called when Agent agent is detected
   void detected(Agent agent){}
@@ -77,7 +82,7 @@ class Entity : Agent {
     regular_attack_started = true;
   }
   void regular_attack_end(){
-    special_attack_started = false;
+    regular_attack_started = false;
   }
   void special_attack_start(){
     special_attack_started = true;

@@ -2,6 +2,7 @@ module item;
 
 import entity;
 import validatable;
+import animation;
 
 class Item : Validatable {
   
@@ -12,6 +13,8 @@ class Item : Validatable {
     subtype_accessory
   }
   
+  Animation animation;
+  
   this(){
     super();
   }
@@ -19,4 +22,5 @@ class Item : Validatable {
   void use(Entity entity){}
   
   int item_subtype_id(){ return subtype_none; }
+  
 }
