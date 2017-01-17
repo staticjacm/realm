@@ -1,5 +1,6 @@
 module drop;
 
+import std.stdio;
 import agent;
 import item;
 
@@ -19,9 +20,9 @@ class Drop : Agent {
   
   void add_item(Item item){
     for(int i = 0; i < items.length; i++){
-      if(items[i] !is null){
+      if(items[i] is null){
         items[i] = item;
-        break;
+        return;
       }
     }
   }

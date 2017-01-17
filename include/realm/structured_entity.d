@@ -72,4 +72,13 @@ class Structured_entity : Entity {
       weapon.use(this);
     super.update;
   }
+  
+  override void apply_damage(float damage){
+    float real_damage = damage;
+    if(armor !is null && armor.valid)
+      real_damage = armor.modify_damage(real_damage);
+    if(accessory !is null && accessory.valid)
+      real_damage = accessory.modify_damage(real_damage);
+    super.apply_damage(damage);
+  }
 }

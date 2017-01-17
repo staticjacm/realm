@@ -15,6 +15,8 @@ class Armor : Item {
   
   override int item_subtype_id(){ return Item.subtype_armor; }
   
+  float modify_damage(float damage){ return damage; }
+  
   /*
   When a structured entity is wearing an armor item and collides with something, the 
   agent's collide functions are triggered then these functions are triggered:

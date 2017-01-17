@@ -38,6 +38,9 @@ assets/shots/fireball1/fireball1 ^
 assets/shots/fireball2/fireball2 ^
 assets/shots/rocket1/rocket1 ^
 assets/weapons/staff/fire_staff ^
+assets/armors/shirt/shirt ^
+assets/accessories/ring/ring_of_defence ^
+assets/drops/drop_tiers ^
 assets/grounds/rocky/rocky_ground_1 ^
 assets/grounds/stone/stone_ground_1 ^
 assets/grounds/sand/sand_1 ^

@@ -15,8 +15,12 @@ import world;
 import area;
 import commoner;
 import fire_staff;
+import ring_of_defence;
+import shirt;
 import rooted;
 import entity;
+import drop;
+import drop_tiers;
 import structured_entity;
 import agent;
 import ground;
@@ -93,8 +97,8 @@ void initialize(){
   gr_set_center_screen = 1;
   // gr_set_screen_size(2400, 1600);
   // gr_set_screen_size(1200, 800);
-  // gr_set_screen_size(300, 200);
   gr_set_screen_size(600, 400);
+  // gr_set_screen_size(300, 200);
   // writefln("a");
   // test_font = gr_load_ttf("cour.ttf".toStringz, 128.0);
   test_font = gr_load_ttf("assets/fonts/ariblk.ttf".toStringz, 128.0);
@@ -110,23 +114,42 @@ void initialize(){
   Rooted.initialize_type;
   Renderable.initialize_type;
   Commoner.initialize_type;
+  Drop_tier_0.initialize_type;
   Testing_world.initialize_type;
   Fire_staff_1.initialize_type;
+  Shirt_1.initialize_type;
+  Ring_of_defence_1.initialize_type;
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
+  Drop test_drop = new Drop_tier_0;
+  test_drop.add_item(new Ring_of_defence_1);
+  
   // test_entity = cast(Structured_entity)(new Commoner);
   test_entity = new Commoner;
   test_entity.position = Vector2f(10.5, 10.5);
   test_entity.automatic_controls = false;
   test_entity.weapon = new Fire_staff_1;
-  player_entity = test_entity;
+  test_entity.armor = new Shirt_1;
+  test_entity.accessory = new Ring_of_defence_1;
+  test_entity.items[0] = new Ring_of_defence_1;
+  test_entity.items[1] = new Ring_of_defence_1;
+  test_entity.items[2] = new Ring_of_defence_1;
+  test_entity.items[3] = new Ring_of_defence_1;
+  test_entity.items[4] = new Ring_of_defence_1;
+  test_entity.items[5] = new Ring_of_defence_1;
+  test_entity.items[6] = new Ring_of_defence_1;
+  player_register(test_entity);
   
   test_world = new Testing_world();
-  player_entity.world = test_world;
+  test_world.place_agent(player_entity);
+  // player_entity.world = test_world;
+  test_drop.position = Vector2f(21.0f, 19.0f);
+  // test_drop.world = test_world;
+  test_world.place_agent(test_drop);
   // player_entity.position = Kernel.center_spawn;
   
   // kernel_world = new Kernel;

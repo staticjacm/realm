@@ -68,7 +68,9 @@ class Entity : Agent {
   ~this(){
     if(effects !is null)
       foreach(Effect effect; effects){
-        destroy(effect);
+        if(effect !is null && effect.valid)
+          effect.finalize;
+          destroy(effect);
       }
   }
   
@@ -101,9 +103,11 @@ class Entity : Agent {
   }
   
   void apply_damage(float damage){
-    health -= fmax(damage - l_defence, 0) / m_defence;
-    if(health <= 0)
-      kill;
+    if(0 < damage){
+      health -= fmax(damage - l_defence, 0) / m_defence;
+      if(health <= 0)
+        kill;
+    }
   }
   
   float targeting_range(){ return 15.0f; }
@@ -163,6 +167,9 @@ class Entity : Agent {
       }
       behavior;
     }
+    foreach(Effect effect; effects){
+      effect.update;
+    }
     super.update;
   }
   
@@ -173,10 +180,45 @@ class Entity : Agent {
     super.render;
   }
   
-  override void collide(Entity other){}
-  override void collide(Shot other){}
-  override void collide(Drop other){}
-  override void collide(Agent other){}
-  override void collide(Wall wall){}
-  override void over(Ground ground){}
+  override void collide(Entity other){
+    foreach(Effect effect; effects){
+      effect.collide(other);
+    }
+    super.collide(other);
+  }
+  override void collide(Shot other){
+    foreach(Effect effect; effects){
+      effect.collide(other);
+    }
+    super.collide(other);
+    
+  }
+  override void collide(Drop other){
+    foreach(Effect effect; effects){
+      effect.collide(other);
+    }
+    super.collide(other);
+    
+  }
+  override void collide(Agent other){
+    foreach(Effect effect; effects){
+      effect.collide(other);
+    }
+    super.collide(other);
+    
+  }
+  override void collide(Wall wall){
+    foreach(Effect effect; effects){
+      effect.collide(wall);
+    }
+    super.collide(wall);
+    
+  }
+  override void over(Ground ground){
+    foreach(Effect effect; effects){
+      effect.over(ground);
+    }
+    super.over(ground);
+    
+  }
 }

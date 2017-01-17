@@ -195,6 +195,8 @@ class World : world_grid_type {
   }
   
   void place_agent(Agent agent){
+    if(agent.world !is this)
+      agent.world = this;
     Area area = get_or_new_area_generate(agent.position);
     if(area !is null){
       if(area !is agent.area){
