@@ -33,6 +33,8 @@ import game;
 import wall;
 import kernel;
 import cactus1;
+import turret;
+import kernel_portal;
 
 alias Vector2f = Vector2!float;
 
@@ -123,6 +125,8 @@ void initialize(){
   Shirt_1.initialize_type;
   Ring_of_defence_1.initialize_type;
   Ring_of_speed_1.initialize_type;
+  Fire_turret_1.initialize_type;
+  Kernel_portal_1.initialize_type;
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
@@ -165,16 +169,32 @@ void initialize(){
   enemy.items[5] = new Ring_of_speed_1;
   enemy.items[6] = new Ring_of_defence_1;
   
+  Fire_turret_1 turret = new Fire_turret_1;
+  turret.position = Vector2f(17.0f, 17.0f);
+  
+  Kernel_portal_1 test_portal = new Kernel_portal_1;
+  test_portal.position = Vector2f(22.0f, 20.0f);
+  test_portal.exit_position = Kernel.center_spawn;
+  
+  Kernel_portal_1 test_portal_2 = new Kernel_portal_1;
+  test_portal_2.position = Kernel.center_spawn + Vector2f(2.0f, 0.0f);
+  test_portal_2.exit_position = Vector2f(22.0f, 20.0f);
+  
   test_world = new Testing_world();
   test_world.place_agent(player_entity);
   test_world.place_agent(enemy);
+  test_world.place_agent(turret);
+  test_world.place_agent(test_portal);
+  test_portal_2.exit_world = test_world;
   // player_entity.world = test_world;
   test_drop.position = Vector2f(21.0f, 19.0f);
   // test_drop.world = test_world;
   test_world.place_agent(test_drop);
   // player_entity.position = Kernel.center_spawn;
   
-  // kernel_world = new Kernel;
+  kernel_world = new Kernel;
+  test_portal.exit_world = kernel_world;
+  kernel_world.place_agent(test_portal_2);
   // player_entity.world = kernel_world;
   // player_entity.position = Kernel.center_spawn;
   

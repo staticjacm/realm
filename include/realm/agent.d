@@ -226,10 +226,13 @@ class Agent : Renderable {
     return shot;
   }
   
+  // For use by player_entity when E-activating something
+  void activate(Agent agent){}
+  
   /++
     Rendering
   ++/
-  override float render_depth(){ return 200; }
+  override float render_depth(){ return 100; }
   override void render(){
     if(render_overlap_boundary){
       gr_color_alpha(1);

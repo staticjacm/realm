@@ -14,6 +14,7 @@ import sgogl;
 import animation;
 import item;
 import world;
+import kernel;
 import weapon;
 import armor;
 import accessory;
@@ -32,6 +33,9 @@ bool gui_show_primary   = true;
 bool gui_show_equipment = true;
 bool gui_show_items     = true;
 bool gui_show_stats     = true;
+
+int activate_button       = GR_E;
+int warp_to_kernel_button = GR_R;
 
 int move_up_button    = GR_W;
 int move_left_button  = GR_A;
@@ -268,6 +272,21 @@ void player_interact_item(int i){
     player_use_item(i);
 }
 
+void player_activate_nearby(){
+  if(player_entity !is null && player_entity.valid && player_entity.world !is null && player_entity.world.valid){
+    Agent_list nearby_agents = player_entity.world.get_agents_nearby(player_entity.position, 1.0f);
+    foreach(Agent nearby_agent; nearby_agents)
+      nearby_agent.activate(cast(Agent)player_entity);
+  }
+}
+
+void player_zero_view(){
+  if(player_entity !is null)
+    view_target = player_entity.position;
+  view_position = view_target;
+  view_velocity = Vector2f(0.0f, 0.0f);
+}
+
 void player_key_function(){
   switch(gr_key){
     case GR_LSHIFT:
@@ -277,6 +296,7 @@ void player_key_function(){
       ctrl_pressed = (gr_key_pressed > 0);
       break;
     
+    // Movement
     case move_up_button:
       if(gr_key_pressed)
         move_up_pressed = true;
@@ -305,6 +325,22 @@ void player_key_function(){
       if(gr_key_pressed){
         player_entity.interacts_with_walls = !player_entity.interacts_with_walls;
         writeln("collides with walls toggled to: ", player_entity.interacts_with_walls);
+      }
+      break;
+      
+    // E-activation
+    case activate_button:
+      if(gr_key_pressed)
+        player_activate_nearby;
+      break;
+      
+    // Warp to kernel
+    case warp_to_kernel_button:
+      if(gr_key_pressed && kernel_world !is null && kernel_world.valid && player_entity !is null && player_entity.valid){
+        player_entity.world = kernel_world;
+        player_entity.position = Kernel.center_spawn;
+        kernel_world.place_agent(player_entity);
+        player_zero_view;
       }
       break;
       

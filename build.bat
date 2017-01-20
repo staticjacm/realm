@@ -35,6 +35,8 @@ include/realm/structured_entity ^
 include/realm/weapon ^
 assets/decorations/twinkle1/twinkle1 ^
 assets/structured_entities/commoner/commoner ^
+assets/agents/turret/turret ^
+assets/portals/kernel_portal/kernel_portal ^
 assets/shots/fireball1/fireball1 ^
 assets/shots/fireball2/fireball2 ^
 assets/shots/rocket1/rocket1 ^
