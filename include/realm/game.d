@@ -16,6 +16,7 @@ import area;
 import commoner;
 import fire_staff;
 import ring_of_defence;
+import ring_of_speed;
 import shirt;
 import rooted;
 import entity;
@@ -107,6 +108,8 @@ void initialize(){
   
   // load_character_images;
   
+  initialize_drop_tiers;
+  
   World.initialize_type;
   Kernel.initialize_type;
   Area.initialize_type;
@@ -119,6 +122,7 @@ void initialize(){
   Fire_staff_1.initialize_type;
   Shirt_1.initialize_type;
   Ring_of_defence_1.initialize_type;
+  Ring_of_speed_1.initialize_type;
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
@@ -132,20 +136,38 @@ void initialize(){
   test_entity = new Commoner;
   test_entity.position = Vector2f(10.5, 10.5);
   test_entity.automatic_controls = false;
-  test_entity.weapon = new Fire_staff_1;
-  test_entity.armor = new Shirt_1;
-  test_entity.accessory = new Ring_of_defence_1;
+  test_entity.faction_id = 0;
+  test_entity.equip_weapon(new Fire_staff_1);
+  test_entity.equip_armor(new Shirt_1);
+  test_entity.equip_accessory(new Ring_of_defence_1);
   test_entity.items[0] = new Ring_of_defence_1;
-  test_entity.items[1] = new Ring_of_defence_1;
+  test_entity.items[1] = new Ring_of_speed_1;
   test_entity.items[2] = new Ring_of_defence_1;
-  test_entity.items[3] = new Ring_of_defence_1;
+  test_entity.items[3] = new Ring_of_speed_1;
   test_entity.items[4] = new Ring_of_defence_1;
-  test_entity.items[5] = new Ring_of_defence_1;
+  test_entity.items[5] = new Ring_of_speed_1;
   test_entity.items[6] = new Ring_of_defence_1;
   player_register(test_entity);
   
+  Structured_entity enemy;
+  enemy = new Commoner;
+  enemy.position = Vector2f(17.0f, 17.0f);
+  enemy.automatic_controls = true;
+  enemy.faction_id = 1;
+  enemy.equip_weapon(new Fire_staff_1);
+  enemy.equip_armor(new Shirt_1);
+  enemy.equip_accessory(new Ring_of_defence_1);
+  enemy.items[0] = new Ring_of_defence_1;
+  enemy.items[1] = new Ring_of_speed_1;
+  enemy.items[2] = new Ring_of_defence_1;
+  enemy.items[3] = new Ring_of_speed_1;
+  enemy.items[4] = new Ring_of_defence_1;
+  enemy.items[5] = new Ring_of_speed_1;
+  enemy.items[6] = new Ring_of_defence_1;
+  
   test_world = new Testing_world();
   test_world.place_agent(player_entity);
+  test_world.place_agent(enemy);
   // player_entity.world = test_world;
   test_drop.position = Vector2f(21.0f, 19.0f);
   // test_drop.world = test_world;

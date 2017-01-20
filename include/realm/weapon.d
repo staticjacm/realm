@@ -1,6 +1,7 @@
 module weapon;
 
 import item;
+import structured_entity;
 import animation;
 
 class Weapon : Item {
@@ -10,6 +11,9 @@ class Weapon : Item {
   this(){
     super();
   }
+  
+  void equipped(Structured_entity entity){}
+  void dequipped(Structured_entity entity){}
   
   override int item_subtype_id(){ return Item.subtype_weapon; }
 }

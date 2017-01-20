@@ -21,6 +21,7 @@ class Renderable : Validatable {
   float height = 0;
   float angle = 0;
   Vector2f position;
+  bool flip_horizontally = false;
   Animation animation;
   
   this(){
@@ -44,18 +45,34 @@ class Renderable : Validatable {
       if(y_shift){
         // if(draw_shadow)
           // gr_draw_centered(shadow_image, position.x, position.y, render_depth + position.y + 1.0, 0.0f, 1.0f, 0.5f);
-        if(height > 0)
-          gr_draw(animation.update(game_time), position + Vector2f(0, height), render_depth + position.y, angle + render_angle);
-        else
-          gr_draw(animation.update(game_time), position, render_depth + position.y, angle + render_angle);
+        if(height > 0){
+          if(flip_horizontally)
+            gr_draw_flipped_horizontally(animation.update(game_time), position + Vector2f(0, height), render_depth + position.y, angle + render_angle);
+          else  
+            gr_draw(animation.update(game_time), position + Vector2f(0, height), render_depth + position.y, angle + render_angle);
+        }
+        else{
+          if(flip_horizontally)
+            gr_draw_flipped_horizontally(animation.update(game_time), position, render_depth + position.y, angle + render_angle);
+          else  
+            gr_draw(animation.update(game_time), position, render_depth + position.y, angle + render_angle);
+        }
       }
       else {
         // if(draw_shadow)
           // gr_draw_centered(shadow_image, position.x, position.y, render_depth + 1.0, 0.0f, 1.0f, 0.5f);
-        if(height > 0)
-          gr_draw(animation.update(game_time), position + Vector2f(0, height), render_depth, angle + render_angle);
-        else
-          gr_draw(animation.update(game_time), position, render_depth, angle + render_angle);
+        if(height > 0){
+          if(flip_horizontally)
+            gr_draw_flipped_horizontally(animation.update(game_time), position + Vector2f(0, height), render_depth, angle + render_angle);
+          else
+            gr_draw(animation.update(game_time), position + Vector2f(0, height), render_depth, angle + render_angle);
+        }
+        else{
+          if(flip_horizontally)
+            gr_draw_flipped_horizontally(animation.update(game_time), position, render_depth, angle + render_angle);
+          else
+            gr_draw(animation.update(game_time), position, render_depth, angle + render_angle);
+        }
       }
     }
   }

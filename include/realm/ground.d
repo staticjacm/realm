@@ -18,7 +18,7 @@ class Ground : Rooted {
   
   float friction(){ return 0.8; }
   
-  void under(Agent agent){}
+  void collide(Agent agent){}
   void entered(Agent agent){}
   void exited(Agent agent){}
 }

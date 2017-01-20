@@ -14,6 +14,7 @@ class Item : Validatable {
   }
   
   Animation animation;
+  float tier = 0;
   
   this(){
     super();

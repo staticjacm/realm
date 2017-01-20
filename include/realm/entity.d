@@ -5,9 +5,12 @@ import std.stdio;
 import std.math;
 import vector;
 import sllist;
+import animation;
 import game;
 import agent;
 import effect;
+import item;
+import drop_tiers;
 import drop;
 import shot;
 import ground;
@@ -36,6 +39,18 @@ class Entity : Agent {
   Effect_list effects;
   Vector2f direction = Vector2f(1, 0); /// What direction they are aiming in
   
+  Animation walking_animation, standing_animation, hurt_animation;
+  bool facing_rightward = true;
+  
+  bool is_walking = false;
+  long walking_switch_time;
+  int walking_switch_delay = 200;
+  bool is_hurt    = false;
+  long hurt_switch_time;
+  int hurt_switch_delay = 10;
+  
+  Item[] items;
+  
   // Targeting and control
   bool automatic_controls = true; // Should behavior be automatic? / should the entity be controlled by the computer?
   Entity target = null;           // The target entity that the
@@ -58,12 +73,15 @@ class Entity : Agent {
   float energy_max  = 10;    // max energy (nrgmax)
   float energy_rate = 0.1;   // energy generation rate (nrgr)
   // movement, attack
+  float propel_rate = 1;     // rate at which the entity can propel itself (self acceleration)
   float max_speed = 1;       // maximum velocity magnitude where the entity can still accelerate themselves in the direction of velocity
   float attack_power = 1;    // determines the energy of shots produced due to physical / contact attacks
   
   this(){
     super();
     effects = new Effect_list;
+    items.length = 8;
+    animation = standing_animation;
   }
   ~this(){
     if(effects !is null)
@@ -72,6 +90,26 @@ class Entity : Agent {
           effect.finalize;
           destroy(effect);
       }
+    
+    // items as drop
+    if(world !is null){
+      int tier_decider = -1;
+      for(int i = 0; i < items.length; i++){
+        if(items[i] !is null){
+          tier_decider = i;
+          break;
+        }
+      }
+      if(0 <= tier_decider){
+        Drop drop = drop_decide_tier(items[tier_decider].tier);
+        drop.position = position;
+        world.place_agent(drop);
+        for(int i = 0; i < items.length; i++){
+          drop.items[i] = items[i];
+          items[i] = null;
+        }
+      }
+    }
   }
   
   override int agent_subtype_id(){ return Agent.subtype_entity; }
@@ -103,6 +141,8 @@ class Entity : Agent {
   }
   
   void apply_damage(float damage){
+    is_hurt = true;
+    hurt_switch_time = game_time + hurt_switch_delay;
     if(0 < damage){
       health -= fmax(damage - l_defence, 0) / m_defence;
       if(health <= 0)
@@ -144,19 +184,35 @@ class Entity : Agent {
   }
   
   void behavior(){
-    // accelerate(rvector(5.0));
     if(target !is null && target.valid){
       Vector2f pdif = target.position - position;
       direction = pdif.normalize;
-      // writefln("direction (%d - %d)", target.id, id);
       if(!regular_attack_started)
         regular_attack_start;
-      accelerate((direction.rotate_by(PI/2) + pdif.normalize*(pdif.norm - 10.0f)).normalize*50.0);
+      propel((direction.rotate_by(PI/2) + pdif.normalize*(pdif.norm - 10.0f)).normalize*50.0);
     }
     else if(regular_attack_started){
-      // writeln("stopped attacking");
       regular_attack_end;
     }
+  }
+  
+  void propel(Vector2f direction){
+    is_walking = true;
+    walking_switch_time = game_time + walking_switch_delay;
+    if(speed < max_speed){
+      accelerate(direction.normalize * propel_rate);
+    }
+  }
+  
+  void select_animation(){
+    facing_rightward = (direction.x <= 0);
+    flip_horizontally = facing_rightward;
+    if(is_walking)
+      animation = walking_animation;
+    else
+      animation = standing_animation;
+    if(is_hurt)
+      animation = hurt_animation;
   }
   
   override void update(){
@@ -167,6 +223,11 @@ class Entity : Agent {
       }
       behavior;
     }
+    select_animation;
+    if(is_walking && walking_switch_time < game_time)
+      is_walking = false;
+    if(is_hurt && hurt_switch_time < game_time)
+      is_hurt = false;
     foreach(Effect effect; effects){
       effect.update;
     }
@@ -180,6 +241,7 @@ class Entity : Agent {
     super.render;
   }
   
+  alias collide = Agent.collide;
   override void collide(Entity other){
     foreach(Effect effect; effects){
       effect.collide(other);
@@ -214,11 +276,11 @@ class Entity : Agent {
     super.collide(wall);
     
   }
-  override void over(Ground ground){
+  override void collide(Ground ground){
     foreach(Effect effect; effects){
-      effect.over(ground);
+      effect.collide(ground);
     }
-    super.over(ground);
+    super.collide(ground);
     
   }
 }

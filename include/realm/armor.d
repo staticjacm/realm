@@ -3,6 +3,7 @@ module armor;
 import item;
 import agent;
 import entity;
+import structured_entity;
 import shot;
 import wall;
 import ground;
@@ -16,6 +17,9 @@ class Armor : Item {
   override int item_subtype_id(){ return Item.subtype_armor; }
   
   float modify_damage(float damage){ return damage; }
+  
+  void equipped(Structured_entity entity){}
+  void dequipped(Structured_entity entity){}
   
   /*
   When a structured entity is wearing an armor item and collides with something, the 

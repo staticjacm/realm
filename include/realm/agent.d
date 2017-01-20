@@ -10,6 +10,7 @@ import area;
 import effect;
 import entity;
 import drop;
+import portal;
 import shot;
 import wall;
 import ground;
@@ -42,6 +43,7 @@ class Agent : Renderable {
   static enum {
     subtype_none,
     subtype_shot,
+    subtype_portal,
     subtype_drop,
     subtype_entity
   };
@@ -145,6 +147,10 @@ class Agent : Renderable {
     if(material !is null)
       material.collide(entity);
   }
+  void collide(Portal portal){
+    if(material !is null)
+      material.collide(portal);
+  }
   void collide(Shot shot){
     if(material !is null)
       material.collide(shot);
@@ -161,18 +167,19 @@ class Agent : Renderable {
     switch(agent.agent_subtype_id){
       case subtype_none:
       default: collide(agent); break;
-      case subtype_entity: collide(cast(Entity)agent); break;
-      case subtype_shot:   collide(cast(Shot)agent);   break;
-      case subtype_drop:   collide(cast(Drop)agent);   break;
+      case subtype_entity: collide(cast(Entity)agent);  break;
+      case subtype_shot:   collide(cast(Shot)agent);      break;
+      case subtype_drop:   collide(cast(Drop)agent);      break;
+      case subtype_portal: collide(cast(Portal)agent);  break;
     }
   }
   void collide(Wall wall){
     if(material !is null)
       material.collide(wall);
   }
-  void over(Ground ground){
+  void collide(Ground ground){
     if(material !is null)
-      material.over(ground);
+      material.collide(ground);
   }
   
   /++
@@ -195,6 +202,7 @@ class Agent : Renderable {
     else
       moving = false;
   }
+  float speed(){ return velocity.norm; }
   bool uses_friction(){ return true; }
   
   void move_by(Vector2f delta){

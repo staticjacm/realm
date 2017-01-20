@@ -1,8 +1,11 @@
 module structured_entity;
 
+import animation;
+import game;
 import weapon;
 import armor;
 import accessory;
+import drop_tiers;
 import item;
 import drop;
 import entity;
@@ -12,55 +15,27 @@ class Structured_entity : Entity {
   Weapon weapon;
   Armor armor;
   Accessory accessory;
-  Item[] items;
   
   this(){
     super();
-    items.length = 8;
   }
   ~this(){
     // drop weapon, armor, accessory and items as drops
     if(world !is null){
-      Drop drop = new Drop;
-      drop.world = world;
-      drop.position = position;
-      int itemi = 0;
-      if(weapon !is null && weapon.valid){
-        drop.items[itemi] = weapon;
-        itemi++;
-      }
-      if(armor !is null && armor.valid){
-        drop.items[itemi] = armor;
-        itemi++;
-      }
-      if(accessory !is null && accessory.valid){
-        drop.items[itemi] = accessory;
-        itemi++;
-      }
-      bool drop_another = false;
-      int drop_another_index = 0;
-      for(int i = 0; i < items.length; i++){
-        if(itemi >= 8){
-          drop_another = true;
-          drop_another_index = i;
-          itemi = 0;
-          break;
-        }
-        else if(items[i] !is null && items[i].valid){
-          drop.items[itemi] = items[i];
-          itemi++;
-        }
-      }
-      if(drop_another){
-        Drop another_drop = new Drop;
-        another_drop.world = world;
-        another_drop.position = position;
-        for(int i = drop_another_index; i < items.length; i++){
-          if(items[i] !is null && items[i].valid){
-            drop.items[itemi] = items[i];
-            itemi++;
-          }
-        }
+      if(weapon !is null || armor !is null || accessory !is null){
+        Drop drop;
+        if(weapon !is null)
+          drop = drop_decide_tier(weapon.tier);
+        else if(armor !is null)
+          drop = drop_decide_tier(armor.tier);
+        else if(accessory !is null)
+          drop = drop_decide_tier(accessory.tier);
+        drop.position = position;
+        world.place_agent(drop);
+        drop.items[0] = cast(Item)weapon;
+        drop.items[1] = cast(Item)armor;
+        drop.items[2] = cast(Item)accessory;
+        weapon = null; armor = null; accessory = null;
       }
     }
   }
@@ -73,6 +48,29 @@ class Structured_entity : Entity {
     super.update;
   }
   
+  override void render(){
+    if(weapon !is null && weapon.animation !is null && weapon.animation.valid){
+      Vector2f display_offset = Vector2f(0.5f, 0.5f + height);
+      if(y_shift){
+        if(flip_horizontally){
+          display_offset.x *= -1;
+          gr_draw_flipped_horizontally(weapon.animation.update(game_time), position + display_offset, render_depth + position.y, angle + render_angle, 0.75f);
+        }
+        else
+          gr_draw(weapon.animation.update(game_time), position + display_offset, render_depth + position.y, angle + render_angle, 0.75f);
+      }
+      else {
+        if(flip_horizontally){
+          display_offset.x *= -1;
+          gr_draw_flipped_horizontally(weapon.animation.update(game_time), position + display_offset, render_depth, angle + render_angle, 0.75f);
+        }
+        else
+          gr_draw(weapon.animation.update(game_time), position + display_offset, render_depth, angle + render_angle, 0.75f);
+      }
+    }
+    super.render;
+  }
+  
   override void apply_damage(float damage){
     float real_damage = damage;
     if(armor !is null && armor.valid)
@@ -80,5 +78,30 @@ class Structured_entity : Entity {
     if(accessory !is null && accessory.valid)
       real_damage = accessory.modify_damage(real_damage);
     super.apply_damage(damage);
+  }
+  
+  void equip_weapon(Weapon new_weapon){
+    if(weapon !is null && weapon.valid)
+      weapon.dequipped(this);
+    if(new_weapon !is null && new_weapon.valid){
+      weapon = new_weapon;
+      weapon.equipped(this);
+    }
+  }
+  void equip_armor(Armor new_armor){
+    if(armor !is null && accessory.valid)
+      armor.dequipped(this);
+    if(new_armor !is null && new_armor.valid){
+      armor = new_armor;
+      armor.equipped(this);
+    }
+  }
+  void equip_accessory(Accessory new_accessory){
+    if(accessory !is null && accessory.valid)
+      accessory.dequipped(this);
+    if(new_accessory !is null && new_accessory.valid){
+      accessory = new_accessory;
+      accessory.equipped(this);
+    }
   }
 }

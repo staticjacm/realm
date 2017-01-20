@@ -36,16 +36,15 @@ class Commoner : Structured_entity {
     }
   }
   
-  Animation animation_standing, animation_walking, animation_hurt;
-  
   this(){
-    super();
-    animation_standing = new Animation([image_standing], 1, Vector2f(0.5, 0), image_dimensions);
-    animation_walking  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
-    animation_hurt     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
-    animation = animation_walking;
+    standing_animation = new Animation([image_standing], 1, Vector2f(0.5, 0), image_dimensions);
+    walking_animation  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
+    hurt_animation     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
     l_defence = 0.0f;
     m_defence = 100.0f;
+    propel_rate = 100.0f;
+    max_speed = 10.0f;
+    super();
   }
   
   override int entity_subtype_id(){ return 1; }
@@ -53,7 +52,6 @@ class Commoner : Structured_entity {
   // override float targeting_range(){ return 5.0f; }
   
   override void kill(){
-    writeln("dead");
     for(int i = 0; i < 10; i++){
       Shot fireball = create_shot(new Fireball1);
       fireball.set_velocity = rvector(4.0f);

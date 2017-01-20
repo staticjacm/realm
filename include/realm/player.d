@@ -12,7 +12,11 @@ import entity;
 import structured_entity;
 import sgogl;
 import animation;
+import item;
 import world;
+import weapon;
+import armor;
+import accessory;
 import effect;
 import area;
 import game;
@@ -24,10 +28,23 @@ Drop nearby_drop;
 Effect player_effect;
 Entity player_entity;
 
+bool gui_show_primary   = true;
+bool gui_show_equipment = true;
+bool gui_show_items     = true;
+bool gui_show_stats     = true;
+
 int move_up_button    = GR_W;
 int move_left_button  = GR_A;
 int move_down_button  = GR_S;
 int move_right_button = GR_D;
+
+int gui_show_primary_button   = GR_H;
+int gui_show_equipment_button = GR_J;
+int gui_show_items_button     = GR_K;
+int gui_show_stats_button     = GR_L;
+
+bool shift_pressed = false;
+bool ctrl_pressed  = false;
 
 bool move_up_pressed = false;
 bool move_left_pressed = false;
@@ -74,13 +91,13 @@ void player_update(){
     player_entity.direction = Vector2f(gr_mouse_x.gr_screen_to_world_x - player_entity.position.x, 
                                        gr_mouse_y.gr_screen_to_world_y - player_entity.position.y ).normalize;
     
-    float boost = 100.0;
-    Vector2f acceleration = Vector2f(0.0f, 0.0f);
-    if(move_up_pressed) acceleration += Vector2f(0.0, 1.0f);
-    else if(move_down_pressed) acceleration += Vector2f(0.0, -1.0f);
-    if(move_left_pressed) acceleration += Vector2f(-1.0, 0.0f);
-    else if(move_right_pressed) acceleration += Vector2f(1.0, 0.0f);
-    player_entity.accelerate(acceleration*boost);
+    Vector2f direction = Vector2f(0.0f, 0.0f);
+    if(move_up_pressed) direction += Vector2f(0.0, 1.0f);
+    else if(move_down_pressed) direction += Vector2f(0.0, -1.0f);
+    if(move_left_pressed) direction += Vector2f(-1.0, 0.0f);
+    else if(move_right_pressed) direction += Vector2f(1.0, 0.0f);
+    if(direction.x != 0 || direction.y != 0)
+      player_entity.propel(direction);
     
     view_target = player_entity.position;
   }
@@ -127,66 +144,73 @@ void player_render_gui(){
     gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
     gr_screen_draw_text(test_font, format("(%.2f, %.2f)", player_entity.position.x, player_entity.position.y).toStringz, 0.0f, 0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.5f);
     
-    // Health
-    gr_screen_draw_text(test_font, "HP", 0.02f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
-    gr_screen_draw_text(test_font, format("%3.0f", player_entity.health).toStringz, 0.02f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+    if(gui_show_primary){
+      // Health
+      gr_screen_draw_text(test_font, "HP", 0.02f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+      gr_screen_draw_text(test_font, format("%3.0f", player_entity.health).toStringz, 0.02f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+      // NRG
+      gr_screen_draw_text(test_font, "NRG", 0.095f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+      gr_screen_draw_text(test_font, format("%3.0f", player_entity.energy).toStringz, 0.095f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+    }
     
-    // NRG
-    gr_screen_draw_text(test_font, "NRG", 0.095f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
-    gr_screen_draw_text(test_font, format("%3.0f", player_entity.energy).toStringz, 0.095f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
-    
-    // Stats
-    gr_screen_draw_text(test_font, format("%2.0f hpmax", player_entity.health_max).toStringz, 0.85, 0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
-    gr_screen_draw_text(test_font, format("%2.0f ldef", player_entity.l_defence).toStringz, 0.85, 0.07f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
-    gr_screen_draw_text(test_font, format("%2.0f mdef", player_entity.m_defence).toStringz, 0.85, 0.09f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
+    if(gui_show_stats){
+      // Stats
+      gr_screen_draw_text(test_font, format("%2.0f hpmax", player_entity.health_max).toStringz, 0.85, 0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
+      gr_screen_draw_text(test_font, format("%2.0f ldef", player_entity.l_defence).toStringz, 0.85, 0.07f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
+      gr_screen_draw_text(test_font, format("%2.0f mdef", player_entity.m_defence).toStringz, 0.85, 0.09f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
+    }
     
     // Structured entity
     if(player_entity.entity_subtype_id == Entity.subtype_structured_entity){
       Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
-      if(player_entity_structured.weapon !is null && player_entity_structured.weapon.valid)
-        gr_screen_draw(
-          player_entity_structured.weapon.animation.update(game_time), 
-          0.17f, 0.0f, 0.0f, 
-          0.0f, 0.0f, 
-          0.0f, 
-          0.045f
-        );
-      if(player_entity_structured.armor !is null && player_entity_structured.armor.valid)
-        gr_screen_draw(
-          player_entity_structured.armor.animation.update(game_time),
-          0.24f, 0.0f, 0.0f, 
-          0.0f, 0.0f, 
-          0.0f, 
-          0.045f
-        );
-      if(player_entity_structured.accessory !is null && player_entity_structured.accessory.valid)
-        gr_screen_draw(
-          player_entity_structured.accessory.animation.update(game_time),
-          0.29f, 0.0f, 0.0f, 
-          0.0f, 0.0f, 
-          0.0f, 
-          0.045f
-        );
-      for(int i = 0; i < player_entity_structured.items.length; i++){
-        if(player_entity_structured.items[i] !is null && player_entity_structured.items[i].valid)
+      if(gui_show_equipment){
+        if(player_entity_structured.weapon !is null && player_entity_structured.weapon.valid)
           gr_screen_draw(
-            player_entity_structured.items[i].animation.update(game_time),
-            0.34f + cast(float)i * 0.065, 0.0f, 0.0f, 
+            player_entity_structured.weapon.animation.update(game_time), 
+            0.17f, 0.0f, 0.0f, 
+            0.0f, 0.0f, 
+            0.0f, 
+            0.045f
+          );
+        if(player_entity_structured.armor !is null && player_entity_structured.armor.valid)
+          gr_screen_draw(
+            player_entity_structured.armor.animation.update(game_time),
+            0.24f, 0.0f, 0.0f, 
+            0.0f, 0.0f, 
+            0.0f, 
+            0.045f
+          );
+        if(player_entity_structured.accessory !is null && player_entity_structured.accessory.valid)
+          gr_screen_draw(
+            player_entity_structured.accessory.animation.update(game_time),
+            0.29f, 0.0f, 0.0f, 
             0.0f, 0.0f, 
             0.0f, 
             0.045f
           );
       }
-      if(nearby_drop !is null && nearby_drop.valid){
-        for(int i = 0; i < nearby_drop.items.length; i++){
-          if(nearby_drop.items[i] !is null && nearby_drop.items[i].valid){
+      if(gui_show_items){
+        for(int i = 0; i < player_entity_structured.items.length; i++){
+          if(player_entity_structured.items[i] !is null && player_entity_structured.items[i].valid)
             gr_screen_draw(
-              nearby_drop.items[i].animation.update(game_time),
-              0.34f + cast(float)i * 0.065, 0.05f, 0.0f, 
+              player_entity_structured.items[i].animation.update(game_time),
+              0.34f + cast(float)i * 0.065, 0.0f, 0.0f, 
               0.0f, 0.0f, 
               0.0f, 
               0.045f
             );
+        }
+        if(nearby_drop !is null && nearby_drop.valid){
+          for(int i = 0; i < nearby_drop.items.length; i++){
+            if(nearby_drop.items[i] !is null && nearby_drop.items[i].valid){
+              gr_screen_draw(
+                nearby_drop.items[i].animation.update(game_time),
+                0.34f + cast(float)i * 0.065, 0.05f, 0.0f, 
+                0.0f, 0.0f, 
+                0.0f, 
+                0.045f
+              );
+            }
           }
         }
       }
@@ -194,8 +218,65 @@ void player_render_gui(){
   }
 }
 
+// Swaps that item slot with the corresponding slot in nearby_drop
+void player_swap_item(int i){
+  if(player_entity !is null && player_entity.valid && nearby_drop !is null && nearby_drop.valid && nearby_drop.items[i] !is null){
+    Item temp = nearby_drop.items[i];
+    nearby_drop.items[i] = player_entity.items[i];
+    player_entity.items[i] = temp;
+  }
+}
+
+void player_equip_item(int i){
+  if(player_entity !is null && player_entity.valid 
+     && player_entity.items[i] !is null && player_entity.items[i].valid 
+     && player_entity.entity_subtype_id == Entity.subtype_structured_entity){
+    Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
+    switch(player_entity_structured.items[i].item_subtype_id){
+      default: break;
+      case Item.subtype_weapon:
+        Item temp = player_entity_structured.items[i];
+        player_entity_structured.items[i] = player_entity_structured.weapon;
+        player_entity_structured.equip_weapon(cast(Weapon)temp);
+        break;
+      case Item.subtype_armor:
+        Item temp = player_entity_structured.items[i];
+        player_entity_structured.items[i] = player_entity_structured.armor;
+        player_entity_structured.equip_armor(cast(Armor)temp);
+        break;
+      case Item.subtype_accessory:
+        Item temp = player_entity_structured.items[i];
+        player_entity_structured.items[i] = player_entity_structured.accessory;
+        player_entity_structured.equip_accessory(cast(Accessory)temp);
+        break;
+    }
+  }
+}
+
+void player_use_item(int i){
+  if(player_entity !is null && player_entity.valid && player_entity.items[i] !is null && player_entity.items[i].valid){
+    player_entity.items[i].use(player_entity);
+  }
+}
+
+void player_interact_item(int i){
+  if(shift_pressed)
+    player_swap_item(i);
+  else if(ctrl_pressed)
+    player_equip_item(i);
+  else 
+    player_use_item(i);
+}
+
 void player_key_function(){
   switch(gr_key){
+    case GR_LSHIFT:
+      shift_pressed = (gr_key_pressed > 0);
+      break;
+    case GR_LCTRL:
+      ctrl_pressed = (gr_key_pressed > 0);
+      break;
+    
     case move_up_button:
       if(gr_key_pressed)
         move_up_pressed = true;
@@ -226,6 +307,36 @@ void player_key_function(){
         writeln("collides with walls toggled to: ", player_entity.interacts_with_walls);
       }
       break;
+      
+    // Gui toggles
+    case gui_show_primary_button:
+      if(gr_key_pressed)
+        gui_show_primary = !gui_show_primary;
+      break;
+    case gui_show_equipment_button:
+      if(gr_key_pressed)
+        gui_show_equipment = !gui_show_equipment;
+      break;
+    case gui_show_items_button:
+      if(gr_key_pressed)
+        gui_show_items = !gui_show_items;
+      break;
+    case gui_show_stats_button:
+      if(gr_key_pressed)
+        gui_show_stats = !gui_show_stats;
+      break;
+      
+    // Item use
+    case GR_1: if(gr_key_pressed) player_interact_item(0); break;
+    case GR_2: if(gr_key_pressed) player_interact_item(1); break;
+    case GR_3: if(gr_key_pressed) player_interact_item(2); break;
+    case GR_4: if(gr_key_pressed) player_interact_item(3); break;
+    case GR_5: if(gr_key_pressed) player_interact_item(4); break;
+    case GR_6: if(gr_key_pressed) player_interact_item(5); break;
+    case GR_7: if(gr_key_pressed) player_interact_item(6); break;
+    case GR_8: if(gr_key_pressed) player_interact_item(7); break;
+      
+    
     default: break;
   }
 }

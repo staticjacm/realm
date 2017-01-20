@@ -26,6 +26,6 @@ abstract class Material : Validatable {
   void collide(Drop other){}
   void collide(Agent other){}
   void collide(Wall wall){}
-  void over(Ground ground){}
+  void collide(Ground ground){}
   void update(){}
 }

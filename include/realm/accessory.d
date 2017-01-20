@@ -2,6 +2,7 @@ module accessory;
 
 import item;
 import entity;
+import structured_entity;
 import shot;
 import wall;
 import ground;
@@ -13,6 +14,9 @@ class Accessory : Item {
   }
   
   float modify_damage(float damage){ return damage; }
+  
+  void equipped(Structured_entity entity){}
+  void dequipped(Structured_entity entity){}
   
   /*
   When a structured entity is wearing an accessory item and collides with something, the 

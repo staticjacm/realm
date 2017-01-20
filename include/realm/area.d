@@ -98,8 +98,8 @@ class Area : Validatable {
     if(ground !is null && ground.interacts){
       foreach(Agent agent; agents){
         if(agent.interacts_with_grounds){
-          ground.under(agent);
-          agent.over(ground);
+          ground.collide(agent);
+          agent.collide(ground);
         }
       }
     }
@@ -116,6 +116,7 @@ class Area : Validatable {
               foreach(Agent check_agent; check_area.agents){
                 if(agent !is check_agent && agent.check_for_overlap(check_agent)){
                   // agent or checkagent might be killed here, so check validity
+                  // writeln(agent.id, " fid", agent.faction_id, " area collisions with ", check_agent.id, " fid", check_agent.faction_id);
                   agent.collide_agent_subtype(check_agent);
                   if(check_agent.valid)
                     check_agent.collide_agent_subtype(agent);

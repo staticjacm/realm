@@ -26,6 +26,7 @@ class Fire_staff_1 : Weapon {
   
   this(){
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
+    tier = 1;
   }
   
   override void use(Entity entity){
@@ -35,6 +36,7 @@ class Fire_staff_1 : Weapon {
         fireball.position = entity.position;
         fireball.velocity = entity.direction * 10;
         fireball.world = entity.world;
+        fireball.faction_id = entity.faction_id;
         ready = false;
         ready_time = game_time + attack_delay;
       }

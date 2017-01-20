@@ -17,7 +17,6 @@ class Shot : Agent {
   
   float energy; /// A catch-all stat for shots which represents how much of an effect it can have on other things
   
-  
   this(){
     super();
   }
@@ -27,18 +26,11 @@ class Shot : Agent {
   
   float damage(){ return 0; }
   
+  alias collide = Agent.collide;
   override void collide(Entity other){
     if(other.faction_id != faction_id)
       other.apply_damage(damage);
-  }
-  override void collide(Shot other){}
-  override void collide(Drop other){}
-  override void collide(Agent other){}
-  override void collide(Wall wall){
-    
-  }
-  override void over(Ground ground){
-    
+    super.collide(other);
   }
   
 }
