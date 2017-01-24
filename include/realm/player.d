@@ -25,6 +25,8 @@ import vector;
 
 float view_size = 15;
 
+float sound_max_distance = 50.0f;
+
 Drop nearby_drop;
 Effect player_effect;
 Entity player_entity;
@@ -65,6 +67,8 @@ float view_pull_strength = 100.0;
 float view_friction = 10;
 float view_shake_amount = 0;
 int view_shake_frames = 0;
+bool use_spring_shake_model = false;
+bool use_screen_shake = true;
 
 class Player_effect : Effect {
   alias collide = Effect.collide;
@@ -79,6 +83,15 @@ class Player_effect : Effect {
 void shake_screen(float amount){
   view_shake_amount = amount.sqrt;
   view_shake_frames = cast(int)(2*amount);
+}
+
+void shake_screen(Vector2f position, float magnitude){
+  if(player_entity !is null){
+    view_shake_amount = (position - player_entity.position).norm;
+    view_shake_amount = 5.0f/(0.1f + view_shake_amount/50.0f);
+    view_shake_frames = cast(int)(4*view_shake_amount.sqrt);
+    // writefln(" amount: %f, frames %d", view_shake_amount, view_shake_frames);
+  }
 }
 
 void player_register(Entity entity){
@@ -105,12 +118,28 @@ void player_update(){
     
     view_target = player_entity.position;
   }
-  view_velocity += ((view_target + view_target_offset - view_position)*view_pull_strength - view_velocity*view_friction)*frame_delta;
-  if(frame_delta > 0)
-    view_position += view_velocity*frame_delta;
-  if(view_shake_frames > 0){
-    view_velocity += rvector(view_shake_amount);
-    view_shake_frames--;
+  if(use_screen_shake){
+    if(use_spring_shake_model){
+      view_velocity += ((view_target + view_target_offset - view_position)*view_pull_strength - view_velocity*view_friction)*frame_delta;
+      if(frame_delta > 0)
+        view_position += view_velocity*frame_delta;
+      if(view_shake_frames > 0){
+        view_velocity += rvector(view_shake_amount);
+        view_shake_frames--;
+      }
+    }
+    else {
+      if(view_shake_frames > 0){
+        view_position = view_target + rvector(view_shake_amount*0.03f);
+        view_shake_frames --;
+      }
+      else {
+        view_position = view_target;
+      }
+    }
+  }
+  else {
+    view_position = view_target;
   }
   
   if(nearby_drop !is null && nearby_drop.valid){
@@ -123,6 +152,7 @@ void player_update(){
 }
 
 void player_render_near(){
+
   if(player_entity.world !is null){
     // get topleft corner of screen
     float view_left = gr_view_left.floor;
@@ -133,10 +163,10 @@ void player_render_near(){
     for(float x = view_left; x < view_right; x++){
       for(float y = view_bottom; y < view_top; y++){
         Area render_area = player_entity.world.get_area(Vector2f(x, y));
-        if(render_area !is null){
+        if(render_area !is null && render_area.valid){
           render_area.render;
-        } 
-      } 
+        }
+      }
     }
   }
 }
@@ -394,9 +424,28 @@ void player_mouse_click_function(){
   }
 }
 
-void player_play_audio(int audio, Vector2f position){
-  int channel = gr_play_once(audio);
-  float xdif = position.x - player_entity.position.x;
-  // 255/2*(2/Pi ArcTan[x] + 1)
-  gr_set_panning(channel, cast(int)(127*(2/PI*atan(-xdif) + 1)));
+int player_play_audio(int audio, World world, Vector2f position, int loops = 0){
+  if(player_entity !is null && player_entity.valid && world is player_entity.world){
+    int channel = gr_play(audio, loops);
+    Vector2f pdif = position - player_entity.position;
+    // float xdif = position.x - player_entity.position.x;
+    // 255/2*(2/Pi ArcTan[x] + 1)
+    // gr_set_panning(channel, cast(int)(127*(2/PI*atan(-pdif.x) + 1)));
+    // gr_set_attenuation(channel, cast(int)(255*pdif.norm/sound_max_distance));
+    set_audio_panning_and_attenuation(channel, pdif, sound_max_distance);
+    return channel;
+  }
+  else
+    return -1;
+}
+
+void player_adjust_audio(int channel, World world, Vector2f position){
+  if(channel >= 0 && player_entity !is null && player_entity.valid){
+    if(world is player_entity.world){
+      Vector2f pdif = position - player_entity.position;
+      set_audio_panning_and_attenuation(channel, pdif, sound_max_distance);
+    }
+    else
+      gr_stop(channel);
+  }
 }

@@ -1,0 +1,141 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4714,        133]
+NotebookOptionsPosition[      4324,        116]
+NotebookOutlinePosition[      4666,        131]
+CellTagsIndexPosition[      4623,        128]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data1", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ToExpression", "/@", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"#", ",", "\"\< \>\""}], "]"}]}], "&"}], "/@", 
+    RowBox[{"Import", "[", 
+     RowBox[{
+     "\"\<U:\\\\save\\\\game\\\\realm\\\\gh\\\\realm\\\\debug_data1.txt\>\"", 
+      ",", "\"\<Lines\>\""}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"data2", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ToExpression", "/@", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"#", ",", "\"\< \>\""}], "]"}]}], "&"}], "/@", 
+    RowBox[{"Import", "[", 
+     RowBox[{
+     "\"\<U:\\\\save\\\\game\\\\realm\\\\gh\\\\realm\\\\debug_data2.txt\>\"", 
+      ",", "\"\<Lines\>\""}], "]"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.694263117005429*^9, 3.6942631301011333`*^9}, {
+  3.694263778796849*^9, 3.6942637855193205`*^9}, {3.694263914564093*^9, 
+  3.694263942878398*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"maxfilter", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"l", ",", "_Real", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"r", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Mean", "[", 
+          RowBox[{"#", "\[LeftDoubleBracket]", 
+           RowBox[{"All", ",", "1"}], "\[RightDoubleBracket]"}], "]"}], ",", 
+         RowBox[{"Max", "[", 
+          RowBox[{"#", "\[LeftDoubleBracket]", 
+           RowBox[{"All", ",", "2"}], "\[RightDoubleBracket]"}], "]"}]}], 
+        "}"}], "&"}], "/@", 
+      RowBox[{"Partition", "[", 
+       RowBox[{"l", ",", 
+        RowBox[{
+         RowBox[{"2", "r"}], "+", "1"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.694264916821144*^9, 3.694265095614275*^9}, {
+  3.694265129219613*^9, 3.694265197313875*^9}, {3.694265644917801*^9, 
+  3.6942656479177933`*^9}, {3.69426596595527*^9, 3.6942659708235064`*^9}, {
+  3.694266059967759*^9, 3.6942661236126833`*^9}, {3.694266163864435*^9, 
+  3.694266191292665*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"ListLogPlot", "[", 
+  RowBox[{"{", "data1", "}"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListLogPlot", "[", 
+  RowBox[{"{", "data2", "}"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6942636534267807`*^9, 3.6942636552940207`*^9}, {
+  3.6942637882061033`*^9, 3.6942637937557917`*^9}, {3.6942639812008314`*^9, 
+  3.694263985608759*^9}, {3.6942656208738174`*^9, 3.6942656255519333`*^9}, {
+  3.6942665482405367`*^9, 3.694266556572075*^9}, {3.694266616727059*^9, 
+  3.6942666169752254`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"maxfilter", "[", 
+  RowBox[{"data1", ",", "10"}], "]"}]], "Input",
+ CellChangeTimes->{{3.694266510564493*^9, 3.6942665182736173`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"ListLogPlot", "[", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{"maxfilter", "[", 
+    RowBox[{"data1", ",", "10"}], "]"}], "\[IndentingNewLine]", "}"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListLogPlot", "[", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{"maxfilter", "[", 
+    RowBox[{"data2", ",", "10"}], "]"}], "\[IndentingNewLine]", "}"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.6942644960710993`*^9, 3.6942645331977763`*^9}, {
+   3.6942646190058126`*^9, 3.694264620383729*^9}, {3.6942647469604044`*^9, 
+   3.694264773970359*^9}, {3.694265267208725*^9, 3.6942653487339144`*^9}, {
+   3.6942658603877563`*^9, 3.6942658713780613`*^9}, {3.6942659224700212`*^9, 
+   3.694265929012714*^9}, 3.6942662384650207`*^9, {3.6942663354950314`*^9, 
+   3.694266341775206*^9}, {3.6942664202943964`*^9, 3.6942664266556234`*^9}, {
+   3.6942666368274193`*^9, 3.694266637378786*^9}}]
+},
+WindowSize->{775, 692},
+WindowMargins->{{Automatic, 291}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 943, 25, 88, "Input"],
+Cell[1504, 47, 1223, 32, 69, "Input"],
+Cell[2730, 81, 511, 9, 50, "Input"],
+Cell[3244, 92, 158, 3, 30, "Input"],
+Cell[3405, 97, 915, 17, 126, "Input"]
+}
+]
+*)
+

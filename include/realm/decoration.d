@@ -1,5 +1,6 @@
 module decoration;
 
+import dbg;
 import game;
 import renderable;
 import sllist;
@@ -36,5 +37,4 @@ class Decoration : Renderable {
     else
       super.render;
   }
-  
 }

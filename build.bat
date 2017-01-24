@@ -4,6 +4,7 @@ REM Use the following line for an optimized build
 REM @dmd -release -O -inline -noboundscheck -odobj realm ^
 dmd -g -profile -odobj realm ^
 include/sgogl ^
+include/realm/dbg ^
 include/realm/game ^
 include/realm/timer ^
 include/realm/sgogl_interface ^

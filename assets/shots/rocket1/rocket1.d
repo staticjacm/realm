@@ -44,7 +44,7 @@ class Rocket1 : Shot {
   this(){
     super();
     animation = new Animation([image_1], 1, Vector2f(0.5, 0.5), Vector2f(1, 1));
-    spin = uniform(-15.0, 15.0);
+    // spin = uniform(-15.0, 15.0);
     fire_time = game_time + fire_delay;
     restitution = 1.3;
   }
@@ -58,23 +58,21 @@ class Rocket1 : Shot {
     if(firing){
       Vector2f acceleration_vector = cs2d(angle);
       accelerate(acceleration_vector*50);
-        // if(uniform(0, 100) < 1){
-          // Rocket1 performancetester = new Rocket1(position, 1);
-          // performancetester.world = world;
-          // performancetester.velocity = -velocity;
-        // }
       for(int i = 0; i < uniform(0, 2); i++){
         Fireball1 exhaust = new Fireball1;
         exhaust.position = position;
-        exhaust.world = world;
+        world.place_agent(exhaust);
         exhaust.set_lifetime = 200;
+        exhaust.faction_id = faction_id;
         exhaust.velocity = -acceleration_vector*10.0;
       }
+      if(running_audio_channel >= 0)
+        player_adjust_audio(running_audio_channel, world, position);
     }
     else if(!firing && fire_time < game_time){
       firing = true;
-      player_play_audio(fire_audio, position);
-      running_audio_channel = gr_play(running_audio, -1);
+      player_play_audio(fire_audio, world, position);
+      running_audio_channel = player_play_audio(running_audio, world, position, -1);
     }
     angle += spin * frame_delta;
     spin *= 0.99;
@@ -84,22 +82,41 @@ class Rocket1 : Shot {
     for(int i = 0; i < uniform(5, 10); i++){
       Fireball1 exhaust = new Fireball1;
       exhaust.position = position;
-      exhaust.world = world;
-      exhaust.velocity = cs2(uniform(-PI, PI));
+      world.place_agent(exhaust);
+      exhaust.faction_id = faction_id;
+      exhaust.set_lifetime = 100;
+      exhaust.velocity = cs2(uniform(-PI, PI))*2.0f;
     }
     if(running_audio_channel >= 0)
       gr_stop(running_audio_channel);
-    player_play_audio(explosion_audio, position);
-    shake_screen(20);
+    player_play_audio(explosion_audio, world, position);
+    shake_screen(position, 20);
     destroy(this);
   }
+  
+  override bool destroy_on_agent_collision(){ return false; }
+  override bool destroy_on_wall_collision(){ return false; }
   
   override void collide(Wall wall){
     super.collide(wall);
     static float explode_angle = PI/2;
     // This is to calculate the angle of collision ( the arccos of the dot product of the normal direction and normal position difference )
     Vector2f p_dif = ((wall.position + Vector2f(.5, .5)) - position).normalize;
-    gr_draw_line(position, position + p_dif, 1.0);
+    // gr_draw_line(position, position + p_dif, 1.0);
+    Vector2f direction = cs2d(angle);
+    float dprod = p_dif.dot(direction);
+    float collision_angle = acos(dprod);
+    spin = -200*angle3(direction, p_dif);
+    if( firing && abs(collision_angle) < explode_angle || velocity.norm > 100.0)
+      explode;
+  }
+  
+  override void collide(Entity entity){
+    super.collide(entity);
+    static float explode_angle = PI/2;
+    // This is to calculate the angle of collision ( the arccos of the dot product of the normal direction and normal position difference )
+    Vector2f p_dif = ((entity.position + Vector2f(.5, .5)) - position).normalize;
+    // gr_draw_line(position, position + p_dif, 1.0);
     Vector2f direction = cs2d(angle);
     float dprod = p_dif.dot(direction);
     float collision_angle = acos(dprod);

@@ -1,7 +1,11 @@
 module renderable;
 
+import core.thread;
+import std.parallelism;
+import std.concurrency;
 import std.stdio;
 import std.string;
+import dbg;
 import sgogl;
 import validatable;
 import game;
@@ -31,6 +35,9 @@ class Renderable : Validatable {
     if(animation !is null)
       destroy(animation);
   }
+  
+  // Call just before a standard removal (example: shot hits wall, this controls effects before shot is destroyed)
+  void kill(){}
   
   /// The angle to compensate for the rotation of the image when rendering
   float render_angle(){ return 0; }

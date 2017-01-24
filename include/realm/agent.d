@@ -80,6 +80,7 @@ class Agent : Renderable {
   Agent_list.Index area_index;
   Material material;
   Vector2f velocity = Vector2f(0, 0);
+  float stop_speed = 0.01f;
   float mass = 1;
   bool moving = false; /// is its velocity nonzero?
   bool moved = false; /// has the agent been moved since it was last placed?
@@ -100,9 +101,6 @@ class Agent : Renderable {
     id = gid++;
     master_index = master_list.add_front(this);
   }
-  
-  int agent_subtype_id(){ return subtype_none; }
-  
   ~this(){
     master_index.remove;
     if(area !is null && area.valid){
@@ -112,6 +110,9 @@ class Agent : Renderable {
     if(material !is null && material.valid)
       destroy(material);
   }
+  
+  
+  int agent_subtype_id(){ return subtype_none; }
   
   override string toString(){ return format("agent %d", id); }
   
@@ -160,17 +161,22 @@ class Agent : Renderable {
       material.collide(drop);
   }
   void collide(Agent agent){
+    Vector2f pdif = this.position - agent.position;
+    accelerate(pdif*0.2);
     if(material !is null)
       material.collide(agent);
   }
   void collide_agent_subtype(Agent agent){
-    switch(agent.agent_subtype_id){
-      case subtype_none:
-      default: collide(agent); break;
-      case subtype_entity: collide(cast(Entity)agent);  break;
-      case subtype_shot:   collide(cast(Shot)agent);      break;
-      case subtype_drop:   collide(cast(Drop)agent);      break;
-      case subtype_portal: collide(cast(Portal)agent);  break;
+    if(agent !is null && agent.valid){
+      collide(agent);
+      switch(agent.agent_subtype_id){
+        case subtype_none:
+        default: break;
+        case subtype_entity: collide(cast(Entity)agent);  break;
+        case subtype_shot:   collide(cast(Shot)agent);      break;
+        case subtype_drop:   collide(cast(Drop)agent);      break;
+        case subtype_portal: collide(cast(Portal)agent);  break;
+      }
     }
   }
   void collide(Wall wall){
@@ -187,7 +193,7 @@ class Agent : Renderable {
   ++/
   void accelerate(Vector2f acceleration){
     velocity += acceleration*frame_delta;
-    if(velocity.x != 0 || velocity.y != 0)
+    if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
       moving = true;
     else
       moving = false;
@@ -197,7 +203,8 @@ class Agent : Renderable {
   }
   void set_velocity(Vector2f new_velocity){
     velocity = new_velocity;
-    if(velocity.x != 0 || velocity.y != 0)
+    // if(velocity.x != 0 || velocity.y != 0)
+    if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
       moving = true;
     else
       moving = false;

@@ -26,11 +26,28 @@ class Shot : Agent {
   
   float damage(){ return 0; }
   
+  bool destroy_on_agent_collision(){ return true; }
+  bool destroy_on_wall_collision(){ return true; }
+  
   alias collide = Agent.collide;
+  
+  override void collide(Wall wall){
+    super.collide(wall);
+    // if(destroy_on_wall_collision){
+      // kill;
+      // destroy(this);
+    // }
+  }
+  
   override void collide(Entity other){
-    if(other.faction_id != faction_id)
-      other.apply_damage(damage);
     super.collide(other);
+    if(other.faction_id != faction_id){
+      other.apply_damage(damage);
+      // if(destroy_on_agent_collision){
+        // kill;
+        // destroy(this);
+      // }
+    }
   }
   
 }

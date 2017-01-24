@@ -136,17 +136,15 @@ class Entity : Agent {
     effect.entity_index = effects.add(effect);
   }
   
-  void kill(){
-    destroy(this);
-  }
-  
   void apply_damage(float damage){
     is_hurt = true;
     hurt_switch_time = game_time + hurt_switch_delay;
     if(0 < damage){
       health -= fmax(damage - l_defence, 0) / m_defence;
-      if(health <= 0)
+      if(health <= 0){
         kill;
+        destroy(this);
+      }
     }
   }
   

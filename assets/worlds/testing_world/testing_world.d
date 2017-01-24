@@ -2,6 +2,7 @@ module testing_world;
 
 import std.stdio;
 import std.random;
+import dbg;
 import game;
 import world;
 import player;

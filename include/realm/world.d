@@ -2,6 +2,7 @@ module world;
 
 import std.stdio;
 import std.math;
+import dbg;
 import grid;
 import decoration;
 import game;
@@ -35,6 +36,7 @@ class World : world_grid_type {
   World_list.Index world_index;
   Metaobject_list metaobjects;
   bool allow_decorations = false; // allows decorations to spawn
+  // bool allow_decorations = true; // allows decorations to spawn
   
   this(){
     super();
@@ -204,6 +206,7 @@ class World : world_grid_type {
           agent.area.remove_agent(agent);
         agent.area_index.remove;
         area.add_agent(agent);
+        agent.moving = true;
       }
     }
     else {

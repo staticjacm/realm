@@ -31,10 +31,7 @@ class Animation : Validatable {
     anchor = _anchor;
     scale = _scale;
   }
-  
-  void destroy(){
-    object.destroy(this);
-  }
+  ~this(){}
   
   void play(){
     playing = true;

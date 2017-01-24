@@ -1,6 +1,7 @@
 module sgogl_interface;
 
 import std.stdio;
+import std.math;
 import vector;
 import sgogl;
 
@@ -69,4 +70,14 @@ void draw_string(string s, uint[] cimgs, float x, float y, float z, float sx, fl
       }
     xacc += sx;
   }
+}
+
+void gr_set_attenuation(int channel, Vector2f pdif, float max_distance){
+  sgogl.gr_set_attenuation(channel, cast(int)(255.0f*pdif.norm/max_distance));
+}
+
+void set_audio_panning_and_attenuation(uint channel, Vector2f pdif, float max_distance){
+  gr_set_attenuation(channel, pdif, max_distance);
+  // 255/2*(2/Pi ArcTan[x] + 1)
+  gr_set_panning(channel, cast(int)(127*(2/PI*atan(-pdif.x) + 1)));
 }

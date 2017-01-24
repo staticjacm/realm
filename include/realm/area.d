@@ -30,6 +30,7 @@ class Area : Validatable {
   static Area_list update_list;
   static bool type_initialized = false;
   static int gid = 0;
+  static int total_number = 0;
   static const(float) area_width = 1.0f, area_height = 1.0f;
   
   static initialize_type(){
@@ -55,6 +56,7 @@ class Area : Validatable {
     position = _position;
     agents = new Agent_list;
     decorations = new Decoration_list;
+    total_number++;
   }
   
   ~this(){
@@ -72,6 +74,7 @@ class Area : Validatable {
     update_index.remove;
     unset_wall;
     unset_ground;
+    total_number--;
     world.remove(position);
   }
   
@@ -165,10 +168,8 @@ class Area : Validatable {
       emptyq = false;
     else
       set_updating = false;
-    if(emptyq){
-      writefln("destroy area %d", id);
+    if(emptyq)
       destroy(this);
-    }
     
   }
   

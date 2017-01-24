@@ -18,13 +18,10 @@ class LList(T) {
     T value;
     
     this(T t){ value = t; }
+    ~this(){}
     
     override string toString(){
       return "llist_element("~value.to!string~")";
-    }
-    
-    void destroy(){
-      object.destroy(this);
     }
   }
   
@@ -96,6 +93,19 @@ class LList(T) {
       result = dg(cel.value);
       if(result) break;
       cel = nel;
+    }
+    return result;
+  }
+  
+  int opApply(scope int delegate(ref Index) dg){
+    int result = 0;
+    Index cin = Index(this, first);
+    Index nin; // next element
+    while(cin.element !is null){
+      nin.element = cin.element.next;
+      result = dg(cin);
+      if(result) break;
+      cin.element = nin.element;
     }
     return result;
   }

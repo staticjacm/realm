@@ -1,0 +1,10 @@
+
+Boss:
+Giant Sea Turtle
+
+Enemies:
+monkey, chimpanzee, gorilla
+parrot, tucan
+piranha, squid, whale, giant squid, sea turtle
+crab, snake, viper
+pirate shimate, pirate swashbuckler, pirate bombardier, pirate captain

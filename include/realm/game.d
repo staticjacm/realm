@@ -8,6 +8,7 @@ import std.math;
 import sgogl;
 import sgogl_interface;
 
+import dbg;
 import timer;
 import testing_world;
 import renderable;
@@ -37,6 +38,8 @@ import turret;
 import kernel_portal;
 
 alias Vector2f = Vector2!float;
+
+File fileout1, fileout2;
 
 Structured_entity test_entity;
 World test_world;
@@ -110,6 +113,10 @@ void initialize(){
   
   // load_character_images;
   
+  // fileout1 = File("debug_data1.txt", "w");
+  // fileout2 = File("debug_data2.txt", "w");
+  
+  
   initialize_drop_tiers;
   
   World.initialize_type;
@@ -172,19 +179,22 @@ void initialize(){
   Fire_turret_1 turret = new Fire_turret_1;
   turret.position = Vector2f(17.0f, 17.0f);
   
-  Kernel_portal_1 test_portal = new Kernel_portal_1;
-  test_portal.position = Vector2f(22.0f, 20.0f);
-  test_portal.exit_position = Kernel.center_spawn;
+  Kernel_portal_1 test_portal_1 = new Kernel_portal_1;
+  test_portal_1.position = Vector2f(20.0f, 20.0f);
+  test_portal_1.exit_position = Vector2f(25.0f, 20.0f);
   
   Kernel_portal_1 test_portal_2 = new Kernel_portal_1;
-  test_portal_2.position = Kernel.center_spawn + Vector2f(2.0f, 0.0f);
-  test_portal_2.exit_position = Vector2f(22.0f, 20.0f);
+  // test_portal_2.position = Kernel.center_spawn + Vector2f(2.0f, 0.0f);
+  test_portal_2.position = Vector2f(25.0f, 20.0f);
+  test_portal_2.exit_position = Vector2f(20.0f, 20.0f);
   
   test_world = new Testing_world();
   test_world.place_agent(player_entity);
   test_world.place_agent(enemy);
   test_world.place_agent(turret);
-  test_world.place_agent(test_portal);
+  test_world.place_agent(test_portal_1);
+  test_world.place_agent(test_portal_2);
+  test_portal_1.exit_world = test_world;
   test_portal_2.exit_world = test_world;
   // player_entity.world = test_world;
   test_drop.position = Vector2f(21.0f, 19.0f);
@@ -192,9 +202,9 @@ void initialize(){
   test_world.place_agent(test_drop);
   // player_entity.position = Kernel.center_spawn;
   
-  kernel_world = new Kernel;
-  test_portal.exit_world = kernel_world;
-  kernel_world.place_agent(test_portal_2);
+  // kernel_world = new Kernel;
+  // test_portal_1.exit_world = kernel_world;
+  // kernel_world.place_agent(test_portal_2);
   // player_entity.world = kernel_world;
   // player_entity.position = Kernel.center_spawn;
   
@@ -206,6 +216,7 @@ void quit(){
 }
 
 void render(){
+
   gr_clear;
   
   // test_world.render;
@@ -229,12 +240,15 @@ void render(){
   gr_refresh;
 }
 
+immutable(bool) debug_update = false;
 void update(){
   
+  static if(debug_update) write_location_debug;
   game_time = game_timer.msecs;
   frame++;
   frame_timer.start;
 
+  static if(debug_update) write_location_debug;
   gr_register_events();  
   while(gr_has_event()){
     switch(gr_read()){
@@ -247,34 +261,44 @@ void update(){
     }
   }
   
+  static if(debug_update) write_location_debug;
   player_update;
   
+  static if(debug_update) write_location_debug;
   foreach(Agent agent; Agent.master_list){
     agent.update;
   }
   
+  static if(debug_update) write_location_debug;
   foreach(World world; World.master_list){
     world.update;
   }
   
+  static if(debug_update) write_location_debug;
   foreach(Rooted rooted; Rooted.update_list){
     rooted.update;
   }
   
+  static if(debug_update) write_location_debug;
   foreach(Area area; Area.update_list){
     area.update;
   }
   
+  static if(debug_update) write_location_debug;
   render;
   
+  static if(debug_update) write_location_debug;
   frame_time = frame_timer.msecs;
   frame_delta = frame_timer.hnsecsf;
+  static if(debug_update) write_location_debug;
   if(frame % 1000 == 0){
     writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
     writeln("  number of agents: ", Agent.master_list.length);
     writeln("  number of decorations: ", Decoration.total_number);
-    // writeln("  number of areas: ", test_world.length);
+    writeln("  number of areas: ", Area.total_number);
   }
   // if(current_game_time > 5000) running = false;
-  Thread.sleep(dur!"msecs"(0));
+  static if(debug_update) write_location_debug;
+  Thread.sleep(dur!"msecs"(1));
+  static if(debug_update) write_location_debug;
 }

@@ -1,10 +1,6 @@
 # To Do:
 
-* GUI displaying stats
-
 # Boring To dos:
-
-* Animation depth rendering isn't working properly again?
 
 * Test entity is stopping attacking like it should after losing target then regaining it
 
@@ -24,9 +20,6 @@
 
 # Future To Dos:
 
-* User interface: displaying character images in sequences (text), buttons, dragables
-* Menus
-
 * Content
 
 * Find a different compiler for release builds. Supposedly the gnu compiler produces much faster binaries than dmd
@@ -43,6 +36,11 @@
 
 # Already done:
 
+* Replacing the testing fire_staff_1 produced fireball1 shots with rocket1's causes a strange lag after awhile
+
+* Animation depth rendering isn't working properly again?
+
+* GUI displaying stats
 * GUI displaying items
   * Sample items
 * GUI displaying accessory

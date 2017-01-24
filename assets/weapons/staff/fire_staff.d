@@ -8,6 +8,7 @@ import animation;
 import entity;
 import weapon;
 import fireball1;
+import rocket1;
 
 class Fire_staff_1 : Weapon {
   static bool type_initialized = false;
@@ -22,7 +23,7 @@ class Fire_staff_1 : Weapon {
   
   bool ready = true;
   long ready_time;
-  long attack_delay = 300;
+  long attack_delay = 100;
   
   this(){
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
@@ -34,8 +35,8 @@ class Fire_staff_1 : Weapon {
       if(entity !is null && entity.valid){
         Fireball1 fireball = new Fireball1;
         fireball.position = entity.position;
-        fireball.velocity = entity.direction * 10;
-        fireball.world = entity.world;
+        fireball.velocity = entity.direction * 30;
+        entity.world.place_agent(fireball);
         fireball.faction_id = entity.faction_id;
         ready = false;
         ready_time = game_time + attack_delay;
