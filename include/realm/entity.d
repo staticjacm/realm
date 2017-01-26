@@ -45,9 +45,10 @@ class Entity : Agent {
   bool is_walking = false;
   long walking_switch_time;
   int walking_switch_delay = 200;
+  
   bool is_hurt    = false;
   long hurt_switch_time;
-  int hurt_switch_delay = 10;
+  int hurt_switch_delay = 100;
   
   Item[] items;
   
@@ -156,7 +157,7 @@ class Entity : Agent {
   }
   
   void find_new_target(){
-    test_timer.start;
+    // test_timer.start;
     if(world !is null){
       Entity_list candidate_entities;
       candidate_entities = world.get_entities_nearby(position, targeting_range);
@@ -178,7 +179,7 @@ class Entity : Agent {
           target = entity;
       }
     }
-    test_timer.report("find_new_target ");
+    // test_timer.report("find_new_target ");
   }
   
   void behavior(){
@@ -239,46 +240,65 @@ class Entity : Agent {
     super.render;
   }
   
+  // Calculate damaged from a collision based on some speed change
+  float collision_damage(float speed_delta){
+    if(speed_delta < 100.0f)
+      return 0.0f;
+    else
+      return speed_delta*speed_delta / 10_000.0f;
+  }
+  override void set_velocity(Vector2f new_velocity){
+    apply_damage(collision_damage((new_velocity - velocity).norm));
+    if(valid)
+      super.set_velocity(new_velocity);
+  }
+  
   alias collide = Agent.collide;
   override void collide(Entity other){
     foreach(Effect effect; effects){
       effect.collide(other);
     }
-    super.collide(other);
+    if(valid)
+      super.collide(other);
   }
   override void collide(Shot other){
     foreach(Effect effect; effects){
       effect.collide(other);
     }
-    super.collide(other);
+    if(valid)
+      super.collide(other);
     
   }
   override void collide(Drop other){
     foreach(Effect effect; effects){
       effect.collide(other);
     }
-    super.collide(other);
+    if(valid)
+      super.collide(other);
     
   }
   override void collide(Agent other){
     foreach(Effect effect; effects){
       effect.collide(other);
     }
-    super.collide(other);
+    if(valid)
+      super.collide(other);
     
   }
   override void collide(Wall wall){
     foreach(Effect effect; effects){
       effect.collide(wall);
     }
-    super.collide(wall);
+    if(valid)
+      super.collide(wall);
     
   }
   override void collide(Ground ground){
     foreach(Effect effect; effects){
       effect.collide(ground);
     }
-    super.collide(ground);
+    if(valid)
+      super.collide(ground);
     
   }
 }

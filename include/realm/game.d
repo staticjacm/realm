@@ -18,6 +18,7 @@ import commoner;
 import fire_staff;
 import ring_of_defence;
 import ring_of_speed;
+import dev_ring;
 import shirt;
 import rooted;
 import entity;
@@ -132,6 +133,7 @@ void initialize(){
   Shirt_1.initialize_type;
   Ring_of_defence_1.initialize_type;
   Ring_of_speed_1.initialize_type;
+  Dev_ring_1.initialize_type;
   Fire_turret_1.initialize_type;
   Kernel_portal_1.initialize_type;
   
@@ -151,7 +153,7 @@ void initialize(){
   test_entity.equip_weapon(new Fire_staff_1);
   test_entity.equip_armor(new Shirt_1);
   test_entity.equip_accessory(new Ring_of_defence_1);
-  test_entity.items[0] = new Ring_of_defence_1;
+  test_entity.items[0] = new Dev_ring_1;
   test_entity.items[1] = new Ring_of_speed_1;
   test_entity.items[2] = new Ring_of_defence_1;
   test_entity.items[3] = new Ring_of_speed_1;

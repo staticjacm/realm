@@ -46,6 +46,7 @@ assets/weapons/staff/fire_staff ^
 assets/armors/shirt/shirt ^
 assets/accessories/ring/ring_of_defence ^
 assets/accessories/ring/ring_of_speed ^
+assets/accessories/ring/dev_ring ^
 assets/drops/drop_tiers ^
 assets/grounds/rocky/rocky_ground_1 ^
 assets/grounds/stone/stone_ground_1 ^

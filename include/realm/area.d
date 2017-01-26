@@ -119,7 +119,7 @@ class Area : Validatable {
           if(area !is null){
             if(agent.interacts_with_agents){
               foreach(Agent check_agent; area.agents){
-                if(agent !is check_agent && agent.fast_test_for_collision(check_agent)){
+                if(agent !is check_agent && agent.fast_test_for_collision(check_agent) && check_agent.id > agent.id){
                   Vector2f_2* collision_result = agent.test_for_collision(check_agent);
                   if(collision_result !is null){
                     // agent or checkagent might be killed here, so check validity

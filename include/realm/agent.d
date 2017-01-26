@@ -30,8 +30,6 @@ alias Vector2f = Vector2!float;
 */
 class Agent_list : LList!Agent {}
 
-bool render_overlap_boundary = false;
-
 /*
   Represents a physical object that can inhabit a world.
   A conceptual abstract of floating (can move freely between grid locations) objects
@@ -52,7 +50,7 @@ class Agent : Renderable {
   static bool type_initialized = false;
   static int gid = 0;
   static Agent_list master_list;
-  static draw_colliders = true;
+  static draw_colliders = false;
   
   static initialize_type(){
     if(!type_initialized){
