@@ -7,6 +7,7 @@ import std.math;
 import std.traits;
 
 alias Vector2f = Vector2!float;
+alias Vector2f_2 = Vector2_2!float;
 
 Vector2f rvector(float r){
   return Vector2f(uniform(-r, r), uniform(-r, r));
@@ -30,6 +31,27 @@ Vector2f rotate_by(Vector2f v, float angle){
 }
 Vector2f rotate_perpendicular(Vector2f v){
   return Vector2f(v.x, -v.y);
+}
+
+struct Vector2_2(T) {
+  Vector2!T x;
+  Vector2!T y;
+}
+
+Vector2f quadrant_vector(Vector2f a){
+  bool s1 = a.y > a.x, s2 = a.y > - a.x;
+  if(s1){
+    if(s2)
+      return Vector2f(0.0f, 1.0f);
+    else
+      return Vector2f(-1.0f, 0.0f);
+  }
+  else {
+    if(s2)
+      return Vector2f(1.0f, 0.0f);
+    else
+      return Vector2f(0.0f, -1.0f);
+  }
 }
 
 /++
@@ -80,8 +102,11 @@ struct Vector2(T) {
       }
       float angle(){ return atan2(y, x); }
       float angled(){ return atan2(y, x)*(180/PI); }
+      Vector2!T proj(Vector2!T other){
+        return other*(dot(other)/other.dot(other));
+      }
       Vector2!T reflect(Vector2!T other){
-        return this - other*(dot(other)/other.dot(other))*2;
+        return this - proj(other)*2;
       }
     }
   }

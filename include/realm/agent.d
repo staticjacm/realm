@@ -4,6 +4,7 @@ module agent;
 import std.stdio;
 import std.string;
 import std.math;
+import collision;
 import game;
 import world;
 import area;
@@ -24,22 +25,22 @@ import sgogl_interface;
 
 alias Vector2f = Vector2!float;
 
-/++
-Proxy class from LList!AgentR
-++/
+/*
+  Proxy class from LList!AgentR
+*/
 class Agent_list : LList!Agent {}
 
 bool render_overlap_boundary = false;
 
-/++
-Represents a physical object that can inhabit a world.
-A conceptual abstract of floating (can move freely between grid locations) objects
-Each agent has a size for collision detection purposes
-++/
+/*
+  Represents a physical object that can inhabit a world.
+  A conceptual abstract of floating (can move freely between grid locations) objects
+  Each agent has a size for collision detection purposes
+*/
 class Agent : Renderable {
-  /++
-    Static Variables
-  ++/
+  /*
+    subtype_*s are so the actual agent subtype of an object can be known at compile time
+  */
   static enum {
     subtype_none,
     subtype_shot,
@@ -51,9 +52,11 @@ class Agent : Renderable {
   static bool type_initialized = false;
   static int gid = 0;
   static Agent_list master_list;
+  static draw_colliders = true;
   
   static initialize_type(){
     if(!type_initialized){
+      super.initialize_type;
       master_list = new Agent_list;
     }
   }
@@ -82,13 +85,19 @@ class Agent : Renderable {
   Vector2f velocity = Vector2f(0, 0);
   float stop_speed = 0.01f;
   float mass = 1;
-  bool moving = false; /// is its velocity nonzero?
-  bool moved = false; /// has the agent been moved since it was last placed?
-  float height = 0;
-  float size = 1;
+  bool moving = false; // is its velocity nonzero?
+  bool moved = false; // has the agent been moved since it was last placed?
+  float height = 0; // How high off the ground is it?
+  float size = 1; // How large is it (for collision detection)
   // float friction = 1.0;
   float restitution = 1.0;
   int faction_id = 0; // determines what faction the agent belongs to - primarily for determining who hurts / targets who
+  /*
+    An agent's collider is the shape which determines when and how it collides with other agents and with walls
+    It is a rectangle with center at the agent's position which is rotated by some angle
+  */
+  float collider_size_x = 1.0f, collider_size_y = 1.0f, collider_angle = 0.0f;
+  Vector2f collider_offset = Vector2f(0, 0);
   bool interacts_with_agents  = true;
   bool interacts_with_walls   = true;
   bool interacts_with_grounds = true;
@@ -135,10 +144,28 @@ class Agent : Renderable {
     }
   }
   
+  void set_position(Vector2f new_position){
+    position = new_position;
+    moved = true;
+  }
   
-  bool check_for_overlap(Agent agent){
-    return (abs(agent.position.x - this.position.x) <= (agent.size/2 + this.size/2)) && 
-           (abs(agent.position.y - this.position.y) <= (agent.size/2 + this.size/2));
+  bool fast_test_for_collision(Agent agent){
+    return (abs(position.x - agent.position.x) < (collider_size_x + agent.collider_size_x)) &&
+           (abs(position.y - agent.position.y) < (collider_size_y + agent.collider_size_y))   ;
+  }
+  Vector2f_2* test_for_collision(Wall wall){
+    return wall.test_for_collision(this);
+  }
+  void block(Agent agent, Vector2f collision_point, Vector2f collision_normal){}
+  /*
+    Checks for a collision between this rotated-rectangle agent and another
+    Feels really fucked up tbh fam
+  */
+  Vector2f_2* test_for_collision(Agent agent){
+    return test_for_collision_crect_crect(
+      position, collider_size_x, collider_size_y, collider_angle, 
+      agent.position, agent.collider_size_x, agent.collider_size_y, agent.collider_angle
+    );
   }
   // bool interacts(T : Agent)(){  return true; }
   // bool interacts(T : Wall)(){   return true; }
@@ -203,7 +230,6 @@ class Agent : Renderable {
   }
   void set_velocity(Vector2f new_velocity){
     velocity = new_velocity;
-    // if(velocity.x != 0 || velocity.y != 0)
     if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
       moving = true;
     else
@@ -241,12 +267,22 @@ class Agent : Renderable {
   ++/
   override float render_depth(){ return 100; }
   override void render(){
-    if(render_overlap_boundary){
+    if(draw_colliders){
+      float cosangle = cos(collider_angle);
+      float sinangle = sin(collider_angle);
+      Vector2f a1 = position + Vector2f(- collider_size_x * cosangle + collider_size_y * sinangle,
+                                        - collider_size_x * sinangle - collider_size_y * cosangle);
+      Vector2f a2 = position + Vector2f(  collider_size_x * cosangle + collider_size_y * sinangle,
+                                          collider_size_x * sinangle - collider_size_y * cosangle);
+      Vector2f a3 = position + Vector2f(  collider_size_x * cosangle - collider_size_y * sinangle,
+                                          collider_size_x * sinangle + collider_size_y * cosangle);
+      Vector2f a4 = position + Vector2f(- collider_size_x * cosangle - collider_size_y * sinangle,
+                                        - collider_size_x * sinangle + collider_size_y * cosangle);
       gr_color_alpha(1);
-      gr_draw_line(position + Vector2f(size/2, size/2), position + Vector2f(-size/2, size/2), 1);
-      gr_draw_line(position + Vector2f(-size/2, size/2), position + Vector2f(-size/2, -size/2), 1);
-      gr_draw_line(position + Vector2f(-size/2, -size/2), position + Vector2f(size/2, -size/2), 1);
-      gr_draw_line(position + Vector2f(size/2, -size/2), position + Vector2f(size/2, size/2), 1);
+      gr_draw_line(a1, a2, 1);
+      gr_draw_line(a2, a3, 1);
+      gr_draw_line(a3, a4, 1);
+      gr_draw_line(a4, a1, 1);
     }
     super.render;
   }

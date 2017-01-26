@@ -40,6 +40,8 @@ class Commoner : Structured_entity {
     standing_animation = new Animation([image_standing], 1, Vector2f(0.5, 0), image_dimensions);
     walking_animation  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
     hurt_animation     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
+    collider_size_x = 0.33;
+    collider_size_y = 0.33;
     l_defence = 0.0f;
     m_defence = 100.0f;
     propel_rate = 100.0f;

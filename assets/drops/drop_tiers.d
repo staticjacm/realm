@@ -33,6 +33,8 @@ class Drop_tier_0 : Drop {
   
   this(){
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
+    collider_size_x = 0.5;
+    collider_size_y = 0.5;
   }
   
 }
@@ -50,6 +52,8 @@ class Drop_tier_1 : Drop {
   
   this(){
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
+    collider_size_x = 0.5;
+    collider_size_y = 0.5;
   }
   
 }

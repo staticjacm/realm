@@ -7,6 +7,7 @@ include/sgogl ^
 include/realm/dbg ^
 include/realm/game ^
 include/realm/timer ^
+include/realm/collision ^
 include/realm/sgogl_interface ^
 include/realm/agent ^
 include/realm/validatable ^

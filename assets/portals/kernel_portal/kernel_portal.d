@@ -22,6 +22,7 @@ class Kernel_portal_1 : Portal {
   }
   
   this(){
-    animation = new Animation([image_1, image_2], 0.5f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 2.0f));
+    animation = new Animation([image_1, image_2], 0.5f, Vector2f(0.5f, 0.1f), Vector2f(1.0f, 2.0f));
+    collider_size_x = 0.5;
   }
 }

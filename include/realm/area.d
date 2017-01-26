@@ -109,61 +109,81 @@ class Area : Validatable {
     
     // Collision detecting agents
     first: foreach(Agent agent; agents){
-      if(agent.interacts_with_agents){
-        // Checking collision between agents and agents in a range
-        int range = cast(int)((agent.size/2 + 1.0).floor);
-        for(int xd = -range; xd <= range; xd++){
-          for(int yd = -range; yd <= range; yd++){
-            Area check_area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
-            if(check_area !is null){
-              foreach(Agent check_agent; check_area.agents){
-                if(agent !is check_agent && agent.check_for_overlap(check_agent)){
-                  // agent or checkagent might be killed here, so check validity
-                  // writeln(agent.id, " fid", agent.faction_id, " area collisions with ", check_agent.id, " fid", check_agent.faction_id);
-                  agent.collide_agent_subtype(check_agent);
-                  if(check_agent.valid)
-                    check_agent.collide_agent_subtype(agent);
-                  if(!agent.valid)
-                    continue first;
+      // Checking collision between agents and agents in a range
+      int range = cast(int)((1.5*fmax(agent.collider_size_x, agent.collider_size_y) + 1.0f).floor);
+      // int range_x = cast(int)((agent.collider_size_x + 1.0).floor);
+      // int range_y = cast(int)((agent.collider_size_y + 1.0).floor);
+      for(int xd = -range; xd <= range; xd++){
+        for(int yd = -range; yd <= range; yd++){
+          Area area = world.get_area(position + Vector2f(cast(float)xd, cast(float)yd));
+          if(area !is null){
+            if(agent.interacts_with_agents){
+              foreach(Agent check_agent; area.agents){
+                if(agent !is check_agent && agent.fast_test_for_collision(check_agent)){
+                  Vector2f_2* collision_result = agent.test_for_collision(check_agent);
+                  if(collision_result !is null){
+                    // agent or checkagent might be killed here, so check validity
+                    agent.block(check_agent, collision_result.x, collision_result.y);
+                    agent.collide_agent_subtype(check_agent);
+                    if(check_agent.valid)
+                      check_agent.collide_agent_subtype(agent);
+                    if(!agent.valid)
+                      continue first;
+                  }
+                }
+              }
+            }
+            if(agent.interacts_with_walls && area.wall !is null && area.wall.interacts){
+              Vector2f_2* collision_result = area.wall.test_for_collision(agent);
+              if(collision_result !is null){
+                agent.collide(area.wall);
+                if(agent.valid && area.wall.valid){
+                  area.wall.collision_block(agent, collision_result.x, collision_result.y);
+                  area.wall.collide(agent);
                 }
               }
             }
           }
         }
       }
-      if(agent.interacts_with_walls){
-        // Checking collisions between agent and surrounding walls
-        // Theres probably a faster / more consise way to do this
-        if(agent.position.x - agent.size/2 < position.x){
-          Area collider_area = world.get_area(position + Vector2f(-1, 0));
-          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-            agent.collide(collider_area.wall);
-            collider_area.wall.collide(agent);
-          }
-        }
-        else if(position.x + 1 < agent.position.x + agent.size/2){
-          Area collider_area = world.get_area(position + Vector2f(1, 0));
-          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-            agent.collide(collider_area.wall);
-            collider_area.wall.collide(agent);
-          }
-        }
-        if(agent.position.y - agent.size/2 < position.y){
-          Area collider_area = world.get_area(position + Vector2f(0, -1));
-          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-            agent.collide(collider_area.wall);
-            collider_area.wall.collide(agent);
-          }
-        }
-        else if(position.y + 1 < agent.position.y + agent.size/2){
-          Area collider_area = world.get_area(position + Vector2f(0, 1));
-          if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
-            agent.collide(collider_area.wall);
-            collider_area.wall.collide(agent);
-          }
-        }
-      }
     }
+      /*
+        rough chekc for agent - wall collisions
+        if(((position.x <= agent.position.x + agent.collider_size_x) &&
+        (position.y <= agent.position.y + agent.collider_size_y)) ||
+        ((position.x + 1.0f >= agent.position.x - agent.collider_size_x) &&
+        (position.y  + 1.0f >= agent.position.y - agent.collider_size_y)))
+      */
+      //if(agent.interacts_with_walls){
+      //  void do_collisions(Agent agent, Area area){
+      //    if(area !is null && area.wall !is null && area.wall.interacts && area.wall.test_for_collision(agent)){
+      //      agent.collide(area.wall);
+      //      area.wall.collide(agent);
+      //    }
+      //  }
+      //  // Checking collisions between agent and surrounding walls
+      //  // Theres probably a faster / more concise way to do this
+      //  if(agent.position.x - agent.collider_size_x < position.x){
+      //    Area collider_area = world.get_area(position + Vector2f(-1, 0));
+      //    do_collisions(agent, collider_area);
+      //    // if(collider_area !is null && collider_area.wall !is null && collider_area.wall.interacts){
+      //      // agent.collide(collider_area.wall);
+      //      // collider_area.wall.collide(agent);
+      //    // }
+      //  }
+      //  if(position.x + 1 < agent.position.x + agent.collider_size_x){
+      //    Area collider_area = world.get_area(position + Vector2f(1, 0));
+      //    do_collisions(agent, collider_area);
+      //  }
+      //  if(agent.position.y - agent.collider_size_y < position.y){
+      //    Area collider_area = world.get_area(position + Vector2f(0, -1));
+      //    do_collisions(agent, collider_area);
+      //  }
+      //  if(position.y + 1 < agent.position.y + agent.collider_size_y){
+      //    Area collider_area = world.get_area(position + Vector2f(0, 1));
+      //    do_collisions(agent, collider_area);
+      //  }
+      //}
     if(agents.length > 0)
       emptyq = false;
     else

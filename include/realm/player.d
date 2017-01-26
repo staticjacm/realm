@@ -143,7 +143,7 @@ void player_update(){
   }
   
   if(nearby_drop !is null && nearby_drop.valid){
-    if(!player_entity.check_for_overlap(nearby_drop)){
+    if(!player_entity.fast_test_for_collision(nearby_drop)){
       nearby_drop = null;
     }
   }

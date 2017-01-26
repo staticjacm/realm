@@ -190,7 +190,7 @@ void initialize(){
   
   test_world = new Testing_world();
   test_world.place_agent(player_entity);
-  test_world.place_agent(enemy);
+  // test_world.place_agent(enemy);
   test_world.place_agent(turret);
   test_world.place_agent(test_portal_1);
   test_world.place_agent(test_portal_2);
