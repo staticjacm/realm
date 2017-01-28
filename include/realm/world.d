@@ -113,38 +113,62 @@ class World : world_grid_type {
     }
   }
   
-  Area_list get_areas_nearby(Vector2f position, float max_distance = 1.0f){
+  void apply_areas_nearby(void delegate(ref Area) dg, Vector2f position, float max_distance = 1.0f){
     float r = (max_distance.ceil);
-    Area_list ret = new Area_list;
     for(float x = -r; x <= r; x++){
       for(float y = -r; y <= r; y++){
         Area area = get_area(position + Vector2f(x, y));
-        if(area !is null){
-          ret.add(area);
-        }
+        if(area !is null)
+          dg(area);
       }
     }
+  }
+  
+  void apply_agents_nearby(void delegate(ref Agent) dg, Vector2f position, float max_distance = 1.0f){
+    apply_areas_nearby((ref Area area){
+      foreach(Agent agent; area.agents)
+        dg(agent);
+    }, position, max_distance);
+  }
+  
+  Area_list get_areas_nearby(Vector2f position, float max_distance = 1.0f){
+    // float r = (max_distance.ceil);
+    Area_list ret = new Area_list;
+    // for(float x = -r; x <= r; x++){
+      // for(float y = -r; y <= r; y++){
+        // Area area = get_area(position + Vector2f(x, y));
+        // if(area !is null){
+          // ret.add(area);
+        // }
+      // }
+    // }
+    apply_areas_nearby((ref Area area){ ret.add(area); }, position, max_distance);
     return ret;
   }
   
   Agent_list get_agents_nearby(Vector2f position, float max_distance = 1.0f){
     Agent_list ret = new Agent_list;
-    Area_list nearby_areas = get_areas_nearby(position, max_distance);
-    foreach(Area area; nearby_areas){
-      foreach(Agent agent; area.agents){
-        ret.add(agent);
-      }
-    }
+    // Area_list nearby_areas = get_areas_nearby(position, max_distance);
+    // foreach(Area area; nearby_areas){
+      // foreach(Agent agent; area.agents){
+        // ret.add(agent);
+      // }
+    // }
+    apply_agents_nearby((ref Agent agent){ ret.add(agent); }, position, max_distance);
     return ret;
   }
   
   Entity_list get_entities_nearby(Vector2f position, float max_distance = 1.0f){
     Entity_list ret = new Entity_list;
-    foreach(Agent agent; get_agents_nearby(position, max_distance)){
-      if(agent.valid && agent.agent_subtype_id == Agent.subtype_entity){
+    // foreach(Agent agent; get_agents_nearby(position, max_distance)){
+      // if(agent.valid && agent.agent_subtype_id == Agent.subtype_entity){
+        // ret.add(cast(Entity)agent);
+      // }
+    // }
+    apply_agents_nearby((ref Agent agent){
+      if(agent.valid && agent.agent_subtype_id == Agent.subtype_entity)
         ret.add(cast(Entity)agent);
-      }
-    }
+    }, position, max_distance);
     return ret;
   }
   

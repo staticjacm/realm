@@ -326,6 +326,15 @@ void player_key_function(){
       ctrl_pressed = (gr_key_pressed > 0);
       break;
     
+    case GR_V:
+      if(gr_key_pressed)
+        game.frame_delay ++;
+      break;
+    case GR_C:
+      if(gr_key_pressed)
+        game.frame_delay --;
+      break;
+    
     // Movement
     case move_up_button:
       if(gr_key_pressed)

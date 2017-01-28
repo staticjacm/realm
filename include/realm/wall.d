@@ -41,8 +41,11 @@ class Wall : Rooted {
       so we use quadrant_vector to get the closest unit vector
     */
     Vector2f pdif_normal = Vector2f(agent.position.x - (position.x + 0.5f), agent.position.y - (position.y + 0.5f)).quadrant_vector;
-    if(agent.velocity.dot(pdif_normal) < 0)
-      agent.set_velocity = agent.velocity.reflect(pdif_normal)*restitution*agent.restitution;
+    if(agent.velocity.dot(pdif_normal) < 0){
+      // agent.set_velocity = agent.velocity.reflect(pdif_normal)*restitution*agent.restitution;
+      Vector2f vdelta = agent.velocity.proj(pdif_normal);
+      agent.set_velocity = agent.velocity - vdelta - vdelta*restitution*agent.restitution;
+    }
     agent.set_position = agent.position + pdif_normal * 0.1;
   }
   

@@ -5,6 +5,7 @@ import vector;
 import game;
 import animation;
 import fireball1;
+import entity;
 import agent;
 import sgogl;
 
@@ -25,7 +26,11 @@ class Fire_turret_1 : Agent {
   bool activated = false;
   long deactivation_time;
   long deactivation_delay = 100;
+  bool shoot_ready = false;
+  long shoot_time;
+  long shoot_delay = 10;
   Animation deactivated_animation, activated_animation;
+  Vector2f direction;
   
   this(){
     deactivated_animation = new Animation([deactivated_image], 1.0f, Vector2f(0.5f, 0.0f), Vector2f(1.0f, 1.0f));
@@ -39,12 +44,18 @@ class Fire_turret_1 : Agent {
         animation = deactivated_animation;
         activated = false;
       }
-      Fireball1 fireball = new Fireball1;
-      fireball.position = this.position;
-      if(world !is null)
-        world.place_agent(fireball);
-      fireball.velocity = rvector(5);
-      fireball.faction_id = faction_id;
+      if(shoot_ready){
+        shoot_ready = false;
+        shoot_time = game_time + shoot_delay;
+        Fireball1 fireball = new Fireball1;
+        fireball.position = this.position;
+        if(world !is null)
+          world.place_agent(fireball);
+        fireball.velocity = direction*15.0f + rvector(1);
+        fireball.faction_id = faction_id;
+      }
+      else if(shoot_time < game_time)
+        shoot_ready = true;
     }
     super.update;
   }
@@ -54,5 +65,7 @@ class Fire_turret_1 : Agent {
     activated = true;
     deactivation_time = game_time + deactivation_delay;
     animation = activated_animation;
+    if(agent.agent_subtype_id == Agent.subtype_entity)
+      direction = (cast(Entity)agent).direction;
   }
 }

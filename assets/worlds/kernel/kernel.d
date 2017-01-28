@@ -1,7 +1,9 @@
 module kernel;
 
+import std.string;
 import std.stdio;
 import std.random;
+import sgogl;
 import game;
 import world;
 import player;
@@ -44,10 +46,13 @@ class Kernel : World {
   static Vector2f beach_portal    = Vector2f(37, 107);
   static Vector2f forest_portal   = Vector2f(150, 35);
   static Vector2f mountain_portal = Vector2f(266, 106);
+  static uint loading_image;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
+      loading_image = gr_load_image("assets/worlds/kernel/loading_screen_image.png".toStringz, 0);
+      writefln("loading image: %d", loading_image);
       Rocky_ground_1.initialize_type;
       Grass_1.initialize_type;
       Matted_grass_1.initialize_type;
@@ -78,7 +83,11 @@ class Kernel : World {
   
   
   this(){
+    game_render_loading_screen(loading_image, 0.0f);
     float R = 20;
+    
+    float number_of_maps = cast(float)tilemap_data.length;
+    float current_map = 0;
     
     /*
       (000, 255, 000) -> grass
@@ -107,6 +116,10 @@ class Kernel : World {
       (186, 019, 164) -> kernel stability boundary
     */
     foreach(Tmr tmr; tilemap_data){
+      current_map++;
+      if(cast(int)current_map % 100 == 0)
+        game_render_loading_screen(loading_image, current_map / number_of_maps);
+      // writefln("%f", current_map / number_of_maps);
       if(tmr.r == 00 && tmr.g == 255 && tmr.b == 00){
         add_ground(new Grass_1(Vector2f(tmr.x, tmr.y)));
       }

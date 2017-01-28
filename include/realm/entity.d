@@ -138,9 +138,9 @@ class Entity : Agent {
   }
   
   void apply_damage(float damage){
-    is_hurt = true;
-    hurt_switch_time = game_time + hurt_switch_delay;
     if(0 < damage){
+      is_hurt = true;
+      hurt_switch_time = game_time + hurt_switch_delay;
       health -= fmax(damage - l_defence, 0) / m_defence;
       if(health <= 0){
         kill;

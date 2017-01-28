@@ -86,7 +86,7 @@ class Agent : Renderable {
   bool moving = false; // is its velocity nonzero?
   bool moved = false; // has the agent been moved since it was last placed?
   float height = 0; // How high off the ground is it?
-  float size = 1; // How large is it (for collision detection)
+  // float size = 1; // How large is it (for collision detection)
   // float friction = 1.0;
   float restitution = 1.0;
   int faction_id = 0; // determines what faction the agent belongs to - primarily for determining who hurts / targets who
@@ -186,8 +186,8 @@ class Agent : Renderable {
       material.collide(drop);
   }
   void collide(Agent agent){
-    Vector2f pdif = this.position - agent.position;
-    accelerate(pdif*0.2);
+    // Vector2f pdif = this.position - agent.position;
+    // accelerate(pdif*0.1f);
     if(material !is null)
       material.collide(agent);
   }
@@ -220,8 +220,11 @@ class Agent : Renderable {
     velocity += acceleration*frame_delta;
     if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
       moving = true;
-    else
+    else {
+      velocity.x = 0;
+      velocity.y = 0;
       moving = false;
+    }
   }
   void apply_impulse(Vector2f force){
     accelerate(force/mass);

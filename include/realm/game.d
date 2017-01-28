@@ -42,6 +42,14 @@ alias Vector2f = Vector2!float;
 
 File fileout1, fileout2;
 
+// enum {
+  // mode_loading,
+  // mode_playing
+// }
+// int game_mode = mode_playing;
+
+uint loading_image = 0;
+
 Structured_entity test_entity;
 World test_world;
 World kernel_world;
@@ -53,11 +61,16 @@ Timer test_timer;
 uint test_font;
 
 Timer game_timer;
+Timer frame_delay_helper;
 Timer frame_timer;
 long frame_time = 0;
 long game_time;
 float frame_delta = 0.001;
 long frame = 0;
+
+bool use_framerate_cap = true;
+float framerate_cap = 30.0f;
+long frame_delay = 0;
 
 uint test_img;
 uint gui_mockup_img;
@@ -95,6 +108,22 @@ void mouse_move_function(){
 void window_event_function(){
 }
 
+// void set_game_mode_loading_screen(uint image){
+  // game_mode = mode_loading;
+  // loading_image = image;
+// }
+
+// void set_game_mode_playing(){
+  // game_mode = mode_playing;
+// }
+
+void game_render_loading_screen(uint image, float loaded){
+  gr_clear;
+  gr_screen_draw(image, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.76f);
+  gr_screen_draw_text(test_font, format("%2.2f", loaded).toStringz, 0.5, 0.25, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+  gr_refresh;
+}
+
 void initialize(){
   gr_open;
   gr_activate_depth_testing(1);
@@ -114,8 +143,8 @@ void initialize(){
   
   // load_character_images;
   
-  // fileout1 = File("debug_data1.txt", "w");
-  // fileout2 = File("debug_data2.txt", "w");
+  fileout1 = File("debug_data1.txt", "w");
+  fileout2 = File("debug_data2.txt", "w");
   
   
   initialize_drop_tiers;
@@ -205,12 +234,14 @@ void initialize(){
   // player_entity.position = Kernel.center_spawn;
   
   // kernel_world = new Kernel;
+  // kernel_world = new Kernel;
   // test_portal_1.exit_world = kernel_world;
   // kernel_world.place_agent(test_portal_2);
   // player_entity.world = kernel_world;
   // player_entity.position = Kernel.center_spawn;
   
   game_timer.start;
+  frame_timer.start;
 }
 
 void quit(){
@@ -219,6 +250,9 @@ void quit(){
 
 void render(){
 
+  frame_time = frame_timer.msecs;
+  frame_delta = frame_timer.hnsecsf;
+  frame_timer.start;
   gr_clear;
   
   // test_world.render;
@@ -244,11 +278,11 @@ void render(){
 
 immutable(bool) debug_update = false;
 void update(){
+  fileout1.writefln("%d %f", game_time, frame_delta);
   
   static if(debug_update) write_location_debug;
   game_time = game_timer.msecs;
   frame++;
-  frame_timer.start;
 
   static if(debug_update) write_location_debug;
   gr_register_events();  
@@ -290,17 +324,31 @@ void update(){
   render;
   
   static if(debug_update) write_location_debug;
-  frame_time = frame_timer.msecs;
-  frame_delta = frame_timer.hnsecsf;
-  static if(debug_update) write_location_debug;
   if(frame % 1000 == 0){
-    writeln("frame_delta: ", floor(frame_delta * 10000)/10, " ms = " , floor(1/frame_delta), " fps");
+    writefln("frame_delta: %2.2f ms = %2.1f fps", frame_delta*1000.0f, 1.0f/frame_delta);
+    writefln("  frame_delay: %d ms = %2.1f fps", frame_delay, 1000.0f/cast(float)frame_delay);
     writeln("  number of agents: ", Agent.master_list.length);
     writeln("  number of decorations: ", Decoration.total_number);
     writeln("  number of areas: ", Area.total_number);
   }
   // if(current_game_time > 5000) running = false;
+  
   static if(debug_update) write_location_debug;
-  Thread.sleep(dur!"msecs"(1));
+  if(use_framerate_cap){
+    // frame_delay = cast(long)(1000.0f / framerate_cap - frame_delay_helper.msecs);
+    // if(frame_delay < 0)
+      // frame_delay = 0;
+    if(frame_delay_helper.msecs < cast(long)(1000.0f / framerate_cap))
+      frame_delay ++;
+    else
+      frame_delay --;
+    if(frame_delay < 0)
+      frame_delay = 0;
+  }
+  else 
+    frame_delay = 0;
+  frame_delay_helper.start;
+  fileout2.writefln("%d %d", game_time, frame_delay);
+  Thread.sleep(dur!"msecs"(frame_delay));
   static if(debug_update) write_location_debug;
 }
