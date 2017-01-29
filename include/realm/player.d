@@ -115,6 +115,7 @@ void player_update(){
     else if(move_right_pressed) direction += Vector2f(1.0, 0.0f);
     if(direction.x != 0 || direction.y != 0)
       player_entity.propel(direction);
+    // possibly w -> toward cursor; s -> away cursor; a,d-> perpendicular to cursor
     
     view_target = player_entity.position;
   }
@@ -327,12 +328,18 @@ void player_key_function(){
       break;
     
     case GR_V:
-      if(gr_key_pressed)
-        game.frame_delay ++;
+      if(gr_key_pressed){
+        game.framerate_cap ++;
+        writefln("framrate cap %f", game.framerate_cap);
+      }
       break;
     case GR_C:
-      if(gr_key_pressed)
-        game.frame_delay --;
+      if(gr_key_pressed){
+        game.framerate_cap --;
+        if(game.framerate_cap < 0)
+          game.framerate_cap = 0;
+        writefln("framrate cap %f", game.framerate_cap);
+      }
       break;
     
     // Movement

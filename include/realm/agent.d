@@ -5,6 +5,8 @@ import std.stdio;
 import std.string;
 import std.math;
 import collision;
+import player;
+import dbg;
 import game;
 import world;
 import area;
@@ -81,7 +83,7 @@ class Agent : Renderable {
   Agent_list.Index area_index;
   Material material;
   Vector2f velocity = Vector2f(0, 0);
-  float stop_speed = 0.01f;
+  float stop_speed = 0.2f;
   float mass = 1;
   bool moving = false; // is its velocity nonzero?
   bool moved = false; // has the agent been moved since it was last placed?
@@ -131,9 +133,8 @@ class Agent : Renderable {
     if(material !is null)
       material.update;
     if(moving){
-      if(uses_friction && area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0)
-        accelerate(-velocity*area.ground.friction*10.0f);
-        // ^ should be accelerate(-velocity.normalize*friction*K);
+      if(uses_friction)
+        apply_friction;
       move_by(velocity*frame_delta);
       if(world !is null && moved){
         world.place_agent(this);
@@ -216,6 +217,13 @@ class Agent : Renderable {
   /++
     Movement Dynamics
   ++/
+  void apply_friction(){
+    // for some reason this has to be velocity/frame_delta instead of just velocity
+    if(area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0)
+      // accelerate(-velocity/frame_delta*area.ground.friction);
+      accelerate(-velocity.normalize*area.ground.friction);
+    // ^ should be accelerate(-velocity.normalize*friction*K);
+  }
   void accelerate(Vector2f acceleration){
     velocity += acceleration*frame_delta;
     if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
@@ -233,18 +241,41 @@ class Agent : Renderable {
     velocity = new_velocity;
     if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
       moving = true;
-    else
+    else {
+      velocity.x = 0;
+      velocity.y = 0;
       moving = false;
+    }
   }
   float speed(){ return velocity.norm; }
   bool uses_friction(){ return true; }
   
+  /*
+    Moves the agent's position by some vector delta and sets moved to true (so it can be replaced
+    in the world
+    Also, this function doesn't ignore walls (move_to does), so move_by cannot move past walls
+  */
   void move_by(Vector2f delta){
     if(delta.x != 0 || delta.y != 0){
-      position += delta;
+      // this check is for when the delta is far enough it can jump through walls
+      float distance = delta.norm;
+      if(interacts_with_walls && distance > 0.2f && world !is null){
+        Wall clipping_wall = world.get_wall_raycast(position, delta.normalize, distance);
+        if(clipping_wall !is null && clipping_wall.interacts){
+          position = clipping_wall.position - quadrant_vector(delta)*0.5;
+          clipping_wall.collision_block(this, position, Vector2f(1, 0));
+          clipping_wall.collide(this);
+          if(clipping_wall.valid && valid)
+            collide(clipping_wall);
+        }
+        else
+          position += delta;
+      }
+      else
+        position += delta;
+      // position += delta;
       moved = true;
     }
-    // position += Vector2f(0.01, 0);
   }
   void move_to(Vector2f new_position){
     if(new_position.x != position.x || new_position.y != position.y){

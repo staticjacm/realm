@@ -2,9 +2,12 @@
 module entity;
 
 import std.stdio;
+import std.string;
 import std.math;
 import vector;
 import sllist;
+import player;
+import dbg;
 import animation;
 import game;
 import agent;
@@ -41,6 +44,14 @@ class Entity : Agent {
   
   Animation walking_animation, standing_animation, hurt_animation;
   bool facing_rightward = true;
+  
+  bool propelling_x = false;
+  long propelling_x_switch_time;
+  long propelling_x_switch_delay = 10;
+  
+  bool propelling_y = false;
+  long propelling_y_switch_time;
+  long propelling_y_switch_delay = 10;
   
   bool is_walking = false;
   long walking_switch_time;
@@ -188,19 +199,50 @@ class Entity : Agent {
       direction = pdif.normalize;
       if(!regular_attack_started)
         regular_attack_start;
-      propel((direction.rotate_by(PI/2) + pdif.normalize*(pdif.norm - 10.0f)).normalize*50.0);
+      propel(direction.rotate_by(PI/2) + pdif.normalize*(pdif.norm - 10.0f));
     }
     else if(regular_attack_started){
       regular_attack_end;
     }
   }
   
+  override void apply_friction(){
+    if(area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0){
+      Vector2f std_friction = -velocity.normalize*area.ground.friction;
+      if(!propelling_x)
+        accelerate(Vector2f(std_friction.x, 0));
+      if(!propelling_y)
+        accelerate(Vector2f(0, std_friction.y));
+    }
+  }
+  
   void propel(Vector2f direction){
     is_walking = true;
     walking_switch_time = game_time + walking_switch_delay;
-    if(speed < max_speed){
-      accelerate(direction.normalize * propel_rate);
+    // if(speed < max_speed)
+      // accelerate(direction.normalize * propel_rate);
+    // else if(velocity.normalize.dot(direction.normalize) < 0.2)
+      // accelerate(direction.normalize * propel_rate);
+    // else
+      // accelerate(direction.normalize * propel_rate / (speed - max_speed + 1));
+    // if(speed < max_speed || velocity.dot(direction) < 0){
+      // accelerate(direction.normalize * propel_rate);
+    // }
+    Vector2f dir_normalized = direction.normalize;
+    if(dir_normalized.x != 0){
+      propelling_x = true;
+      propelling_x_switch_time = game_time + propelling_x_switch_delay;
     }
+    if(dir_normalized.y != 0){
+      propelling_y = true;
+      propelling_y_switch_time = game_time + propelling_y_switch_delay;
+    }
+    if(velocity.x.abs < max_speed || velocity.x.sgn != dir_normalized.x.sgn)
+      accelerate(Vector2f(dir_normalized.x * propel_rate, 0));
+    if(velocity.y.abs < max_speed || velocity.y.sgn != dir_normalized.y.sgn)
+      accelerate(Vector2f(0, dir_normalized.y * propel_rate));
+    // else
+      // accelerate(direction.normalize * (max_speed - speed) * propel_rate);
   }
   
   void select_animation(){
@@ -225,6 +267,10 @@ class Entity : Agent {
     select_animation;
     if(is_walking && walking_switch_time < game_time)
       is_walking = false;
+    if(propelling_x && propelling_x_switch_time < game_time)
+      propelling_x = false;
+    if(propelling_y && propelling_y_switch_time < game_time)
+      propelling_y = false;
     if(is_hurt && hurt_switch_time < game_time)
       is_hurt = false;
     foreach(Effect effect; effects){

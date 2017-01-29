@@ -40,8 +40,6 @@ import kernel_portal;
 
 alias Vector2f = Vector2!float;
 
-File fileout1, fileout2;
-
 // enum {
   // mode_loading,
   // mode_playing
@@ -66,6 +64,7 @@ Timer frame_timer;
 long frame_time = 0;
 long game_time;
 float frame_delta = 0.001;
+float frame_delta_2 = 0.001;
 long frame = 0;
 
 bool use_framerate_cap = true;
@@ -143,9 +142,7 @@ void initialize(){
   
   // load_character_images;
   
-  fileout1 = File("debug_data1.txt", "w");
-  fileout2 = File("debug_data2.txt", "w");
-  
+  initialize_debug;
   
   initialize_drop_tiers;
   
@@ -250,10 +247,12 @@ void quit(){
 
 void render(){
 
-  frame_time = frame_timer.msecs;
-  frame_delta = frame_timer.hnsecsf;
-  frame_timer.start;
+  // frame_time = frame_timer.msecs;
+  // frame_delta = frame_timer.hnsecsf;
+  // frame_timer.start;
   gr_clear;
+  
+  render_debug;
   
   // test_world.render;
   
@@ -278,7 +277,12 @@ void render(){
 
 immutable(bool) debug_update = false;
 void update(){
-  fileout1.writefln("%d %f", game_time, frame_delta);
+  if(player_entity !is null){
+    debug_write_1(format("%2.4f", player_entity.velocity.norm));
+    writefln("%2.2f", player_entity.velocity.norm);
+  }
+  // debug_write_1(framerate_cap);
+  // debug_write_1(frame_delta);
   
   static if(debug_update) write_location_debug;
   game_time = game_timer.msecs;
@@ -348,7 +352,10 @@ void update(){
   else 
     frame_delay = 0;
   frame_delay_helper.start;
-  fileout2.writefln("%d %d", game_time, frame_delay);
+  frame_delta = frame_timer.hnsecsf;
+  frame_time = frame_timer.msecs;
+  frame_timer.start;
+  // Thread.sleep(dur!"msecs"(cast(long)(game_time / 100)));
   Thread.sleep(dur!"msecs"(frame_delay));
   static if(debug_update) write_location_debug;
 }

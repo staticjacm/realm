@@ -49,6 +49,7 @@ class Commoner : Entity {
     animation_walking  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
     animation_hurt     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
     animation = animation_walking;
+    propel_rate = 1.0f;
     l_defence = 0.0f;
     m_defence = 100.0f;
   }

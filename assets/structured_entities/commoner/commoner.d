@@ -44,8 +44,8 @@ class Commoner : Structured_entity {
     collider_size_y = 0.33;
     l_defence = 0.0f;
     m_defence = 100.0f;
-    propel_rate = 100.0f;
-    max_speed = 10.0f;
+    propel_rate = 50.0f;
+    max_speed = 5.0f;
     super();
   }
   
