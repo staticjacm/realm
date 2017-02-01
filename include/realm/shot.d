@@ -21,6 +21,10 @@ class Shot : Agent {
     super();
   }
   
+  override string name(){ return "shot"; }
+  override string description(){ return "An undefined shot"; }
+  override string standard_article(){ return "a"; }
+  
   override int agent_subtype_id(){ return Agent.subtype_shot; }
   int shot_subtype_id(){ return 0; }
   

@@ -36,4 +36,9 @@ class White_fence_1 : Wall {
     }
     endwait_time = game_time + endwait_delay;
   }
+  
+  override string name(){ return "White Fence"; }
+  override string description(){ return "Freshly painted"; }
+  override string standard_article(){ return "a"; }
+  
 }

@@ -33,4 +33,9 @@ class Matted_grass_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Matted Grass"; }
+  override string description(){ return "A product of unergonomic walkway planning"; }
+  override string standard_article(){ return "some"; }
+  
 }

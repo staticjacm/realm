@@ -7,7 +7,7 @@ import animation;
 class Item : Validatable {
   
   static enum {
-    subtype_none,
+    subtype_item,
     subtype_weapon,
     subtype_armor,
     subtype_accessory
@@ -20,8 +20,12 @@ class Item : Validatable {
     super();
   }
   
+  string name(){ return "item"; }
+  string description(){ return "An undefined item"; }
+  string standard_article(){ return "an"; }
+  
   void use(Entity entity){}
   
-  int item_subtype_id(){ return subtype_none; }
+  int item_subtype_id(){ return subtype_item; }
   
 }

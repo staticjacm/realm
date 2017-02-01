@@ -33,4 +33,9 @@ class Grass_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Grass"; }
+  override string description(){ return "It looks soft but if you lay in it you will get itchy"; }
+  override string standard_article(){ return "some"; }
+  
 }

@@ -23,6 +23,10 @@ class Ring_of_speed_1 : Accessory {
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
   }
   
+  override string name(){ return "Common Ring of Speed"; }
+  override string description(){ return "Slightly increases speed"; }
+  override string standard_article(){ return "a"; }
+  
   override void equipped(Structured_entity entity){
     entity.max_speed += 10.0f;
   }

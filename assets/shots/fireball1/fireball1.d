@@ -38,6 +38,10 @@ class Fireball1 : Shot {
     restitution = 0;
   }
   
+  override string name(){ return "Fireball"; }
+  override string description(){ return "Wow! That's hot!"; }
+  override string standard_article(){ return "a"; }
+  
   override bool uses_friction(){ return false; }
   
   void set_lifetime(long lifetime_){

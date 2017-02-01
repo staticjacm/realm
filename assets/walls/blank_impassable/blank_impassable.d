@@ -23,4 +23,9 @@ class Blank_impassable : Wall {
   this(Vector2f _position){
     super(_position);
   }
+  
+  override string name(){ return "Something Blank"; }
+  override string description(){ return "An ill defined section of space and time"; }
+  override string standard_article(){ return "a"; }
+  
 }

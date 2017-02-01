@@ -33,4 +33,9 @@ class Fountain_water_1 : Ground {
       case 1: animation = new Animation([image_1, image_2], uniform(0.8f, 1.2f), Vector2f(0,0), Vector2f(1,1));  break;
     }
   }
+  
+  override string name(){ return "Refreshing Fountain Water"; }
+  override string description(){ return "Negative ions!"; }
+  override string standard_article(){ return "a"; }
+  
 }

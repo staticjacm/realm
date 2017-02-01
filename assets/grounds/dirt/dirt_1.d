@@ -35,4 +35,9 @@ class Dirt_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Dirt"; }
+  override string description(){ return "There's really, really nothing to see here"; }
+  override string standard_article(){ return "some"; }
+  
 }

@@ -26,6 +26,10 @@ class Twinkle1 : Decoration {
     animation = new Animation([image], 1, Vector2f(0.5, 0.5), Vector2f(0.25, 0.25));
   }
   
+  override string name(){ return "Twinkling"; }
+  override string description(){ return "Something reflective must be in the air"; }
+  override string standard_article(){ return "a"; }
+  
   override long lifetime(){ return 500; }
   
   override void render(){

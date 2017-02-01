@@ -49,6 +49,10 @@ class Commoner : Structured_entity {
     super();
   }
   
+  override string name(){ return "Filthy Commoner"; }
+  override string description(){ return "A pleb"; }
+  override string standard_article(){ return "a"; }
+  
   override int entity_subtype_id(){ return 1; }
   
   // override float targeting_range(){ return 5.0f; }

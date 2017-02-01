@@ -37,4 +37,9 @@ class Grass_with_flowers_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Grass With Pretty Flowers"; }
+  override string description(){ return "They smell great!"; }
+  override string standard_article(){ return "some"; }
+  
 }

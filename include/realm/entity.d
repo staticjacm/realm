@@ -77,7 +77,7 @@ class Entity : Agent {
   float m_defence = 1.0;     // decreases incoming dmg multiplicatively (newdmg = olddmg / mdef)
   float energy_defence = 0;  // decreases incoming energy damage additively (newnrgdmg = oldnrgdmg - nrgdef)
   // health
-  float health      = 5;     // health, hp<0 => death (hp)
+  float health      = 10;     // health, hp<0 => death (hp)
   float health_max  = 10;    // max health (hpmax)
   float health_rate = 0.1;   // health generation rate (hpr)
   // energy - a generic magic / stamina
@@ -123,6 +123,10 @@ class Entity : Agent {
       }
     }
   }
+  
+  override string name(){ return "entity"; }
+  override string description(){ return "An undefined entity"; }
+  override string standard_article(){ return "an"; }
   
   override int agent_subtype_id(){ return Agent.subtype_entity; }
   int entity_subtype_id(){ return subtype_entity; }
@@ -257,6 +261,10 @@ class Entity : Agent {
   }
   
   override void update(){
+    if(energy < energy_max)
+      energy += energy_rate * frame_delta;
+    if(health < health_max)
+      health += health_rate * frame_delta;
     if(automatic_controls){
       if(targeting_time < game_time){
         targeting_time = game_time + targeting_cycle;

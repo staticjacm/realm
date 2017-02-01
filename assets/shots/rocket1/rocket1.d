@@ -49,6 +49,10 @@ class Rocket1 : Shot {
     restitution = 1.3;
   }
   
+  override string name(){ return "Rocket"; }
+  override string description(){ return "Explodes on contact with the tip"; }
+  override string standard_article(){ return "a"; }
+  
   override float render_angle(){ return -45.0; }
   
   override bool uses_friction(){ return false; }

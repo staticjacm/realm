@@ -37,4 +37,9 @@ class Brick_path_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Brick Pathway"; }
+  override string description(){ return "Bricks laid nicely into pretty patterns"; }
+  override string standard_article(){ return "a"; }
+  
 }

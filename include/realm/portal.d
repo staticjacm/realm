@@ -12,6 +12,10 @@ class Portal : Agent {
   this(){}
   ~this(){}
   
+  override string name(){ return "portal"; }
+  override string description(){ return "An undefined portal"; }
+  override string standard_article(){ return "a"; }
+  
   override int agent_subtype_id(){ return Agent.subtype_portal; }
   
   override void activate(Agent agent){

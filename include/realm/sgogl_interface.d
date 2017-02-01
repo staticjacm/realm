@@ -5,6 +5,22 @@ import std.math;
 import vector;
 import sgogl;
 
+/*
+  Draw a vertex-centered rectangle at position p with side lengths given by s
+*/
+void screen_draw_vrect(Vector2f p, Vector2f s, float z){
+  sgogl.gr_screen_draw_line(p.x      , p.y      , p.x + s.x, p.y      , z);
+  sgogl.gr_screen_draw_line(p.x + s.x, p.y      , p.x + s.x, p.y + s.y, z);
+  sgogl.gr_screen_draw_line(p.x + s.x, p.y + s.y, p.x      , p.y + s.y, z);
+  sgogl.gr_screen_draw_line(p.x      , p.y + s.y, p.x      , p.y      , z);
+}
+void screen_draw_vrect(float px, float py, float sx, float sy, float z){
+  sgogl.gr_screen_draw_line(px     , py     , px + sx, py     , z);
+  sgogl.gr_screen_draw_line(px + sx, py     , px + sx, py + sy, z);
+  sgogl.gr_screen_draw_line(px + sx, py + sy, px     , py + sy, z);
+  sgogl.gr_screen_draw_line(px     , py + sy, px     , py     , z);
+}
+
 void gr_draw_line(Vector2f v1, Vector2f v2, float z){
   sgogl.gr_draw_line(v1.x, v1.y, v2.x, v2.y, z);
 }
@@ -27,49 +43,6 @@ void gr_view_centered(Vector2f position, float scale){
 bool point_in_view(Vector2f point, float margin = 1){
   return (gr_view_left - margin <= point.x) && (gr_view_bottom - margin <= point.y) && 
          (point.x <= gr_view_right + margin) && (point.y <= gr_view_top + margin);
-}
-
-/*
-  Turns utf8 character codes into character image list indexes
-  Image lists are layed out just like utf8 but with ! ~= 1 like the following:
-    utf8 21 - 2F
-      !  "  #  $  %  &  '  (  )  *  +  ,  -  .  /  
-    utf8 30 - 39
-      0  1  2  3  4  5  6  7  8  9  
-    utf8 3A - 40
-      :  ;  <  =  >  ?  @  
-    utf8 41 - 5A
-      A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z  
-    utf8 5F - 60
-      [ \ ] ^ _ `  
-    utf8 61 - 7A
-      a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
-    utf8 7B - 7E
-      {  |  }  ~
-  index 0 is the blank character that obviously has no image representation (utf8 space)
- */
-uint character_to_image_index(string checks = "careful")(char c){
-  static if(checks == "careful"){
-    uint ret = c - 20;
-    if(ret < 0) return 0;
-    else if(0x7E < ret) return 0x7E;
-    else return ret;
-  }
-  else static if(checks == "careless"){
-    return c - 20;
-  }
-}
-
-void draw_string(string s, uint[] cimgs, float x, float y, float z, float sx, float sy){
-  float xacc = x;
-  foreach(char c; s){
-    uint index = character_to_image_index(c);
-    if(index > 0){
-      writeln("index: ", index);
-      gr_screen_draw(cimgs[index], xacc, y, z, 0.5f, 0.0f, 0.0f, sx, sy);
-      }
-    xacc += sx;
-  }
 }
 
 void gr_set_attenuation(int channel, Vector2f pdif, float max_distance){

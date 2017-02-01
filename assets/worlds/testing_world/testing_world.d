@@ -102,6 +102,10 @@ class Testing_world : World {
     
   }
   
+  override string name(){ return "World o' Testing"; }
+  override string description(){ return "For testing things out"; }
+  override string standard_article(){ return "a"; }
+  
   override void update(){
     super.update;
     // if(spawn_next_time < game_time){

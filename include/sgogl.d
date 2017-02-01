@@ -898,11 +898,14 @@ extern(C){
 
 extern(C) {
   void gr_screen_draw(uint, float, float, float, float, float, float, float, float);
+  void gr_screen_draw_partial(uint, float, float, float, float, float, float, float, float, float, float, float, float);
   void gr_draw(uint, float, float, float, float, float, float, float, float);
+  void gr_draw_partial(uint, float, float, float, float, float, float, float, float, float, float, float, float);
   void gr_draw_quad(uint, float, float, float, float, float, float, float, float, float, float, float);
   void gr_draw_quad_solid(float, float, float, float, float, float, float, float, float);
   void gr_draw_centered(uint, float, float, float, float, float, float);
   void gr_draw_point(float, float, float);
+  void gr_screen_draw_line(float, float, float, float, float);
   void gr_draw_line(float, float, float, float, float);
   void gr_draw_line_3d(float, float, float, float, float, float);
   void gr_refresh();

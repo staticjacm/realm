@@ -37,6 +37,10 @@ class Drop_tier_0 : Drop {
     collider_size_y = 0.5;
   }
   
+  override string name(){ return "Common Drop"; }
+  override string description(){ return "Nothing special here"; }
+  override string standard_article(){ return "a"; }
+  
 }
 
 class Drop_tier_1 : Drop {
@@ -55,5 +59,9 @@ class Drop_tier_1 : Drop {
     collider_size_x = 0.5;
     collider_size_y = 0.5;
   }
+  
+  override string name(){ return "Uncommon Drop"; }
+  override string description(){ return "Doesn't contain terrible drops"; }
+  override string standard_article(){ return "a"; }
   
 }

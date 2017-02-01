@@ -1,0 +1,141 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4815,        133]
+NotebookOptionsPosition[      4461,        117]
+NotebookOutlinePosition[      4802,        132]
+CellTagsIndexPosition[      4759,        129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"chars", "=", 
+   RowBox[{"CharacterRange", "[", 
+    RowBox[{"32", ",", "126"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"font", "=", "\"\<Courier\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"standardsize", "=", 
+   RowBox[{"ImageDimensions", "@", 
+    RowBox[{"Rasterize", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Style", "[", 
+       RowBox[{"\"\<N\>\"", ",", "120", ",", 
+        RowBox[{"FontFamily", "\[Rule]", "font"}]}], "]"}], 
+      "\[IndentingNewLine]", ",", "\"\<Image\>\""}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"padding", "=", "0"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6948230076092873`*^9, 3.69482300776439*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"small", " ", "gaps"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"glyphs", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ImagePad", "[", 
+        RowBox[{
+         RowBox[{"ImageResize", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Rasterize", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"#", ",", "240", ",", 
+               RowBox[{"FontFamily", "\[Rule]", "font"}]}], "]"}], 
+             "\[IndentingNewLine]", ",", "\"\<Image\>\""}], "]"}], 
+           "\[IndentingNewLine]", ",", "standardsize"}], "]"}], ",", 
+         "padding", ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "]"}], "&"}], "/@", 
+      "chars"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"ImageAssemble", "[", 
+    RowBox[{"Partition", "[", 
+     RowBox[{"glyphs", ",", "19"}], "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.694817676591222*^9, 3.694817683307687*^9}, {
+  3.694818028477923*^9, 3.6948180303691792`*^9}, {3.6948181437135186`*^9, 
+  3.6948182135891294`*^9}, {3.6948186426356325`*^9, 3.694818642989869*^9}, {
+  3.6948186894637594`*^9, 3.6948186916632214`*^9}, {3.6948187486669073`*^9, 
+  3.6948187687572594`*^9}, {3.6948188079623194`*^9, 3.6948188117028055`*^9}, {
+  3.694818889794713*^9, 3.6948188921822987`*^9}, {3.694819121263847*^9, 
+  3.694819146738778*^9}, {3.6948194562844887`*^9, 3.694819503904143*^9}, {
+  3.6948198589255695`*^9, 3.694819859427902*^9}, {3.6948225326668024`*^9, 
+  3.6948225328179007`*^9}, {3.694822836251729*^9, 3.69482283920269*^9}, {
+  3.694823026173626*^9, 3.6948230264017797`*^9}, {3.694823090460298*^9, 
+  3.694823090964632*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"large", " ", "gaps"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"glyphs", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ImagePad", "[", 
+        RowBox[{
+         RowBox[{"ImageResize", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Rasterize", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"FontFamily", "\[Rule]", "font"}]}], "]"}], 
+             "\[IndentingNewLine]", ",", "\"\<Image\>\"", ",", 
+             RowBox[{"RasterSize", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{"256", ",", "256"}], "}"}]}]}], "]"}], 
+           "\[IndentingNewLine]", ",", "standardsize"}], "]"}], ",", 
+         "padding", ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "]"}], "&"}], "/@", 
+      "chars"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"ImageAssemble", "[", 
+    RowBox[{"Partition", "[", 
+     RowBox[{"glyphs", ",", "19"}], "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.694822533670467*^9, 3.694822579365841*^9}, {
+  3.6948227452862654`*^9, 3.6948227665193796`*^9}, {3.6948228057214355`*^9, 
+  3.6948228321580076`*^9}, {3.6948230285662184`*^9, 3.6948230287653503`*^9}, {
+  3.694823100558011*^9, 3.694823101617715*^9}}]
+},
+WindowSize->{1358, 700},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 141, 4, 30, "Input"],
+Cell[702, 26, 607, 15, 107, "Input"],
+Cell[1312, 43, 1760, 37, 145, "Input"],
+Cell[3075, 82, 1382, 33, 145, "Input"]
+}
+]
+*)
+

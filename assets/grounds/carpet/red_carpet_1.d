@@ -28,4 +28,9 @@ class Red_carpet_1 : Ground {
     super(_position);
     animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));
   }
+  
+  override string name(){ return "Red Carpet"; }
+  override string description(){ return "A red carpet. Glamorous!"; }
+  override string standard_article(){ return "a"; }
+  
 }

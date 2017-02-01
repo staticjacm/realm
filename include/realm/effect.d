@@ -24,6 +24,10 @@ class Effect : Validatable {
     entity_index.remove;
   }
   
+  string name(){ return "effect"; }
+  string description(){ return "An undefined effect"; }
+  string standard_article(){ return "an"; }
+  
   void update(){}
   void initialize(){}
   void finalize(){}

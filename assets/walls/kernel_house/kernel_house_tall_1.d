@@ -40,4 +40,9 @@ class Kernel_house_tall_1 : Wall {
         default: goto case 0; break;
       }
   }
+  
+  override string name(){ return "House Wall"; }
+  override string description(){ return "Must house many people (or a few very wealthy ones)"; }
+  override string standard_article(){ return "a"; }
+  
 }

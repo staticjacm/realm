@@ -35,4 +35,9 @@ class Stability_boundary_1 : Wall {
     }
     animation = new Animation(frames_list, uniform(0.98f, 1.02f), Vector2f(0, 0), Vector2f(1, 2));
   }
+  
+  override string name(){ return "Stability Boundary"; }
+  override string description(){ return "The only thing stopping this world from finally collapsing. Hopefully one day it can be lifted"; }
+  override string standard_article(){ return "the"; }
+  
 }

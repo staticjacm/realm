@@ -28,4 +28,9 @@ class Portal_carpet_1 : Ground {
     super(_position);
     animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));
   }
+  
+  override string name(){ return "Portal Carpet"; }
+  override string description(){ return "Ancient carpet woven before the world fell apart. It is commonly laid under portals"; }
+  override string standard_article(){ return "a"; }
+  
 }

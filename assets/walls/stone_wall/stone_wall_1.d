@@ -32,4 +32,9 @@ class Stone_wall_1 : Wall {
       case 2:  animation = new Animation([image_3], 1, Vector2f(0, 0), Vector2f(1, 2)); break;
     }
   }
+  
+  override string name(){ return "Stone Wall"; }
+  override string description(){ return "A cold, smooth stone wall"; }
+  override string standard_article(){ return "a"; }
+  
 }

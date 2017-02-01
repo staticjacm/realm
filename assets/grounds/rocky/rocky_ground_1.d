@@ -37,6 +37,10 @@ class Rocky_ground_1 : Ground {
     }
   }
   
+  override string name(){ return "Very Rocky Ground"; }
+  override string description(){ return "Tender footsies dare not tread"; }
+  override string standard_article(){ return "some"; }
+  
   override void render(){
     if(onq)
       gr_color(1, 0, 0, 1);

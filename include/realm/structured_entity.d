@@ -40,6 +40,8 @@ class Structured_entity : Entity {
     }
   }
   
+  override string description(){ return "An undefined entity with equipment"; }
+  
   override int entity_subtype_id(){ return Entity.subtype_structured_entity; }
   
   override void update(){

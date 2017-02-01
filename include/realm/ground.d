@@ -10,6 +10,10 @@ class Ground : Rooted {
     super(_position);
   }
   
+  override string name(){ return "ground"; }
+  override string description(){ return "An undefined ground"; }
+  override string standard_article(){ return "a"; }
+  
   override float render_depth(){ return 300; }
   
   override int rooted_subtype_id(){ return Rooted.subtype_ground; }

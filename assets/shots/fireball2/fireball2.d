@@ -35,6 +35,10 @@ class Fireball2 : Shot {
     end_time = game_time + lifetime;
   }
   
+  override string name(){ return "Hot Fireball"; }
+  override string description(){ return "Damn! That's REALLY hot!"; }
+  override string standard_article(){ return "a"; }
+  
   override bool uses_friction(){ return false; }
   
   override void update(){

@@ -35,4 +35,8 @@ class Sand_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Sand"; }
+  override string description(){ return "It's coarse, rough, irritating and it gets everywhere"; }
+  override string standard_article(){ return "some"; }
 }

@@ -65,6 +65,10 @@ class Kernel : World {
     }
   }
   
+  override string name(){ return "Island Paradise"; }
+  override string description(){ return "The old realm used to have incredible beaches that stretched for many miles on magnificent green islands. All of this world's creatures have been corrupted by the destroyer -- the oldest among them more so"; }
+  override string standard_article(){ return "a"; }
+  
   override void update(){
     super.update;
   }

@@ -24,6 +24,10 @@ class Shirt_1 : Armor {
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
   }
   
+  override string name(){ return "Justashirt"; }
+  override string description(){ return "A shirt, what more do you expect?"; }
+  override string standard_article(){ return "a"; }
+  
   override float modify_damage(float damage){
     return damage - 1;
   }

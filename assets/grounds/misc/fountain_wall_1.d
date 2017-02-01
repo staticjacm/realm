@@ -28,4 +28,9 @@ class Fountain_wall_1 : Ground {
     super(_position);
     animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));
   }
+  
+  override string name(){ return "Wall of a Fountain"; }
+  override string description(){ return "Don't fall in!"; }
+  override string standard_article(){ return "a"; }
+  
 }

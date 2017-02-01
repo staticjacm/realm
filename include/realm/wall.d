@@ -16,6 +16,10 @@ class Wall : Rooted {
     super(_position);
   }
   
+  override string name(){ return "wall"; }
+  override string description(){ return "An undefined wall"; }
+  override string standard_article(){ return "a"; }
+  
   override float render_depth(){ return 100; }
   
   override int rooted_subtype_id(){ return Rooted.subtype_wall; }

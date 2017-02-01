@@ -37,4 +37,9 @@ class Makeshift_brick_path_1 : Ground {
       default: goto case 0; break;
     }
   }
+  
+  override string name(){ return "Makeshift Brick Pathway"; }
+  override string description(){ return "Whoever layed these bricks should be fired!"; }
+  override string standard_article(){ return "a"; }
+  
 }

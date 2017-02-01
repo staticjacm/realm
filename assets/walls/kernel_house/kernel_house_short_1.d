@@ -40,4 +40,9 @@ class Kernel_house_short_1 : Wall {
         default: goto case 0; break;
       }
   }
+  
+  override string name(){ return "House Wall"; }
+  override string description(){ return "A building where people generally live"; }
+  override string standard_article(){ return "a"; }
+  
 }

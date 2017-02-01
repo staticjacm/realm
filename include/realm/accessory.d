@@ -15,6 +15,10 @@ import ground;
 */
 class Accessory : Item {
   
+  override string name(){ return "accessory"; }
+  override string description(){ return "An undefined accessory"; }
+  override string standard_article(){ return "an"; }
+  
   // This modifies incoming damage when equipped by a structured entity
   float modify_damage(float damage){ return damage; }
   

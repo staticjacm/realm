@@ -8,6 +8,7 @@ import std.math;
 import sgogl;
 import sgogl_interface;
 
+import text;
 import dbg;
 import timer;
 import testing_world;
@@ -56,7 +57,10 @@ bool running = true;
 
 Timer test_timer;
 
+uint standard_font;
+float standard_font_offset = 0.3;
 uint test_font;
+uint test_bitmap_font;
 
 Timer game_timer;
 Timer frame_delay_helper;
@@ -79,17 +83,17 @@ void key_function(){
   player_key_function();
   // writefln(" key %d", gr_key);
   switch(gr_scancode){
-    case GR_SCANCODE_LEFT: gr_set_screen_size(gr_screen_width - 10, gr_screen_height);  writefln("< screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
-    case GR_SCANCODE_RIGHT: gr_set_screen_size(gr_screen_width + 10, gr_screen_height); writefln("> screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
-    case GR_SCANCODE_UP: gr_set_screen_size(gr_screen_width, gr_screen_height + 10);    writefln("^ screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
-    case GR_SCANCODE_DOWN: gr_set_screen_size(gr_screen_width, gr_screen_height - 10);  writefln("v screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_RETURN;
-    case GR_SCANCODE_RETURN: gr_clear_all; break;
-    case GR_SCANCODE_R: gr_set_keep_window_aspect = 1; writeln("keep_window_aspect 1");   break;
-    case GR_SCANCODE_F: gr_set_keep_window_aspect = 0; writeln("keep_window_aspect 0");   break;
-    case GR_SCANCODE_T: gr_set_center_screen = 1;      writeln("center_screen 1");        break;
-    case GR_SCANCODE_G: gr_set_center_screen = 0;      writeln("center_screen 0");        break;
-    case GR_SCANCODE_Y: gr_set_stretch_screen = 1;     writeln("stretch_screen 1");       break;
-    case GR_SCANCODE_H: gr_set_stretch_screen = 0;     writeln("stretch_screen 0");       break;
+    case GR_SCANCODE_KP_4:     gr_set_screen_size(gr_screen_width - 10, gr_screen_height); writefln("< screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_6:     gr_set_screen_size(gr_screen_width + 10, gr_screen_height); writefln("> screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_8:     gr_set_screen_size(gr_screen_width, gr_screen_height + 10); writefln("^ screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_2:     gr_set_screen_size(gr_screen_width, gr_screen_height - 10); writefln("v screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_ENTER: gr_clear_all; break;
+    // case GR_SCANCODE_R: gr_set_keep_window_aspect = 1; writeln("keep_window_aspect 1");   break;
+    // case GR_SCANCODE_F: gr_set_keep_window_aspect = 0; writeln("keep_window_aspect 0");   break;
+    // case GR_SCANCODE_T: gr_set_center_screen = 1;      writeln("center_screen 1");        break;
+    // case GR_SCANCODE_G: gr_set_center_screen = 0;      writeln("center_screen 0");        break;
+    // case GR_SCANCODE_Y: gr_set_stretch_screen = 1;     writeln("stretch_screen 1");       break;
+    // case GR_SCANCODE_H: gr_set_stretch_screen = 0;     writeln("stretch_screen 0");       break;
     default: break;
   }
 }
@@ -137,12 +141,15 @@ void initialize(){
   // writefln("a");
   // test_font = gr_load_ttf("cour.ttf".toStringz, 128.0);
   test_font = gr_load_ttf("assets/fonts/ariblk.ttf".toStringz, 128.0);
+  standard_font = gr_load_image("assets/fonts/cour_low.png".toStringz, 0);
+  test_bitmap_font = gr_load_image("assets/fonts/cour_low.png".toStringz, 0);
   // test_font = gr_load_ttf("", 32.0f);
   // writefln("b");
   
   // load_character_images;
   
   initialize_debug;
+  initialize_player;
   
   initialize_drop_tiers;
   
@@ -262,13 +269,22 @@ void render(){
   
   player_render_near;
   
-  gr_draw_centered(test_img, test_x, test_y, 1.0, 0.0, 0.5, 0.5);
+  gr_draw_partial(test_img, 0, 0, 1, 0.5, test_x, test_y, 1.0, 0.5, 0.5, 0.0, 0.5, 0.5);
   
   gr_color(1.0, 0.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, Vector2f(0, 0), 1.0);
   gr_color(0.0, 1.0, 0.0, 1.0);
   gr_draw_line(player_entity.position, player_entity.position + player_entity.velocity/10, 1.0);
   gr_color_alpha(1.0);
+  
+  // if(player_entity !is null){
+  //   gr_color(1.0f, 0.0f, 0.0f, 1.0f);
+  //   screen_draw_string(format("speed %2.2f", player_entity.speed), test_bitmap_font, 19, 5, 0.3, 0.1f, 0.2f, 0.0f, 0.04f, 0.04f);
+  //   gr_color_alpha(1.0f);
+  //   
+  //   if(player_entity.area !is null && player_entity.area.ground !is null)
+  //     screen_draw_string(format("%s %s", player_entity.area.ground.standard_article, player_entity.area.ground.name), test_bitmap_font, 19, 5, 0.3, 0.1f, 0.25f, 0.0f, 0.04f, 0.04f);
+  // }
   
   player_render_gui;
   
@@ -277,10 +293,10 @@ void render(){
 
 immutable(bool) debug_update = false;
 void update(){
-  if(player_entity !is null){
-    debug_write_1(format("%2.4f", player_entity.velocity.norm));
-    writefln("%2.2f", player_entity.velocity.norm);
-  }
+  // if(player_entity !is null){
+  //   debug_write_1(format("%2.4f", player_entity.velocity.norm));
+  //   writefln("%2.2f", player_entity.velocity.norm);
+  // }
   // debug_write_1(framerate_cap);
   // debug_write_1(frame_delta);
   

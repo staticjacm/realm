@@ -12,6 +12,10 @@ class Weapon : Item {
     super();
   }
   
+  override string name(){ return "weapon"; }
+  override string description(){ return "An undefined weapon"; }
+  override string standard_article(){ return "a"; }
+  
   void equipped(Structured_entity entity){}
   void dequipped(Structured_entity entity){}
   

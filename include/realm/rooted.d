@@ -42,6 +42,10 @@ class Rooted : Renderable {
     id = gid++;
   }
   
+  string name(){ return "rooted object"; }
+  string description(){ return "An undefined rooted object"; }
+  string standard_article(){ return "a"; }
+  
   // ~this(){
     // writeln("destructured rooted at ", position);
   // }

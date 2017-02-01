@@ -30,6 +30,10 @@ class Fire_staff_1 : Weapon {
     tier = 1;
   }
   
+  override string name(){ return "Common Staff of Fire"; }
+  override string description(){ return "Shoots not-so-powerful fireballs"; }
+  override string standard_article(){ return "a"; }
+  
   override void use(Entity entity){
     if(ready){
       if(entity !is null && entity.valid){

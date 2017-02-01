@@ -29,6 +29,10 @@ class Decoration : Renderable {
     area_index.remove;
   }
   
+  string name(){ return "decoration"; }
+  string description(){ return "An undefined decoration"; }
+  string standard_article(){ return "a"; }
+  
   long lifetime(){ return 1000;}
   
   override void render(){

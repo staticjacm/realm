@@ -5,6 +5,7 @@ import std.stdio;
 import std.string;
 import std.math;
 import std.random;
+import text;
 import sgogl_interface;
 import agent;
 import drop;
@@ -23,19 +24,46 @@ import area;
 import game;
 import vector;
 
-float view_size = 15;
-
-float sound_max_distance = 50.0f;
-
 Drop nearby_drop;
 Effect player_effect;
 Entity player_entity;
+  
+// GUI
+bool gui_show_primary     = true;
+bool gui_show_equipment   = true;
+bool gui_show_items       = true;
+bool gui_show_stats       = true;
+bool gui_show_description = false;
 
-bool gui_show_primary   = true;
-bool gui_show_equipment = true;
-bool gui_show_items     = true;
-bool gui_show_stats     = true;
+enum{
+  gui_description_mode_world,
+  gui_description_mode_item,
+  gui_description_mode_weapon,
+  gui_description_mode_armor,
+  gui_description_mode_accessory,
+  gui_description_mode_class,
+  gui_description_mode_ground,
+  gui_description_mode_wall
+}
+int gui_description_mode = gui_description_mode_world;
 
+
+int drop_selection      = 0;
+int inventory_selection = 0;
+int selection_marker    = 0;
+bool selection_marker_on_inventory = true;  // is the selection marker on the inventory or on the nearby drops item list?
+
+uint selection_border_image;
+
+float gui_panel_size   = 0.065; // size of a single info panel (hp, nrg, equipment, etc)
+float gui_lower_gap    = 0.002;  // distance of panels from the bottom of the screen
+float gui_panel_depth  = 0.2f;  // render depth (z)
+
+float gui_stat_font_width  = 0.03;
+float gui_stat_font_height = 0.03;
+float gui_stat_line_size   = 0.02;
+
+// Buttons / Controls
 int activate_button       = GR_E;
 int warp_to_kernel_button = GR_R;
 
@@ -43,6 +71,12 @@ int move_up_button    = GR_W;
 int move_left_button  = GR_A;
 int move_down_button  = GR_S;
 int move_right_button = GR_D;
+
+int selection_marker_move_left_button  = GR_LEFT;
+int selection_marker_move_right_button = GR_RIGHT;
+int selection_marker_switch_button     = GR_UP;
+int selection_marker_switch_button_alt = GR_DOWN;
+int selection_marker_select_button     = GR_RETURN;
 
 int gui_show_primary_button   = GR_H;
 int gui_show_equipment_button = GR_J;
@@ -52,23 +86,28 @@ int gui_show_stats_button     = GR_L;
 bool shift_pressed = false;
 bool ctrl_pressed  = false;
 
-bool move_up_pressed = false;
-bool move_left_pressed = false;
-bool move_down_pressed = false;
+bool move_up_pressed    = false;
+bool move_left_pressed  = false;
+bool move_down_pressed  = false;
 bool move_right_pressed = false;
 
 bool mouse_left_down = false;
 
+// View
 Vector2f view_target = Vector2f(0, 0);
 Vector2f view_target_offset = Vector2f(0, 0);
 Vector2f view_position = Vector2f(0, 0);
 Vector2f view_velocity = Vector2f(0, 0);
+float view_size = 15;
 float view_pull_strength = 100.0;
 float view_friction = 10;
 float view_shake_amount = 0;
 int view_shake_frames = 0;
 bool use_spring_shake_model = false;
 bool use_screen_shake = true;
+
+float sound_max_distance = 50.0f;
+
 
 class Player_effect : Effect {
   alias collide = Effect.collide;
@@ -78,6 +117,10 @@ class Player_effect : Effect {
   override void collide(Drop other){
     nearby_drop = other;
   }
+}
+
+void initialize_player(){
+  selection_border_image = gr_load_image("assets/gui/fancy_border.png", 0);
 }
 
 void shake_screen(float amount){
@@ -146,6 +189,7 @@ void player_update(){
   if(nearby_drop !is null && nearby_drop.valid){
     if(!player_entity.fast_test_for_collision(nearby_drop)){
       nearby_drop = null;
+      selection_marker_on_inventory = true;
     }
   }
   
@@ -172,82 +216,288 @@ void player_render_near(){
   }
 }
 
+/*
+  (Poorly) Render the gui
+*/
 void player_render_gui(){
   if(player_entity !is null && player_entity.valid){
-    gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
+    // gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
     
-    gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
-    gr_screen_draw_text(test_font, format("(%.2f, %.2f)", player_entity.position.x, player_entity.position.y).toStringz, 0.0f, 0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.5f);
+    // gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
+    // gr_screen_draw_text(test_font, format("(%.2f, %.2f)", player_entity.position.x, player_entity.position.y).toStringz, 0.0f, 0.4f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0.5f);
     
+    // Primary statistics: Health, Energy
     if(gui_show_primary){
-      // Health
-      gr_screen_draw_text(test_font, "HP", 0.02f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
-      gr_screen_draw_text(test_font, format("%3.0f", player_entity.health).toStringz, 0.02f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
-      // NRG
-      gr_screen_draw_text(test_font, "NRG", 0.095f, 0.03f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
-      gr_screen_draw_text(test_font, format("%3.0f", player_entity.energy).toStringz, 0.095f, 0.01f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.1f);
+      
+      // Health Bar
+      screen_draw_string!"centered"(
+        format("HP"), 
+        standard_font, 19, 5, standard_font_offset, 
+        gui_panel_size / 2, gui_panel_size / 2, gui_panel_depth - 0.05f, 
+        0.04f, 0.04f
+      );
+      gr_color(1.0f, 0.0f, 0.0f, 1.0f);
+      gr_screen_draw(
+        -1,
+        0.0f, gui_lower_gap, gui_panel_depth,
+        0.0f, 0.0f,
+        0.0f,
+        gui_panel_size, gui_panel_size * player_entity.health / player_entity.health_max
+      );
+      gr_color_alpha(1.0f);
+      
+      // Energy Bar (+1)
+      screen_draw_string!"centered"(
+        format("NRG"),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 3 / 2, gui_panel_size / 2, gui_panel_depth - 0.05,
+        0.04f, 0.04f
+      );
+      gr_color(0.0f, 0.0f, 1.0f, 1.0f);
+      gr_screen_draw(
+        -1,
+        gui_panel_size * 1.0f, gui_lower_gap, gui_panel_depth,
+        0.0f, 0.0f,
+        0.0f,
+        gui_panel_size, gui_panel_size * player_entity.energy / player_entity.energy_max
+      );
+      gr_color_alpha(1.0f);
     }
     
-    if(gui_show_stats){
-      // Stats
-      gr_screen_draw_text(test_font, format("%2.0f hpmax", player_entity.health_max).toStringz, 0.85, 0.05f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
-      gr_screen_draw_text(test_font, format("%2.0f ldef", player_entity.l_defence).toStringz, 0.85, 0.07f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
-      gr_screen_draw_text(test_font, format("%2.0f mdef", player_entity.m_defence).toStringz, 0.85, 0.09f, 0.0f, 0.0f, 0.0f, 0.0f, 0.15f, 0.15f);
-    }
-    
-    // Structured entity
-    if(player_entity.entity_subtype_id == Entity.subtype_structured_entity){
+    // Structured entity information (+2)
+    if(gui_show_equipment && player_entity.entity_subtype_id == Entity.subtype_structured_entity){
       Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
-      if(gui_show_equipment){
-        if(player_entity_structured.weapon !is null && player_entity_structured.weapon.valid)
+      if(player_entity_structured.weapon !is null && player_entity_structured.weapon.valid)
+        gr_screen_draw(
+          player_entity_structured.weapon.animation.update(game_time), 
+          gui_panel_size * 2, gui_lower_gap, gui_panel_depth, 
+          0.0f, 0.0f, 
+          0.0f, 
+          gui_panel_size
+        );
+      if(player_entity_structured.armor !is null && player_entity_structured.armor.valid)
+        gr_screen_draw(
+          player_entity_structured.armor.animation.update(game_time),
+          gui_panel_size * 3, gui_lower_gap, gui_panel_depth, 
+          0.0f, 0.0f, 
+          0.0f, 
+          gui_panel_size
+        );
+      if(player_entity_structured.accessory !is null && player_entity_structured.accessory.valid)
+        gr_screen_draw(
+          player_entity_structured.accessory.animation.update(game_time),
+          gui_panel_size * 4, gui_lower_gap, gui_panel_depth, 
+          0.0f, 0.0f, 
+          0.0f, 
+          gui_panel_size
+        );
+    }
+    
+    // Items (+5)
+    if(gui_show_items){
+      
+      // Item selection marker over selected item
+      if(selection_marker_on_inventory){
+        gr_color(0.0f, 1.0f, 0.0f, 1.0f);
+        gr_screen_draw(
+          selection_border_image, 
+          gui_panel_size * cast(float)(5 + selection_marker), gui_lower_gap, gui_panel_depth, 
+          0.0f, 0.0f, 
+          0.0f, 
+          gui_panel_size, gui_panel_size
+        );
+        gr_color_alpha(1.0f);
+      }
+        
+      // Currently selected player item
+      gr_color(1.0f, 0.0f, 0.0f, 1.0f);
+      gr_screen_draw(
+        selection_border_image,
+          gui_panel_size * cast(float)(5 + inventory_selection), gui_lower_gap, gui_panel_depth, 
+          0.0f, 0.0f, 
+          0.0f, 
+          gui_panel_size, gui_panel_size
+      );
+      gr_color_alpha(1.0f);
+      
+      
+      // Player_entity's items
+      for(int i = 0; i < player_entity.items.length; i++){
+        if(player_entity.items[i] !is null && player_entity.items[i].valid)
           gr_screen_draw(
-            player_entity_structured.weapon.animation.update(game_time), 
-            0.17f, 0.0f, 0.0f, 
+            player_entity.items[i].animation.update(game_time),
+            gui_panel_size * cast(float)(5 + i), gui_lower_gap, gui_panel_depth, 
             0.0f, 0.0f, 
             0.0f, 
-            0.045f
-          );
-        if(player_entity_structured.armor !is null && player_entity_structured.armor.valid)
-          gr_screen_draw(
-            player_entity_structured.armor.animation.update(game_time),
-            0.24f, 0.0f, 0.0f, 
-            0.0f, 0.0f, 
-            0.0f, 
-            0.045f
-          );
-        if(player_entity_structured.accessory !is null && player_entity_structured.accessory.valid)
-          gr_screen_draw(
-            player_entity_structured.accessory.animation.update(game_time),
-            0.29f, 0.0f, 0.0f, 
-            0.0f, 0.0f, 
-            0.0f, 
-            0.045f
+            gui_panel_size
           );
       }
-      if(gui_show_items){
-        for(int i = 0; i < player_entity_structured.items.length; i++){
-          if(player_entity_structured.items[i] !is null && player_entity_structured.items[i].valid)
-            gr_screen_draw(
-              player_entity_structured.items[i].animation.update(game_time),
-              0.34f + cast(float)i * 0.065, 0.0f, 0.0f, 
-              0.0f, 0.0f, 
-              0.0f, 
-              0.045f
-            );
+      
+      // Closest drop's items
+      if(nearby_drop !is null && nearby_drop.valid){
+        
+        // Item selection marker over selected dropitem
+        if(!selection_marker_on_inventory){
+          gr_color(0.0f, 1.0f, 0.0f, 1.0f);
+          gr_screen_draw(
+            selection_border_image, 
+            gui_panel_size * cast(float)(5 + selection_marker), gui_lower_gap + gui_panel_size, gui_panel_depth, 
+            0.0f, 0.0f, 
+            0.0f, 
+            gui_panel_size, gui_panel_size
+          );
+          gr_color_alpha(1.0f);
         }
-        if(nearby_drop !is null && nearby_drop.valid){
-          for(int i = 0; i < nearby_drop.items.length; i++){
-            if(nearby_drop.items[i] !is null && nearby_drop.items[i].valid){
-              gr_screen_draw(
-                nearby_drop.items[i].animation.update(game_time),
-                0.34f + cast(float)i * 0.065, 0.05f, 0.0f, 
-                0.0f, 0.0f, 
-                0.0f, 
-                0.045f
-              );
-            }
+        
+        // Drop item selection
+        gr_color(1.0f, 0.0f, 0.0f, 1.0f);
+        gr_screen_draw(
+          selection_border_image,
+            gui_panel_size * cast(float)(5 + drop_selection), gui_lower_gap + gui_panel_size, gui_panel_depth, 
+            0.0f, 0.0f, 
+            0.0f, 
+            gui_panel_size, gui_panel_size
+        );
+        gr_color_alpha(1.0f);
+        
+        // Drop's items
+        for(int i = 0; i < nearby_drop.items.length; i++){
+          if(nearby_drop.items[i] !is null && nearby_drop.items[i].valid){
+            gr_screen_draw(
+              nearby_drop.items[i].animation.update(game_time),
+            gui_panel_size * cast(float)(5 + i), gui_lower_gap + gui_panel_size, gui_panel_depth, 
+            0.0f, 0.0f, 
+            0.0f, 
+            gui_panel_size
+            );
           }
         }
+      }
+    }
+    
+    // Stats (+13)
+    if(gui_show_stats){
+      
+      // health
+      gr_color(1.0f, 0.8f, 0.8f, 1.0f);
+      screen_draw_string(
+        format("hp"),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 2, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  %2.0f / %2.0f", player_entity.health_max, player_entity.health),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 1, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  rate: %2.0f", player_entity.health_rate),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      
+      // energy
+      gr_color(0.8f, 0.8f, 1.0f, 1.0f);
+      screen_draw_string(
+        format("nrg:"),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 5, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  %2.0f / %2.0f", player_entity.energy_max, player_entity.energy),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 4, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  rate: %2.0f", player_entity.energy_rate),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 3, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      
+      // defence
+      gr_color(0.8f, 0.8f, 0.8f, 0.5f);
+      screen_draw_string(
+        format("def:"),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 9, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  l: %2.0f", player_entity.l_defence),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 8, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  m: %2.0f", player_entity.m_defence - 100),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 7, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  e: %2.0f", player_entity.energy_defence),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 6, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      
+      // speed
+      gr_color(1.0f, 0.75f, 0.25f, 0.5f);
+      screen_draw_string(
+        format("speed:"),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 12, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  max: %2.0f", player_entity.max_speed),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 11, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      screen_draw_string(
+        format("  rate: %2.0f", player_entity.propel_rate),
+        standard_font, 19, 5, standard_font_offset,
+        gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 10, gui_panel_depth,
+        gui_stat_font_width, gui_stat_font_height
+      );
+      gr_color_alpha(1.0f);
+    }
+    
+    // Description for world / item / weapon / armor / accessory / class / ground / wall
+    if(gui_show_description){
+      switch(gui_description_mode){
+        default: break;
+        case gui_description_mode_world:
+          
+          break;
+        case gui_description_mode_item:
+          
+          break;
+        case gui_description_mode_weapon:
+          
+          break;
+        case gui_description_mode_armor:
+          
+          break;
+        case gui_description_mode_accessory:
+          
+          break;
+        case gui_description_mode_class:
+          
+          break;
+        case gui_description_mode_ground:
+          
+          break;
+        case gui_description_mode_wall:
+          
+          break;
       }
     }
   }
@@ -259,6 +509,18 @@ void player_swap_item(int i){
     Item temp = nearby_drop.items[i];
     nearby_drop.items[i] = player_entity.items[i];
     player_entity.items[i] = temp;
+  }
+}
+
+void player_get_item(int i){
+  if(player_entity !is null && player_entity.valid && nearby_drop !is null && nearby_drop.valid && nearby_drop.items[i] !is null){
+    for(int j = 0; j < player_entity.items.length; j++){
+      if(player_entity.items[j] is null){
+        player_entity.items[j] = nearby_drop.items[i];
+        nearby_drop.remove_item(i);
+        return;
+      }
+    }
   }
 }
 
@@ -318,6 +580,58 @@ void player_zero_view(){
   view_velocity = Vector2f(0.0f, 0.0f);
 }
 
+void selection_marker_move_left(){
+  selection_marker --;
+  if(selection_marker < 0)
+    selection_marker = 7;
+}
+
+void selection_marker_move_right(){
+  selection_marker ++;
+  if(selection_marker > 7)
+    selection_marker = 0;
+}
+
+void selection_marker_switch(){
+  if(nearby_drop !is null && nearby_drop.valid)
+  selection_marker_on_inventory = !selection_marker_on_inventory;
+}
+
+void selection_marker_activate(){
+  if(selection_marker_on_inventory){
+    Item item = player_entity.items[selection_marker];
+    if(item !is null){
+      if(item.item_subtype_id != Item.subtype_item)
+        player_equip_item(selection_marker);
+      else
+        player_use_item(selection_marker);
+    }
+  }
+}
+
+void selection_marker_swap(){
+  if(!selection_marker_on_inventory)
+    player_get_item(selection_marker);
+}
+
+void selection_marker_select(){
+  static long selection_marker_double_select_time;
+  static immutable(long) selection_marker_double_select_delay = 200;
+  if(selection_marker_on_inventory){
+    if(selection_marker == inventory_selection && game_time < selection_marker_double_select_time)
+      selection_marker_activate;
+    else
+      inventory_selection = selection_marker;
+  }
+  else {
+    if(selection_marker == drop_selection && game_time < selection_marker_double_select_time)
+      selection_marker_swap;
+    else
+      drop_selection = selection_marker;
+  }
+  selection_marker_double_select_time = game_time + selection_marker_double_select_delay;
+}
+
 void player_key_function(){
   switch(gr_key){
     case GR_LSHIFT:
@@ -349,19 +663,19 @@ void player_key_function(){
       else
         move_up_pressed = false;
       break;
-    case move_down_button:  
+    case move_down_button:
       if(gr_key_pressed)
         move_down_pressed = true;
       else
         move_down_pressed = false;
       break;
-    case move_left_button:  
+    case move_left_button:
       if(gr_key_pressed)
         move_left_pressed = true;
       else
         move_left_pressed = false;
       break;
-    case move_right_button: 
+    case move_right_button:
       if(gr_key_pressed)
         move_right_pressed = true;
       else
@@ -388,6 +702,27 @@ void player_key_function(){
         kernel_world.place_agent(player_entity);
         player_zero_view;
       }
+      break;
+    
+    // GUI selection marker movement
+    case selection_marker_move_left_button:
+      if(gr_key_pressed)
+        selection_marker_move_left;
+      break;
+    case selection_marker_move_right_button:
+      if(gr_key_pressed)
+        selection_marker_move_right;
+      break;
+    case selection_marker_switch_button_alt:
+    case selection_marker_switch_button:
+      if(gr_key_pressed)
+        selection_marker_switch;
+      break;
+    
+    // GUI selection marker selecting
+    case selection_marker_select_button:
+      if(gr_key_pressed)
+        selection_marker_select;
       break;
       
     // Gui toggles

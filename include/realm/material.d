@@ -18,6 +18,10 @@ abstract class Material : Validatable {
   
   this(){ super(); }
   
+  string name(){ return "material"; }
+  string description(){ return "An undefined material"; }
+  string standard_article(){ return "a"; }
+  
   /++
   owner has this material, other is the one owner is overlapping
   ++/

@@ -32,6 +32,10 @@ class Cactus1 : Wall {
     endwait_time = game_time + endwait_delay;
   }
   
+  override string name(){ return "Cactus"; }
+  override string description(){ return "Very spiny, don't touch this!"; }
+  override string standard_article(){ return "a"; }
+  
   override void render(){
     if(waiting)
       gr_color(1, 0, 0, 1);

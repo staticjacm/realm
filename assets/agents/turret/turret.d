@@ -38,6 +38,10 @@ class Fire_turret_1 : Agent {
     animation = deactivated_animation;
   }
   
+  override string name(){ return "Common Fire Turret"; }
+  override string description(){ return "A turret that shoot fireballs"; }
+  override string standard_article(){ return "a"; }
+  
   override void update(){
     if(activated){
       if(deactivation_time < game_time){

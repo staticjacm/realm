@@ -48,4 +48,9 @@ class Stone_ground_1 : Ground {
       }
     }
   }
+  
+  override string name(){ return "Stone"; }
+  override string description(){ return "A hard, smooth stone surface"; }
+  override string standard_article(){ return "some"; }
+  
 }

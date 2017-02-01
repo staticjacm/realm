@@ -214,6 +214,10 @@ class Kernel : World {
     collider_entity.world = this;
     place_agent(collider_entity);
   }
+    
+ override string name(){ return "Kernel"; }
+ override string description(){ return "There once was a large realm just like the others. Many generations ago the destroyer came and eat that realm. We fight all the time to keep it from consuming the only thing left."; }
+ override string standard_article(){ return "the"; }
   
   override void update(){
     super.update;

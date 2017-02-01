@@ -23,6 +23,10 @@ class Dev_ring_1 : Accessory {
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
   }
   
+  override string name(){ return "developers' ring"; }
+  override string description(){ return "You better be a developer!"; }
+  override string standard_article(){ return "a"; }
+  
   override void equipped(Structured_entity entity){
     entity.propel_rate += 10.0f;
     entity.max_speed += 10.0f;

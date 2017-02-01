@@ -23,6 +23,10 @@ class Ring_of_defence_1 : Accessory {
     animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
   }
   
+  override string name(){ return "Common Ring of Defence"; }
+  override string description(){ return "Slightly increases defence"; }
+  override string standard_article(){ return "a"; }
+  
   override void equipped(Structured_entity entity){
     entity.m_defence += 1.0f;
   }

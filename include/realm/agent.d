@@ -120,6 +120,9 @@ class Agent : Renderable {
       destroy(material);
   }
   
+  string name(){ return "Agent"; }
+  string description(){ return "An undefined agent"; }
+  string standard_article(){ return "an"; }
   
   int agent_subtype_id(){ return subtype_none; }
   

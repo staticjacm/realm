@@ -14,6 +14,10 @@ class Armor : Item {
     super();
   }
   
+  override string name(){ return "armor"; }
+  override string description(){ return "An undefined piece of armor"; }
+  override string standard_article(){ return "an"; }
+  
   override int item_subtype_id(){ return Item.subtype_armor; }
   
   float modify_damage(float damage){ return damage; }

@@ -54,6 +54,10 @@ class World : world_grid_type {
     }
   }
   
+  string name(){ return "world"; }
+  string description(){ return "An undefined world"; }
+  string standard_article(){ return "a"; }
+  
   void update(){}
   
   void initialize(){}
