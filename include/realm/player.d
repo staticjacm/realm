@@ -5,6 +5,7 @@ import std.stdio;
 import std.string;
 import std.math;
 import std.random;
+import dbg;
 import text;
 import sgogl_interface;
 import agent;
@@ -23,6 +24,7 @@ import effect;
 import area;
 import game;
 import vector;
+import drop_tiers;
 
 Drop nearby_drop;
 Effect player_effect;
@@ -47,6 +49,15 @@ enum{
 }
 int gui_description_mode = gui_description_mode_world;
 
+int gui_description_mode_world_button     = GR_F1;
+int gui_description_mode_item_button      = GR_F2;
+int gui_description_mode_weapon_button    = GR_F3;
+int gui_description_mode_armor_button     = GR_F4;
+int gui_description_mode_accessory_button = GR_F5;
+int gui_description_mode_class_button     = GR_F6;
+int gui_description_mode_ground_button    = GR_F7;
+int gui_description_mode_wall_button      = GR_F8;
+
 
 int drop_selection      = 0;
 int inventory_selection = 0;
@@ -63,6 +74,14 @@ float gui_stat_font_width  = 0.03;
 float gui_stat_font_height = 0.03;
 float gui_stat_line_size   = 0.02;
 
+float gui_description_upper_gap   = 0.05;  // gap between top description element and top of screen
+float gui_description_left_gap    = 0.05;  // gap between top description element and top of screen
+float gui_description_between_gap = 0.025; // gap between description elements
+float gui_description_font_width  = 0.05;
+float gui_description_font_height = 0.04;
+float gui_description_line_size   = 0.05;
+float gui_description_depth       = 0.2;
+
 // Buttons / Controls
 int activate_button       = GR_E;
 int warp_to_kernel_button = GR_R;
@@ -74,14 +93,15 @@ int move_right_button = GR_D;
 
 int selection_marker_move_left_button  = GR_LEFT;
 int selection_marker_move_right_button = GR_RIGHT;
-int selection_marker_switch_button     = GR_UP;
-int selection_marker_switch_button_alt = GR_DOWN;
+int selection_marker_move_up_button    = GR_UP;
+int selection_marker_move_down_button  = GR_DOWN;
 int selection_marker_select_button     = GR_RETURN;
 
-int gui_show_primary_button   = GR_H;
-int gui_show_equipment_button = GR_J;
-int gui_show_items_button     = GR_K;
-int gui_show_stats_button     = GR_L;
+int gui_show_description_button = GR_G;
+int gui_show_primary_button     = GR_H;
+int gui_show_equipment_button   = GR_J;
+int gui_show_items_button       = GR_K;
+int gui_show_stats_button       = GR_L;
 
 bool shift_pressed = false;
 bool ctrl_pressed  = false;
@@ -393,7 +413,7 @@ void player_render_gui(){
         gui_stat_font_width, gui_stat_font_height
       );
       screen_draw_string(
-        format("  rate: %2.0f", player_entity.health_rate),
+        format("  rate: %2.1f", player_entity.health_rate),
         standard_font, 19, 5, standard_font_offset,
         gui_panel_size * 13, gui_lower_gap, gui_panel_depth,
         gui_stat_font_width, gui_stat_font_height
@@ -414,7 +434,7 @@ void player_render_gui(){
         gui_stat_font_width, gui_stat_font_height
       );
       screen_draw_string(
-        format("  rate: %2.0f", player_entity.energy_rate),
+        format("  rate: %2.1f", player_entity.energy_rate),
         standard_font, 19, 5, standard_font_offset,
         gui_panel_size * 13, gui_lower_gap + gui_stat_line_size * 3, gui_panel_depth,
         gui_stat_font_width, gui_stat_font_height
@@ -472,33 +492,111 @@ void player_render_gui(){
     
     // Description for world / item / weapon / armor / accessory / class / ground / wall
     if(gui_show_description){
+      string type_string, name_string, description_string;
       switch(gui_description_mode){
         default: break;
         case gui_description_mode_world:
-          
+          type_string        = "World:";
+          name_string        = format("%s %s", player_entity.world.standard_article, player_entity.world.name);
+          description_string = player_entity.world.description.wrap(25);
           break;
         case gui_description_mode_item:
-          
+          Item display_item;
+          if(selection_marker_on_inventory && player_entity.items[selection_marker] !is null)
+            display_item = player_entity.items[selection_marker];
+          else if(!selection_marker_on_inventory && nearby_drop !is null && nearby_drop.items[selection_marker] !is null)
+            display_item = nearby_drop.items[selection_marker];
+          if(display_item !is null){
+            type_string        = "Item:";
+            name_string        = format("%s %s", display_item.standard_article, display_item.name);
+            description_string = display_item.description.wrap(25);
+          }
           break;
         case gui_description_mode_weapon:
-          
+          if(player_entity.entity_subtype_id == Entity.subtype_structured_entity){
+            Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
+            if(player_entity_structured.weapon !is null){
+              type_string        = "Weapon:";
+              name_string        = format("%s %s", player_entity_structured.weapon.standard_article, player_entity_structured.weapon.name);
+              description_string = player_entity_structured.weapon.description.wrap(25);
+            }
+            else {
+              type_string = "No weapon";
+            }
+          }
+          else {
+            type_string = "Can't hold a weapon";
+          }
           break;
         case gui_description_mode_armor:
-          
+          if(player_entity.entity_subtype_id == Entity.subtype_structured_entity){
+            Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
+            if(player_entity_structured.armor !is null){
+              type_string        = "Armor:";
+              name_string        = format("%s %s", player_entity_structured.armor.standard_article, player_entity_structured.armor.name);
+              description_string = player_entity_structured.armor.description.wrap(25);
+            }
+            else {
+              type_string = "No armor";
+            }
+          }
+          else {
+            type_string = "Can't hold armor";
+          }
           break;
         case gui_description_mode_accessory:
-          
+          if(player_entity.entity_subtype_id == Entity.subtype_structured_entity){
+            Structured_entity player_entity_structured = cast(Structured_entity)player_entity;
+            if(player_entity_structured.accessory !is null){
+              type_string        = "Accessory:";
+              name_string        = format("%s %s", player_entity_structured.accessory.standard_article, player_entity_structured.accessory.name);
+              description_string = player_entity_structured.accessory.description.wrap(25);
+            }
+            else {
+              type_string = "No accessory";
+            }
+          }
+          else {
+            type_string = "Can't hold an accessory";
+          }
           break;
         case gui_description_mode_class:
-          
+          type_string        = "Class:";
+          name_string        = format("%s %s", player_entity.standard_article, player_entity.name);
+          description_string = player_entity.description.wrap(25);
           break;
         case gui_description_mode_ground:
-          
+          if(player_entity.area !is null && player_entity.area.ground !is null){
+            type_string        = "Ground:";
+            name_string        = format("%s %s", player_entity.area.ground.standard_article, player_entity.area.ground.name);
+            description_string = player_entity.area.ground.description.wrap(25);
+          }
           break;
         case gui_description_mode_wall:
           
           break;
       }
+      
+      screen_draw_string(
+        type_string,
+        standard_font, 19, 5, standard_font_offset,
+        gui_description_left_gap, gr_screen_draw_height - gui_description_upper_gap, gui_panel_depth,
+        gui_description_font_width, gui_description_font_height
+      );
+      gr_color(1.0f, 0.0f, 0.0f, 1.0f);
+      screen_draw_string(
+        name_string,
+        standard_font, 19, 5, standard_font_offset,
+        gui_description_left_gap, gr_screen_draw_height - gui_description_upper_gap - gui_description_line_size, gui_panel_depth,
+        gui_description_font_width, gui_description_font_height
+      );
+      gr_color_alpha(1.0f);
+      screen_draw_string(
+        description_string,
+        standard_font, 19, 5, standard_font_offset,
+        gui_description_left_gap, gr_screen_draw_height - gui_description_upper_gap - gui_description_line_size*2, gui_panel_depth,
+        gui_description_font_width, gui_description_font_height
+      );
     }
   }
 }
@@ -581,20 +679,86 @@ void player_zero_view(){
 }
 
 void selection_marker_move_left(){
+  if(nearby_drop is null)
+    selection_marker_on_inventory = true;
+  int old_selection = selection_marker;
   selection_marker --;
   if(selection_marker < 0)
     selection_marker = 7;
+  if(ctrl_pressed){
+    if(player_entity !is null && player_entity.items[old_selection] !is null){
+      Item temp = player_entity.items[selection_marker];
+      player_entity.items[selection_marker] = player_entity.items[old_selection];
+      player_entity.items[old_selection] = temp;
+    }
+  }
 }
 
 void selection_marker_move_right(){
+  if(nearby_drop is null)
+    selection_marker_on_inventory = true;
+  int old_selection = selection_marker;
   selection_marker ++;
   if(selection_marker > 7)
     selection_marker = 0;
+  if(ctrl_pressed){
+    if(player_entity !is null && player_entity.items[old_selection] !is null){
+      Item temp = player_entity.items[selection_marker];
+      player_entity.items[selection_marker] = player_entity.items[old_selection];
+      player_entity.items[old_selection] = temp;
+    }
+  }
+}
+
+void player_drop_item(int i){
+  if(player_entity !is null && player_entity.world !is null && player_entity.items[i] !is null){
+    write_location_debug;
+    // there currently is a drop
+    if(nearby_drop !is null && nearby_drop.valid){
+      write_location_debug;
+      int drop_space = nearby_drop.find_empty_space;
+      // has an empty spot for the item
+      if(drop_space >= 0){
+        write_location_debug;
+        nearby_drop.items[drop_space] = player_entity.items[i];
+        player_entity.items[i] = null;
+      }
+      // its full -> create a new drop
+      else {
+        write_location_debug;
+        Drop new_drop = drop_decide_tier(player_entity.items[i].tier);
+        new_drop.position = player_entity.position;
+        player_entity.world.place_agent(new_drop);
+        new_drop.add_item(player_entity.items[i]);
+        player_entity.items[i] = null;
+      }
+    }
+    // there is no drop nearby
+    else {
+      write_location_debug;
+      Drop new_drop = drop_decide_tier(player_entity.items[i].tier);
+      new_drop.position = player_entity.position;
+      player_entity.world.place_agent(new_drop);
+      new_drop.add_item(player_entity.items[i]);
+      player_entity.items[i] = null;
+    }
+  }
+}
+
+void player_grab_item(int i){
+  if(player_entity !is null && nearby_drop !is null && nearby_drop.items[i] !is null){
+    int inventory_space = player_entity.find_empty_space;
+    if(inventory_space >= 0){
+      player_entity.items[inventory_space] = nearby_drop.items[i];
+      nearby_drop.remove_item(i);
+    }
+  }
 }
 
 void selection_marker_switch(){
-  if(nearby_drop !is null && nearby_drop.valid)
-  selection_marker_on_inventory = !selection_marker_on_inventory;
+  if(nearby_drop !is null){
+    selection_marker_on_inventory = !selection_marker_on_inventory;
+  }
 }
 
 void selection_marker_activate(){
@@ -713,10 +877,20 @@ void player_key_function(){
       if(gr_key_pressed)
         selection_marker_move_right;
       break;
-    case selection_marker_switch_button_alt:
-    case selection_marker_switch_button:
-      if(gr_key_pressed)
-        selection_marker_switch;
+    case selection_marker_move_down_button:
+      if(gr_key_pressed){
+        if(ctrl_pressed && !selection_marker_on_inventory)
+          player_grab_item(selection_marker);
+        else
+          selection_marker_switch;
+      }
+    case selection_marker_move_up_button:
+      if(gr_key_pressed){
+        if(ctrl_pressed && selection_marker_on_inventory)
+          player_drop_item(selection_marker);
+        else
+          selection_marker_switch;
+      }
       break;
     
     // GUI selection marker selecting
@@ -730,6 +904,10 @@ void player_key_function(){
       if(gr_key_pressed)
         gui_show_primary = !gui_show_primary;
       break;
+    case gui_show_description_button:
+      if(gr_key_pressed)
+        gui_show_description = !gui_show_description;
+      break;
     case gui_show_equipment_button:
       if(gr_key_pressed)
         gui_show_equipment = !gui_show_equipment;
@@ -742,7 +920,16 @@ void player_key_function(){
       if(gr_key_pressed)
         gui_show_stats = !gui_show_stats;
       break;
-      
+    
+    case gui_description_mode_world_button:     if(gr_key_pressed) gui_description_mode = gui_description_mode_world; break;
+    case gui_description_mode_item_button:      if(gr_key_pressed) gui_description_mode = gui_description_mode_item; break;
+    case gui_description_mode_weapon_button:    if(gr_key_pressed) gui_description_mode = gui_description_mode_weapon; break;
+    case gui_description_mode_armor_button:     if(gr_key_pressed) gui_description_mode = gui_description_mode_armor; break;
+    case gui_description_mode_accessory_button: if(gr_key_pressed) gui_description_mode = gui_description_mode_accessory; break;
+    case gui_description_mode_class_button:     if(gr_key_pressed) gui_description_mode = gui_description_mode_class; break;
+    case gui_description_mode_ground_button:    if(gr_key_pressed) gui_description_mode = gui_description_mode_ground; break;
+    case gui_description_mode_wall_button:      if(gr_key_pressed) gui_description_mode = gui_description_mode_wall; break;
+    
     // Item use
     case GR_1: if(gr_key_pressed) player_interact_item(0); break;
     case GR_2: if(gr_key_pressed) player_interact_item(1); break;

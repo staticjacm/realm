@@ -157,6 +157,85 @@ class World : world_grid_type {
   }
   
   /*
+    Applies a function (of the current distance from the start, the current position, and the 
+    current area) on each area it comes across
+    
+    It works by casting a ray repeatedly inside a unit square. Depending on where the ray hits
+    inside of the unit square it will cycle back around to the other side of the square. Note
+    that the direction of the ray is always the same
+    
+    Returning true continues, returning false breaks out of apply_raycast
+    If generate is false then it will return as soon as it hits a null area
+  */
+  void apply_raycast(bool delegate(float, Vector2f, Area) dg, Vector2f position, Vector2f direction, bool generate = false){
+    Area current_area;
+    immutable(float) area_width = 1.0f, area_height = 1.0f;
+    float current_distance = 0;
+    if(generate)
+      current_area = get_or_new_area_generate(position);
+    else
+      current_area = get_area(position);
+    float x = position.x - floor(current_area.position.x);
+    float y = position.y - floor(current_area.position.y);
+    float lx, ly; // last x, y
+    Vector2f current_position = position;
+    while(dg(current_distance, current_position, current_area)){
+      lx = x; ly = y;
+      float xp, yp;
+      // this determines where (xp, yp) are on the boundaries of the unit square
+      if(direction.y > 0)
+        xp = x + direction.x * (area_height - y) / direction.y;
+      else
+        xp = x - direction.x * y / direction.y;
+      if(direction.x > 0)
+        yp = y + direction.y * (area_width - x) / direction.x;
+      else
+        yp = y - direction.y * x / direction.x;
+      // this replaces the current position (x, y) with the new position after
+      // moving into the next area (and cycling on the boundary of the square)
+      // also, here we replace the current area with the correct adjacent area
+      // debug_add_line(current_position, 1);
+      if( (0 <= xp) && (xp <= area_width) ) {
+        x = xp;
+        // bottom boundary
+        if(yp < 0) {
+          current_position += Vector2f(x - lx, 0 - ly);
+          y = area_height;
+          current_area = current_area.adjacent_b;
+        }
+        // upper boundary
+        else {
+          current_position += Vector2f(x - lx, area_height - ly);
+          y = 0;
+          current_area = current_area.adjacent_u;
+        }
+      }
+      else {
+        y = yp;
+        // left boundary
+        if(xp < 0) {
+          current_position += Vector2f(0 - lx, yp - ly);
+          x = area_width;
+          current_area = current_area.adjacent_l;
+        }
+        // right boundary
+        else {
+          current_position += Vector2f(area_width - lx, yp - ly);
+          x = 0;
+          current_area = current_area.adjacent_r;
+        }
+      }
+      current_distance += (current_position - position).norm;
+      if(current_area is null){
+        if(generate)
+          current_area = get_or_new_area_generate(current_position);
+        else
+          return;
+      }
+    }
+  }
+  
+  /*
     Returns the wall obtained by raycasting from position in the direction given
     If no wall is detected within a distance of max_distance then it returns null
     The generate parameter specifies whether or not the world should generate new areas as
@@ -245,29 +324,32 @@ class World : world_grid_type {
       return null;
   }
   /*
-    Heres the retard version of the above
+    Heres the retard version of the above (apply_raycast)
+    
+    The dg area parameter could be null, so watch out!
   */
-  // Wall get_wall_raycast(Vector2f position, Vector2f direction, float max_distance, bool generate = true){
-  //   Vector2f current_position = position;
-  //   Area current_area;
-  //   if(generate)
-  //     current_area = get_or_new_area_generate(position);
-  //   else
-  //     current_area = get_area(position);
-  //   while((current_position - position).norm < max_distance && current_area !is null && current_area.wall is null){
-  //     // debug_add_line(current_position, 1);
-  //     current_position += direction * 0.01;      
-  //     // debug_add_line(current_position, 2);
-  //     if(generate)
-  //       current_area = get_or_new_area_generate(position);
-  //     else
-  //       current_area = get_area(position);
-  //   }
-  //   if(current_area !is null && current_area.wall !is null)
-  //     return current_area.wall;
-  //   else
-  //     return null;
-  // }
+  void apply_raycast_2(bool delegate(float, Vector2f, Area) dg, Vector2f position, Vector2f direction, bool generate = true, float step_size = 0.3){
+    Vector2f current_position = position;
+    Area current_area;
+    Vector2f direction_normalized = direction.normalize;
+    if(generate)
+      current_area = get_or_new_area_generate(position);
+    else
+      current_area = get_area(position);
+    while(dg((current_position - position).norm, current_position, current_area)){
+      current_position += direction_normalized * step_size;
+      // if(generate)
+        // current_area = get_or_new_area_generate(current_position);
+      // else
+        // current_area = get_area(current_position);
+      if(!current_area.contains(current_position)){
+        if(generate)
+          current_area = get_or_new_area_generate(current_position);
+        else
+          current_area = get_area(current_position);
+      }
+    }
+  }
   
   Area new_area(string checks = "careful")(Vector2f position){
     static if(checks == "careful"){

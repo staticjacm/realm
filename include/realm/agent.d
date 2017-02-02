@@ -4,6 +4,8 @@ module agent;
 import std.stdio;
 import std.string;
 import std.math;
+import sgogl;
+import timer;
 import collision;
 import player;
 import dbg;
@@ -24,6 +26,8 @@ import validatable;
 import sllist;
 import sgogl;
 import sgogl_interface;
+
+Timer test_timer;
 
 alias Vector2f = Vector2!float;
 
@@ -82,7 +86,9 @@ class Agent : Renderable {
   Agent_list.Index master_index;
   Agent_list.Index area_index;
   Material material;
+  Vector2f last_veloity = Vector2f(0, 0);
   Vector2f velocity = Vector2f(0, 0);
+  float speed;
   float stop_speed = 0.2f;
   float mass = 1;
   bool moving = false; // is its velocity nonzero?
@@ -136,7 +142,7 @@ class Agent : Renderable {
     if(material !is null)
       material.update;
     if(moving){
-      if(uses_friction)
+      if(uses_friction && speed != 0)
         apply_friction;
       move_by(velocity*frame_delta);
       if(world !is null && moved){
@@ -221,21 +227,26 @@ class Agent : Renderable {
     Movement Dynamics
   ++/
   void apply_friction(){
-    // for some reason this has to be velocity/frame_delta instead of just velocity
-    if(area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0)
-      // accelerate(-velocity/frame_delta*area.ground.friction);
-      accelerate(-velocity.normalize*area.ground.friction);
-    // ^ should be accelerate(-velocity.normalize*friction*K);
+    if(speed > stop_speed && area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0){
+      if(speed < 3*stop_speed)
+        accelerate(-velocity*area.ground.friction/10);
+      else
+        accelerate(-velocity.normalize*area.ground.friction);
+    }
   }
   void accelerate(Vector2f acceleration){
+    // last_velocity = velocity;
     velocity += acceleration*frame_delta;
-    if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
+    speed = velocity.norm;
+    if(speed > stop_speed)
       moving = true;
     else {
       velocity.x = 0;
       velocity.y = 0;
+      speed = 0.0f;
       moving = false;
     }
+    
   }
   void apply_impulse(Vector2f force){
     accelerate(force/mass);
@@ -250,7 +261,7 @@ class Agent : Renderable {
       moving = false;
     }
   }
-  float speed(){ return velocity.norm; }
+  // float speed(){ return velocity.norm; }
   bool uses_friction(){ return true; }
   
   /*
@@ -261,22 +272,23 @@ class Agent : Renderable {
   void move_by(Vector2f delta){
     if(delta.x != 0 || delta.y != 0){
       // this check is for when the delta is far enough it can jump through walls
-      float distance = delta.norm;
-      if(interacts_with_walls && distance > 0.2f && world !is null){
-        Wall clipping_wall = world.get_wall_raycast(position, delta.normalize, distance);
-        if(clipping_wall !is null && clipping_wall.interacts){
-          position = clipping_wall.position - quadrant_vector(delta)*0.5;
-          clipping_wall.collision_block(this, position, Vector2f(1, 0));
-          clipping_wall.collide(this);
-          if(clipping_wall.valid && valid)
-            collide(clipping_wall);
-        }
-        else
-          position += delta;
+      float delta_distance = delta.norm;
+      if(interacts_with_walls && delta_distance > 1.0f && world !is null){
+        world.apply_raycast_2((float current_distance, Vector2f current_position, Area current_area){
+          if(delta_distance <= current_distance)
+            return false;
+          else if(current_area !is null){
+            position = current_position;
+            if(current_area.agent_fits(this))
+              return true;
+            else
+              return false;
+          }
+          return false;
+        }, position, delta, true, 0.5f);
       }
       else
         position += delta;
-      // position += delta;
       moved = true;
     }
   }

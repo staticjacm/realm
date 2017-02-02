@@ -58,7 +58,7 @@ bool running = true;
 Timer test_timer;
 
 uint standard_font;
-float standard_font_offset = 0.3;
+float standard_font_offset = 0.4;
 uint test_font;
 uint test_bitmap_font;
 
@@ -228,14 +228,21 @@ void initialize(){
   // test_world.place_agent(enemy);
   test_world.place_agent(turret);
   test_world.place_agent(test_portal_1);
-  test_world.place_agent(test_portal_2);
+  // test_world.place_agent(test_portal_2);
   test_portal_1.exit_world = test_world;
-  test_portal_2.exit_world = test_world;
   // player_entity.world = test_world;
   test_drop.position = Vector2f(21.0f, 19.0f);
   // test_drop.world = test_world;
   test_world.place_agent(test_drop);
   // player_entity.position = Kernel.center_spawn;
+  
+  Testing_world test_world_2 = new Testing_world();
+  test_world_2 = new Testing_world();
+  test_world_2.place_agent(player_entity);
+  test_world_2.place_agent(test_portal_2);
+  
+  test_portal_1.exit_world = test_world_2;
+  test_portal_2.exit_world = test_world;
   
   // kernel_world = new Kernel;
   // kernel_world = new Kernel;
@@ -298,7 +305,7 @@ void update(){
   //   writefln("%2.2f", player_entity.velocity.norm);
   // }
   // debug_write_1(framerate_cap);
-  // debug_write_1(frame_delta);
+  debug_write_1(frame_delta);
   
   static if(debug_update) write_location_debug;
   game_time = game_timer.msecs;

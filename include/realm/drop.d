@@ -36,14 +36,29 @@ class Drop : Agent {
   
   // Checks if it has an item
   bool has_item(){
-    bool item_found = false;
     for(int j = 0; j < items.length; j++){
-      if(items[j] !is null){
-        item_found = true;
-        break;
-      }
+      if(items[j] !is null)
+        return true;
     }
-    return item_found;
+    return false;
+  }
+  
+  // Checks if it has a free space
+  bool is_full(){
+    for(int j = 0; j < items.length; j++){
+      if(items[j] is null)
+        return true;
+    }
+    return false;
+  }
+  
+  // Returns the first empty space in items (-1 if none found)
+  int find_empty_space(){
+    for(int i = 0; i < items.length; i++){
+      if(items[i] is null)
+        return i;
+    }
+    return -1;
   }
   
   void remove_item(int i){

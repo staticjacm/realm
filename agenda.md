@@ -4,13 +4,12 @@
 
 * Test entity is stopping attacking like it should after losing target then regaining it
 
-* Initialization takes a strangely long time for some reason. This is a problem for every initialization function, apparently.
+* Initialization seems to takes a strangely long time for some reason. This is a problem for every initialization function, apparently. It might not actually be being slowed by anything, the algorithms might just suck
 
 * Agent friction increases when fps is low.
 * When screen loses focus and then gains focus (or something like that) the frame_delta is fuckin huge and... well you can imagine the consequences
 
 * Organize and implement a scheme for slowed / delayed updating of certain objects. For example: areas outside the view can be updated less often than areas inside the view. Only update agents every 0.1 ms, or whatever timing makes sense.
-* The ``Thread.sleep`` call should be adjusted every frame to maintain a constant fps (could also include a switch for unbound fps)
 
 * ``core.exception.InvalidMemoryOperationError@src\core\exception.d(693): Invalid memory operation`` Doesn't apparently hurt anything but it is annoying. Happens at shutdown
 
@@ -19,19 +18,18 @@
 
 * Content
 
+* Make apply_raycast actually work for Agent.move_by;
+
 * Find a different compiler for release builds. Supposedly the gnu compiler produces much faster binaries than dmd
 
 
 # Possible To Dos:
 
-* A damage object for exchanging between shots - entities, etc
-
 * Put all image / audio loading into its own module
 
-* Agent.size could be an overridable function instead of a variable
-
-
 # Already done:
+
+* The ``Thread.sleep`` call should be adjusted every frame to maintain a constant fps (could also include a switch for unbound fps)
 
 * Agents always experience four (4) collisions when colliding with an agent - two when agent A detects a collision with agent B (A.overlap(B), B.overlap(A)), and two when B detects a collision with agent A (B.overlap(A), A.overlap(B)). This can easily be avoided by only overlapping if one agents id is larger than the others, and detecting if the other will detect a collision with this one by checking its size. Note: this is probably solved, but I may have overlooked something.
 

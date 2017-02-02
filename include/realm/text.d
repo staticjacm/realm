@@ -39,7 +39,8 @@ void screen_draw_string(string centering = "")(string s, uint fontimg, int numx,
   immutable(float) gheight = 1.0f/cast(float)numy; // individual glyph heights
   foreach(char c; s){
     if(c == '\n'){
-      yacc += sy;
+      yacc -= sy;
+      xacc  = x;
     }
     else {
       uint index = character_to_image_index(c);
@@ -75,7 +76,8 @@ void draw_string(string centering = "")(string s, uint fontimg, int numx, int nu
   immutable(float) gheight = 1.0f/cast(float)numy; // individual glyph heights
   foreach(char c; s){
     if(c == '\n'){
-      yacc += sy;
+      yacc -= sy;
+      xacc  = x;
     }
     else {
       uint index = character_to_image_index(c);

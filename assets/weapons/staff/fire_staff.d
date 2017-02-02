@@ -2,9 +2,12 @@ module fire_staff;
 
 import std.stdio;
 import std.string;
+import dbg;
 import game;
 import sgogl;
 import animation;
+import world;
+import area;
 import entity;
 import weapon;
 import fireball1;
@@ -42,6 +45,16 @@ class Fire_staff_1 : Weapon {
         fireball.velocity = entity.direction * 30;
         entity.world.place_agent(fireball);
         fireball.faction_id = entity.faction_id;
+        // debug_add_line(entity.position, 1);
+        // entity.world.apply_raycast_2((float distance, Vector2f pos, Area area){
+          // writeln("pos ", pos, " area ", area);
+          // debug_add_line(pos, 2);
+          // debug_add_line(pos, 1);
+          // if(10.0f < distance || area is null || area.wall !is null){
+            // return false;
+          // }
+          // return true;
+        // }, entity.position, entity.direction, true);
         ready = false;
         ready_time = game_time + attack_delay;
       }

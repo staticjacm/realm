@@ -15,9 +15,8 @@ void initialize_drop_tiers(){
 Drop drop_decide_tier(float tier){
   if(tier < 1)
     return new Drop_tier_0;
-  else if(true)
+  else
     return new Drop_tier_1;
-  
 }
 
 class Drop_tier_0 : Drop {

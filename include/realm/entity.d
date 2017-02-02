@@ -210,16 +210,6 @@ class Entity : Agent {
     }
   }
   
-  override void apply_friction(){
-    if(area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0){
-      Vector2f std_friction = -velocity.normalize*area.ground.friction;
-      if(!propelling_x)
-        accelerate(Vector2f(std_friction.x, 0));
-      if(!propelling_y)
-        accelerate(Vector2f(0, std_friction.y));
-    }
-  }
-  
   void propel(Vector2f direction){
     is_walking = true;
     walking_switch_time = game_time + walking_switch_delay;
@@ -292,6 +282,34 @@ class Entity : Agent {
     gr_draw_line(position, position + direction, 1);
     gr_color_alpha(1.0);
     super.render;
+  }
+  
+  
+  // Checks if it has an item
+  bool has_item(){
+    for(int j = 0; j < items.length; j++){
+      if(items[j] !is null)
+        return true;
+    }
+    return false;
+  }
+  
+  // Checks if it has a free space
+  bool is_full(){
+    for(int j = 0; j < items.length; j++){
+      if(items[j] is null)
+        return true;
+    }
+    return false;
+  }
+  
+  // Returns the first empty space in items (-1 if none found)
+  int find_empty_space(){
+    for(int i = 0; i < items.length; i++){
+      if(items[i] is null)
+        return i;
+    }
+    return -1;
   }
   
   // Calculate damaged from a collision based on some speed change
