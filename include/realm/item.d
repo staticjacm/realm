@@ -10,7 +10,8 @@ class Item : Validatable {
     subtype_item,
     subtype_weapon,
     subtype_armor,
-    subtype_accessory
+    subtype_accessory,
+    subtype_token
   }
   
   Animation animation;

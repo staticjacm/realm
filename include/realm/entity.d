@@ -124,6 +124,12 @@ class Entity : Agent {
     }
   }
   
+  override void kill(){
+    foreach(Effect effect; effects){
+      effect.kill;
+    }
+  }
+  
   override string name(){ return "entity"; }
   override string description(){ return "An undefined entity"; }
   override string standard_article(){ return "an"; }

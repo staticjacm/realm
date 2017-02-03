@@ -31,6 +31,7 @@ class Effect : Validatable {
   void update(){}
   void initialize(){}
   void finalize(){}
+  void kill(){}
   
   void collide(Entity other){}
   void collide(Shot other){}

@@ -42,8 +42,8 @@ import kernel_portal;
 alias Vector2f = Vector2!float;
 
 // enum {
-  // mode_loading,
-  // mode_playing
+//   mode_loading,
+//   mode_playing
 // }
 // int game_mode = mode_playing;
 
@@ -160,6 +160,7 @@ void initialize(){
   Rooted.initialize_type;
   Renderable.initialize_type;
   Commoner.initialize_type;
+  Commoner_token.initialize_type;
   Drop_tier_0.initialize_type;
   Testing_world.initialize_type;
   Fire_staff_1.initialize_type;
@@ -193,6 +194,7 @@ void initialize(){
   test_entity.items[4] = new Ring_of_defence_1;
   test_entity.items[5] = new Ring_of_speed_1;
   test_entity.items[6] = new Ring_of_defence_1;
+  test_entity.items[7] = new Commoner_token;
   player_register(test_entity);
   
   Structured_entity enemy;

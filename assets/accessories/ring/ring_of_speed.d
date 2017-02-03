@@ -28,10 +28,10 @@ class Ring_of_speed_1 : Accessory {
   override string standard_article(){ return "a"; }
   
   override void equipped(Structured_entity entity){
-    entity.max_speed += 10.0f;
+    entity.max_speed += 1.0f;
   }
   override void dequipped(Structured_entity entity){
-    entity.max_speed -= 10.0f;
+    entity.max_speed -= 1.0f;
   }
   
 }

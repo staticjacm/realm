@@ -15,7 +15,9 @@ import structured_entity;
 import sgogl;
 import animation;
 import item;
+import token;
 import world;
+import wall;
 import kernel;
 import weapon;
 import armor;
@@ -25,10 +27,13 @@ import area;
 import game;
 import vector;
 import drop_tiers;
+import free_soul;
+import dead_world;
 
 Drop nearby_drop;
 Effect player_effect;
 Entity player_entity;
+Item player_token;
   
 // GUI
 bool gui_show_primary     = true;
@@ -36,6 +41,7 @@ bool gui_show_equipment   = true;
 bool gui_show_items       = true;
 bool gui_show_stats       = true;
 bool gui_show_description = false;
+bool gui_show_token       = true;
 
 enum{
   gui_description_mode_world,
@@ -45,7 +51,8 @@ enum{
   gui_description_mode_accessory,
   gui_description_mode_class,
   gui_description_mode_ground,
-  gui_description_mode_wall
+  gui_description_mode_wall,
+  gui_description_mode_token
 }
 int gui_description_mode = gui_description_mode_world;
 
@@ -57,7 +64,8 @@ int gui_description_mode_accessory_button = GR_F5;
 int gui_description_mode_class_button     = GR_F6;
 int gui_description_mode_ground_button    = GR_F7;
 int gui_description_mode_wall_button      = GR_F8;
-
+int gui_description_mode_token_button     = GR_F9;
+Wall last_bumped_wall;
 
 int drop_selection      = 0;
 int inventory_selection = 0;
@@ -65,6 +73,7 @@ int selection_marker    = 0;
 bool selection_marker_on_inventory = true;  // is the selection marker on the inventory or on the nearby drops item list?
 
 uint selection_border_image;
+uint gui_item_panels_image;
 
 float gui_panel_size   = 0.065; // size of a single info panel (hp, nrg, equipment, etc)
 float gui_lower_gap    = 0.002;  // distance of panels from the bottom of the screen
@@ -102,6 +111,7 @@ int gui_show_primary_button     = GR_H;
 int gui_show_equipment_button   = GR_J;
 int gui_show_items_button       = GR_K;
 int gui_show_stats_button       = GR_L;
+int gui_show_token_button       = GR_F;
 
 bool shift_pressed = false;
 bool ctrl_pressed  = false;
@@ -129,18 +139,34 @@ bool use_screen_shake = true;
 float sound_max_distance = 50.0f;
 
 
+// World last_world;
+
 class Player_effect : Effect {
   alias collide = Effect.collide;
   override void finalize(){
     nearby_drop = null;
   }
-  override void collide(Drop other){
-    nearby_drop = other;
+  override void collide(Drop drop){
+    nearby_drop = drop;
+    super.collide(drop);
+  }
+  override void collide(Wall wall){
+    last_bumped_wall = wall;
+    super.collide(wall);
+  }
+  
+  override void kill(){
+    // last_world = player_entity.world;
+    player_died;
+    super.kill;
   }
 }
 
 void initialize_player(){
+  Dead_world.initialize_type;
+  Free_soul.initialize_type;
   selection_border_image = gr_load_image("assets/gui/fancy_border.png", 0);
+  gui_item_panels_image  = gr_load_image("assets/gui/item_panels.png", 0);
 }
 
 void shake_screen(float amount){
@@ -161,6 +187,17 @@ void player_register(Entity entity){
   destroy(player_effect);
   player_entity = entity;
   player_entity.add_effect(new Player_effect);
+}
+
+void player_died(){
+  World dead_world = new Dead_world;
+  // Vector2f new_position = player_entity.position; 
+  Entity soul = new Free_soul;
+  player_register(soul);
+  soul.position = Vector2f(0, 0);
+  // soul.position = new_position;
+  // last_world.place_agent(soul);
+  dead_world.place_agent(soul);
 }
 
 void player_update(){
@@ -241,6 +278,14 @@ void player_render_near(){
 */
 void player_render_gui(){
   if(player_entity !is null && player_entity.valid){
+    // gr_screen_draw(
+    //   player_entity.animation.update(game_time),
+    //   gui_panel_size * 2, gui_lower_gap + gui_panel_size * 2, gui_panel_depth, 
+    //   0.0f, 0.0f, 
+    //   0.0f, 
+    //   gui_panel_size
+    // );
+    
     // gr_screen_draw(gui_mockup_img, 0.0f, 0.0f, 0.1f, 0.0f, 0.0f, 0.0f, 1.0f, 0.666666f);
     
     // gr_screen_draw_text(test_font, format("Player health: %f", player_entity.health).toStringz, 0.0f, 0.2f, 0.0f, 0.0f, 0.0f, 0.0f, 0.4f, 0.4f);
@@ -333,10 +378,10 @@ void player_render_gui(){
       gr_color(1.0f, 0.0f, 0.0f, 1.0f);
       gr_screen_draw(
         selection_border_image,
-          gui_panel_size * cast(float)(5 + inventory_selection), gui_lower_gap, gui_panel_depth, 
-          0.0f, 0.0f, 
-          0.0f, 
-          gui_panel_size, gui_panel_size
+        gui_panel_size * cast(float)(5 + inventory_selection), gui_lower_gap, gui_panel_depth, 
+        0.0f, 0.0f, 
+        0.0f, 
+        gui_panel_size, gui_panel_size
       );
       gr_color_alpha(1.0f);
       
@@ -385,10 +430,10 @@ void player_render_gui(){
           if(nearby_drop.items[i] !is null && nearby_drop.items[i].valid){
             gr_screen_draw(
               nearby_drop.items[i].animation.update(game_time),
-            gui_panel_size * cast(float)(5 + i), gui_lower_gap + gui_panel_size, gui_panel_depth, 
-            0.0f, 0.0f, 
-            0.0f, 
-            gui_panel_size
+              gui_panel_size * cast(float)(5 + i), gui_lower_gap + gui_panel_size, gui_panel_depth, 
+              0.0f, 0.0f, 
+              0.0f, 
+              gui_panel_size
             );
           }
         }
@@ -575,6 +620,17 @@ void player_render_gui(){
         case gui_description_mode_wall:
           
           break;
+        case gui_description_mode_token:
+          if(player_token !is null){
+            type_string        = "Token:";
+            name_string        = format("%s %s", player_token.standard_article, player_token.name);
+            description_string = player_token.description.wrap(25);
+          }
+          else {
+            type_string = "No token!!!";
+            name_string = "Be careful!";
+          }
+          break;
       }
       
       screen_draw_string(
@@ -596,6 +652,16 @@ void player_render_gui(){
         standard_font, 19, 5, standard_font_offset,
         gui_description_left_gap, gr_screen_draw_height - gui_description_upper_gap - gui_description_line_size*2, gui_panel_depth,
         gui_description_font_width, gui_description_font_height
+      );
+    }
+    
+    if(gui_show_token && player_token !is null){
+      gr_screen_draw(
+        player_token.animation.update(game_time),
+        1.0f, gr_screen_draw_height, gui_panel_depth, 
+        1.0f, 1.0f,
+        0.0f,
+        gui_panel_size
       );
     }
   }
@@ -650,7 +716,12 @@ void player_equip_item(int i){
 
 void player_use_item(int i){
   if(player_entity !is null && player_entity.valid && player_entity.items[i] !is null && player_entity.items[i].valid){
-    player_entity.items[i].use(player_entity);
+    if(player_entity.items[i].item_subtype_id == Item.subtype_token){
+      player_token = player_entity.items[i];
+      player_entity.items[i] = null;
+    }
+    else
+      player_entity.items[i].use(player_entity);
   }
 }
 
@@ -765,10 +836,20 @@ void selection_marker_activate(){
   if(selection_marker_on_inventory){
     Item item = player_entity.items[selection_marker];
     if(item !is null){
-      if(item.item_subtype_id != Item.subtype_item)
-        player_equip_item(selection_marker);
-      else
-        player_use_item(selection_marker);
+      switch(item.item_subtype_id){
+        case Item.subtype_weapon:
+        case Item.subtype_armor:
+        case Item.subtype_accessory:
+          player_equip_item(selection_marker);
+          break;
+        case Item.subtype_token:
+          player_token = player_entity.items[selection_marker];
+          player_entity.items[selection_marker] = null;
+          break;
+        case Item.subtype_item:
+        default:
+          player_use_item(selection_marker);
+      }
     }
   }
 }
@@ -796,6 +877,12 @@ void selection_marker_select(){
   selection_marker_double_select_time = game_time + selection_marker_double_select_delay;
 }
 
+void set_description_mode(int mode){
+  if(gui_description_mode == mode || !gui_show_description)
+    gui_show_description = !gui_show_description;
+  gui_description_mode = mode;
+}
+
 void player_key_function(){
   switch(gr_key){
     case GR_LSHIFT:
@@ -817,6 +904,11 @@ void player_key_function(){
         if(game.framerate_cap < 0)
           game.framerate_cap = 0;
         writefln("framrate cap %f", game.framerate_cap);
+      }
+      break;
+    case GR_Z:
+      if(gr_key_pressed){
+        player_entity.apply_damage(1000.0f);
       }
       break;
     
@@ -921,14 +1013,15 @@ void player_key_function(){
         gui_show_stats = !gui_show_stats;
       break;
     
-    case gui_description_mode_world_button:     if(gr_key_pressed) gui_description_mode = gui_description_mode_world; break;
-    case gui_description_mode_item_button:      if(gr_key_pressed) gui_description_mode = gui_description_mode_item; break;
-    case gui_description_mode_weapon_button:    if(gr_key_pressed) gui_description_mode = gui_description_mode_weapon; break;
-    case gui_description_mode_armor_button:     if(gr_key_pressed) gui_description_mode = gui_description_mode_armor; break;
-    case gui_description_mode_accessory_button: if(gr_key_pressed) gui_description_mode = gui_description_mode_accessory; break;
-    case gui_description_mode_class_button:     if(gr_key_pressed) gui_description_mode = gui_description_mode_class; break;
-    case gui_description_mode_ground_button:    if(gr_key_pressed) gui_description_mode = gui_description_mode_ground; break;
-    case gui_description_mode_wall_button:      if(gr_key_pressed) gui_description_mode = gui_description_mode_wall; break;
+    case gui_description_mode_world_button:     if(gr_key_pressed) set_description_mode(gui_description_mode_world);     break;
+    case gui_description_mode_item_button:      if(gr_key_pressed) set_description_mode(gui_description_mode_item);      break;
+    case gui_description_mode_weapon_button:    if(gr_key_pressed) set_description_mode(gui_description_mode_weapon);    break;
+    case gui_description_mode_armor_button:     if(gr_key_pressed) set_description_mode(gui_description_mode_armor);     break;
+    case gui_description_mode_accessory_button: if(gr_key_pressed) set_description_mode(gui_description_mode_accessory); break;
+    case gui_description_mode_class_button:     if(gr_key_pressed) set_description_mode(gui_description_mode_class);     break;
+    case gui_description_mode_ground_button:    if(gr_key_pressed) set_description_mode(gui_description_mode_ground);    break;
+    case gui_description_mode_wall_button:      if(gr_key_pressed) set_description_mode(gui_description_mode_wall);      break;
+    case gui_description_mode_token_button:     if(gr_key_pressed) set_description_mode(gui_description_mode_token);     break;
     
     // Item use
     case GR_1: if(gr_key_pressed) player_interact_item(0); break;

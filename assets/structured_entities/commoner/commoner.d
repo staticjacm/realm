@@ -9,6 +9,8 @@ import game;
 import animation;
 import vector;
 import structured_entity;
+import entity;
+import token;
 import shot;
 import agent;
 import fireball1;
@@ -64,4 +66,28 @@ class Commoner : Structured_entity {
     }
     super.kill;
   }
+}
+
+class Commoner_token : Token {
+  static uint image;
+  static bool type_initialized = false;
+  
+  static initialize_type(){
+    if(!type_initialized){
+      image = gr_load_image("assets/structured_entities/commoner/token_1.png".toStringz, 0);
+    }
+  }
+  
+  this(){
+    animation = new Animation([image], 1.0f, Vector2f(0.5f, 0.5f), Vector2f(1.0f, 1.0f));
+  }
+  
+  override string name(){ return "Commoner Token"; }
+  override string description(){ return "A toiling pleb is inside"; }
+  override string standard_article(){ return "a"; }
+  
+  override Entity make_entity(){
+    return new Commoner;
+  }
+  
 }

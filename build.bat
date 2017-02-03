@@ -28,6 +28,7 @@ include/realm/portal ^
 include/realm/effect ^
 include/realm/shot ^
 include/realm/player ^
+include/realm/token ^
 include/realm/accessory ^
 include/realm/armor ^
 include/realm/decoration ^
@@ -37,6 +38,7 @@ include/realm/metaobject ^
 include/realm/structured_entity ^
 include/realm/weapon ^
 assets/decorations/twinkle1/twinkle1 ^
+assets/entities/free_soul/free_soul ^
 assets/structured_entities/commoner/commoner ^
 assets/agents/turret/turret ^
 assets/portals/kernel_portal/kernel_portal ^
@@ -53,6 +55,7 @@ assets/grounds/rocky/rocky_ground_1 ^
 assets/grounds/stone/stone_ground_1 ^
 assets/grounds/sand/sand_1 ^
 assets/grounds/dirt/dirt_1 ^
+assets/grounds/dirt/dead_dirt ^
 assets/grounds/brick/brick_path_1 ^
 assets/grounds/brick/makeshift_brick_path_1 ^
 assets/grounds/carpet/portal_carpet_1 ^
@@ -64,6 +67,7 @@ assets/grounds/grass/grass_with_flowers_1 ^
 assets/grounds/misc/fountain_wall_1 ^
 assets/walls/cactus1/cactus1 ^
 assets/walls/stone_wall/stone_wall_1 ^
+assets/walls/stone_wall/dead_stone_wall ^
 assets/walls/kernel_house/kernel_house_tall_1 ^
 assets/walls/kernel_house/kernel_house_short_1 ^
 assets/walls/blank_impassable/blank_impassable ^
@@ -73,4 +77,5 @@ assets/worlds/testing_world/testing_world ^
 -J"assets/worlds/testing_world" ^
 assets/worlds/kernel/kernel ^
 -J"assets/worlds/kernel" ^
+assets/worlds/dead_world/dead_world ^
 -Iinclude lib/sgogl.lib
