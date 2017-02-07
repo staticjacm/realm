@@ -4,14 +4,14 @@ import std.stdio;
 import std.string;
 import dbg;
 import game;
+import make;
 import sgogl;
 import animation;
 import world;
 import area;
 import entity;
 import weapon;
-import fireball1;
-import rocket1;
+import shot;
 
 class Fire_staff_1 : Weapon {
   static bool type_initialized = false;
@@ -20,6 +20,7 @@ class Fire_staff_1 : Weapon {
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
+      make.initialize_type!"Fireball_1";
       image = gr_load_image("assets/weapons/staff/fire_staff_1.png".toStringz, 0);
     }
   }
@@ -40,7 +41,7 @@ class Fire_staff_1 : Weapon {
   override void use(Entity entity){
     if(ready){
       if(entity !is null && entity.valid){
-        Fireball1 fireball = new Fireball1;
+        Shot fireball = make_shot!"Fireball_1";
         fireball.position = entity.position;
         fireball.velocity = entity.direction * 30;
         entity.world.place_agent(fireball);

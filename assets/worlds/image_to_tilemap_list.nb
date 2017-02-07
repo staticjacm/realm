@@ -10,18 +10,17 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7207,        197]
-NotebookOptionsPosition[      6925,        183]
-NotebookOutlinePosition[      7267,        198]
-CellTagsIndexPosition[      7224,        195]
+NotebookDataLength[      8045,        218]
+NotebookOptionsPosition[      7763,        204]
+NotebookOutlinePosition[      8105,        219]
+CellTagsIndexPosition[      8062,        216]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"world", "=", "\"\<testing_world\>\""}], 
-  ";"}], "\[IndentingNewLine]", 
+  RowBox[{"world", "=", "\"\<kernel\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"SetDirectory", "[", 
@@ -30,6 +29,14 @@ Cell[BoxData[{
      "\"\<\\\\\>\""}], "]"}], ";"}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
+  RowBox[{"ignore", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{"What", " ", "color", " ", "to", " ", 
+    RowBox[{"ignore", " ", "/", " ", "not"}], " ", "place", " ", "in", " ", 
+    "tmr", " ", "list"}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
   RowBox[{"image", "=", 
    RowBox[{"Import", "[", 
     RowBox[{"\"\<tilemap.png\>\"", ",", "\"\<Image\>\""}], "]"}]}], 
@@ -44,25 +51,37 @@ Cell[BoxData[{
    RowBox[{"ImageDimensions", "[", "image", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{
-   RowBox[{"tilelist", "=", 
-    RowBox[{"Flatten", "[", 
-     RowBox[{
-      RowBox[{"MapIndexed", "[", 
+  RowBox[{"tilelist", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{
+     RowBox[{"MapIndexed", "[", 
+      RowBox[{
        RowBox[{
-        RowBox[{
-         RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{
           RowBox[{
-           RowBox[{
-           "#2", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
-           RowBox[{
-           "#2", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], ",", 
-           RowBox[{"Round", "[", 
-            RowBox[{"255", "*", 
-             RowBox[{"#1", "\[LeftDoubleBracket]", 
-              RowBox[{"1", ";;", "3"}], "\[RightDoubleBracket]"}]}], "]"}]}], 
-          "}"}], "&"}], ",", "imagedata", ",", 
-        RowBox[{"{", "2", "}"}]}], "]"}], ",", "1"}], "]"}]}], ";"}], 
+          "#2", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], ",", 
+          RowBox[{
+          "#2", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], ",", 
+          RowBox[{"Round", "[", 
+           RowBox[{"255", "*", 
+            RowBox[{"#1", "\[LeftDoubleBracket]", 
+             RowBox[{"1", ";;", "3"}], "\[RightDoubleBracket]"}]}], "]"}]}], 
+         "}"}], "&"}], ",", "imagedata", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}], ",", "1"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tilelist", "=", 
+   RowBox[{"DeleteCases", "[", 
+    RowBox[{"tilelist", ",", 
+     RowBox[{"{", 
+      RowBox[{"_", ",", "_", ",", "ignore"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<number of tiles: \>\"", ",", 
+     RowBox[{"Length", "[", "tilelist", "]"}]}], "]"}], ";"}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"offset", "=", 
@@ -139,7 +158,9 @@ Cell[BoxData[{
   3.692970378688202*^9, 3.692970389109129*^9}, {3.6929706220940013`*^9, 
   3.6929706222621145`*^9}, {3.69297145232414*^9, 3.6929714616823606`*^9}, {
   3.6930557142681046`*^9, 3.693055746841756*^9}, {3.6931416239827337`*^9, 
-  3.693141627265916*^9}}],
+  3.693141627265916*^9}, {3.6953017646337185`*^9, 3.695301840799859*^9}, {
+  3.695301886521249*^9, 3.695301960437379*^9}, {3.695308574327957*^9, 
+  3.695308575591798*^9}}],
 
 Cell[BoxData[
  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
@@ -197,8 +218,8 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 4882, 121, 487, "Input"],
-Cell[5443, 143, 1478, 38, 221, "Input"]
+Cell[558, 20, 5720, 142, 563, "Input"],
+Cell[6281, 164, 1478, 38, 221, "Input"]
 }
 ]
 *)

@@ -3,40 +3,36 @@ module testing_world;
 import std.stdio;
 import std.random;
 import dbg;
+import make;
 import game;
 import world;
 import player;
-import commoner;
-import rocky_ground_1;
-import stone_ground_1;
-import stone_wall_1;
-import portal_carpet_1;
 import agent;
 import area;
 import vector;
+import ground;
+import decoration;
 import wall;
 import timer;
-import cactus1;
-import fireball1;
-import twinkle1;
+import stone_ground;
 
 Timer test_timer;
 
 Tmr[] tilemap_data = mixin(import("testing_world_tilemap_data.txt"));
 
-class Testing_world : World {
+class Testing_world_1 : World {
   static bool type_initialized = false;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      Rocky_ground_1.initialize_type;
-      Stone_ground_1.initialize_type;
-      Portal_carpet_1.initialize_type;
-      Stone_wall_1.initialize_type;
-      Cactus1.initialize_type;
-      Fireball1.initialize_type;
-      Twinkle1.initialize_type;
+      make.initialize_type!"Rocky_ground_1";
+      make.initialize_type!"Stone_ground_1";
+      make.initialize_type!"Portal_carpet_1";
+      make.initialize_type!"Stone_wall_1";
+      make.initialize_type!"Cactus_1";
+      make.initialize_type!"Fireball_1";
+      make.initialize_type!"Twinkle_1";
     }
   }
   
@@ -48,19 +44,27 @@ class Testing_world : World {
     
     foreach(Tmr tmr; tilemap_data){
       if(tmr.r == 255 && tmr.g == 255 && tmr.b == 255){
-        add_ground(new Stone_ground_1(Vector2f(tmr.x, tmr.y), 0));
+        Stone_ground_1 ground = cast(Stone_ground_1)make_ground!"Stone_ground_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
+        ground.set_type = 0;
+        add_ground(ground);
       }
       else if(tmr.r == 0 && tmr.g == 255 && tmr.b == 0){
-        add_ground(new Stone_ground_1(Vector2f(tmr.x, tmr.y), 1));
+        Stone_ground_1 ground = cast(Stone_ground_1)make_ground!"Stone_ground_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
+        ground.set_type = 1;
+        add_ground(ground);
       }
       else if(tmr.r == 255 && tmr.g == 0 && tmr.b == 0){
-        Wall new_wall;
-        new_wall = new Stone_wall_1(Vector2f(tmr.x, tmr.y));
-        new_wall.set_updating = true;
-        add_wall(new_wall);
+        Wall wall = make_wall!"Stone_wall_1";
+        wall.set_position = Vector2f(tmr.x, tmr.y);
+        wall.set_updating = true;
+        add_wall(wall);
       }
       else if(tmr.r == 0 && tmr.g == 0 && tmr.b == 255){
-        add_ground(new Portal_carpet_1(Vector2f(tmr.x, tmr.y)));
+        Ground ground = make_ground!"Portal_carpet_1";
+        ground.set_position(Vector2f(tmr.x, tmr.y));
+        add_ground(ground);
       }
     }
     /*
@@ -115,7 +119,7 @@ class Testing_world : World {
       // fireball.world = this;
       // fireball.set_velocity = Vector2f(10.0, 0.0);
     // }
-      Twinkle1 twinkle = new Twinkle1;
+      Decoration twinkle = make_decoration!"Twinkle_1";
       twinkle.position = Vector2f(9, 10) + rvector(1.0);
       place_decoration(twinkle);
   }
@@ -129,15 +133,22 @@ class Testing_world : World {
           Area area = get_area(adj_pos);
           if(area is null){
             area = new_area!"careless"(adj_pos);
-            area.set_ground = new Rocky_ground_1(adj_pos);
-            if(uniform(0, 100) < 60)
-              area.set_wall = new Cactus1(adj_pos);
+            Ground ground = make_ground!"Rocky_ground_1";
+            ground.set_position(adj_pos);
+            area.set_ground = ground;
+            if(uniform(0, 100) < 60){
+              Wall wall = make_wall!"Cactus_1";
+              wall.set_position = adj_pos;
+              area.set_wall = wall;
+            }
           }
         }
       }
     }
     center_area = new_area(position.floor);
-    center_area.set_ground = new Rocky_ground_1(center_area.position);
+    Ground ground = make_ground!"Rocky_ground_1";
+    ground.set_position(center_area.position);
+    center_area.set_ground = ground;
     return center_area;
   }
   

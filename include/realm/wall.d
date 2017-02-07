@@ -12,8 +12,8 @@ class Wall : Rooted {
   
   bool draw_colliders = false;
   
-  this(Vector2f _position){
-    super(_position);
+  this(){
+    super();
   }
   
   override string name(){ return "wall"; }

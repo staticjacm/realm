@@ -36,13 +36,12 @@ class Rooted : Renderable {
   Rooted_list.Index update_index;
   int id;
   
-  this(Vector2f _position){
+  this(){
     super();
-    position = _position;
     id = gid++;
   }
   
-  string name(){ return "rooted object"; }
+  string name(){ return "Rooted Object"; }
   string description(){ return "An undefined rooted object"; }
   string standard_article(){ return "a"; }
   
@@ -59,7 +58,6 @@ class Rooted : Renderable {
   bool interacts(){ return true; }
   
   void update(){}
-  
   bool updates(){ return update_index.valid; }
   
   override bool draw_shadow(){ return false; }

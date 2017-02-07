@@ -15,7 +15,7 @@ import sgogl;
 
 alias Vector2f = Vector2!float;
 
-class Free_soul : Entity {
+class Free_soul_1 : Entity {
   static uint image_1, image_2;
   static bool type_initialized = false;
   

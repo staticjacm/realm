@@ -1,19 +1,17 @@
-module commoner;
+module commoner_unstructured;
 
 /// This guy should actually be under structured entities, but it doesn't really matter for now
 
 import std.stdio;
 import std.string;
 import std.random;
+import make;
 import game;
 import animation;
 import vector;
 import entity;
 import shot;
 import agent;
-import fireball1;
-import fireball2;
-import rocket1;
 import sgogl;
 
 alias Vector2f = Vector2!float;
@@ -25,9 +23,9 @@ class Commoner : Entity {
   
   static initialize_type(){
     if(!type_initialized){
-      Fireball1.initialize_type;
-      Fireball2.initialize_type;
-      Rocket1.initialize_type;
+      make.initialize_type!"Fireball_1";
+      make.initialize_type!"Fireball_2";
+      make.initialize_type!"Rocket_1";
       image_dimensions = Vector2f(1, 1);
       image_standing  = gr_load_image("assets/entities/commoner/standing.png".toStringz, 0);
       image_walking_1 = gr_load_image("assets/entities/commoner/walking_1.png".toStringz, 0);
@@ -75,11 +73,11 @@ class Commoner : Entity {
       if(attacking){
         for(int i = 0; i < 4; i++){
           if(uniform(0.0f, 100.0f) < 50.0){
-            Shot fireball = create_shot(new Fireball1);
+            Shot fireball = create_shot(make_shot!"Fireball_1");
             fireball.set_velocity = (direction * 10.0f + Vector2f(uniform(-1.0f, 1.0f), uniform(-1.0f, 1.0f)));
           }
           else {
-            Shot fireball = create_shot(new Fireball2);
+            Shot fireball = create_shot(make_shot!"Fireball_2");
             fireball.set_velocity = (direction * 10.0f + Vector2f(uniform(-1.0f, 1.0f), uniform(-1.0f, 1.0f)));
           }
         }
@@ -95,7 +93,7 @@ class Commoner : Entity {
   override void kill(){
     writeln("dead");
     for(int i = 0; i < 10; i++){
-      Shot fireball = create_shot(new Fireball1);
+      Shot fireball = create_shot(make_shot!"Fireball_1");
       fireball.set_velocity = rvector(4.0f);
     }
     super.kill;

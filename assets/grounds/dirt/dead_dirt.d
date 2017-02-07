@@ -24,13 +24,12 @@ class Dead_dirt_1 : Ground {
     }
   }
   
-  this(Vector2f _position){
-    super(_position);
+  this(){
     switch(uniform!"[]"(0, 2)){
+      default:
       case 0: animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
       case 1: animation = new Animation([image_2], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
       case 2: animation = new Animation([image_3], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      default: goto case 0; break;
     }
   }
   

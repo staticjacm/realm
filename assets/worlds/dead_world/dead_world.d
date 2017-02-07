@@ -4,33 +4,34 @@ import std.stdio;
 import std.math;
 import std.random;
 import dbg;
+import make;
 import game;
 import world;
 import player;
-import commoner;
-import dead_dirt;
-import dead_stone_wall;
-import kernel_portal;
+import portal;
+import ground;
 import agent;
 import area;
 import vector;
 import wall;
 import timer;
+import entry_world;
 
 Timer test_timer;
 
 /*
   The world the player goes to after dying but before reviving in the entry world
 */
-class Dead_world : World {
+class Dead_world_1 : World {
   static bool type_initialized = false;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      Dead_dirt_1.initialize_type;
-      Dead_stone_wall_1.initialize_type;
-      Kernel_portal_1.initialize_type;
+      make.initialize_type!"Dead_dirt_1";
+      make.initialize_type!"Dead_stone_wall_1";
+      make.initialize_type!"Entry_world_1";
+      make.initialize_type!"Kernel_portal_1";
     }
   }
   
@@ -47,19 +48,29 @@ class Dead_world : World {
       for(float y = -R; y < R; y++){
         if( (x < -r) || (r < x) || (y < -r) || (r < y) ){
           if(uniform(0.0f, 100.0f)*sqrt(x*x + y*y) < 100.0f){
-            if(uniform(0.0f, 100.0f) < 10.0f)
-              add_ground(new Dead_dirt_1(Vector2f(x, y)));
-            else
-              add_wall(new Dead_stone_wall_1(Vector2f(x, y)));
+            if(uniform(0.0f, 100.0f) < 10.0f){
+              Ground ground = make_ground!"Dead_dirt_1";
+              ground.set_position(Vector2f(x, y));
+              add_ground(ground);
+            }
+            else {
+              Wall wall = make_wall!"Dead_stone_wall_1";
+              wall.set_position(Vector2f(x, y));
+              add_wall(wall);
+            }
           }
         }
         else {
           float prob = uniform(0.0f, 100.0f)*sqrt(x*x + y*y);
           if(prob < 400.0f){
-            add_ground(new Dead_dirt_1(Vector2f(x, y)));
+            Ground ground = make_ground!"Dead_dirt_1";
+            ground.set_position(Vector2f(x, y));
+            add_ground(ground);
           }
           else {
-            add_wall(new Dead_stone_wall_1(Vector2f(x, y)));
+            Wall wall = make_wall!"Dead_stone_wall_1";
+            wall.set_position(Vector2f(x, y));
+            add_wall(wall);
           }
         }
       }
@@ -75,8 +86,10 @@ class Dead_world : World {
   override void update(){
     if(!portal_placed && portal_spawn_time < game_time){
       portal_placed = true;
-      Kernel_portal_1 portal = new Kernel_portal_1;
+      Portal portal = make_portal!"Kernel_portal_1";
       portal.position = Vector2f(0, 5);
+      portal.exit_world = game.entry;
+      portal.exit_position = Entry_world_1.spawn_location;
       place_agent(portal);
     }
     super.update;
@@ -91,13 +104,17 @@ class Dead_world : World {
           Area area = get_area(adj_pos);
           if(area is null){
             area = new_area!"careless"(adj_pos);
-            area.set_wall = new Dead_stone_wall_1(adj_pos);
+            Wall wall = make_wall!"Dead_stone_wall_1";
+            wall.set_position(Vector2f(x, y));
+            area.set_wall = wall;
           }
         }
       }
     }
     center_area = new_area(position.floor);
-    center_area.set_ground = new Dead_dirt_1(center_area.position);
+    Ground ground = make_ground!"Dead_dirt_1";
+    ground.set_position(position);
+    center_area.set_ground = ground;
     return center_area;
   }
   

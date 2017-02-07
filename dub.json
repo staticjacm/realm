@@ -1,0 +1,22 @@
+{
+	"name": "realm",
+  
+  "targetPath": "build",
+  
+  "sourcePaths": ["assets", "include"],
+  "mainSourceFile": "realm.d",
+  "libs": ["lib/sgogl"],
+  "stringImportPaths": [
+    "assets/worlds/testing_world",
+    "assets/worlds/kernel",
+    "assets/worlds/entry_world",
+  ],
+  
+  "buildRequirements": ["allowWarnings"],
+  "buildTypes": {
+    "debugprofile": {
+      "buildOptions": ["debugMode", "debugInfo", "profile"]
+    }
+  },
+  "targetType": "executable"
+}

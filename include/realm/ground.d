@@ -6,8 +6,8 @@ import agent;
 import rooted;
 
 class Ground : Rooted {
-  this(Vector2f _position){
-    super(_position);
+  this(){
+    super();
   }
   
   override string name(){ return "ground"; }

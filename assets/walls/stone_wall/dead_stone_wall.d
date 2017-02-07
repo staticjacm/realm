@@ -23,8 +23,7 @@ class Dead_stone_wall_1 : Wall {
     }
   }
   
-  this(Vector2f _position){
-    super(_position);
+  this(){
     switch(uniform!"[]"(0, 2)){
       default:
       case 0:  animation = new Animation([image_1], 1, Vector2f(0, 0), Vector2f(1, 2)); break;

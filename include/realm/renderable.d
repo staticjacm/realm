@@ -47,6 +47,16 @@ class Renderable : Validatable {
   bool draw_shadow(){ return false; }
   uint shadow_image(){ return shadow_image_32x32; }
   
+  void set_position(Vector2f new_position){
+    position = new_position;
+  }
+  void set_position(float x, float y){
+    position = Vector2f(x, y);
+  }
+  void set_position(int x, int y){
+    position = Vector2f(cast(float)x, cast(float)y);
+  }
+  
   void render(){
     if(animation !is null && animation.valid){
       if(y_shift){

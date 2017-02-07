@@ -6,6 +6,7 @@ import std.string;
 import std.math;
 import std.random;
 import dbg;
+import make;
 import text;
 import sgogl_interface;
 import agent;
@@ -27,8 +28,6 @@ import area;
 import game;
 import vector;
 import drop_tiers;
-import free_soul;
-import dead_world;
 
 Drop nearby_drop;
 Effect player_effect;
@@ -163,8 +162,8 @@ class Player_effect : Effect {
 }
 
 void initialize_player(){
-  Dead_world.initialize_type;
-  Free_soul.initialize_type;
+  make.initialize_type!"Dead_world_1";
+  make.initialize_type!"Free_soul_1";
   selection_border_image = gr_load_image("assets/gui/fancy_border.png", 0);
   gui_item_panels_image  = gr_load_image("assets/gui/item_panels.png", 0);
 }
@@ -190,9 +189,9 @@ void player_register(Entity entity){
 }
 
 void player_died(){
-  World dead_world = new Dead_world;
+  World dead_world = make_world!"Dead_world_1";
   // Vector2f new_position = player_entity.position; 
-  Entity soul = new Free_soul;
+  Entity soul = make_entity!"Free_soul_1";
   player_register(soul);
   soul.position = Vector2f(0, 0);
   // soul.position = new_position;
@@ -976,6 +975,7 @@ void player_key_function(){
         else
           selection_marker_switch;
       }
+      break;
     case selection_marker_move_up_button:
       if(gr_key_pressed){
         if(ctrl_pressed && selection_marker_on_inventory)

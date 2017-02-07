@@ -11,33 +11,23 @@ import sgogl_interface;
 import text;
 import dbg;
 import timer;
-import testing_world;
+import make;
 import renderable;
 import world;
+import portal;
 import area;
-import commoner;
-import fire_staff;
-import ring_of_defence;
-import ring_of_speed;
-import dev_ring;
-import shirt;
 import rooted;
 import entity;
 import drop;
-import drop_tiers;
 import structured_entity;
 import agent;
 import ground;
-import rocky_ground_1;
 import decoration;
 import vector;
 import player;
 import game;
 import wall;
-import kernel;
-import cactus1;
-import turret;
-import kernel_portal;
+import drop_tiers;
 
 alias Vector2f = Vector2!float;
 
@@ -52,6 +42,7 @@ uint loading_image = 0;
 Structured_entity test_entity;
 World test_world;
 World kernel_world;
+World entry;
 
 bool running = true;
 
@@ -154,78 +145,76 @@ void initialize(){
   initialize_drop_tiers;
   
   World.initialize_type;
-  Kernel.initialize_type;
+  // Kernel.initialize_type;
+  // Entry_world_1.initialize_type;
   Area.initialize_type;
   Agent.initialize_type;
   Rooted.initialize_type;
   Renderable.initialize_type;
-  Commoner.initialize_type;
-  Commoner_token.initialize_type;
-  Drop_tier_0.initialize_type;
-  Testing_world.initialize_type;
-  Fire_staff_1.initialize_type;
-  Shirt_1.initialize_type;
-  Ring_of_defence_1.initialize_type;
-  Ring_of_speed_1.initialize_type;
-  Dev_ring_1.initialize_type;
-  Fire_turret_1.initialize_type;
-  Kernel_portal_1.initialize_type;
+  make.initialize_type!"Kernel";
+  make.initialize_type!"Entry_world_1";
+  make.initialize_type!"Commoner_1";
+  make.initialize_type!"Commoner_1_token";
+  make.initialize_type!"Drop_tier_0";
+  make.initialize_type!"Testing_world_1";
+  make.initialize_type!"Fire_staff_1";
+  make.initialize_type!"Shirt_1";
+  make.initialize_type!"Ring_of_defence_1";
+  make.initialize_type!"Ring_of_speed_1";
+  make.initialize_type!"Dev_ring_1";
+  make.initialize_type!"Fire_turret_1";
+  make.initialize_type!"Kernel_portal_1";
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
   
   gr_view_centered(Vector2f(0, 0), 10);
   
-  Drop test_drop = new Drop_tier_0;
-  test_drop.add_item(new Ring_of_defence_1);
+  entry = make_world!"Entry_world_1";
+  
+  Drop test_drop = make_drop!"Drop_tier_0";
+  test_drop.add_item(make_item!"Ring_of_defence_1");
   
   // test_entity = cast(Structured_entity)(new Commoner);
-  test_entity = new Commoner;
+  test_entity = make_structured_entity!"Commoner_1";
   test_entity.position = Vector2f(10.5, 10.5);
   test_entity.automatic_controls = false;
   test_entity.faction_id = 0;
-  test_entity.equip_weapon(new Fire_staff_1);
-  test_entity.equip_armor(new Shirt_1);
-  test_entity.equip_accessory(new Ring_of_defence_1);
-  test_entity.items[0] = new Dev_ring_1;
-  test_entity.items[1] = new Ring_of_speed_1;
-  test_entity.items[2] = new Ring_of_defence_1;
-  test_entity.items[3] = new Ring_of_speed_1;
-  test_entity.items[4] = new Ring_of_defence_1;
-  test_entity.items[5] = new Ring_of_speed_1;
-  test_entity.items[6] = new Ring_of_defence_1;
-  test_entity.items[7] = new Commoner_token;
+  test_entity.equip_weapon(make_weapon!"Fire_staff_1");
+  test_entity.equip_armor(make_armor!"Shirt_1");
+  test_entity.equip_accessory(make_accessory!"Ring_of_defence_1");
+  test_entity.items[0] = make_item!"Dev_ring_1";
+  test_entity.items[1] = make_item!"Ring_of_speed_1";
+  test_entity.items[2] = make_item!"Ring_of_defence_1";
+  test_entity.items[3] = make_item!"Ring_of_speed_1";
+  test_entity.items[4] = make_item!"Ring_of_defence_1";
+  test_entity.items[5] = make_item!"Ring_of_speed_1";
+  test_entity.items[6] = make_item!"Ring_of_defence_1";
+  test_entity.items[7] = make_item!"Commoner_1_token";
   player_register(test_entity);
   
   Structured_entity enemy;
-  enemy = new Commoner;
+  enemy = make_structured_entity!"Commoner_1";
   enemy.position = Vector2f(17.0f, 17.0f);
   enemy.automatic_controls = true;
   enemy.faction_id = 1;
-  enemy.equip_weapon(new Fire_staff_1);
-  enemy.equip_armor(new Shirt_1);
-  enemy.equip_accessory(new Ring_of_defence_1);
-  enemy.items[0] = new Ring_of_defence_1;
-  enemy.items[1] = new Ring_of_speed_1;
-  enemy.items[2] = new Ring_of_defence_1;
-  enemy.items[3] = new Ring_of_speed_1;
-  enemy.items[4] = new Ring_of_defence_1;
-  enemy.items[5] = new Ring_of_speed_1;
-  enemy.items[6] = new Ring_of_defence_1;
+  enemy.equip_weapon(make_weapon!"Fire_staff_1");
+  enemy.equip_armor(make_armor!"Shirt_1");
+  enemy.equip_accessory(make_accessory!"Ring_of_defence_1");
   
-  Fire_turret_1 turret = new Fire_turret_1;
+  Agent turret = make_agent!"Fire_turret_1";
   turret.position = Vector2f(17.0f, 17.0f);
   
-  Kernel_portal_1 test_portal_1 = new Kernel_portal_1;
+  Portal test_portal_1 = make_portal!"Kernel_portal_1";
   test_portal_1.position = Vector2f(20.0f, 20.0f);
   test_portal_1.exit_position = Vector2f(25.0f, 20.0f);
   
-  Kernel_portal_1 test_portal_2 = new Kernel_portal_1;
+  Portal test_portal_2 = make_portal!"Kernel_portal_1";
   // test_portal_2.position = Kernel.center_spawn + Vector2f(2.0f, 0.0f);
   test_portal_2.position = Vector2f(25.0f, 20.0f);
   test_portal_2.exit_position = Vector2f(20.0f, 20.0f);
   
-  test_world = new Testing_world();
+  test_world = make_world!"Testing_world_1";
   test_world.place_agent(player_entity);
   // test_world.place_agent(enemy);
   test_world.place_agent(turret);
@@ -238,8 +227,8 @@ void initialize(){
   test_world.place_agent(test_drop);
   // player_entity.position = Kernel.center_spawn;
   
-  Testing_world test_world_2 = new Testing_world();
-  test_world_2 = new Testing_world();
+  World test_world_2 = make_world!"Testing_world_1";
+  test_world_2 = make_world!"Testing_world_1";
   test_world_2.place_agent(player_entity);
   test_world_2.place_agent(test_portal_2);
   

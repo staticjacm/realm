@@ -152,9 +152,17 @@ class Agent : Renderable {
     }
   }
   
-  void set_position(Vector2f new_position){
-    position = new_position;
+  override void set_position(Vector2f new_position){
     moved = true;
+    super.set_position(new_position);
+  }
+  override void set_position(float x, float y){
+    moved = true;
+    super.set_position(x, y);
+  }
+  override void set_position(int x, int y){
+    moved = true;
+    super.set_position(x, y);
   }
   
   bool fast_test_for_collision(Agent agent){

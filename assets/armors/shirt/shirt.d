@@ -7,7 +7,6 @@ import sgogl;
 import animation;
 import entity;
 import armor;
-import fireball1;
 
 class Shirt_1 : Armor {
   static bool type_initialized = false;
