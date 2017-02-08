@@ -1,0 +1,124 @@
+
+// items
+
+// accessories
+module dev_ring
+  class Dev_ring_1
+module ring_of_defence
+  class Ring_of_defence_1
+module ring_of_speed
+  class Ring_of_speed_1
+
+// armors
+module shirt
+  class Shirt_1
+
+// weapons
+module fire_staff
+  class Fire_staff_1
+
+// agents
+module brazier
+  class Brass_brazier_1
+module token_generator
+  class Token_generator_1
+module fire_turret
+  class Fire_turret_1
+
+// drops
+module drop_tiers
+  class Drop_tier_0
+  class Drop_tier_1
+
+// entities
+// module commoner
+module free_soul
+  class Free_soul_1
+
+// portals
+module character_generator_portal
+  class Character_generator_portal_1
+module kernel_portal
+  class Kernel_portal_1
+
+// shots
+module fireball
+  class Fireball_1
+  class Fireball_2
+module rocket
+  class Rocket_1
+
+// structured entities
+module commoner
+  class Commoner_1
+
+// decorations
+module twinkle
+  class Twinkle_1
+
+// grounds
+module brick_path
+  class Brick_path_1
+module makeshift_brick_path
+  class Makeshift_brick_path_1
+module blue_carpet
+  class Blue_carpet_1
+module portal_carpet
+  class Portal_carpet_1
+module red_carpet
+  class Red_carpet_1
+module checkered_floor
+  class Checkered_white_black_floor_1
+module dead_dirt
+  class Dead_dirt_1
+module dirt
+  class Dirt_1
+module grass
+  class Grass_1
+  class Matted_grass_1
+  class Grass_with_flowers_1
+module marble_floor
+  class Marble_floor_1
+module fountain_wall
+  class Fountain_wall_1
+module sand
+  class Sand_1
+module stone_ground
+  class Stone_ground_1
+module fountain_water
+  class Fountain_water_1
+module rocky_ground
+  class Rocky_ground_1
+
+// walls
+module blank_impassable_wall
+  class Blank_impassable_wall_1
+module cactus
+  class Cactus_1
+module kernel_house_short
+  class Kernel_house_short_1
+module kernel_house_tall
+  class Kernel_house_tall_1
+module marble_column
+  class Marble_column_1
+module marble_wall
+  class Marble_wall_1
+module stability_boundary
+  class Stability_boundary_1
+module dead_stone_wall
+  class Dead_stone_wall_1
+module stone_wall
+  class Stone_wall_1
+module white_fence
+  class White_fence_1
+
+// worlds
+module testing_world
+  class Testing_world_1
+module kernel
+  class Kernel
+// module island_world
+module entry_world
+  class Entry_world_1
+module dead_world
+  class Dead_world_1

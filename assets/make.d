@@ -9,6 +9,7 @@ module make;
 */
 
 import std.stdio;
+import std.string;
 
 import item;
 import accessory;
@@ -25,80 +26,32 @@ import ground;
 import wall;
 import world;
 
-// accessories
-import dev_ring;
-import ring_of_defence;
-import ring_of_speed;
+/*
+  This constructs a string for all the imports
+*/
+string asset_registry_modules_import_mixin(){
+  string instring = import("asset_registry.txt");
+  string[] lines = instring.splitLines;
+  string ret = "";
+  foreach(string line; lines){
+    if(line[0] != '/'){
+      string[] words = line.split;
+      if(words.length == 2 && words[0] == "module"){
+        // import fire_staff;
+        ret ~= "import " ~ words[1] ~ ";\n";
+      }
+    }
+  }
+  return ret;
+}
 
-// armors
-import shirt;
+mixin(asset_registry_modules_import_mixin);
 
-// weapons
-import fire_staff;
+//
+// Compile time make
+//
 
-// agents
-import brazier;
-import token_generator;
-import fire_turret;
-
-// drops
-import drop_tiers;
-
-// entities
-import commoner;
-import free_soul;
-
-// portals
-import character_generator_portal;
-import kernel_portal;
-
-// shots
-import fireball;
-import rocket;
-
-// structured entities
-import commoner;
-
-// decorations
-import twinkle;
-
-// grounds
-import brick_path;
-import makeshift_brick_path;
-import blue_carpet;
-import portal_carpet;
-import red_carpet;
-import checkered_floor;
-import dead_dirt;
-import dirt;
-import grass;
-import marble_floor;
-import fountain_wall;
-import sand;
-import stone_ground;
-import fountain_water;
-import rocky_ground;
-
-// walls
-import blank_impassable_wall;
-import cactus;
-import kernel_house_short;
-import kernel_house_tall;
-import marble_column;
-import marble_wall;
-import stability_boundary;
-import dead_stone_wall;
-import stone_wall;
-import white_fence;
-
-// worlds
-import testing_world;
-import kernel;
-// import island_world;
-import entry_world;
-import dead_world;
-
-pragma(inline){
+pragma(inline, true){
   void initialize_type(string type)(){ mixin(type ~ ".initialize_type;"); }
   auto make_type(string type)(){ mixin("return new " ~ type ~ ";"); }
   
@@ -127,4 +80,84 @@ pragma(inline){
   World make_world(string type)(){ mixin("return new " ~ type ~ ";"); }
 }
 
+//
+// Run time make
+//
 
+/*
+  This constructs a string for make_<super_class> functions to mixin
+  It populates all the make_<super_class> function switch statements with the correct class string -> return statement cases
+  example:
+    make_weapon("Dev_ring_1")  (not make_weapon!"Fire_staff_1" !)
+    reduces to switch("Dev_ring_1"){ default: return null; case "Ring_of_defence_1": return Ring_of_defence_1; ... case "Dev_ring_1": return Dev_ring_1; ...}
+    which reduces to return Dev_ring_1;
+*/
+string asset_registry_classes_make_mixin(string super_class)(){
+  string instring = import("asset_registry.txt");
+  string[] lines = instring.splitLines;
+  string ret = "";
+  foreach(string line; lines){
+    if(line[0] != '/'){
+      string[] words = line.split;
+      if(words.length == 2 && words[0] == "class"){
+        // checks if the class is a subclass of super_class
+        // static if(is(Fire_staff_1 : Agent)) {case "Fire_staff_1": return new Fire_staff_1;}
+        ret ~= "static if(is(" ~ words[1] ~ ":" ~ super_class ~ ")) { case \"" ~ words[1] ~"\": return new " ~ words[1] ~ ";}\n";
+        // ret ~= "static if(is(" ~ words[1] ~ ":" ~ super_class ~ ")) { pragma(msg, \"" ~ words[1] ~" allowed in " ~ super_class ~"\"); case \"" ~ words[1] ~"\": return new " ~ words[1] ~ ";}\n";
+      }
+    }
+  }
+  return ret;
+}
+
+/*
+  This constructs a string for the initialize_type function to mixin
+  It populates the initialize_type function switch statements with the correct class string -> initialize statements
+  example:
+    initialize_type("Dev_ring_1")  (not initialize_type!"Fire_staff_1" !)
+    reduces to switch("Dev_ring_1"){ default: return; case "Ring_of_defence_1": Ring_of_defence_1.initialize_type; break; ... case "Dev_ring_1": Dev_ring_1.initialize_type; break; ...}
+    which reduces to Dev_ring_1.initialize_type;
+*/
+string asset_registry_classes_initialize_type_mixin(){
+  string instring = import("asset_registry.txt");
+  string[] lines = instring.splitLines;
+  string ret = "";
+  foreach(string line; lines){
+    if(line[0] != '/'){
+      string[] words = line.split;
+      if(words.length == 2 && words[0] == "class"){
+        // checks if the class is a subclass of super_class
+        ret ~= "case \"" ~ words[1] ~"\": " ~ words[1] ~ ".initialize_type; return;\n";
+      }
+    }
+  }
+  return ret;
+}
+
+pragma(inline, true){
+  void initialize_type(string class_name){ switch(class_name){ default: return; mixin(asset_registry_classes_initialize_type_mixin); } }
+  
+  // Items
+  Item make_item(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Item"); } }
+  Armor make_armor(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Armor"); } }
+  Weapon make_weapon(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Weapon"); } }
+  Accessory make_accessory(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Accessory"); } }
+  
+  // Agents
+  Agent make_agent(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Agent"); } }
+  Entity make_entity(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Entity"); } }
+  Structured_entity make_structured_entity(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Structured_entity"); } }
+  Shot make_shot(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Shot"); } }
+  Portal make_portal(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Portal"); } }
+  Drop make_drop(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Drop"); } }
+  
+  // Decoration
+  Decoration make_decoration(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Decoration"); } }
+  
+  // Rooteds
+  Ground make_ground(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Ground"); } }
+  Wall make_wall(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Wall"); } }
+  
+  // World
+  World make_world(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"World"); } }
+}

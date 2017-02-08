@@ -13,8 +13,8 @@ class Vector2f_2_list : LList!Vector2f_2 {}
 Vector2f_2_list debug_line_list;
 
 void initialize_debug(){
-  fileout1 = File("debug_data1.txt", "w");
-  fileout2 = File("debug_data2.txt", "w");
+  fileout1 = File("debug/debug_data1.txt", "w");
+  fileout2 = File("debug/debug_data2.txt", "w");
   
   debug_line_list = new Vector2f_2_list;
 }

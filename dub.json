@@ -7,6 +7,7 @@
   "mainSourceFile": "realm.d",
   "libs": ["lib/sgogl"],
   "stringImportPaths": [
+    "assets",
     "assets/worlds/testing_world",
     "assets/worlds/kernel",
     "assets/worlds/entry_world",
