@@ -13,6 +13,7 @@ import game;
 import agent;
 import effect;
 import item;
+import token;
 import drop_tiers;
 import drop;
 import shot;
@@ -128,6 +129,10 @@ class Entity : Agent {
     foreach(Effect effect; effects){
       effect.kill;
     }
+  }
+  
+  Token tokenify(){
+    return null;
   }
   
   override string name(){ return "entity"; }

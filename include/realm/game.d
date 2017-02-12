@@ -28,6 +28,7 @@ import player;
 import game;
 import wall;
 import drop_tiers;
+import kernel;
 
 alias Vector2f = Vector2!float;
 
@@ -193,6 +194,8 @@ void initialize(){
   test_entity.items[7] = make_item!"Commoner_1_token";
   player_register(test_entity);
   
+  // kernel_world = new Kernel;
+  
   Structured_entity enemy;
   enemy = make_structured_entity!"Commoner_1";
   enemy.position = Vector2f(17.0f, 17.0f);
@@ -291,12 +294,6 @@ void render(){
 
 immutable(bool) debug_update = false;
 void update(){
-  // if(player_entity !is null){
-  //   debug_write_1(format("%2.4f", player_entity.velocity.norm));
-  //   writefln("%2.2f", player_entity.velocity.norm);
-  // }
-  // debug_write_1(framerate_cap);
-  debug_write_1(frame_delta);
   
   static if(debug_update) write_location_debug;
   game_time = game_timer.msecs;

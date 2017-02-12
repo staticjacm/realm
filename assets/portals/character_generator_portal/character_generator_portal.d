@@ -2,12 +2,19 @@ module character_generator_portal;
 
 import std.stdio;
 import std.string;
+import dbg;
+import make;
 import agent;
 import animation;
 import vector;
 import sgogl;
 import portal;
 import world;
+import token;
+import entity;
+import game;
+import kernel;
+import player;
 
 class Character_generator_portal_1 : Portal {
   static bool type_initialized = false;
@@ -27,13 +34,27 @@ class Character_generator_portal_1 : Portal {
   }
   
   override string name(){ return "Character Portal"; }
-  override string description(){ return "You got a token?"; }
+  override string description(){ return "You need a token to get through?"; }
   override string standard_article(){ return "a"; }
   
   /*
-    this is empty because module player controls whether or not
-    the player gets to go through or not
+    This only allows players through
   */
-  override void activate(Agent agent){ }
+  override void activate(Agent agent){
+    if(agent is player_entity && player_token !is null){
+      if(game.kernel_world is null){
+        game.kernel_world = new Kernel;
+        exit_world = game.kernel_world;
+        exit_position = Kernel.center_spawn;
+      }
+      if(exit_world is null){
+        exit_world = game.kernel_world;
+        exit_position = Kernel.center_spawn;
+      }
+      Entity entity = (cast(Token)player_token).make_entity;
+      player_register(entity);
+      Portal.activate(entity);
+    }
+  }
   
 }

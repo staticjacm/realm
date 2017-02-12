@@ -51,6 +51,7 @@ module rocket
 // structured entities
 module commoner
   class Commoner_1
+  class Commoner_1_token
 
 // decorations
 module twinkle

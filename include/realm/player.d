@@ -190,12 +190,9 @@ void player_register(Entity entity){
 
 void player_died(){
   World dead_world = make_world!"Dead_world_1";
-  // Vector2f new_position = player_entity.position; 
   Entity soul = make_entity!"Free_soul_1";
   player_register(soul);
   soul.position = Vector2f(0, 0);
-  // soul.position = new_position;
-  // last_world.place_agent(soul);
   dead_world.place_agent(soul);
 }
 
@@ -716,8 +713,10 @@ void player_equip_item(int i){
 void player_use_item(int i){
   if(player_entity !is null && player_entity.valid && player_entity.items[i] !is null && player_entity.items[i].valid){
     if(player_entity.items[i].item_subtype_id == Item.subtype_token){
+      writeln("replaced token");
+      Item temp = player_token;
       player_token = player_entity.items[i];
-      player_entity.items[i] = null;
+      player_entity.items[i] = player_token;
     }
     else
       player_entity.items[i].use(player_entity);
@@ -842,8 +841,9 @@ void selection_marker_activate(){
           player_equip_item(selection_marker);
           break;
         case Item.subtype_token:
+          Item temp = player_token;
           player_token = player_entity.items[selection_marker];
-          player_entity.items[selection_marker] = null;
+          player_entity.items[selection_marker] = temp;
           break;
         case Item.subtype_item:
         default:
@@ -951,10 +951,11 @@ void player_key_function(){
       
     // Warp to kernel
     case warp_to_kernel_button:
-      if(gr_key_pressed && kernel_world !is null && kernel_world.valid && player_entity !is null && player_entity.valid){
-        player_entity.world = kernel_world;
+      if(game.kernel_world is null)
+        game.kernel_world = new Kernel;
+      if(gr_key_pressed && player_entity !is null && player_entity.valid){
         player_entity.position = Kernel.center_spawn;
-        kernel_world.place_agent(player_entity);
+        game.kernel_world.place_agent(player_entity);
         player_zero_view;
       }
       break;

@@ -8,6 +8,7 @@ import std.traits;
 
 alias Vector2f = Vector2!float;
 alias Vector2f_2 = Vector2_2!float;
+alias Vector2i = Vector2!int;
 
 Vector2f rvector(float r){
   return Vector2f(uniform(-r, r), uniform(-r, r));

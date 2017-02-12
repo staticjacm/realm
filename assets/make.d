@@ -25,6 +25,7 @@ import decoration;
 import ground;
 import wall;
 import world;
+import token;
 
 /*
   This constructs a string for all the imports
@@ -47,9 +48,9 @@ string asset_registry_modules_import_mixin(){
 
 mixin(asset_registry_modules_import_mixin);
 
-//
-// Compile time make
-//
+// // // // //
+// // // // // Compile time make
+// // // // //
 
 pragma(inline, true){
   void initialize_type(string type)(){ mixin(type ~ ".initialize_type;"); }
@@ -78,11 +79,14 @@ pragma(inline, true){
   
   // World
   World make_world(string type)(){ mixin("return new " ~ type ~ ";"); }
+  
+  // Token
+  Token make_token(string type)(){ mixin("return new " ~ type ~ ";"); }
 }
 
-//
-// Run time make
-//
+// // // // //
+// // // // // Run time make
+// // // // //
 
 /*
   This constructs a string for make_<super_class> functions to mixin
@@ -160,4 +164,7 @@ pragma(inline, true){
   
   // World
   World make_world(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"World"); } }
+  
+  // Token
+  Token make_token(string class_name){ switch(class_name){ default: return null; mixin(asset_registry_classes_make_mixin!"Token"); } }
 }

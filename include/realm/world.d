@@ -1,9 +1,11 @@
 module world;
 
+import std.string;
 import std.stdio;
 import std.math;
 import dbg;
 import grid;
+import validatable;
 import decoration;
 import game;
 import vector;
@@ -15,14 +17,14 @@ import entity;
 import area;
 import metaobject;
 import timer;
+import player;
 
 Timer test_timer;
 
-alias world_grid_type = Dict_grid2!(Area, float);
-
 class World_list : LList!World {}
 
-class World : world_grid_type {
+class World : Validatable {
+  static int gid = 0;
   static World_list master_list;
   static bool type_initialized = false;
   
@@ -33,20 +35,26 @@ class World : world_grid_type {
     }
   }
   
+  Grid2!(Area, float) grid;
   World_list.Index world_index;
   Metaobject_list metaobjects;
+  int number_of_agents   = 0;
+  int number_of_players  = 0;
+  int id;
   bool allow_decorations = false; // allows decorations to spawn
   // bool allow_decorations = true; // allows decorations to spawn
   
   this(){
     super();
+    id = gid++;
     world_index = master_list.add(this);
     metaobjects = new Metaobject_list;
+    create_grid;
   }
   
   ~this(){
     world_index.remove;
-    foreach(Area area; this){
+    foreach(Area area; grid){
       destroy(area);
     }
     foreach(Metaobject metaobj; metaobjects){
@@ -57,6 +65,23 @@ class World : world_grid_type {
   string name(){ return "world"; }
   string description(){ return "An undefined world"; }
   string standard_article(){ return "a"; }
+  
+  void create_grid(){
+    // grid = new Dict_grid2!(Area, float);
+    // grid = new Dict_array_grid2!(Area, float, 10, 10);
+    grid = new Array_grid2!(Area, float);
+  }
+  
+  // Area* get(Vector2f position){ return grid.get(position); }
+  // int opApply(scope int delegate(ref Area) dg){ return grid.opApply(dg); }
+  // void set(Area area, Vector2f position){ grid.set(area, position); }
+  // void remove(Vector2f position){ grid.remove(position); }
+  // bool exists(Vector2f position){ return grid.exists(position); }
+  // int length(){ return grid.length; }
+  
+  bool destroy_when_zero_agents(){ return false; }
+  bool destroy_when_zero_players(){ return false; }
+  void kill(){}
   
   void update(){}
   
@@ -94,18 +119,24 @@ class World : world_grid_type {
     if(area !is null){
       if(area.world !is this){
         if(area.world !is null)
-          area.world.remove(area.position);
+          area.world.grid.remove(area.position);
         area.world = this;
       }
       area.position.x = area.position.x.floor;
       area.position.y = area.position.y.floor;
-      set(area, area.position);
+      test_timer.start;
+      grid.set(area, area.position);
+      long timing = test_timer.hnsecs;
+      debug_write_2(timing);
       connect_area_to_surroundings(area);
     }
   }
   
   Area get_area(string checks = "careful")(Vector2f position){
-    Area* areap = get(position.floor);
+    test_timer.start;
+    Area* areap = grid.get(position.floor);
+    long timing = test_timer.hnsecs;
+    debug_write_1(timing);
     static if(checks == "careful"){
       if(areap !is null)
         return *areap;
@@ -353,13 +384,14 @@ class World : world_grid_type {
   
   Area new_area(string checks = "careful")(Vector2f position){
     static if(checks == "careful"){
-      if(!exists(position)){
+      Area* area_p = grid.get(position);
+      if(area_p is null){
         Area area = new Area(position.floor);
         integrate_area(area);
         return area;
       }
       else
-        return null;
+        return *area_p;
     }
     else static if(checks == "careless"){
       Area area = new Area(position.floor);
@@ -371,7 +403,8 @@ class World : world_grid_type {
   Area get_or_new_area_single(Vector2f position){
     Area area = get_area(position);
     if(area is null){
-      return new_area!"careful"(position);
+      Area ret_area = new_area!"careful"(position);
+      return ret_area;
     }
     else
       return area;
@@ -390,18 +423,26 @@ class World : world_grid_type {
   void add_wall(Wall wall){
     wall.position.x = floor(wall.position.x);
     wall.position.y = floor(wall.position.y);
-    get_or_new_area_single(wall.position).set_wall(wall);
+    Area area = get_or_new_area_single(wall.position);
+    area.set_wall(wall);
   }
   
   void add_ground(Ground ground){
     ground.position.x = floor(ground.position.x);
     ground.position.y = floor(ground.position.y);
-    get_or_new_area_single(ground.position).set_ground(ground);
+    Area area = get_or_new_area_single(ground.position);
+    area.set_ground(ground);
   }
   
   void place_agent(Agent agent){
-    if(agent.world !is this)
+    if(agent.world !is this){
+      number_of_agents++;
+      if(agent is player_entity)
+        number_of_players++;
+      if(agent.world !is null)
+        agent.world.agent_exitted(agent);
       agent.world = this;
+    }
     Area area = get_or_new_area_generate(agent.position);
     if(area !is null){
       if(area !is agent.area){
@@ -429,9 +470,32 @@ class World : world_grid_type {
       destroy(decor);
   }
   
+  void agent_exitted(Agent agent){
+    number_of_agents--;
+    // if(number_of_agents <= 0 && destroy_when_zero_agents){
+    //   kill;
+    //   destroy(this);
+    // }
+    // This likely also produces complex bugs like below
+    if(agent is player_entity){
+      number_of_players--;
+      // if(number_of_players <= 0 && destroy_when_zero_players){
+      //   kill;
+      //   destroy(this);
+      // }
+      // This produces complex bugs for some reason
+    }
+  }
+  
 }
 
-// Tile map relation for tile mapping (the name is short to conserve memory in source files)
+/*
+  Tile map relation for tile mapping (the name is short to conserve memory in source files)
+  (x, y) is the tile's position Vector2f(x, y)
+  (r, g, b) is an arbitrary color value from a bitmap (this isn't just a single field because
+  copying color values from an image editor is really easy compared to reducing those rgb
+  colors to a single field, or any of the other ways of doing it)
+*/
 struct Tmr {
   int x, y;
   int r,g,b;

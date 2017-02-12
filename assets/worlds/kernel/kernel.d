@@ -3,6 +3,7 @@ module kernel;
 import std.string;
 import std.stdio;
 import std.random;
+import dbg;
 import sgogl;
 import make;
 import game;
@@ -105,118 +106,147 @@ class Kernel : World {
       // writefln("%f", current_map / number_of_maps);
       if(tmr.r == 00 && tmr.g == 255 && tmr.b == 00){
         Ground ground = make.make_ground!"Grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 42 && tmr.g == 69 && tmr.b == 00){
         Ground ground = make.make_ground!"Matted_grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 130 && tmr.g == 74 && tmr.b == 00){
         Ground ground = make.make_ground!"Dirt_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 245 && tmr.g == 235 && tmr.b == 48){
         Ground ground = make.make_ground!"Sand_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 124 && tmr.g == 102 && tmr.b == 94){
         Ground ground = make.make_ground!"Rocky_ground_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 119 && tmr.g == 255 && tmr.b == 00){
         Ground ground = make_ground!"Grass_with_flowers_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 31 && tmr.g == 58 && tmr.b == 31){
         Ground ground = make_ground!"Grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
         /* Add tree decoration here */
       }
       else if(tmr.r == 104 && tmr.g == 104 && tmr.b == 104){
         Ground ground = make_ground!"Rocky_ground_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         Wall wall = make_wall!"Stone_wall_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
         add_wall(wall);
       }
       else if(tmr.r == 166 && tmr.g == 166 && tmr.b == 166){
         Ground ground = make.make_ground!"Rocky_ground_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 200 && tmr.g == 134 && tmr.b == 157){
         Ground ground = make_ground!"Brick_path_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 138 && tmr.g == 80 && tmr.b == 100){
         Ground ground = make_ground!"Makeshift_brick_path_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 42 && tmr.g == 69 && tmr.b == 00){
         Ground ground = make_ground!"Matted_grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 150 && tmr.g == 215 && tmr.b == 215){
         Ground ground = make_ground!"Portal_carpet_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 177 && tmr.g == 61 && tmr.b == 86){
         Ground ground = make_ground!"Red_carpet_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 104 && tmr.g == 91 && tmr.b == 179){
         Ground ground = make_ground!"Fountain_water_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 67 && tmr.g == 64 && tmr.b == 90){
         Ground ground = make_ground!"Fountain_wall_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
       else if(tmr.r == 171 && tmr.g == 40 && tmr.b == 157){
         Wall wall = make_wall!"Kernel_house_tall_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(Kernel_house_tall_1)wall).set_type(0);
         add_wall(wall);
       }
       else if(tmr.r == 157 && tmr.g == 171 && tmr.b == 40){
         Wall wall = make_wall!"Kernel_house_tall_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(Kernel_house_tall_1)wall).set_type(1);
         add_wall(wall);
       }
       else if(tmr.r == 97 && tmr.g == 21 && tmr.b == 89){
         Wall wall = make_wall!"Kernel_house_short_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(Kernel_house_short_1)wall).set_type(0);
         add_wall(wall);
       }
       else if(tmr.r == 105 && tmr.g == 114 && tmr.b == 27){
         Wall wall = make_wall!"Kernel_house_short_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(Kernel_house_short_1)wall).set_type(1);
         add_wall(wall);
       }
       else if(tmr.r == 21 && tmr.g == 81 && tmr.b == 82){
         Wall wall = make_wall!"Blank_impassable_wall_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         add_wall(wall);
       }
       else if(tmr.r == 148 && tmr.g == 120 && tmr.b == 54){
         Wall wall = make_wall!"White_fence_1"; // horizontal
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(White_fence_1)wall).set_type(0);
         Ground ground = make_ground!"Grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_wall(wall);
         add_ground(ground);
       }
       else if(tmr.r == 89 && tmr.g == 66 && tmr.b == 28){
         Wall wall = make_wall!"White_fence_1"; // corner ul
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(White_fence_1)wall).set_type(1);
         Ground ground = make_ground!"Grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_wall(wall);
         add_ground(ground);
       }
       else if(tmr.r == 166 && tmr.g == 143 && tmr.b == 87){
         Wall wall = make_wall!"White_fence_1"; // vertical
+        wall.position = Vector2f(tmr.x, tmr.y);
         (cast(White_fence_1)wall).set_type(2);
         Ground ground = make_ground!"Grass_1";
+        ground.position = Vector2f(tmr.x, tmr.y);
         add_wall(wall);
         add_ground(ground);
       }
       else if(tmr.r == 186 && tmr.g == 19 && tmr.b == 164){
         Wall wall = make_wall!"Stability_boundary_1";
+        wall.position = Vector2f(tmr.x, tmr.y);
         add_wall(wall);
       }
       // else if(tmr.r == 0 && tmr.g == 0 && tmr.b == 255){

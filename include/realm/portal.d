@@ -19,8 +19,10 @@ class Portal : Agent {
   override int agent_subtype_id(){ return Agent.subtype_portal; }
   
   override void activate(Agent agent){
-    agent.world = exit_world;
-    agent.position = exit_position;
+    if(agent !is null && exit_world !is null){
+      agent.position = exit_position;
+      exit_world.place_agent(agent);
+    }
   }
   
 }

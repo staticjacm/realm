@@ -236,10 +236,12 @@ class Agent : Renderable {
   ++/
   void apply_friction(){
     if(speed > stop_speed && area !is null && area.ground !is null && area.ground.valid && area.ground.friction != 0){
-      if(speed < 3*stop_speed)
+      if(speed < 3*stop_speed){
         accelerate(-velocity*area.ground.friction/10);
-      else
+      }
+      else{
         accelerate(-velocity.normalize*area.ground.friction);
+      }
     }
   }
   void accelerate(Vector2f acceleration){
@@ -261,7 +263,8 @@ class Agent : Renderable {
   }
   void set_velocity(Vector2f new_velocity){
     velocity = new_velocity;
-    if(abs(velocity.x - stop_speed) > stop_speed || abs(velocity.y - stop_speed) > stop_speed)
+    speed = velocity.norm;
+    if(speed > stop_speed)
       moving = true;
     else {
       velocity.x = 0;

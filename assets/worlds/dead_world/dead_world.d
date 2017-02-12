@@ -36,7 +36,8 @@ class Dead_world_1 : World {
   }
   
   float portal_spawn_time = 0;
-  float portal_spawn_delay = 5 * 1000;
+  float portal_spawn_delay = 100;
+  // float portal_spawn_delay = 5 * 1000;
   bool portal_placed = false;
   
   this(){
@@ -78,6 +79,11 @@ class Dead_world_1 : World {
     
     portal_spawn_time = game_time + portal_spawn_delay;
   }
+  ~this(){
+    writeln("dead world destroyed ");
+  }
+  
+  override bool destroy_when_zero_players(){ return true; }
   
   override string name(){ return "..."; }
   override string description(){ return "Game over"; }

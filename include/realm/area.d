@@ -75,7 +75,7 @@ class Area : Validatable {
     unset_wall;
     unset_ground;
     total_number--;
-    world.remove(position);
+    world.grid.remove(position);
   }
   
   override string toString(){ return format("area %d", id); }
