@@ -34,12 +34,16 @@ module drop_tiers
 // module commoner
 module free_soul
   class Free_soul_1
+module giant_sea_turtle
+  class Giant_sea_turtle_1
 
 // portals
 module character_generator_portal
   class Character_generator_portal_1
 module kernel_portal
   class Kernel_portal_1
+module generic_portal
+  class Generic_portal_1
 
 // shots
 module fireball
@@ -84,10 +88,16 @@ module fountain_wall
   class Fountain_wall_1
 module sand
   class Sand_1
+module oasis_sand
+  class Oasis_sand_1
 module stone_ground
   class Stone_ground_1
 module fountain_water
   class Fountain_water_1
+module shallow_ocean_water
+  class Shallow_ocean_water_1
+module oasis_water
+  class Oasis_water_1
 module rocky_ground
   class Rocky_ground_1
 
@@ -112,13 +122,20 @@ module stone_wall
   class Stone_wall_1
 module white_fence
   class White_fence_1
+module deep_ocean_water
+  class Deep_ocean_water_1
+module tropical_tree
+  class Tropical_tree_1
+module island_mountain
+  class Island_mountain_cliff_1
 
 // worlds
 module testing_world
   class Testing_world_1
 module kernel
   class Kernel
-// module island_world
+module island_world
+  class Island_world_1
 module entry_world
   class Entry_world_1
 module dead_world

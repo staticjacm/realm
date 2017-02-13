@@ -138,7 +138,7 @@ string asset_registry_classes_initialize_type_mixin(){
   return ret;
 }
 
-pragma(inline, true){
+pragma(inline){
   void initialize_type(string class_name){ switch(class_name){ default: return; mixin(asset_registry_classes_initialize_type_mixin); } }
   
   // Items

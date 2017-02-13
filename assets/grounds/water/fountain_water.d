@@ -35,6 +35,6 @@ class Fountain_water_1 : Ground {
   
   override string name(){ return "Refreshing Fountain Water"; }
   override string description(){ return "Negative ions!"; }
-  override string standard_article(){ return "a"; }
+  override string standard_article(){ return "some"; }
   
 }

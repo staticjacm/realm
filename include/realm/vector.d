@@ -5,6 +5,9 @@ import std.conv;
 import std.stdio;
 import std.math;
 import std.traits;
+import sllist;
+
+alias Vector2f_list = LList!Vector2f;
 
 alias Vector2f = Vector2!float;
 alias Vector2f_2 = Vector2_2!float;

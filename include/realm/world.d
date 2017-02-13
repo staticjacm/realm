@@ -68,8 +68,8 @@ class World : Validatable {
   
   void create_grid(){
     // grid = new Dict_grid2!(Area, float);
-    // grid = new Dict_array_grid2!(Area, float, 10, 10);
-    grid = new Array_grid2!(Area, float);
+    grid = new Dict_array_grid2!(Area, float, 10, 10);
+    // grid = new Array_grid2!(Area, float);
   }
   
   // Area* get(Vector2f position){ return grid.get(position); }
@@ -427,11 +427,21 @@ class World : Validatable {
     area.set_wall(wall);
   }
   
+  void add_wall(Wall wall, Vector2f position){
+    wall.position = position;
+    add_wall(wall);
+  }
+  
   void add_ground(Ground ground){
     ground.position.x = floor(ground.position.x);
     ground.position.y = floor(ground.position.y);
     Area area = get_or_new_area_single(ground.position);
     area.set_ground(ground);
+  }
+  
+  void add_ground(Ground ground, Vector2f position){
+    ground.position = position;
+    add_ground(ground);
   }
   
   void place_agent(Agent agent){

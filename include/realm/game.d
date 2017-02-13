@@ -165,6 +165,8 @@ void initialize(){
   make.initialize_type!"Dev_ring_1";
   make.initialize_type!"Fire_turret_1";
   make.initialize_type!"Kernel_portal_1";
+  make.initialize_type!"Generic_portal_1";
+  make.initialize_type!"Island_world_1";
   
   test_img = gr_load_image("assets/test_img.png".toStringz, 0);
   gui_mockup_img = gr_load_image("assets/gui/gui_mockup.png".toStringz, 0);
@@ -218,6 +220,13 @@ void initialize(){
   test_portal_2.exit_position = Vector2f(20.0f, 20.0f);
   
   test_world = make_world!"Testing_world_1";
+  
+  Portal island_portal = make_portal!"Generic_portal_1";
+  island_portal.position = Vector2f(19.0f, 19.0f);
+  island_portal.exit_world = make_world!"Island_world_1";
+  island_portal.exit_position = Vector2f(0, 0);
+  test_world.place_agent(island_portal);
+  
   test_world.place_agent(player_entity);
   // test_world.place_agent(enemy);
   test_world.place_agent(turret);

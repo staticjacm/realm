@@ -885,10 +885,12 @@ void set_description_mode(int mode){
 void player_key_function(){
   switch(gr_key){
     case GR_LSHIFT:
-      shift_pressed = (gr_key_pressed > 0);
+      if(!gr_key_repeated)
+        shift_pressed = (gr_key_pressed > 0);
       break;
     case GR_LCTRL:
-      ctrl_pressed = (gr_key_pressed > 0);
+      if(!gr_key_repeated)
+        ctrl_pressed = (gr_key_pressed > 0);
       break;
     
     case GR_V:
@@ -913,31 +915,39 @@ void player_key_function(){
     
     // Movement
     case move_up_button:
-      if(gr_key_pressed)
-        move_up_pressed = true;
+      if(gr_key_pressed){
+        if(!gr_key_repeated)
+          move_up_pressed = true;
+      }
       else
         move_up_pressed = false;
       break;
     case move_down_button:
-      if(gr_key_pressed)
-        move_down_pressed = true;
+      if(gr_key_pressed){
+        if(!gr_key_repeated)
+          move_down_pressed = true;
+      }
       else
         move_down_pressed = false;
       break;
     case move_left_button:
-      if(gr_key_pressed)
-        move_left_pressed = true;
+      if(gr_key_pressed){
+        if(!gr_key_repeated)
+          move_left_pressed = true;
+      }
       else
         move_left_pressed = false;
       break;
     case move_right_button:
-      if(gr_key_pressed)
-        move_right_pressed = true;
+      if(gr_key_pressed){
+        if(!gr_key_repeated)
+          move_right_pressed = true;
+      }
       else
         move_right_pressed = false;
       break;
     case GR_Q: 
-      if(gr_key_pressed){
+      if(gr_key_pressed && !gr_key_repeated){
         player_entity.interacts_with_walls = !player_entity.interacts_with_walls;
         writeln("collides with walls toggled to: ", player_entity.interacts_with_walls);
       }
@@ -951,9 +961,9 @@ void player_key_function(){
       
     // Warp to kernel
     case warp_to_kernel_button:
-      if(game.kernel_world is null)
-        game.kernel_world = new Kernel;
-      if(gr_key_pressed && player_entity !is null && player_entity.valid){
+      if(gr_key_pressed && !gr_key_repeated && player_entity !is null && player_entity.valid){
+        if(game.kernel_world is null)
+          game.kernel_world = new Kernel;
         player_entity.position = Kernel.center_spawn;
         game.kernel_world.place_agent(player_entity);
         player_zero_view;
@@ -988,7 +998,7 @@ void player_key_function(){
     
     // GUI selection marker selecting
     case selection_marker_select_button:
-      if(gr_key_pressed)
+      if(gr_key_pressed && !gr_key_repeated)
         selection_marker_select;
       break;
       
@@ -1025,14 +1035,14 @@ void player_key_function(){
     case gui_description_mode_token_button:     if(gr_key_pressed) set_description_mode(gui_description_mode_token);     break;
     
     // Item use
-    case GR_1: if(gr_key_pressed) player_interact_item(0); break;
-    case GR_2: if(gr_key_pressed) player_interact_item(1); break;
-    case GR_3: if(gr_key_pressed) player_interact_item(2); break;
-    case GR_4: if(gr_key_pressed) player_interact_item(3); break;
-    case GR_5: if(gr_key_pressed) player_interact_item(4); break;
-    case GR_6: if(gr_key_pressed) player_interact_item(5); break;
-    case GR_7: if(gr_key_pressed) player_interact_item(6); break;
-    case GR_8: if(gr_key_pressed) player_interact_item(7); break;
+    case GR_1: if(gr_key_pressed && !gr_key_repeated) player_interact_item(0); break;
+    case GR_2: if(gr_key_pressed && !gr_key_repeated) player_interact_item(1); break;
+    case GR_3: if(gr_key_pressed && !gr_key_repeated) player_interact_item(2); break;
+    case GR_4: if(gr_key_pressed && !gr_key_repeated) player_interact_item(3); break;
+    case GR_5: if(gr_key_pressed && !gr_key_repeated) player_interact_item(4); break;
+    case GR_6: if(gr_key_pressed && !gr_key_repeated) player_interact_item(5); break;
+    case GR_7: if(gr_key_pressed && !gr_key_repeated) player_interact_item(6); break;
+    case GR_8: if(gr_key_pressed && !gr_key_repeated) player_interact_item(7); break;
       
     
     default: break;

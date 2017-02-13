@@ -5,6 +5,7 @@ module sllist;
 A very simple linked list library
 ++/
 
+import std.random;
 import std.stdio;
 import std.conv;
 
@@ -210,4 +211,53 @@ unittest {
     sum += i;
   }
   assert( sum == 19 );
+}
+
+bool contains(T)(LList!T list, T value){
+  foreach(T t; list){
+    static if(__traits(compiles, t is value)){
+      if(t is value)
+        return true;
+    }
+    else {
+      if(t == value)
+        return true;
+    }
+  }
+  return false;
+}
+
+/*
+  Creates a new list of n elements sampled randomly and uniformly only once from list
+  I discovered this algorithm heuristically. There is no guarantee that it produces
+  a truly uniform sample of a distribution (although my testing on distributions like
+  Range[_Integer] (ie {0, 1, ..., N}) indicates that it is uniform or very nearly so)
+  Some errors:
+    Might be very slightly more likely to give runs of sequential elements
+*/
+LList!T random_sample(T)(LList!T list, int n){
+  LList!T ret = new LList!T;
+  int i = 0;
+  foreach(T value; list){
+    if( uniform!"[]"(0, 1) < cast(float)(n - ret.length + 1)/cast(float)(list.length - i + 1) )
+      ret.add(value);
+    i++;
+    if(ret.length >= n)
+      break;
+  }
+  return ret;
+}
+
+unittest {
+  LList!int list1 = new LList!int;
+  for(int i = 0; i < 10000; i++){
+    list1.add(i);
+  }
+  LList!int list2 = list1.random_sample(100);
+  assert(list2.length == 100);
+  float mean = 0;
+  foreach(int i; list2)
+    mean += cast(float)i;
+  mean /= cast(float)list2.length;
+  assert(abs(mean - 5000.0f) < 1000.0f ) // :^)
 }

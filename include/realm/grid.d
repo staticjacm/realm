@@ -15,9 +15,9 @@ import std.traits;
 import vector;
 import validatable;
 
-void write_location_debug(int line = __LINE__, string mod = __MODULE__, string fun = __PRETTY_FUNCTION__){
-  writefln("%d %s %s", line, mod, fun);
-}
+// void write_location_debug(int line = __LINE__, string mod = __MODULE__, string fun = __PRETTY_FUNCTION__){
+//   writefln("%d %s %s", line, mod, fun);
+// }
 
 abstract class Grid2(T, V) : Validatable {  
   this(){ super(); }
