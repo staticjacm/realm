@@ -98,6 +98,8 @@ module shallow_ocean_water
   class Shallow_ocean_water_1
 module oasis_water
   class Oasis_water_1
+module river_water
+  class River_water_1
 module rocky_ground
   class Rocky_ground_1
 
@@ -126,6 +128,8 @@ module deep_ocean_water
   class Deep_ocean_water_1
 module tropical_tree
   class Tropical_tree_1
+module bush
+  class Bush_1
 module island_mountain
   class Island_mountain_cliff_1
 

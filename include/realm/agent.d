@@ -323,7 +323,7 @@ class Agent : Renderable {
   /++
     Rendering
   ++/
-  override float render_depth(){ return 100; }
+  override float render_depth(){ return 10300; }
   override void render(){
     if(draw_colliders){
       float cosangle = cos(collider_angle);

@@ -18,10 +18,10 @@ class Brick_path_1 : Ground {
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      image_1 = gr_load_image("assets/grounds/brick/brick_path_1.png".toStringz, 0);
-      image_2 = gr_load_image("assets/grounds/brick/brick_path_2.png".toStringz, 0);
-      image_3 = gr_load_image("assets/grounds/brick/brick_path_3.png".toStringz, 0);
-      image_4 = gr_load_image("assets/grounds/brick/brick_path_4.png".toStringz, 0);
+      image_1 = gr_load_image("assets/grounds/brick/brick_path_1_1.png".toStringz, 0);
+      image_2 = gr_load_image("assets/grounds/brick/brick_path_1_2.png".toStringz, 0);
+      image_3 = gr_load_image("assets/grounds/brick/brick_path_1_3.png".toStringz, 0);
+      image_4 = gr_load_image("assets/grounds/brick/brick_path_1_4.png".toStringz, 0);
     }
   }
   

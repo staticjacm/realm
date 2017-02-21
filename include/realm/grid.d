@@ -88,8 +88,6 @@ unittest {
 /*
   A Grid2 type which uses an array of arrays to store values
   Use this for worlds which are big and immutable
-  
-  Untested!
 */
 class Array_grid2(T, V): Grid2!(T, V) {
   
@@ -265,8 +263,6 @@ unittest {
   A Grid2f hybrid dictionary-array type
   A compromise between dict_grid2 and array_grid2
   Uses an associative array to store 2d grids of uniform dimensions
-  
-  Untested!
 */
 class Dict_array_grid2(T, V, int width, int height) : Grid2!(T, V) {
   
@@ -344,7 +340,6 @@ class Dict_array_grid2(T, V, int width, int height) : Grid2!(T, V) {
       Internal_grid new_grid;
       int inx = cast(int)floor(vector.x - block_vector.x);
       int iny = cast(int)floor(vector.y - block_vector.y);
-      // writefln("(%s, %s, %s, %s) [%d, %d] v [%d, %d]", to!string(vector.x), to!string(vector.y), to!string(block_vector.x), to!string(block_vector.y), inx, iny, width, height);
       new_grid[inx][iny].has_value = true;
       new_grid[inx][iny].value = value;
       dictionary[block_vector] = new_grid;

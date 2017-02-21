@@ -37,4 +37,7 @@ class Fountain_water_1 : Ground {
   override string description(){ return "Negative ions!"; }
   override string standard_article(){ return "some"; }
   
+  override float friction(){ return 45; }
+  override float max_speed_mod(){ return 0.5; }
+  
 }

@@ -20,7 +20,7 @@ class Wall : Rooted {
   override string description(){ return "An undefined wall"; }
   override string standard_article(){ return "a"; }
   
-  override float render_depth(){ return 100; }
+  override float render_depth(){ return 10300; }
   
   override int rooted_subtype_id(){ return Rooted.subtype_wall; }
   
@@ -40,17 +40,19 @@ class Wall : Rooted {
   
   // Heres where the wall causes an agent to recoil, move away, etc
   void collision_block(Agent agent, Vector2f collision_point, Vector2f collision_normal){
-    /*
-      With walls we always want the normal vectors to be the usual unit vectors
-      so we use quadrant_vector to get the closest unit vector
-    */
-    Vector2f pdif_normal = Vector2f(agent.position.x - (position.x + 0.5f), agent.position.y - (position.y + 0.5f)).quadrant_vector;
-    if(agent.velocity.dot(pdif_normal) < 0){
-      // agent.set_velocity = agent.velocity.reflect(pdif_normal)*restitution*agent.restitution;
-      Vector2f vdelta = agent.velocity.proj(pdif_normal);
-      agent.set_velocity = agent.velocity - vdelta - vdelta*restitution*agent.restitution;
+    if(agent !is null && agent.valid){
+      /*
+        With walls we always want the normal vectors to be the usual unit vectors
+        so we use quadrant_vector to get the closest unit vector
+      */
+      Vector2f pdif_normal = Vector2f(agent.position.x - (position.x + 0.5f), agent.position.y - (position.y + 0.5f)).quadrant_vector;
+      if(agent.velocity.dot(pdif_normal) < 0){
+        // agent.set_velocity = agent.velocity.reflect(pdif_normal)*restitution*agent.restitution;
+        Vector2f vdelta = agent.velocity.proj(pdif_normal);
+        agent.set_velocity = agent.velocity - vdelta - vdelta*restitution*agent.restitution;
+      }
+      agent.set_position = agent.position + pdif_normal * 0.1; // Access violation error here
     }
-    agent.set_position = agent.position + pdif_normal * 0.1;
   }
   
   void collide(Agent agent){}

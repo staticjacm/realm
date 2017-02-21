@@ -13,24 +13,27 @@ import validatable;
 
 class Grass_1 : Ground {
   static bool type_initialized = false;
-  static uint image_1, image_2;
+  static uint[] images; static int image_number = 16;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      image_1 = gr_load_image("assets/grounds/grass/grass_1.png".toStringz, 0);
-      image_2 = gr_load_image("assets/grounds/grass/grass_2.png".toStringz, 0);
+      images.length = image_number;
+      for(int i = 0; i < image_number; i++){
+        images[i] = gr_load_image(format("assets/grounds/grass/grass_1_%d.png", i + 1).toStringz, 0);
+      }
     }
   }
   
-  bool onq = false;
-  
   this(){
-    switch(uniform!"[]"(0, 1)){
-      default:
-      case 0: animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      case 1: animation = new Animation([image_2], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-    }
+    int img_index = uniform!"[]"(0, image_number - 1);
+    // writeln("grass: ", img_index);
+    animation = new Animation([images[img_index]], 1.0f, Vector2f(0.333333f,0.333333f), Vector2f(3,3));
+    // switch(uniform!"[]"(1, 1)){
+    //   default:
+    //   case 0: animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
+    //   case 1: animation = new Animation([image_2], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
+    // }
   }
   
   override string name(){ return "Grass"; }
@@ -51,8 +54,6 @@ class Matted_grass_1 : Ground {
     }
   }
   
-  bool onq = false;
-  
   this(){
     switch(uniform!"[]"(0, 1)){
       default:
@@ -69,28 +70,22 @@ class Matted_grass_1 : Ground {
 
 class Grass_with_flowers_1 : Ground {
   static bool type_initialized = false;
-  static uint image_1, image_2, image_3, image_4;
+  static uint[] images; static int image_number = 16;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      image_1 = gr_load_image("assets/grounds/grass/grass_with_flowers_1.png".toStringz, 0);
-      image_2 = gr_load_image("assets/grounds/grass/grass_with_flowers_2.png".toStringz, 0);
-      image_3 = gr_load_image("assets/grounds/grass/grass_with_flowers_3.png".toStringz, 0);
-      image_4 = gr_load_image("assets/grounds/grass/grass_with_flowers_4.png".toStringz, 0);
+      images.length = image_number;
+      for(int i = 0; i < image_number; i++){
+        images[i] = gr_load_image(format("assets/grounds/grass/grass_with_flowers_1_%d.png", i + 1).toStringz, 0);
+      }
     }
   }
   
-  bool onq = false;
-  
   this(){
-    switch(uniform!"[]"(0, 3)){
-      default:
-      case 0: animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      case 1: animation = new Animation([image_2], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      case 2: animation = new Animation([image_3], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      case 3: animation = new Animation([image_4], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-    }
+    int img_index = uniform!"[]"(0, image_number - 1);
+    // writeln("grass: ", img_index);
+    animation = new Animation([images[img_index]], 1.0f, Vector2f(0.333333f,0.333333f), Vector2f(3,3));
   }
   
   override string name(){ return "Grass With Pretty Flowers"; }

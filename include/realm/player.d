@@ -907,6 +907,20 @@ void player_key_function(){
         writefln("framrate cap %f", game.framerate_cap);
       }
       break;
+    case GR_N:
+      if(gr_key_pressed){
+        view_size ++;
+        writefln("view size %f", view_size);
+      }
+      break;
+    case GR_B:
+      if(gr_key_pressed){
+        view_size --;
+        if(view_size < 1)
+          view_size = 1;
+        writefln("view size %f", view_size);
+      }
+      break;
     case GR_Z:
       if(gr_key_pressed){
         player_entity.apply_damage(1000.0f);

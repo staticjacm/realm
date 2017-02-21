@@ -8,6 +8,7 @@ import std.traits;
 import sllist;
 
 alias Vector2f_list = LList!Vector2f;
+alias Vector2f_2_list = LList!Vector2f_2;
 
 alias Vector2f = Vector2!float;
 alias Vector2f_2 = Vector2_2!float;
@@ -62,7 +63,7 @@ Vector2f quadrant_vector(Vector2f a){
 An arbitrary 2-Tuple of values of type T
 ++/
 struct Vector2(T) {
-  T x; T y;
+  T x = T.init; T y = T.init;
   
   string toString(){ return "("~x.to!string~", "~y.to!string~")"; }
   
@@ -118,6 +119,10 @@ struct Vector2(T) {
 
 Vector2!T floor(T)(Vector2!T vector){
   return Vector2!T(std.math.floor(vector.x), std.math.floor(vector.y));
+}
+
+Vector2!T round(T)(Vector2!T vector){
+  return Vector2!T(std.math.round(vector.x), std.math.round(vector.y));
 }
 
 // opBinary!"*"(T) Scalar multiplication unittest
@@ -195,7 +200,7 @@ unittest {
 An arbitrary 3-Tuple of values of type T
 ++/
 struct Vector3(T) {
-  T x; T y; T z;
+  T x = T.init; T y = T.init; T z = T.init;
   
   string toString(){ return "("~x.to!string~", "~y.to!string~", "~z.to!string~")"; }
   

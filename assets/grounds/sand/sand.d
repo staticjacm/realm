@@ -13,26 +13,24 @@ import validatable;
 
 class Sand_1 : Ground {
   static bool type_initialized = false;
-  static uint image_1, image_2, image_3;
+  static uint[] images; static int image_number = 18;
   
   static void initialize_type(){
     if(!type_initialized){
       type_initialized = true;
-      image_1 = gr_load_image("assets/grounds/sand/sand_1.png".toStringz, 0);
-      image_2 = gr_load_image("assets/grounds/sand/sand_2.png".toStringz, 0);
-      image_3 = gr_load_image("assets/grounds/sand/sand_2.png".toStringz, 0);
+      images.length = image_number;
+      for(int i = 0; i < image_number; i++){
+        images[i] = gr_load_image(format("assets/grounds/sand/sand_1_%d.png", i + 1).toStringz, 0);
+      }
     }
   }
   
   bool onq = false;
   
   this(){
-    switch(uniform!"[]"(0, 2)){
-      default:
-      case 0: animation = new Animation([image_1], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      case 1: animation = new Animation([image_2], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-      case 2: animation = new Animation([image_3], 1.0f, Vector2f(0,0), Vector2f(1,1));  break;
-    }
+    int img_index = uniform!"[]"(0, image_number - 1);
+    // writeln("grass: ", img_index);
+    animation = new Animation([images[img_index]], 1.0f, Vector2f(0.333333f,0.333333f), Vector2f(3,3));
   }
   
   override string name(){ return "Sand"; }

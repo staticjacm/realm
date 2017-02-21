@@ -261,3 +261,52 @@ unittest {
   mean /= cast(float)list2.length;
   assert(abs(mean - 5000.0f) < 1000.0f ) // :^)
 }
+
+/*
+  This should really be T* return type but it complicates use
+*/
+T random_choice(T)(LList!T list){
+  if(list.length > 0){
+    int i = 0;
+    foreach(T value; list){
+      if( uniform!"[]"(0, 1) < 1.0f/cast(float)(list.length - i + 1) )
+        return value;
+      i++;
+    }
+    return list.last.value;
+  }
+  else
+    return T.init;
+}
+
+/*
+  Same as above but uses prob as the probability at each step
+*/
+T random_choice(T)(LList!T list, float delegate(int) prob){
+  if(list.length > 0){
+    int i = 0;
+    foreach(T value; list){
+      if( uniform!"[]"(0, 1) < prob(i) )
+        return value;
+      i++;
+    }
+    return list.last.value;
+  }
+  else
+    return T.init;
+}
+
+/*
+  Same as above but prob is constant
+*/
+T random_choice(T)(LList!T list, float prob){
+  if(list.length > 0){
+    foreach(T value; list){
+      if( uniform!"[]"(0, 1) < prob )
+        return value;
+    }
+    return list.last.value;
+  }
+  else
+    return T.init;
+}

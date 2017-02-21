@@ -39,4 +39,7 @@ class Oasis_water_1 : Ground {
   override string description(){ return "Some say the water in an oasis extends life"; }
   override string standard_article(){ return "some"; }
   
+  override float friction(){ return 45; }
+  override float max_speed_mod(){ return 0.5; }
+  
 }

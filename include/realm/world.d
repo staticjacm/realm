@@ -148,6 +148,9 @@ class World : Validatable {
     }
   }
   
+  /*
+    Applies a function to every existing area nearby
+  */
   void apply_areas_nearby(void delegate(ref Area) dg, Vector2f position, float max_distance = 1.0f){
     float r = (max_distance.ceil);
     for(float x = -r; x <= r; x++){
@@ -155,6 +158,20 @@ class World : Validatable {
         Area area = get_area(position + Vector2f(x, y));
         if(area !is null)
           dg(area);
+      }
+    }
+  }
+  
+  /*
+    Applies a function to every possible location of an area (x, y) in some radius r (ie: x^2 + y^2 <= r^2)
+  */
+  void apply_radius(void delegate(float, float) dg, Vector2f position, float radius){
+    float radius_squared = radius*radius;
+    for(float x = -radius; x <= radius; x++){
+      float x_squared = x*x;
+      for(float y = -radius; y <= radius; y++){
+        if(x_squared + y*y <= radius_squared)
+          dg(position.x + x, position.y + y);
       }
     }
   }
@@ -420,11 +437,15 @@ class World : Validatable {
       return area;
   }
   
+  /*
+    This adds a wall to an area with its position if it doesn't already have one
+  */
   void add_wall(Wall wall){
     wall.position.x = floor(wall.position.x);
     wall.position.y = floor(wall.position.y);
     Area area = get_or_new_area_single(wall.position);
-    area.set_wall(wall);
+    if(area.wall is null)
+      area.set_wall(wall);
   }
   
   void add_wall(Wall wall, Vector2f position){
@@ -432,16 +453,64 @@ class World : Validatable {
     add_wall(wall);
   }
   
+  /*
+    This adds a wall to an area with its position always (even if there is already a wall there)
+  */
+  void add_or_replace_wall(Wall wall){
+    wall.position.x = floor(wall.position.x);
+    wall.position.y = floor(wall.position.y);
+    Area area = get_or_new_area_single(wall.position);
+    area.set_wall(wall);
+  }
+  
+  void add_or_replace_wall(Wall wall, Vector2f position){
+    wall.position = position;
+    add_or_replace_wall(wall);
+  }
+  
+  /*
+    This adds a ground to an area with its position if it doesn't already have one
+  */
   void add_ground(Ground ground){
+    ground.position.x = floor(ground.position.x);
+    ground.position.y = floor(ground.position.y);
+    Area area = get_or_new_area_single(ground.position);
+    if(area.ground is null)
+      area.set_ground(ground);
+  }
+  
+  void add_ground(Ground ground, Vector2f position){
+    ground.position = position;
+    add_ground(ground);
+  }
+  
+  /*
+    This adds a ground to an area with its position always (even if there is already a ground there)
+  */
+  void add_or_replace_ground(Ground ground){
     ground.position.x = floor(ground.position.x);
     ground.position.y = floor(ground.position.y);
     Area area = get_or_new_area_single(ground.position);
     area.set_ground(ground);
   }
   
-  void add_ground(Ground ground, Vector2f position){
+  void add_or_replace_ground(Ground ground, Vector2f position){
     ground.position = position;
-    add_ground(ground);
+    add_or_replace_ground(ground);
+  }
+  
+  void remove_ground(Vector2f position){
+    Vector2f get_position = Vector2f(floor(position.x), floor(position.y));
+    Area area = get_area(get_position);
+    if(area !is null)
+      area.unset_ground;
+  }
+  
+  void remove_wall(Vector2f position){
+    Vector2f get_position = Vector2f(floor(position.x), floor(position.y));
+    Area area = get_area(get_position);
+    if(area !is null)
+      area.unset_wall;
   }
   
   void place_agent(Agent agent){

@@ -123,7 +123,7 @@ void initialize(){
   gr_open;
   gr_activate_depth_testing(1);
   gr_activate_linear_filtering(0);
-  gr_set_max_depth(1000.0f);
+  gr_set_max_depth(20000.0f);
   gr_set_window_size(600, 400);
   gr_set_center_screen = 1;
   // gr_set_screen_size(2400, 1600);
@@ -304,6 +304,9 @@ void render(){
 immutable(bool) debug_update = false;
 void update(){
   
+  debug_write_1(game_time);
+  debug_write_2(format("%2.2f", frame_delta));
+  
   static if(debug_update) write_location_debug;
   game_time = game_timer.msecs;
   frame++;
@@ -348,7 +351,7 @@ void update(){
   render;
   
   static if(debug_update) write_location_debug;
-  if(frame % 1000 == 0){
+  if(frame % 500 == 0){
     writefln("frame_delta: %2.2f ms = %2.1f fps", frame_delta*1000.0f, 1.0f/frame_delta);
     writefln("  frame_delay: %d ms = %2.1f fps", frame_delay, 1000.0f/cast(float)frame_delay);
     writeln("  number of agents: ", Agent.master_list.length);

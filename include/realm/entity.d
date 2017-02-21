@@ -242,9 +242,13 @@ class Entity : Agent {
       propelling_y = true;
       propelling_y_switch_time = game_time + propelling_y_switch_delay;
     }
-    if(velocity.x.abs < max_speed || velocity.x.sgn != dir_normalized.x.sgn)
+    
+    float real_max_speed = max_speed;
+    if(area !is null && area.ground !is null)
+      real_max_speed = max_speed * area.ground.max_speed_mod;
+    if(velocity.x.abs < real_max_speed || velocity.x.sgn != dir_normalized.x.sgn)
       accelerate(Vector2f(dir_normalized.x * propel_rate, 0));
-    if(velocity.y.abs < max_speed || velocity.y.sgn != dir_normalized.y.sgn)
+    if(velocity.y.abs < real_max_speed || velocity.y.sgn != dir_normalized.y.sgn)
       accelerate(Vector2f(0, dir_normalized.y * propel_rate));
     // else
       // accelerate(direction.normalize * (max_speed - speed) * propel_rate);

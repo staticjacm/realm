@@ -39,4 +39,7 @@ class Shallow_ocean_water_1 : Ground {
   override string description(){ return "Shallow enough to stand in"; }
   override string standard_article(){ return "some"; }
   
+  override float friction(){ return 45; }
+  override float max_speed_mod(){ return 0.4; }
+  
 }

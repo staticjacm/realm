@@ -41,8 +41,9 @@ class Giant_sea_turtle_1 : Entity {
     animation_standing = new Animation([image_standing], 1, Vector2f(0.5, 0), image_dimensions);
     animation_walking  = new Animation([image_walking_1, image_walking_2], 10, Vector2f(0.5, 0), image_dimensions);
     animation_hurt     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
-    animation = animation_walking;
+    // animation = animation_walking;
     propel_rate = 3.0f;
+    max_speed = 10;
     l_defence = 5.0f;
   }
   

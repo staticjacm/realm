@@ -155,6 +155,7 @@ class Kernel : World {
       }
       else if(tmr.r == 200 && tmr.g == 134 && tmr.b == 157){
         Ground ground = make_ground!"Brick_path_1";
+        writeln("brick path is ", ground !is null);
         ground.position = Vector2f(tmr.x, tmr.y);
         add_ground(ground);
       }
