@@ -2,6 +2,8 @@ module wall;
 
 import std.stdio;
 import std.math;
+import animation;
+import game;
 import sgogl_interface;
 import collision;
 import vector;
@@ -19,8 +21,6 @@ class Wall : Rooted {
   override string name(){ return "wall"; }
   override string description(){ return "An undefined wall"; }
   override string standard_article(){ return "a"; }
-  
-  override float render_depth(){ return 10300; }
   
   override int rooted_subtype_id(){ return Rooted.subtype_wall; }
   
@@ -70,6 +70,11 @@ class Wall : Rooted {
       gr_draw_line(w3, w4, 1);
       gr_draw_line(w4, w1, 1);
     }
+    if(flip_horizontally)
+      gr_draw_tilted_flipped_horizontally(animation.update(game_time), position, render_depth, 1.0f, angle + render_angle, 1.0f);
+    else 
+      // writefln("this %b valid %b animation %b type %s", this !is null, valid, animation !is null, name);
+      gr_draw_tilted(animation.update(game_time), position, render_depth, 1.0f, angle + render_angle, 1.0f);
     super.render;
   }
 }

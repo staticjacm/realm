@@ -42,4 +42,6 @@ class Shallow_ocean_water_1 : Ground {
   override float friction(){ return 45; }
   override float max_speed_mod(){ return 0.4; }
   
+  override float height(){ return -0.2; }
+  
 }

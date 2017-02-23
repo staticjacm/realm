@@ -4,6 +4,7 @@ module agent;
 import std.stdio;
 import std.string;
 import std.math;
+import animation;
 import sgogl;
 import timer;
 import collision;
@@ -56,7 +57,8 @@ class Agent : Renderable {
   static bool type_initialized = false;
   static int gid = 0;
   static Agent_list master_list;
-  static draw_colliders = false;
+  static bool draw_colliders = false;
+  static float flying_height = 3.0f; // The height which agents need to be to no longer interact with ground level agents
   
   static initialize_type(){
     if(!type_initialized){
@@ -323,7 +325,6 @@ class Agent : Renderable {
   /++
     Rendering
   ++/
-  override float render_depth(){ return 10300; }
   override void render(){
     if(draw_colliders){
       float cosangle = cos(collider_angle);
@@ -341,6 +342,21 @@ class Agent : Renderable {
       gr_draw_line(a2, a3, 1);
       gr_draw_line(a3, a4, 1);
       gr_draw_line(a4, a1, 1);
+    }
+    if(height < flying_height){
+      float adjusted_height = height;
+      if(area !is null && area.ground !is null)
+        adjusted_height += area.ground.height;
+      if(flip_horizontally)
+        gr_draw_tilted_flipped_horizontally(animation.update(game_time), position + Vector2f(0, adjusted_height), render_depth - adjusted_height, 1.0f, angle + render_angle, 1.0f);
+      else  
+        gr_draw_tilted(animation.update(game_time), position + Vector2f(0, adjusted_height), render_depth - adjusted_height, 1.0f, angle + render_angle, 1.0f);
+    }
+    else {
+      if(flip_horizontally)
+        gr_draw_tilted_flipped_horizontally(animation.update(game_time), position + Vector2f(0, height), render_depth - height, 1.0f, angle + render_angle, 1.0f);
+      else  
+        gr_draw_tilted(animation.update(game_time), position + Vector2f(0, height), render_depth - height, 1.0f, angle + render_angle, 1.0f);
     }
     super.render;
   }

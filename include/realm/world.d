@@ -41,6 +41,7 @@ class World : Validatable {
   int number_of_agents   = 0;
   int number_of_players  = 0;
   int id;
+  Vector2f entrance_position = Vector2f(0.0f, 0.0f);
   bool allow_decorations = false; // allows decorations to spawn
   // bool allow_decorations = true; // allows decorations to spawn
   
@@ -576,6 +577,6 @@ class World : Validatable {
   colors to a single field, or any of the other ways of doing it)
 */
 struct Tmr {
-  int x, y;
-  int r,g,b;
+  int x = 0, y = 0;
+  int r = 0, g = 0, b = 0;
 }

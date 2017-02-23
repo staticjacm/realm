@@ -33,6 +33,7 @@ class Fireball_1 : Shot {
     super();
     animation = new Animation([image_1, image_2, image_3], 30, Vector2f(0.5, 0.5), Vector2f(1, 1));
     end_time = game_time + lifetime + uniform(0, 500);
+    height = 0.5;
     collider_size_x = 0.5;
     collider_size_y = 0.5;
     restitution = 0;

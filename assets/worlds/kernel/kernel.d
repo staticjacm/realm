@@ -36,7 +36,7 @@ class Kernel : World {
     if(!type_initialized){
       type_initialized = true;
       loading_image = gr_load_image("assets/worlds/kernel/loading_screen_image.png".toStringz, 0);
-      writefln("loading image: %d", loading_image);
+      // writefln("loading image: %d", loading_image);
       make.initialize_type!"Rocky_ground_1";
       make.initialize_type!"Grass_1";
       make.initialize_type!"Matted_grass_1";
@@ -70,6 +70,8 @@ class Kernel : World {
     game_render_loading_screen(loading_image, 0.0f);
     float R = 20;
     
+    entrance_position = center_spawn;
+    
     float number_of_maps = cast(float)tilemap_data.length;
     float current_map = 0;
     
@@ -101,154 +103,104 @@ class Kernel : World {
     */
     foreach(Tmr tmr; tilemap_data){
       current_map++;
+      if(tmr.x)
       if(cast(int)current_map % 100 == 0)
         game_render_loading_screen(loading_image, current_map / number_of_maps);
       // writefln("%f", current_map / number_of_maps);
       if(tmr.r == 00 && tmr.g == 255 && tmr.b == 00){
-        Ground ground = make.make_ground!"Grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Grass_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 42 && tmr.g == 69 && tmr.b == 00){
-        Ground ground = make.make_ground!"Matted_grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Matted_grass_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 130 && tmr.g == 74 && tmr.b == 00){
-        Ground ground = make.make_ground!"Dirt_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Dirt_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 245 && tmr.g == 235 && tmr.b == 48){
-        Ground ground = make.make_ground!"Sand_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Sand_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 124 && tmr.g == 102 && tmr.b == 94){
-        Ground ground = make.make_ground!"Rocky_ground_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Rocky_ground_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 119 && tmr.g == 255 && tmr.b == 00){
-        Ground ground = make_ground!"Grass_with_flowers_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Grass_with_flowers_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 31 && tmr.g == 58 && tmr.b == 31){
-        Ground ground = make_ground!"Grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Grass_with_flowers_1", Vector2f(tmr.x, tmr.y));
+        add_wall(make_wall!"Tropical_tree_1", Vector2f(tmr.x, tmr.y));
         /* Add tree decoration here */
       }
       else if(tmr.r == 104 && tmr.g == 104 && tmr.b == 104){
-        Ground ground = make_ground!"Rocky_ground_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        Wall wall = make_wall!"Stone_wall_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
-        add_wall(wall);
+        add_ground(make_ground!"Rocky_ground_1", Vector2f(tmr.x, tmr.y));
+        add_wall(make_wall!"Stone_wall_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 166 && tmr.g == 166 && tmr.b == 166){
-        Ground ground = make.make_ground!"Rocky_ground_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Rocky_ground_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 200 && tmr.g == 134 && tmr.b == 157){
-        Ground ground = make_ground!"Brick_path_1";
-        writeln("brick path is ", ground !is null);
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Brick_path_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 138 && tmr.g == 80 && tmr.b == 100){
-        Ground ground = make_ground!"Makeshift_brick_path_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Makeshift_brick_path_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 42 && tmr.g == 69 && tmr.b == 00){
-        Ground ground = make_ground!"Matted_grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Matted_grass_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 150 && tmr.g == 215 && tmr.b == 215){
-        Ground ground = make_ground!"Portal_carpet_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Portal_carpet_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 177 && tmr.g == 61 && tmr.b == 86){
-        Ground ground = make_ground!"Red_carpet_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Red_carpet_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 104 && tmr.g == 91 && tmr.b == 179){
-        Ground ground = make_ground!"Fountain_water_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Fountain_water_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 67 && tmr.g == 64 && tmr.b == 90){
-        Ground ground = make_ground!"Fountain_wall_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_ground(ground);
+        add_ground(make_ground!"Fountain_wall_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 171 && tmr.g == 40 && tmr.b == 157){
-        Wall wall = make_wall!"Kernel_house_tall_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(Kernel_house_tall_1)wall).set_type(0);
-        add_wall(wall);
+        Kernel_house_tall_1 wall = new Kernel_house_tall_1;
+        wall.set_type(0);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 157 && tmr.g == 171 && tmr.b == 40){
-        Wall wall = make_wall!"Kernel_house_tall_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(Kernel_house_tall_1)wall).set_type(1);
-        add_wall(wall);
+        Kernel_house_tall_1 wall = new Kernel_house_tall_1;
+        wall.set_type(1);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 97 && tmr.g == 21 && tmr.b == 89){
-        Wall wall = make_wall!"Kernel_house_short_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(Kernel_house_short_1)wall).set_type(0);
-        add_wall(wall);
+        Kernel_house_short_1 wall = new Kernel_house_short_1;
+        wall.set_type(0);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 105 && tmr.g == 114 && tmr.b == 27){
-        Wall wall = make_wall!"Kernel_house_short_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(Kernel_house_short_1)wall).set_type(1);
-        add_wall(wall);
+        Kernel_house_short_1 wall = new Kernel_house_short_1;
+        wall.set_type(1);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 21 && tmr.g == 81 && tmr.b == 82){
-        Wall wall = make_wall!"Blank_impassable_wall_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        add_wall(wall);
+        add_wall(make_wall!"Blank_impassable_wall_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 148 && tmr.g == 120 && tmr.b == 54){
-        Wall wall = make_wall!"White_fence_1"; // horizontal
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(White_fence_1)wall).set_type(0);
-        Ground ground = make_ground!"Grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_wall(wall);
-        add_ground(ground);
+        White_fence_1 wall = new White_fence_1; // horizontal
+        wall.set_type(0);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
+        add_ground(make_ground!"Grass_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 89 && tmr.g == 66 && tmr.b == 28){
-        Wall wall = make_wall!"White_fence_1"; // corner ul
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(White_fence_1)wall).set_type(1);
-        Ground ground = make_ground!"Grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_wall(wall);
-        add_ground(ground);
+        White_fence_1 wall = new White_fence_1; // corner ul
+        wall.set_type(1);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
+        add_ground(make_ground!"Grass_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 166 && tmr.g == 143 && tmr.b == 87){
-        Wall wall = make_wall!"White_fence_1"; // vertical
-        wall.position = Vector2f(tmr.x, tmr.y);
-        (cast(White_fence_1)wall).set_type(2);
-        Ground ground = make_ground!"Grass_1";
-        ground.position = Vector2f(tmr.x, tmr.y);
-        add_wall(wall);
-        add_ground(ground);
+        White_fence_1 wall = new White_fence_1; // vertical
+        wall.set_type(2);
+        add_wall(wall, Vector2f(tmr.x, tmr.y));
+        add_ground(make_ground!"Grass_1", Vector2f(tmr.x, tmr.y));
       }
       else if(tmr.r == 186 && tmr.g == 19 && tmr.b == 164){
-        Wall wall = make_wall!"Stability_boundary_1";
-        wall.position = Vector2f(tmr.x, tmr.y);
-        add_wall(wall);
+        add_wall(make_wall!"Stability_boundary_1", Vector2f(tmr.x, tmr.y));
       }
       // else if(tmr.r == 0 && tmr.g == 0 && tmr.b == 255){
         // add_ground(new Rocky_ground_1(Vector2f(tmr.x, tmr.y)));
@@ -266,7 +218,7 @@ class Kernel : World {
   }
     
  override string name(){ return "Kernel"; }
- override string description(){ return "There once was a large realm just like the others. Many generations ago the destroyer came and eat that realm. We fight all the time to keep it from consuming the only thing left."; }
+ override string description(){ return "There once was a large realm just like the others. Many generations ago the destroyer came and ate that realm. We fight all the time to keep it from consuming the only thing left."; }
  override string standard_article(){ return "the"; }
   
   override void update(){

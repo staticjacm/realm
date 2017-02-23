@@ -96,3 +96,13 @@ void gr_draw_flipped_horizontally(Animation animation, Vector2f position, float 
 void gr_screen_draw(Animation animation, float x, float y, float depth, float anx, float any, float angle, float scale){
   sgogl.gr_screen_draw(animation.current_frame, x, y, depth, anx, any, angle, scale*animation.scale.x, scale*animation.scale.y);
 }
+
+//
+
+void gr_draw_tilted(Animation animation, Vector2f position, float depth, float tilt, float angle, float scale){
+  sgogl.gr_draw_tilted(animation.current_frame, position.x, position.y, depth, tilt, animation.anchor.x, animation.anchor.y, angle, scale*animation.scale.x, scale*animation.scale.y);
+}
+
+void gr_draw_tilted_flipped_horizontally(Animation animation, Vector2f position, float depth, float tilt, float angle, float scale){
+  sgogl.gr_draw_tilted(animation.current_frame, position.x, position.y, depth, tilt, 1.0f - animation.anchor.x, animation.anchor.y, angle, -scale*animation.scale.x, scale*animation.scale.y);
+}

@@ -40,4 +40,6 @@ class Fountain_water_1 : Ground {
   override float friction(){ return 45; }
   override float max_speed_mod(){ return 0.5; }
   
+  override float height(){ return -0.1; }
+  
 }

@@ -4,6 +4,7 @@ module commoner;
 
 import std.stdio;
 import std.string;
+import std.math;
 import std.random;
 import make;
 import game;
@@ -57,8 +58,6 @@ class Commoner_1 : Structured_entity {
   override string standard_article(){ return "a"; }
   
   override int entity_subtype_id(){ return 1; }
-  
-  // override float targeting_range(){ return 5.0f; }
   
   override void kill(){
     for(int i = 0; i < 10; i++){

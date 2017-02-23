@@ -296,6 +296,8 @@ class Entity : Agent {
     gr_color(0.0, 0.0, 1.0, 1.0);
     gr_draw_line(position, position + direction, 1);
     gr_color_alpha(1.0);
+    if(area !is null && area.ground !is null)
+      area.ground.render_under(this);
     super.render;
   }
   

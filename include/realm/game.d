@@ -223,9 +223,10 @@ void initialize(){
   
   Portal island_portal = make_portal!"Generic_portal_1";
   island_portal.position = Vector2f(19.0f, 19.0f);
-  island_portal.exit_world = make_world!"Island_world_1";
-  island_portal.exit_position = Vector2f(0, 0);
+  island_portal.default_world_class = "Island_world_1";
   test_world.place_agent(island_portal);
+  
+  test_world.add_or_replace_ground(make_ground!"River_water_1", Vector2f(5, 5));
   
   test_world.place_agent(player_entity);
   // test_world.place_agent(enemy);
@@ -241,7 +242,7 @@ void initialize(){
   
   World test_world_2 = make_world!"Testing_world_1";
   test_world_2 = make_world!"Testing_world_1";
-  test_world_2.place_agent(player_entity);
+  // test_world_2.place_agent(player_entity);
   test_world_2.place_agent(test_portal_2);
   
   test_portal_1.exit_world = test_world_2;

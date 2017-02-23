@@ -39,8 +39,6 @@ class Island_world_1 : World {
   }
   
   Vector2f boss_point;
-  Vector2f entrance_point;
-  
   
   this(){
     string[Vector2f] world;
@@ -281,7 +279,7 @@ class Island_world_1 : World {
     }
   
     // Vector2f boss_point;
-    entrance_point = land_points.random_choice;
+    entrance_position = land_points.random_choice;
     
     test_timer.report("time:");
     

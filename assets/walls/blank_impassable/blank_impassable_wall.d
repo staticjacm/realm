@@ -20,12 +20,12 @@ class Blank_impassable_wall_1 : Wall {
     }
   }
   
-  this(){
-  
-  }
+  this(){}
   
   override string name(){ return "Something Blank"; }
   override string description(){ return "An ill defined section of space and time"; }
   override string standard_article(){ return "a"; }
+  
+  override void render(){}
   
 }
