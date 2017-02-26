@@ -129,6 +129,7 @@ class Entity : Agent {
     foreach(Effect effect; effects){
       effect.kill;
     }
+    destroy(this);
   }
   
   Token tokenify(){
@@ -144,6 +145,13 @@ class Entity : Agent {
   
   /// detected(agent) is called when Agent agent is detected
   void detected(Agent agent){}
+  
+  void created_shot(Shot shot){
+    shot.faction_id = faction_id;
+    shot.position = position;
+    if(world !is null)
+      world.place_agent(shot);
+  }
   
   void regular_attack_start(){
     regular_attack_started = true;
@@ -168,10 +176,8 @@ class Entity : Agent {
       is_hurt = true;
       hurt_switch_time = game_time + hurt_switch_delay;
       health -= fmax(damage - l_defence, 0) / m_defence;
-      if(health <= 0){
+      if(health <= 0)
         kill;
-        destroy(this);
-      }
     }
   }
   

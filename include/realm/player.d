@@ -264,6 +264,9 @@ void player_render_near(){
         if(render_area !is null && render_area.valid){
           render_area.render;
         }
+        else {
+          player_entity.world.render_area_default(Vector2f(x, y));
+        }
       }
     }
   }
@@ -924,6 +927,11 @@ void player_key_function(){
     case GR_Z:
       if(gr_key_pressed){
         player_entity.apply_damage(1000.0f);
+      }
+      break;
+    case GR_P:
+      if(gr_key_pressed){
+        game.paused = !game.paused;
       }
       break;
     

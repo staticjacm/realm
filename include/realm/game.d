@@ -46,6 +46,7 @@ World kernel_world;
 World entry;
 
 bool running = true;
+bool paused  = false;
 
 Timer test_timer;
 
@@ -61,6 +62,7 @@ long frame_time = 0;
 long game_time;
 float frame_delta = 0.001;
 float frame_delta_2 = 0.001;
+float frame_delta_max = 0.1;
 long frame = 0;
 
 bool use_framerate_cap = true;
@@ -70,38 +72,6 @@ long frame_delay = 0;
 uint test_img;
 uint gui_mockup_img;
 float test_x = 0.0, test_y = 0.0;
-
-void key_function(){
-  player_key_function();
-  // writefln(" key %d", gr_key);
-  switch(gr_scancode){
-    case GR_SCANCODE_KP_4:     gr_set_screen_size(gr_screen_width - 10, gr_screen_height); writefln("< screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
-    case GR_SCANCODE_KP_6:     gr_set_screen_size(gr_screen_width + 10, gr_screen_height); writefln("> screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
-    case GR_SCANCODE_KP_8:     gr_set_screen_size(gr_screen_width, gr_screen_height + 10); writefln("^ screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
-    case GR_SCANCODE_KP_2:     gr_set_screen_size(gr_screen_width, gr_screen_height - 10); writefln("v screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
-    case GR_SCANCODE_KP_ENTER: gr_clear_all; break;
-    // case GR_SCANCODE_R: gr_set_keep_window_aspect = 1; writeln("keep_window_aspect 1");   break;
-    // case GR_SCANCODE_F: gr_set_keep_window_aspect = 0; writeln("keep_window_aspect 0");   break;
-    // case GR_SCANCODE_T: gr_set_center_screen = 1;      writeln("center_screen 1");        break;
-    // case GR_SCANCODE_G: gr_set_center_screen = 0;      writeln("center_screen 0");        break;
-    // case GR_SCANCODE_Y: gr_set_stretch_screen = 1;     writeln("stretch_screen 1");       break;
-    // case GR_SCANCODE_H: gr_set_stretch_screen = 0;     writeln("stretch_screen 0");       break;
-    default: break;
-  }
-}
-
-void mouse_click_function(){
-  player_mouse_click_function;
-}
-
-void mouse_move_function(){
-  gr_read_mouse;
-  test_x = gr_mouse_x.gr_screen_to_world_x;
-  test_y = gr_mouse_y.gr_screen_to_world_y;
-}
-
-void window_event_function(){
-}
 
 // void set_game_mode_loading_screen(uint image){
   // game_mode = mode_loading;
@@ -158,6 +128,7 @@ void initialize(){
   make.initialize_type!"Commoner_1_token";
   make.initialize_type!"Drop_tier_0";
   make.initialize_type!"Testing_world_1";
+  make.initialize_type!"Broadsword_1";
   make.initialize_type!"Fire_staff_1";
   make.initialize_type!"Shirt_1";
   make.initialize_type!"Ring_of_defence_1";
@@ -177,35 +148,7 @@ void initialize(){
   
   Drop test_drop = make_drop!"Drop_tier_0";
   test_drop.add_item(make_item!"Ring_of_defence_1");
-  
-  // test_entity = cast(Structured_entity)(new Commoner);
-  test_entity = make_structured_entity!"Commoner_1";
-  test_entity.position = Vector2f(10.5, 10.5);
-  test_entity.automatic_controls = false;
-  test_entity.faction_id = 0;
-  test_entity.equip_weapon(make_weapon!"Fire_staff_1");
-  test_entity.equip_armor(make_armor!"Shirt_1");
-  test_entity.equip_accessory(make_accessory!"Ring_of_defence_1");
-  test_entity.items[0] = make_item!"Dev_ring_1";
-  test_entity.items[1] = make_item!"Ring_of_speed_1";
-  test_entity.items[2] = make_item!"Ring_of_defence_1";
-  test_entity.items[3] = make_item!"Ring_of_speed_1";
-  test_entity.items[4] = make_item!"Ring_of_defence_1";
-  test_entity.items[5] = make_item!"Ring_of_speed_1";
-  test_entity.items[6] = make_item!"Ring_of_defence_1";
-  test_entity.items[7] = make_item!"Commoner_1_token";
-  player_register(test_entity);
-  
   // kernel_world = new Kernel;
-  
-  Structured_entity enemy;
-  enemy = make_structured_entity!"Commoner_1";
-  enemy.position = Vector2f(17.0f, 17.0f);
-  enemy.automatic_controls = true;
-  enemy.faction_id = 1;
-  enemy.equip_weapon(make_weapon!"Fire_staff_1");
-  enemy.equip_armor(make_armor!"Shirt_1");
-  enemy.equip_accessory(make_accessory!"Ring_of_defence_1");
   
   Agent turret = make_agent!"Fire_turret_1";
   turret.position = Vector2f(17.0f, 17.0f);
@@ -221,15 +164,47 @@ void initialize(){
   
   test_world = make_world!"Testing_world_1";
   
+  // Structured_entity enemy;
+  // enemy = make_structured_entity!"Commoner_1";
+  // enemy.position = Vector2f(17.0f, 17.0f);
+  // enemy.automatic_controls = true;
+  // enemy.faction_id = 1;
+  // enemy.equip_weapon(make_weapon!"Fire_staff_1");
+  // enemy.equip_armor(make_armor!"Shirt_1");
+  // enemy.equip_accessory(make_accessory!"Ring_of_defence_1");
+  // test_world.place_agent(enemy);
+  
   Portal island_portal = make_portal!"Generic_portal_1";
-  island_portal.position = Vector2f(19.0f, 19.0f);
+  island_portal.position = Vector2f(14.0f, 19.0f);
   island_portal.default_world_class = "Island_world_1";
   test_world.place_agent(island_portal);
   
+  Entity test_boss = make_entity!"Giant_sea_turtle_1";
+  test_boss.position = Vector2f(14.0f, 14.0f);
+  test_boss.faction_id = 1;
+  test_world.place_agent(test_boss);
+  
+  // test_entity = cast(Structured_entity)(new Commoner);
+  test_entity = make_structured_entity!"Commoner_1";
+  test_entity.position = Vector2f(10.5, 10.5);
+  test_entity.automatic_controls = false;
+  test_entity.faction_id = 0;
+  test_entity.equip_weapon(make_weapon!"Fire_staff_1");
+  test_entity.equip_armor(make_armor!"Shirt_1");
+  test_entity.equip_accessory(make_accessory!"Dev_ring_1");
+  test_entity.items[0] = make_item!"Dev_ring_1";
+  test_entity.items[1] = make_item!"Broadsword_1";
+  test_entity.items[2] = make_item!"Ring_of_defence_1";
+  test_entity.items[3] = make_item!"Ring_of_speed_1";
+  test_entity.items[4] = make_item!"Ring_of_defence_1";
+  test_entity.items[5] = make_item!"Ring_of_speed_1";
+  test_entity.items[6] = make_item!"Ring_of_defence_1";
+  test_entity.items[7] = make_item!"Commoner_1_token";
+  player_register(test_entity);
+  test_world.place_agent(player_entity);
+  
   test_world.add_or_replace_ground(make_ground!"River_water_1", Vector2f(5, 5));
   
-  test_world.place_agent(player_entity);
-  // test_world.place_agent(enemy);
   test_world.place_agent(turret);
   test_world.place_agent(test_portal_1);
   // test_world.place_agent(test_portal_2);
@@ -302,21 +277,64 @@ void render(){
   gr_refresh;
 }
 
-immutable(bool) debug_update = false;
-void update(){
-  
-  debug_write_1(game_time);
-  debug_write_2(format("%2.2f", frame_delta));
-  
-  static if(debug_update) write_location_debug;
-  game_time = game_timer.msecs;
-  frame++;
+// Should include saving mechanism in the future
+void close_game(){
+  running = false;
+}
 
-  static if(debug_update) write_location_debug;
+void key_function(){
+  player_key_function();
+  // writefln(" key %d", gr_key);
+  switch(gr_scancode){
+    case GR_SCANCODE_KP_4:     gr_set_screen_size(gr_screen_width - 10, gr_screen_height); writefln("< screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_6:     gr_set_screen_size(gr_screen_width + 10, gr_screen_height); writefln("> screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_8:     gr_set_screen_size(gr_screen_width, gr_screen_height + 10); writefln("^ screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_2:     gr_set_screen_size(gr_screen_width, gr_screen_height - 10); writefln("v screen size %d %d", gr_screen_width, gr_screen_height); goto case GR_SCANCODE_KP_ENTER;
+    case GR_SCANCODE_KP_ENTER: gr_clear_all; break;
+    // case GR_SCANCODE_R: gr_set_keep_window_aspect = 1; writeln("keep_window_aspect 1");   break;
+    // case GR_SCANCODE_F: gr_set_keep_window_aspect = 0; writeln("keep_window_aspect 0");   break;
+    // case GR_SCANCODE_T: gr_set_center_screen = 1;      writeln("center_screen 1");        break;
+    // case GR_SCANCODE_G: gr_set_center_screen = 0;      writeln("center_screen 0");        break;
+    // case GR_SCANCODE_Y: gr_set_stretch_screen = 1;     writeln("stretch_screen 1");       break;
+    // case GR_SCANCODE_H: gr_set_stretch_screen = 0;     writeln("stretch_screen 0");       break;
+    default: break;
+  }
+}
+
+void mouse_click_function(){
+  player_mouse_click_function;
+}
+
+void mouse_move_function(){
+  gr_read_mouse;
+  test_x = gr_mouse_x.gr_screen_to_world_x;
+  test_y = gr_mouse_y.gr_screen_to_world_y;
+}
+
+void window_event_function(){
+  switch(gr_window_event){
+    case GR_WINDOW_FOCUS_LOST:
+      writeln("focus lost");
+      paused = true;
+      break;
+    case GR_WINDOW_FOCUS_GAINED:
+      writeln("focus gained");
+      paused = false;
+      break;
+    case GR_WINDOW_MOVED:
+      writeln("window moved");
+      break;
+    default: break;
+  }
+}
+
+void update_events(){
   gr_register_events();  
   while(gr_has_event()){
     switch(gr_read()){
-      case GR_CLOSE: running = false; break;
+      case GR_CLOSE:
+        close_game;
+        break;
       case GR_KEY_EVENT: key_function; break;
       case GR_MOUSE_BUTTON_EVENT: mouse_click_function; break;
       case GR_MOUSE_MOVE_EVENT: mouse_move_function; break;
@@ -324,42 +342,67 @@ void update(){
       default: break;
     }
   }
+}
+
+immutable(bool) debug_update = false;
+void update(){
   
+  debug_write_1(game_time);
+  debug_write_2(format("%2.2f", frame_delta));
+
   static if(debug_update) write_location_debug;
-  player_update;
+  update_events;
   
-  static if(debug_update) write_location_debug;
-  foreach(Agent agent; Agent.master_list){
-    agent.update;
+  if(!paused){
+    static if(debug_update) write_location_debug;
+    game_time = game_timer.msecs;
+    frame++;
+    
+    static if(debug_update) write_location_debug;
+    player_update;
+    
+    static if(debug_update) write_location_debug;
+    foreach(Agent agent; Agent.master_list){
+      agent.update;
+    }
+    
+    static if(debug_update) write_location_debug;
+    foreach(World world; World.master_list){
+      world.update;
+    }
+    
+    static if(debug_update) write_location_debug;
+    foreach(Rooted rooted; Rooted.update_list){
+      rooted.update;
+    }
+    
+    
+    //foreach(Area area; Area.update_list){
+    //  area.update;
+    //}
+    Area.update_list.iterate((Area area){
+      if(area !is null && area.valid){
+        area.update;
+        return 1;
+      }
+      else
+        return -1;
+    });
+    // debug_writeln_misc(" ");
+    
+    static if(debug_update) write_location_debug;
+    render;
+    
+    static if(debug_update) write_location_debug;
+    if(frame % 500 == 0){
+      writefln("frame_delta: %2.2f ms = %2.1f fps", frame_delta*1000.0f, 1.0f/frame_delta);
+      writefln("  frame_delay: %d ms = %2.1f fps", frame_delay, 1000.0f/cast(float)frame_delay);
+      writeln("  number of agents: ", Agent.master_list.length);
+      writeln("  number of decorations: ", Decoration.total_number);
+      writeln("  number of areas: ", Area.total_number);
+    }
+    // if(current_game_time > 5000) running = false;
   }
-  
-  static if(debug_update) write_location_debug;
-  foreach(World world; World.master_list){
-    world.update;
-  }
-  
-  static if(debug_update) write_location_debug;
-  foreach(Rooted rooted; Rooted.update_list){
-    rooted.update;
-  }
-  
-  static if(debug_update) write_location_debug;
-  foreach(Area area; Area.update_list){
-    area.update;
-  }
-  
-  static if(debug_update) write_location_debug;
-  render;
-  
-  static if(debug_update) write_location_debug;
-  if(frame % 500 == 0){
-    writefln("frame_delta: %2.2f ms = %2.1f fps", frame_delta*1000.0f, 1.0f/frame_delta);
-    writefln("  frame_delay: %d ms = %2.1f fps", frame_delay, 1000.0f/cast(float)frame_delay);
-    writeln("  number of agents: ", Agent.master_list.length);
-    writeln("  number of decorations: ", Decoration.total_number);
-    writeln("  number of areas: ", Area.total_number);
-  }
-  // if(current_game_time > 5000) running = false;
   
   static if(debug_update) write_location_debug;
   if(use_framerate_cap){
@@ -377,6 +420,8 @@ void update(){
     frame_delay = 0;
   frame_delay_helper.start;
   frame_delta = frame_timer.hnsecsf;
+  if(frame_delta > frame_delta_max)
+    frame_delta = frame_delta_max;
   frame_time = frame_timer.msecs;
   frame_timer.start;
   // Thread.sleep(dur!"msecs"(cast(long)(game_time / 100)));

@@ -102,6 +102,9 @@ class Kernel : World {
       (186, 019, 164) -> kernel stability boundary
     */
     foreach(Tmr tmr; tilemap_data){
+      game.update_events;
+      if(!game.running)
+        break;
       current_map++;
       if(tmr.x)
       if(cast(int)current_map % 100 == 0)
@@ -223,13 +226,6 @@ class Kernel : World {
   
   override void update(){
     super.update;
-    // if(spawn_next_time < game_time){
-      // spawn_next_time = game_time + spawn_delay;
-      // Fireball1 fireball = new Fireball1;
-      // fireball.position = Vector2f(10, 10);
-      // fireball.world = this;
-      // fireball.set_velocity = Vector2f(10.0, 0.0);
-    // }
       Decoration twinkle = make_decoration!"Twinkle_1";
       twinkle.position = Vector2f(9, 10) + rvector(1.0);
       place_decoration(twinkle);

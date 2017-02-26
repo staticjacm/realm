@@ -30,10 +30,12 @@ class Dev_ring_1 : Accessory {
   override void equipped(Structured_entity entity){
     entity.propel_rate += 10.0f;
     entity.max_speed += 10.0f;
+    entity.m_defence += 10.0f;
   }
   override void dequipped(Structured_entity entity){
     entity.propel_rate -= 10.0f;
     entity.max_speed -= 10.0f;
+    entity.m_defence -= 10.0f;
   }
   
 }

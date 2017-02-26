@@ -50,6 +50,9 @@ class Fireball_1 : Shot {
     end_time = game_time + lifetime_;
   }
   
+  override bool destroy_on_agent_collision(){ return true; }
+  override bool destroy_on_wall_collision(){ return false; }
+  
   override float damage(){
     return 0.1f;
   }
@@ -58,9 +61,7 @@ class Fireball_1 : Shot {
     super.update;
     // accelerate(rvector(1));
     accelerate(rvector(100));
-    if(end_time < game_time){
-      destroy(this);
-    }
+    if(end_time < game_time){ kill; }
   }
 }
 
@@ -91,14 +92,15 @@ class Fireball_2 : Shot {
   
   override bool uses_friction(){ return false; }
   
+  override bool destroy_on_agent_collision(){ return true; }
+  override bool destroy_on_wall_collision(){ return false; }
+  
   override float damage(){
     return 0.4;
   }
   
   override void update(){
     super.update;
-    if(end_time < game_time){
-      destroy(this);
-    }
+    if(end_time < game_time){ kill; }
   }
 }

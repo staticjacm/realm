@@ -16,6 +16,8 @@ class Renderable : Validatable {
   static bool type_initialized = false;
   static uint shadow_image_32x32;
   
+  static float default_render_depth(){ return 1000.0f; }
+  
   static initialize_type(){
     if(!type_initialized){
       shadow_image_32x32 = gr_load_image("assets/shadow_32x32.png".toStringz, 0);
@@ -36,8 +38,10 @@ class Renderable : Validatable {
       destroy(animation);
   }
   
-  // Call just before a standard removal (example: shot hits wall, this controls effects before shot is destroyed)
-  void kill(){}
+  // This allows assets to control whether or not the object is destroyed, and what happens then
+  void kill(){
+    destroy(this);
+  }
   
   /// The angle to compensate for the rotation of the image when rendering
   float render_angle(){ return 0; }

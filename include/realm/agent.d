@@ -57,7 +57,7 @@ class Agent : Renderable {
   static bool type_initialized = false;
   static int gid = 0;
   static Agent_list master_list;
-  static bool draw_colliders = false;
+  static bool draw_colliders = true;
   static float flying_height = 3.0f; // The height which agents need to be to no longer interact with ground level agents
   
   static initialize_type(){
@@ -88,7 +88,7 @@ class Agent : Renderable {
   Agent_list.Index master_index;
   Agent_list.Index area_index;
   Material material;
-  Vector2f last_veloity = Vector2f(0, 0);
+  Vector2f last_velocity = Vector2f(0, 0);
   Vector2f velocity = Vector2f(0, 0);
   float speed;
   float stop_speed = 0.2f;

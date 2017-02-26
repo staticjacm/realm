@@ -37,20 +37,18 @@ class Shot : Agent {
   
   override void collide(Wall wall){
     super.collide(wall);
-    // if(destroy_on_wall_collision){
-      // kill;
-      // destroy(this);
-    // }
+    if(damage > wall.destruction_damage_threshold)
+      wall.kill;
+    if(destroy_on_wall_collision)
+      kill;
   }
   
   override void collide(Entity other){
     super.collide(other);
     if(other.faction_id != faction_id){
       other.apply_damage(damage);
-      // if(destroy_on_agent_collision){
-        // kill;
-        // destroy(this);
-      // }
+      if(destroy_on_agent_collision)
+        kill;
     }
   }
   

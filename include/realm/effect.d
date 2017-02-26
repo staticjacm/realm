@@ -24,14 +24,16 @@ class Effect : Validatable {
     entity_index.remove;
   }
   
-  string name(){ return "effect"; }
+  string name(){ return "Effect"; }
   string description(){ return "An undefined effect"; }
   string standard_article(){ return "an"; }
   
   void update(){}
   void initialize(){}
   void finalize(){}
-  void kill(){}
+  void kill(){
+    destroy(this);
+  }
   
   void collide(Entity other){}
   void collide(Shot other){}

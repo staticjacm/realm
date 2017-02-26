@@ -16,6 +16,8 @@ module shirt
 // weapons
 module fire_staff
   class Fire_staff_1
+module broadsword
+  class Broadsword_1
 
 // agents
 module brazier
@@ -51,6 +53,10 @@ module fireball
   class Fireball_2
 module rocket
   class Rocket_1
+module big_bite
+  class Big_bite_1
+module slash
+  class Slash_1
 
 // structured entities
 module commoner

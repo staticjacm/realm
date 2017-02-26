@@ -26,12 +26,6 @@ class Commoner_1 : Structured_entity {
   
   static initialize_type(){
     if(!type_initialized){
-      // Fireball1.initialize_type;
-      // Fireball2.initialize_type;
-      // Rocket1.initialize_type;
-      make.initialize_type!"Fireball_1";
-      make.initialize_type!"Fireball_2";
-      make.initialize_type!"Rocket_1";
       image_dimensions = Vector2f(1, 1);
       image_standing  = gr_load_image("assets/structured_entities/commoner/standing.png".toStringz, 0);
       image_walking_1 = gr_load_image("assets/structured_entities/commoner/walking_1.png".toStringz, 0);
@@ -46,9 +40,7 @@ class Commoner_1 : Structured_entity {
     hurt_animation     = new Animation([image_hurt], 1, Vector2f(0.5, 0), image_dimensions);
     collider_size_x = 0.33;
     collider_size_y = 0.33;
-    l_defence = 0.0f;
-    m_defence = 100.0f;
-    propel_rate = 50.0f;
+    propel_rate = 60.0f;
     max_speed = 5.0f;
     super();
   }
@@ -59,13 +51,6 @@ class Commoner_1 : Structured_entity {
   
   override int entity_subtype_id(){ return 1; }
   
-  override void kill(){
-    for(int i = 0; i < 10; i++){
-      Shot fireball = create_shot(make_shot!"Fireball_1");
-      fireball.set_velocity = rvector(4.0f);
-    }
-    super.kill;
-  }
 }
 
 class Commoner_1_token : Token {

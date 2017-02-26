@@ -54,3 +54,56 @@ void set_audio_panning_and_attenuation(uint channel, Vector2f pdif, float max_di
   // 255/2*(2/Pi ArcTan[x] + 1)
   gr_set_panning(channel, cast(int)(127*(2/PI*atan(-pdif.x) + 1)));
 }
+
+/*
+  Colors:
+*/
+
+pragma(inline, true)
+void reset_color(){
+  gr_color(1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+pragma(inline, true)
+void set_color(string color)(){
+  static if(color == "red")
+    gr_color(1.0f, 0.0f, 0.0f, 1.0f);
+  else static if(color == "green")
+    gr_color(0.0f, 1.0f, 0.0f, 1.0f);
+  else static if(color == "blue")
+    gr_color(0.0f, 0.0f, 1.0f, 1.0f);
+  
+  else static if(color == "white")
+    gr_color(1.0f, 1.0f, 1.0f, 1.0f);
+  else static if(color == "black")
+    gr_color(0.0f, 0.0f, 0.0f, 1.0f);
+  
+  else static if(color == "transparent")
+    gr_color(0.0f, 0.0f, 0.0f, 0.0f);
+  
+}
+
+pragma(inline, true)
+void set_color(int r, int g, int b, int a = 255){
+  gr_color(cast(float)r / 255.0f, cast(float)g / 255.0f, cast(float)b / 255.0f, cast(float)a / 255.0f);
+}
+
+pragma(inline, true)
+void set_color(float r, float g, float b, float a = 1.0f){
+  gr_color(r, g, b, a);
+}
+
+void set_color(float h, float a = 1.0f){
+  float r, g, b;
+  float q = (h * PI / 180.0f) % 360;
+  r = cos(q);
+  if(r < 0)
+    r = 0;
+  g = sin(q);
+  if(g < 0)
+    g = 0;
+  b = -cos(q);
+  if(b < 0)
+    b = 0;
+  gr_color(r, g, b, a);
+}

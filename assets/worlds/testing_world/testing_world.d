@@ -2,6 +2,7 @@ module testing_world;
 
 import std.stdio;
 import std.random;
+import sgogl;
 import dbg;
 import make;
 import game;
@@ -10,10 +11,12 @@ import player;
 import agent;
 import area;
 import vector;
+import renderable;
 import ground;
 import decoration;
 import wall;
 import timer;
+import rocky_ground;
 import stone_ground;
 
 Timer test_timer;
@@ -112,13 +115,6 @@ class Testing_world_1 : World {
   
   override void update(){
     super.update;
-    // if(spawn_next_time < game_time){
-      // spawn_next_time = game_time + spawn_delay;
-      // Fireball1 fireball = new Fireball1;
-      // fireball.position = Vector2f(10, 10);
-      // fireball.world = this;
-      // fireball.set_velocity = Vector2f(10.0, 0.0);
-    // }
       Decoration twinkle = make_decoration!"Twinkle_1";
       twinkle.position = Vector2f(9, 10) + rvector(1.0);
       place_decoration(twinkle);
@@ -151,5 +147,11 @@ class Testing_world_1 : World {
     center_area.set_ground = ground;
     return center_area;
   }
+  
+  // override void render_area_default(Vector2f position){
+  //   gr_color(0.611765f, 0.45098f, 0.215686f, 1.0f);
+  //   gr_draw_partial(Rocky_ground_1.image_1, position.x, position.y, 1.0f, 1.0f, position.x, position.y, Renderable.default_render_depth, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+  //   gr_color_alpha(1.0f);
+  // }
   
 }

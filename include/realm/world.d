@@ -88,6 +88,8 @@ class World : Validatable {
   
   void initialize(){}
   
+  void render_area_default(Vector2f position){}
+  
   /// For rendering full screen effects (?)
   void render(){}
   

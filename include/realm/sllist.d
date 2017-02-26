@@ -6,8 +6,10 @@ A very simple linked list library
 ++/
 
 import std.random;
+import std.string;
 import std.stdio;
 import std.conv;
+import dbg;
 
 class LList(T) {
   
@@ -33,6 +35,7 @@ class LList(T) {
     bool valid = false;
     LList list;
     Element element;
+    alias element this;
     
     this(LList list_, Element element_){
       valid = true;
@@ -112,11 +115,11 @@ class LList(T) {
   }
   
   enum {
-    ITER_CONTINUE,
-    ITER_DELETE,
-    ITER_BREAK
+    ITER_CONTINUE =  1,
+    ITER_DELETE   =  0,
+    ITER_BREAK    = -1
   }
-  void iterate(scope int delegate(ref T) dg){
+  void iterate(int delegate(T) dg){
     Element nel, cel = first;
     while(cel !is null){
       switch(dg(cel.value)){
@@ -141,6 +144,8 @@ class LList(T) {
   }
   
   Index add(T t){
+    // static if(__traits(compiles, t !is null))
+      // debug_writeln_misc(format("t %30s %b", to!string(t), t !is null));
     // Empty
     if(first is null){
       // writeln("first is null");

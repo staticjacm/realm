@@ -18,6 +18,9 @@ class Wall : Rooted {
     super();
   }
   
+  // Damage must be above this amount for the wall to be destroyed
+  float destruction_damage_threshold(){ return 10_000.0f; }
+  
   override string name(){ return "wall"; }
   override string description(){ return "An undefined wall"; }
   override string standard_article(){ return "a"; }

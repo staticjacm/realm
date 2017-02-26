@@ -10,6 +10,7 @@ import std.stdio;
 import std.string;
 import std.math;
 import decoration;
+import dbg;
 import game;
 import validatable;
 import world;
@@ -163,32 +164,52 @@ class Area : Validatable {
     bool emptyq = false;
     
     if(ground !is null && ground.interacts){
-      foreach(Agent agent; agents){
-        if(agent.interacts_with_grounds){
-          ground.collide(agent);
-          agent.collide(ground);
+      agents.iterate((Agent agent){
+        if(agent !is null && agent.valid){
+          foreach(Agent agent; agents){
+            if(agent.interacts_with_grounds){
+              ground.collide(agent);
+              agent.collide(ground);
+            }
+          }
+          return 1;
         }
-      }
+        else
+          return -1;
+      });
     }
     
     if(wall !is null && wall.interacts){
-      foreach(Agent agent; agents){
-        if(agent.interacts_with_walls){
-          agent.collide(wall);
-          if(!agent.valid)
-            continue;
-          else if(wall.valid){
-            wall.collision_block(agent, agent.position, agent.velocity);
-            wall.collide(agent);
+      agents.iterate((Agent agent){
+        if(agent !is null && agent.valid){
+          if(agent.interacts_with_walls){
+            agent.collide(wall);
+            if(!agent.valid)
+              return 1;
+            else if(wall.valid){
+              wall.collision_block(agent, agent.position, agent.velocity);
+              wall.collide(agent);
+            }
           }
+          return 1;
         }
-      }
+        else
+          return -1;
+      });
     }
     
     // Collision detecting agents
-    foreach(Agent agent; agents){
-      agent_do_collisions(agent);
-    }
+    // foreach(Agent agent; agents){
+    //   agent_do_collisions(agent);
+    // }
+    agents.iterate((Agent agent){
+      if(agent !is null && agent.valid){
+        agent_do_collisions(agent);
+        return 1;
+      }
+      else
+        return -1;
+    });
     if(agents.length > 0)
       emptyq = false;
     else
@@ -239,15 +260,16 @@ class Area : Validatable {
   }
   
   void add_agent(Agent agent){
-    if(contains(agent.position)){
+    // if(contains(agent.position)){
       agent.area = this;
       set_updating = true;
+      // debug_writeln_misc(format("adding to agents: %b", agent !is null));
       agent.area_index = agents.add(agent);
       if(ground !is null)
         ground.entered(agent);
-    }
-    else
-      agent.area_index.remove;
+    // }
+    // else
+      // agent.area_index.remove;
   }
   
   void add_decoration(Decoration decor){

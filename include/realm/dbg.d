@@ -7,14 +7,15 @@ import sgogl_interface;
 import game;
 import sllist;
 
-File fileout1, fileout2;
+File fileout1, fileout2, fileout_misc;
 
 class Vector2f_2_list : LList!Vector2f_2 {}
 Vector2f_2_list debug_line_list;
 
 void initialize_debug(){
-  fileout1 = File("debug/debug_data1.txt", "w");
-  fileout2 = File("debug/debug_data2.txt", "w");
+  fileout1     = File("debug/debug_data1.txt", "w");
+  fileout2     = File("debug/debug_data2.txt", "w");
+  fileout_misc = File("debug/debug_misc.txt", "w");
   
   debug_line_list = new Vector2f_2_list;
 }
@@ -34,6 +35,12 @@ void debug_write_1(T)(T value){
 }
 void debug_write_2(T)(T value){
   fileout2.writeln(game_time, " ", value);
+}
+void debug_writeln_misc(T)(T value){
+  fileout_misc.writeln(value);
+}
+void debug_write_misc(T)(T value){
+  fileout_misc.write(value);
 }
 
 void render_debug(){
